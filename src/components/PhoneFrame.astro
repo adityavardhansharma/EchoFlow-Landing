@@ -1,0 +1,42 @@
+---
+/* A clean Android-style device frame. Wraps a screenshot <img> or the looping
+   <video>. Screenshots are 1440x3120 (≈9:19.5). */
+interface Props { class?: string; tone?: 'dark' | 'light'; }
+const { class: klass = '', tone = 'dark' } = Astro.props;
+---
+<div class:list={['phone', `phone-${tone}`, klass]}>
+  <div class="phone-bezel">
+    <span class="phone-cam" aria-hidden="true"></span>
+    <div class="phone-screen">
+      <slot />
+    </div>
+  </div>
+</div>
+
+<style>
+  .phone { width: min(300px, 78vw); }
+  .phone-bezel {
+    position: relative;
+    border-radius: 42px;
+    padding: 9px;
+    background: linear-gradient(155deg, #2b3445, #0c1118);
+    box-shadow:
+      0 2px 1px rgba(255,255,255,.18) inset,
+      0 -2px 2px rgba(0,0,0,.6) inset,
+      0 40px 80px -30px rgba(0,0,0,.7);
+  }
+  .phone-light .phone-bezel { background: linear-gradient(155deg, #e7e3d9, #b9b3a4); }
+  .phone-cam {
+    position: absolute; top: 16px; left: 50%; transform: translateX(-50%);
+    width: 9px; height: 9px; border-radius: 50%;
+    background: #05080d; box-shadow: 0 0 0 2px rgba(255,255,255,.06); z-index: 3;
+  }
+  .phone-screen {
+    border-radius: 34px; overflow: hidden; background: #000;
+    aspect-ratio: 1440 / 3120; position: relative;
+  }
+  .phone-screen :global(img),
+  .phone-screen :global(video) {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+</style>

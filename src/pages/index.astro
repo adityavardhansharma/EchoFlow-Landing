@@ -1,0 +1,61 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import Spread from '../components/Spread.astro';
+import Models from '../components/Models.astro';
+import Themes from '../components/Themes.astro';
+import Bento from '../components/Bento.astro';
+import CTA from '../components/CTA.astro';
+import Footer from '../components/Footer.astro';
+---
+<Base>
+  <Nav />
+  <main>
+    <Hero />
+
+    <section class="paper spreads">
+      <div class="wrap-wide stack">
+        <Spread
+          id="design"
+          kicker="Material 3 Expressive"
+          title="Shapely, springy, alive."
+          body="EchoFlow is built head-to-toe on Google's Material 3 Expressive. Scalloped shapes, bold type and physics-based spring motion give every tap, swipe and transition a playful bounce — it doesn't just work, it delights."
+          bullets={[
+            "Real <b>Material Shapes</b> — the scalloped seals throughout",
+            "<b>Spring</b> physics on every tap and transition",
+            "Bold expressive type & soft, generous surfaces",
+          ]}
+          img="/brand/shot-reasoning.jpg"
+          tone="light"
+          accent="var(--c-lavender)"
+        />
+        <Spread
+          kicker="Stored on your device"
+          title="Your whole history, on your phone."
+          body="Every conversation is saved locally on your device — so your full chat history is there the instant you open the app, works with no internet at all, and never sits on someone else's server."
+          bullets={[
+            "All chats stored <b>locally</b> on your device",
+            "Open past conversations <b>offline</b>, anytime",
+            "Never uploaded, never kept on a server",
+          ]}
+          img="/brand/shot-sidebar.jpg"
+          tone="light"
+          accent="var(--c-ocean)"
+          reverse
+        />
+      </div>
+    </section>
+
+    <Models />
+    <Themes />
+    <Bento />
+    <CTA />
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .spreads { background: var(--paper); }
+  .stack { display: grid; gap: clamp(4rem, 9vw, 7rem); }
+</style>

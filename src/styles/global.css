@@ -1,0 +1,148 @@
+/* =============================================================================
+   EchoFlow — landing page design system
+
+   Art direction: "Signal & Seal". EchoFlow is a bring-your-own-key OpenRouter
+   chat client. The site is editorial and confident: a deep-ocean cinematic hero
+   running the live app, flowing into airy warm-paper feature spreads that pair
+   REAL device screenshots with big typographic statements. The scalloped badge
+   "seal" from the app's icon buttons is the recurring stamp motif throughout.
+   ============================================================================= */
+
+:root {
+  /* Type */
+  --display: 'Bricolage Grotesque', Georgia, serif;
+  --sans: 'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Ocean brand (mirrors the app's default Ocean palette) */
+  --blue:        #1763c6;
+  --blue-600:    #1f6feb;
+  --blue-bright: #88b9ff;
+  --blue-deep:   #0b2a55;
+  --blue-ink:    #07101e;
+
+  /* Surfaces */
+  --ink:         #08111f;   /* deep-ocean dark sections */
+  --ink-2:       #0d1b2e;
+  --ink-card:    #122337;
+  --paper:       #f4f2ec;   /* warm editorial light sections */
+  --paper-2:     #ebe8df;
+  --card:        #ffffff;
+  --line-dark:   rgba(180, 205, 240, 0.14);
+  --line:        rgba(20, 30, 50, 0.12);
+
+  /* Text */
+  --on-ink:      #eaf1fb;
+  --on-ink-soft: #9fb2cc;
+  --on-paper:    #111722;
+  --on-paper-soft:#55606f;
+
+  /* Theme accents (the app's seven palettes — used as small multi-theme cues) */
+  --c-ocean:    #1763c6;
+  --c-mono:     #16181d;
+  --c-forest:   #1c6e2e;
+  --c-sunset:   #b4540b;
+  --c-lavender: #6750a4;
+  --c-rose:     #b01b49;
+  --c-wall:     #5b8bd0;
+
+  /* Shape scale (mirrors app dp radii) */
+  --r-s: 14px; --r-m: 20px; --r-l: 28px; --r-xl: 36px; --r-full: 999px;
+
+  --spring: linear(0,.009 .8%,.035 1.7%,.141 3.7%,.723 9.8%,.938 12.4%,1.02 14%,1.063 15.7%,1.07 17.6%,1.054 19.6%,1 24.4%,.984 27%,.99 36%,1 49%,1);
+  --ease: cubic-bezier(.2,0,0,1);
+  --ease-out: cubic-bezier(.05,.7,.1,1);
+
+  --maxw: 1200px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  background: var(--paper);
+  color: var(--on-paper);
+  line-height: 1.6;
+  font-synthesis-weight: none;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+img, svg, video { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; border: 0; background: none; }
+::selection { background: var(--blue); color: #fff; }
+
+/* ---- Layout ---- */
+.wrap { width: min(var(--maxw), 100% - 2.6rem); margin-inline: auto; }
+.wrap-wide { width: min(1340px, 100% - 2.6rem); margin-inline: auto; }
+section { padding-block: clamp(4.5rem, 9vw, 8rem); position: relative; }
+
+.dark { background: var(--ink); color: var(--on-ink); }
+.dark .muted { color: var(--on-ink-soft); }
+.paper .muted { color: var(--on-paper-soft); }
+
+/* ---- Type ---- */
+.display {
+  font-family: var(--display);
+  font-weight: 800;
+  line-height: 0.96;
+  letter-spacing: -0.025em;
+  font-size: clamp(2.8rem, 7.2vw, 6rem);
+}
+.h2 {
+  font-family: var(--display);
+  font-weight: 800;
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+}
+.h3 {
+  font-family: var(--display);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  font-size: clamp(1.35rem, 2.4vw, 1.85rem);
+  line-height: 1.08;
+}
+.lead { font-size: clamp(1.08rem, 1.5vw, 1.3rem); line-height: 1.55; max-width: 52ch; }
+
+.kicker {
+  display: inline-flex; align-items: center; gap: .6rem;
+  font-family: var(--mono);
+  font-size: .76rem; font-weight: 500; letter-spacing: .22em; text-transform: uppercase;
+}
+.kicker::before { content: ''; width: 26px; height: 1px; background: currentColor; opacity: .5; }
+
+/* gradient ink text */
+.grad-blue {
+  background: linear-gradient(100deg, var(--blue-bright), #cfe2ff 70%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+/* ---- Buttons (match the app's pill buttons) ---- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .6rem;
+  border-radius: var(--r-full); padding: .95rem 1.7rem;
+  font-weight: 700; font-size: 1.02rem; letter-spacing: -.01em; white-space: nowrap;
+  transition: transform .5s var(--spring), box-shadow .3s, background .25s, color .25s;
+}
+.btn:active { transform: scale(.95); }
+.btn-primary { background: var(--blue-600); color: #fff;
+  box-shadow: 0 14px 34px -14px rgba(31,111,235,.8); }
+.btn-primary:hover { background: #2a7bff; transform: translateY(-2px); }
+.btn-light { background: #fff; color: var(--blue-ink); }
+.btn-light:hover { transform: translateY(-2px); box-shadow: 0 14px 30px -16px rgba(0,0,0,.5); }
+.btn-outline-ink { border: 1.5px solid var(--line-dark); color: var(--on-ink); }
+.btn-outline-ink:hover { background: rgba(255,255,255,.06); }
+.btn-outline { border: 1.5px solid var(--line); color: var(--on-paper); }
+.btn-outline:hover { background: rgba(20,30,50,.05); }
+
+/* Reveal class kept as a harmless no-op (scroll animation removed for smoothness). */
+.reveal { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important; scroll-behavior: auto !important; }
+}

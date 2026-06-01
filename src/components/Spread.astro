@@ -1,0 +1,72 @@
+---
+import PhoneFrame from './PhoneFrame.astro';
+import Seal from './Seal.astro';
+
+interface Props {
+  id?: string;
+  kicker: string;
+  title: string;
+  body: string;
+  bullets?: string[];
+  img: string;
+  tone?: 'dark' | 'light';      // phone bezel tone
+  reverse?: boolean;            // image on the right (default left)
+  accent?: string;             // accent color for kicker + seal
+}
+const {
+  id, kicker, title, body, bullets = [], img,
+  tone = 'light', reverse = false, accent = 'var(--blue)',
+} = Astro.props;
+---
+<div id={id} class:list={['spread', { reverse }]}>
+  <div class="spread-copy reveal">
+    <span class="kicker" style={`color:${accent}`}>{kicker}</span>
+    <h2 class="h2">{title}</h2>
+    <p class="lead muted">{body}</p>
+    {bullets.length > 0 && (
+      <ul class="checks">
+        {bullets.map((b) => (
+          <li>
+            <Seal size={22} fill={accent}>
+              <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7" /></svg>
+            </Seal>
+            <span set:html={b}></span>
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+
+  <div class="spread-visual reveal" data-d="1">
+    <span class="halo" style={`background:radial-gradient(circle, ${accent}, transparent 68%)`} aria-hidden="true"></span>
+    <PhoneFrame tone={tone}>
+      <img src={img} alt={title} loading="lazy" width="288" height="624" />
+    </PhoneFrame>
+  </div>
+</div>
+
+<style>
+  .spread { display: grid; grid-template-columns: 1fr .8fr; gap: clamp(2rem, 6vw, 5rem);
+    align-items: center; }
+  .spread.reverse { grid-template-columns: .8fr 1fr; }
+  .spread.reverse .spread-copy { order: 2; }
+  .spread.reverse .spread-visual { order: 1; }
+
+  .spread-copy > * + * { margin-top: 1.3rem; }
+  .checks { list-style: none; padding: 0; display: grid; gap: .9rem; margin-top: 1.6rem; }
+  .checks li { display: flex; align-items: center; gap: .8rem; font-weight: 500; font-size: 1.02rem; }
+  .checks li :global(b) { font-weight: 700; }
+
+  .spread-visual { position: relative; display: grid; place-items: center; }
+  .spread-visual :global(.phone) { width: min(280px, 74vw); position: relative; z-index: 1; }
+  .halo { position: absolute; width: 115%; aspect-ratio: 1; border-radius: 50%;
+    filter: blur(70px); opacity: .22; z-index: 0; }
+
+  @media (max-width: 860px) {
+    .spread, .spread.reverse { grid-template-columns: 1fr; gap: 2.5rem; text-align: center; }
+    .spread.reverse .spread-copy, .spread.reverse .spread-visual { order: initial; }
+    .checks { justify-items: center; }
+    .checks li { justify-content: center; text-align: left; }
+    .spread-copy { display: flex; flex-direction: column; align-items: center; }
+  }
+</style>

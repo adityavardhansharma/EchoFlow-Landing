@@ -1,0 +1,49 @@
+---
+import Seal from './Seal.astro';
+const year = new Date().getFullYear();
+---
+<footer class="dark footer">
+  <div class="wrap-wide foot-in">
+    <div class="foot-brand">
+      <a class="brand" href="#top"><Seal size={32} logo fill="var(--blue-600)" /> EchoFlow</a>
+      <p class="muted">A bring-your-own-key AI chat client for Android, powered by OpenRouter.</p>
+    </div>
+    <nav class="cols" aria-label="Footer">
+      <div>
+        <h4>App</h4>
+        <a href="#design">Design</a>
+        <a href="#models">Models</a>
+        <a href="#themes">Themes</a>
+        <a href="#features">Features</a>
+      </div>
+      <div>
+        <h4>Get started</h4>
+        <a href="/EchoFlow.apk" download>Download APK</a>
+        <a href="https://github.com/adityavardhansharma/EchoFlow" target="_blank" rel="noopener">GitHub repo ↗</a>
+        <a href="#models">Add your key</a>
+        <a href="#themes">Pick a theme</a>
+      </div>
+    </nav>
+  </div>
+  <div class="wrap-wide foot-base muted">
+    <span>© {year} EchoFlow</span>
+    <span>Built for OpenRouter · Not affiliated with any model provider</span>
+  </div>
+</footer>
+
+<style>
+  .footer { padding-block: 3.5rem 2rem; border-top: 1px solid var(--line-dark); }
+  .foot-in { display: flex; justify-content: space-between; gap: 2.5rem; flex-wrap: wrap; }
+  .brand { display: inline-flex; align-items: center; gap: .6rem; font-family: var(--display);
+    font-weight: 800; font-size: 1.2rem; letter-spacing: -.03em; }
+  .foot-brand p { margin-top: .8rem; max-width: 36ch; font-size: .95rem; }
+  .cols { display: flex; gap: 3.5rem; }
+  .cols h4 { font-family: var(--mono); font-size: .72rem; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--on-ink-soft); margin-bottom: .9rem; font-weight: 500; }
+  .cols a { display: block; color: var(--on-ink-soft); padding: .28rem 0; font-weight: 500; transition: color .2s; }
+  .cols a:hover { color: var(--on-ink); }
+  .foot-base { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+    margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--line-dark);
+    font-family: var(--mono); font-size: .76rem; }
+  @media (max-width: 560px) { .cols { gap: 2.5rem; } }
+</style>
