@@ -18,3 +18,9 @@ pnpm-debug.log*
 # os
 .DS_Store
 Thumbs.db
+
+# editor / tooling
+.idea/
+.vscode/
+.agents/
+skills-lock.json
