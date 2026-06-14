@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import SpeedInsights from '@vercel/speed-insights/astro';
 interface Props { title?: string; description?: string; }
 const {
   title = 'EchoFlow — every model, made yours',
@@ -29,32 +30,6 @@ const {
   </head>
   <body>
     <slot />
-    <script>
-      // Point every download button ([data-apk]) at the latest GitHub release's APK
-      // asset. Falls back to the /releases/latest page (the hardcoded href) if the
-      // API call fails or no .apk asset is found.
-      (async () => {
-        const links = document.querySelectorAll('a[data-apk]');
-        if (!links.length) return;
-        try {
-          const res = await fetch('https://api.github.com/repos/adityavardhansharma/EchoFlow/releases/latest', {
-            headers: { Accept: 'application/vnd.github+json' },
-          });
-          if (!res.ok) return;
-          const data = await res.json();
-          const apk = (data.assets || []).find((a) => a.name?.toLowerCase().endsWith('.apk'));
-          if (apk?.browser_download_url) {
-            links.forEach((a) => a.setAttribute('href', apk.browser_download_url));
-          }
-          if (data.tag_name) {
-            document.querySelectorAll('[data-apk-version]').forEach((el) => {
-              el.textContent = data.tag_name;
-            });
-          }
-        } catch {
-          /* keep the releases-page fallback href */
-        }
-      })();
-    </script>
+    <SpeedInsights />
   </body>
 </html>
