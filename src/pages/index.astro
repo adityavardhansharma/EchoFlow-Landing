@@ -31,6 +31,35 @@ import Footer from '../components/Footer.astro';
           accent="var(--c-lavender)"
         />
         <Spread
+          id="research"
+          kicker="Deep Research"
+          title="Research that runs itself."
+          body="Ask a real question and EchoFlow investigates the web across multiple steps, then writes a cited report. It runs in the background — lock your phone and come back to the answer."
+          bullets={[
+            "Powered by <b>Exa</b>, <b>Parallel</b>, <b>Firecrawl</b> — or your own model",
+            "Runs in the <b>background</b> with a progress notification",
+            "<b>Cited</b>, structured reports you can trust",
+          ]}
+          img="/brand/shot-research-run.jpg"
+          tone="light"
+          accent="var(--c-forest)"
+          reverse
+        />
+        <Spread
+          id="local"
+          kicker="On-device models"
+          title="Run AI on your phone. Even offline."
+          body="Download a model once and chat with no internet, no cost, and no data leaving your device. Perfect for travel, flaky signal, or simply keeping everything private."
+          bullets={[
+            "Gemma, Qwen, DeepSeek & more, fully <b>on-device</b>",
+            "Works <b>offline</b> — no key, no account",
+            "Download curated picks or <b>import your own</b>",
+          ]}
+          img="/brand/shot-local-models.jpg"
+          tone="light"
+          accent="var(--c-sunset)"
+        />
+        <Spread
           kicker="Stored on your device"
           title="Your whole history, on your phone."
           body="Every conversation is saved locally on your device — so your full chat history is there the instant you open the app, works with no internet at all, and never sits on someone else's server."
