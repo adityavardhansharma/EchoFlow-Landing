@@ -2,6 +2,7 @@
 import PhoneFrame from './PhoneFrame.astro';
 import Seal from './Seal.astro';
 import { flower } from '../lib/shapes';
+import { RELEASES_URL } from '../lib/releases';
 const ring = flower(12, 50, 43);
 const REPO = 'https://github.com/adityavardhansharma/EchoFlow';
 ---
@@ -18,7 +19,7 @@ const REPO = 'https://github.com/adityavardhansharma/EchoFlow';
         <p class="lead">Bring your OpenRouter key, pick your models, choose your color —
         and start talking to an AI that finally feels like yours.</p>
         <div class="cta-actions">
-          <a class="btn btn-light" href={`${REPO}/releases/latest`} data-apk rel="noopener">
+          <a class="btn btn-light" href={RELEASES_URL} data-apk rel="noopener">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M17.6 9.5 16 6.8a.4.4 0 0 0-.7.5L17 9.9A9.6 9.6 0 0 0 12 8.6a9.6 9.6 0 0 0-5 1.3l1.6-2.6a.4.4 0 0 0-.7-.5L6.4 9.5A8 8 0 0 0 3 15.6h18a8 8 0 0 0-3.4-6.1ZM8 13.4a.8.8 0 1 1 .8-.8.8.8 0 0 1-.8.8Zm8 0a.8.8 0 1 1 .8-.8.8.8 0 0 1-.8.8Z"/></svg>
             Download for Android
           </a>

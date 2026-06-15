@@ -31,5 +31,65 @@ const {
   <body>
     <slot />
     <SpeedInsights />
+    <script>
+      import { RELEASES_URL, fetchLatestRelease, findApkAsset } from '../lib/releases';
+
+      const links = document.querySelectorAll('a[data-apk]');
+      let apkUrlPromise;
+
+      async function getLatestApkUrl() {
+        if (!apkUrlPromise) {
+          apkUrlPromise = fetchLatestRelease().then((release) => {
+            const apk = findApkAsset(release);
+            if (!apk?.browser_download_url) {
+              throw new Error('No APK asset found in latest GitHub release');
+            }
+
+            links.forEach((link) => {
+              link.setAttribute('href', apk.browser_download_url);
+              link.setAttribute('download', '');
+            });
+
+            if (release.tag_name) {
+              document.querySelectorAll('[data-apk-version]').forEach((el) => {
+                el.textContent = release.tag_name;
+              });
+            }
+
+            return apk.browser_download_url;
+          });
+        }
+
+        try {
+          return await apkUrlPromise;
+        } catch (error) {
+          apkUrlPromise = undefined;
+          throw error;
+        }
+      }
+
+      links.forEach((link) => {
+        link.addEventListener('click', async (event) => {
+          if (link.getAttribute('href') !== RELEASES_URL) return;
+
+          event.preventDefault();
+          link.setAttribute('aria-busy', 'true');
+
+          try {
+            window.location.href = await getLatestApkUrl();
+          } catch {
+            link.removeAttribute('aria-busy');
+          }
+        });
+      });
+
+      if (links.length) {
+        getLatestApkUrl().catch(() => {
+          links.forEach((link) => {
+            link.removeAttribute('aria-busy');
+          });
+        });
+      }
+    </script>
   </body>
 </html>
