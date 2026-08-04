@@ -1,0 +1,59 @@
+---
+import ContentLayout from '../layouts/ContentLayout.astro';
+import FAQ from '../components/FAQ.astro';
+import { pages, faqJsonLd } from '../lib/seo';
+import { featureLinks } from '../lib/navigation';
+
+const seo = pages.models;
+const faqs = [
+  { question: 'Can I use Claude and ChatGPT in the same app?', answer: 'Yes. EchoFlow lets you add models from OpenRouter or direct provider APIs and switch between them in one conversation without losing context.' },
+  { question: 'Which AI app lets me use multiple models?', answer: 'EchoFlow is built as a multi-model AI client for Android. You choose the right model per task—fast models for drafts, reasoning models for hard problems—without installing separate apps.' },
+  { question: 'Do I need a subscription?', answer: 'EchoFlow is free and open-source. You pay your model providers directly through API usage (bring your own API key) or use free-tier models where available.' },
+];
+---
+<ContentLayout
+  seo={seo}
+  kicker="Multi-model AI"
+  heading="Use multiple AI models in one Android app"
+  lead="Choose the right model for each conversation. Switch between GPT, Claude, Gemini, DeepSeek and more without changing apps."
+  related={featureLinks.filter((l) => l.href !== seo.path)}
+  videoPoster="/brand/shot-cloud-models.jpg"
+  jsonLd={faqJsonLd(faqs)}
+>
+  <p>
+    Most AI apps lock you into one provider. EchoFlow is a <strong>multi-model AI app</strong> for Android
+    that lets you <strong>chat with different AI models</strong>, compare approaches, and
+    <strong>switch between AI models</strong> mid-conversation from a single tap.
+  </p>
+
+  <img class="feature-shot" src="/brand/shot-cloud-models.jpg" alt="EchoFlow model directory showing multiple AI models on Android" width="800" height="520" loading="lazy" />
+
+  <h2>One app, every model you need</h2>
+  <p>
+    Add models through <a href="/openrouter">OpenRouter</a> or <a href="/providers">direct provider APIs</a>.
+    Frontier models, fast models, reasoning models, and free options can all live in one list.
+    The benefit is practical: draft with a fast model, refine with a stronger one, or compare answers
+    without juggling subscriptions and separate apps.
+  </p>
+
+  <h2>Switch models without losing the thread</h2>
+  <p>
+    EchoFlow is an <strong>AI chat app with model selector</strong> built into the chat header.
+    Change models during a conversation when a task needs different strengths—coding, research,
+    creative writing, or quick Q&amp;A.
+  </p>
+
+  <h2>Universal AI chat for power users</h2>
+  <ul>
+    <li><strong>Model directory</strong> — search, favourite, and organise your models</li>
+    <li><strong>Custom model IDs</strong> — add any model your provider supports</li>
+    <li><strong>Reasoning traces</strong> — see how supported models think before they answer</li>
+    <li><strong>Same toolkit everywhere</strong> — <a href="/web-search">web search</a>, <a href="/documents">documents</a>, and <a href="/deep-research">Deep Research</a> work across models</li>
+  </ul>
+
+  <div class="callout">
+    <p><strong>Not just a model list.</strong> EchoFlow is a full <a href="/">Android AI assistant</a>—open-source, privacy-focused, and designed so you control which models you use and what you pay.</p>
+  </div>
+
+  <FAQ items={faqs} />
+</ContentLayout>

@@ -1,0 +1,25 @@
+---
+interface Props {
+  items: { question: string; answer: string }[];
+}
+const { items } = Astro.props;
+---
+<section class="faq">
+  <h2 class="h3">Common questions</h2>
+  <dl>
+    {items.map((item) => (
+      <>
+        <dt>{item.question}</dt>
+        <dd>{item.answer}</dd>
+      </>
+    ))}
+  </dl>
+</section>
+
+<style>
+  .faq { margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--line); }
+  .faq h2 { margin-bottom: 1.2rem; }
+  .faq dl { display: grid; gap: 1.2rem; }
+  .faq dt { font-family: var(--display); font-weight: 700; font-size: 1.1rem; margin-bottom: .35rem; }
+  .faq dd { color: var(--on-paper-soft); margin: 0; line-height: 1.65; }
+</style>

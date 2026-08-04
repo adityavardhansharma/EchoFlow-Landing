@@ -1,0 +1,59 @@
+---
+import ContentLayout from '../layouts/ContentLayout.astro';
+import FAQ from '../components/FAQ.astro';
+import { pages, faqJsonLd } from '../lib/seo';
+
+const seo = pages.providers;
+const faqs = [
+  { question: 'Is there an AI app where I can use my own API key?', answer: 'Yes. EchoFlow is a bring your own API key (BYOK) AI app for Android. Connect OpenRouter, OpenAI, Anthropic, Google Gemini, DeepSeek, or any OpenAI-compatible endpoint.' },
+  { question: 'How can I avoid paying for several separate AI subscriptions?', answer: 'Use one BYOK app with pay-as-you-go API billing. EchoFlow lets you access multiple providers through one interface—you pay providers per use instead of stacking monthly plans.' },
+  { question: 'Does EchoFlow support custom AI endpoints?', answer: 'Yes. Add OpenAI-compatible base URLs for self-hosted servers, Ollama, LM Studio, and other providers. See our custom endpoints guide.' },
+];
+---
+<ContentLayout
+  seo={seo}
+  kicker="Bring your own API key"
+  heading="BYOK AI app — use your own API key on Android"
+  lead="Connect OpenAI, Claude, Gemini, DeepSeek and custom endpoints. Pay-as-you-go pricing with no EchoFlow subscription."
+  related={[
+    { label: 'OpenRouter', href: '/openrouter' },
+    { label: 'Custom Endpoints', href: '/custom-endpoints' },
+    { label: 'API key guide', href: '/guides/use-your-own-api-key' },
+  ]}
+  jsonLd={faqJsonLd(faqs)}
+>
+  <p>
+    EchoFlow is a <strong>bring your own API key AI app</strong> (BYOK) for Android.
+    Instead of another monthly AI subscription, you connect the providers you already use—or
+    want to try—and pay only for the tokens you consume.
+  </p>
+
+  <h2>Supported provider workflows</h2>
+  <ul>
+    <li><strong>OpenRouter</strong> — one key, hundreds of models (<a href="/openrouter">setup guide</a>)</li>
+    <li><strong>OpenAI</strong> — use OpenAI API on Android for GPT models</li>
+    <li><strong>Anthropic Claude</strong> — use Claude API on Android directly or via OpenRouter</li>
+    <li><strong>Google Gemini</strong> — use Gemini API on Android with your Google AI key</li>
+    <li><strong>DeepSeek</strong> — use DeepSeek API on Android for cost-effective reasoning</li>
+    <li><strong>Custom endpoints</strong> — <a href="/custom-endpoints">OpenAI-compatible Android client</a> for self-hosted and LAN servers</li>
+  </ul>
+
+  <img class="feature-shot" src="/brand/shot-settings.jpg" alt="EchoFlow API key and provider settings on Android" width="800" height="520" loading="lazy" />
+
+  <h2>Why BYOK matters</h2>
+  <p>
+    A <strong>pay-as-you-go AI chat app</strong> puts you in control of cost and provider choice.
+    Power users can run cheap models for drafts and frontier models for hard tasks.
+    Developers can point EchoFlow at staging endpoints. Privacy-conscious users can choose
+    providers with policies they trust—while keeping <a href="/privacy">chat history local</a>.
+  </p>
+
+  <h2>Keys stay on your device</h2>
+  <p>
+    API keys are stored on your Android device. EchoFlow does not require an account and does
+    not upload your keys to EchoFlow servers. When you send a message to a cloud model, that
+    provider processes your prompt according to their terms.
+  </p>
+
+  <FAQ items={faqs} />
+</ContentLayout>

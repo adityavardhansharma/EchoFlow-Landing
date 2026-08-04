@@ -1,0 +1,64 @@
+---
+import ContentLayout from '../layouts/ContentLayout.astro';
+import FAQ from '../components/FAQ.astro';
+import { pages, faqJsonLd } from '../lib/seo';
+
+const seo = pages.privacy;
+const faqs = [
+  { question: 'Which AI app does not require an account?', answer: 'EchoFlow does not require an EchoFlow account or sign-up. You install the app, optionally add API keys, and start chatting. Provider accounts may still be needed for cloud models.' },
+  { question: 'Can I store AI chats locally?', answer: 'Yes. EchoFlow stores conversation history on your Android device. Past chats are available offline and are not uploaded to EchoFlow servers.' },
+  { question: 'Is EchoFlow completely private?', answer: 'No app that sends prompts to cloud models can claim total privacy. Local storage keeps your history on your phone, but cloud providers process prompts you send to their models. We explain this clearly rather than making absolute claims.' },
+];
+---
+<ContentLayout
+  seo={seo}
+  kicker="Privacy & control"
+  heading="Privacy-first AI chat for Android"
+  lead="Local chat storage, no EchoFlow account, open-source transparency. Understand what stays on your phone and what cloud providers see."
+  related={[
+    { label: 'Open Source', href: '/open-source' },
+    { label: 'Local Models', href: '/local-models' },
+    { label: 'Private ChatGPT alternative', href: '/alternatives/chatgpt' },
+  ]}
+  videoPoster="/brand/shot-sidebar.jpg"
+  jsonLd={faqJsonLd(faqs)}
+>
+  <p>
+    EchoFlow is a <strong>privacy-focused AI app</strong> built for people who want
+    <strong>control over their AI data</strong>. It is a <strong>private AI chat app</strong>
+  with <strong>AI chats stored locally</strong>—an <strong>AI app without account</strong>
+    or sign-up required to use the app itself.
+  </p>
+
+  <h2>What stays on your phone</h2>
+  <ul>
+    <li><strong>Chat history</strong> — stored locally on device</li>
+    <li><strong>API keys</strong> — saved on device for BYOK workflows</li>
+    <li><strong>App preferences</strong> — themes, model lists, settings</li>
+    <li><strong>Downloaded local models</strong> — when you use <a href="/local-models">on-device models</a></li>
+  </ul>
+
+  <img class="feature-shot" src="/brand/shot-sidebar.jpg" alt="EchoFlow local chat history sidebar on Android" width="800" height="520" loading="lazy" />
+
+  <h2>What cloud providers may see</h2>
+  <p>
+    When you send a message to a cloud model—OpenAI, Claude, Gemini, OpenRouter, or others—
+    that provider processes your prompt according to their policies. <strong>Local chat storage
+    does not prevent cloud providers from processing prompts you choose to send.</strong>
+    EchoFlow does not claim to be "100% private" or "completely anonymous."
+  </p>
+
+  <h2>Open-source transparency</h2>
+  <p>
+    EchoFlow is an <strong>open-source private AI app</strong>. You can inspect the code on
+    <a href="/open-source">GitHub</a>, verify what the app does, and contribute improvements.
+    We aim to be an <strong>AI assistant without analytics</strong> baked into the product experience—
+    check the repository and release notes for current behaviour.
+  </p>
+
+  <div class="callout">
+    <p><strong>Practical privacy:</strong> Use <a href="/local-models">local models</a> when you want offline, on-device inference. Use <a href="/providers">BYOK cloud models</a> when you need frontier capability—on your terms and billing.</p>
+  </div>
+
+  <FAQ items={faqs} />
+</ContentLayout>

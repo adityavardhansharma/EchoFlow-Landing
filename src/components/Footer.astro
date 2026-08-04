@@ -1,38 +1,41 @@
 ---
 import Seal from './Seal.astro';
 import { RELEASES_URL } from '../lib/releases';
+import { alternativeLinks, featureLinks, guideLinks, resourceLinks } from '../lib/navigation';
 const year = new Date().getFullYear();
 ---
 <footer class="dark footer">
   <div class="wrap-wide foot-in">
     <div class="foot-brand">
-      <a class="brand" href="#top"><Seal size={32} logo fill="var(--blue-600)" /> EchoFlow</a>
-      <p class="muted">A bring-your-own-key AI chat client for Android, powered by OpenRouter.</p>
+      <a class="brand" href="/"><Seal size={32} logo fill="var(--blue-600)" /> EchoFlow</a>
+      <p class="muted">An open-source, privacy-first AI app for Android. Multiple models, your own API keys, web search, file analysis, research, image generation, and optional local models.</p>
     </div>
     <nav class="cols" aria-label="Footer">
       <div>
-        <h4>App</h4>
-        <a href="#design">Design</a>
-        <a href="#models">Models</a>
-        <a href="#themes">Themes</a>
-        <a href="#features">Features</a>
+        <h4>Features</h4>
+        {featureLinks.slice(0, 6).map((l) => <a href={l.href}>{l.label}</a>)}
       </div>
       <div>
-        <h4>Get started</h4>
-        <a href={RELEASES_URL} data-apk rel="noopener">Download APK</a>
-        <a href="https://github.com/adityavardhansharma/EchoFlow" target="_blank" rel="noopener">GitHub repo ↗</a>
-        <a href="#models">Add your key</a>
-        <a href="#themes">Pick a theme</a>
+        <h4>More</h4>
+        {featureLinks.slice(6).map((l) => <a href={l.href}>{l.label}</a>)}
+        {resourceLinks.map((l) => <a href={l.href}>{l.label}</a>)}
       </div>
       <div>
-        <h4>Contact</h4>
-        <a href="mailto:echoflow@adityavs.tech">echoflow@adityavs.tech</a>
+        <h4>Comparisons</h4>
+        {alternativeLinks.map((l) => <a href={l.href}>{l.label}</a>)}
+      </div>
+      <div>
+        <h4>Guides</h4>
+        {guideLinks.map((l) => <a href={l.href}>{l.label}</a>)}
+        <a href="https://github.com/adityavardhansharma/EchoFlow" target="_blank" rel="noopener">GitHub ↗</a>
+        <a href="mailto:echoflow@adityavs.tech">Contact</a>
       </div>
     </nav>
   </div>
   <div class="wrap-wide foot-base muted">
     <span>© {year} EchoFlow</span>
-    <span>Built for OpenRouter · Not affiliated with any model provider</span>
+    <span>Open-source · Not affiliated with OpenRouter or any model provider</span>
+    <a href="/download">Download APK</a>
   </div>
 </footer>
 
@@ -41,14 +44,16 @@ const year = new Date().getFullYear();
   .foot-in { display: flex; justify-content: space-between; gap: 2.5rem; flex-wrap: wrap; }
   .brand { display: inline-flex; align-items: center; gap: .6rem; font-family: var(--display);
     font-weight: 800; font-size: 1.2rem; letter-spacing: -.03em; }
-  .foot-brand p { margin-top: .8rem; max-width: 36ch; font-size: .95rem; }
-  .cols { display: flex; gap: 3.5rem; }
+  .foot-brand p { margin-top: .8rem; max-width: 38ch; font-size: .92rem; }
+  .cols { display: flex; gap: 2.5rem; flex-wrap: wrap; }
   .cols h4 { font-family: var(--mono); font-size: .72rem; letter-spacing: .12em; text-transform: uppercase;
     color: var(--on-ink-soft); margin-bottom: .9rem; font-weight: 500; }
-  .cols a { display: block; color: var(--on-ink-soft); padding: .28rem 0; font-weight: 500; transition: color .2s; }
+  .cols a { display: block; color: var(--on-ink-soft); padding: .22rem 0; font-weight: 500;
+    font-size: .9rem; transition: color .2s; }
   .cols a:hover { color: var(--on-ink); }
-  .foot-base { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+  .foot-base { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap;
     margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--line-dark);
     font-family: var(--mono); font-size: .76rem; }
-  @media (max-width: 560px) { .cols { gap: 2.5rem; } }
+  .foot-base a { color: var(--blue-bright); }
+  @media (max-width: 560px) { .cols { gap: 2rem; } }
 </style>

@@ -1,0 +1,58 @@
+---
+import ContentLayout from '../layouts/ContentLayout.astro';
+import FAQ from '../components/FAQ.astro';
+import { pages, faqJsonLd, GITHUB_REPO } from '../lib/seo';
+
+const seo = pages.download;
+const faqs = [
+  { question: 'How do I install EchoFlow on Android?', answer: 'Download the APK from GitHub Releases, enable install from unknown sources for your browser or file manager, and open the APK. EchoFlow is not limited to Google Play at this time.' },
+  { question: 'What Android version is required?', answer: 'EchoFlow targets modern Android versions (Android 8+). Check the latest release notes on GitHub for exact minimum SDK requirements.' },
+  { question: 'Is EchoFlow free?', answer: 'Yes. EchoFlow is free and open-source. Cloud model usage may incur provider charges when you use your own API keys.' },
+];
+---
+<ContentLayout
+  seo={seo}
+  kicker="Download"
+  heading="Download EchoFlow for Android"
+  lead="Free APK from GitHub Releases. No account required to install."
+  showVideo={true}
+  related={[
+    { label: 'Use your own API key', href: '/guides/use-your-own-api-key' },
+    { label: 'Open Source', href: '/open-source' },
+    { label: 'OpenRouter setup', href: '/openrouter' },
+  ]}
+  jsonLd={faqJsonLd(faqs)}
+>
+  <p>
+  <a class="btn btn-primary" href="https://github.com/adityavardhansharma/EchoFlow/releases" data-apk rel="noopener">Download latest APK</a>
+  </p>
+
+  <h2>Installation steps</h2>
+  <ol>
+    <li>Tap <strong>Download latest APK</strong> above (resolves to the current GitHub release)</li>
+    <li>When prompted, allow installation from this source</li>
+    <li>Open EchoFlow—no sign-up required</li>
+    <li>Optional: add an <a href="/openrouter">OpenRouter</a> or <a href="/providers">provider API key</a></li>
+  </ol>
+
+  <h2>Release channels</h2>
+  <p>
+    Stable builds are published on
+    <a href={GITHUB_REPO}/releases target="_blank" rel="noopener">GitHub Releases</a>.
+    Version <span data-apk-version>latest</span> is fetched automatically on this page.
+    Follow the repository for changelogs and pre-release notes.
+  </p>
+
+  <h2>After install</h2>
+  <ul>
+    <li><a href="/guides">Read the guides</a> for BYOK, Ollama, and PDF workflows</li>
+    <li>Explore <a href="/models">multi-model chat</a> and <a href="/privacy">privacy settings</a></li>
+    <li>Star the <a href={GITHUB_REPO} target="_blank" rel="noopener">GitHub project</a> to support development</li>
+  </ul>
+
+  <FAQ items={faqs} />
+</ContentLayout>
+
+<style is:global>
+  .content-page .prose .btn { text-decoration: none; margin: 1rem 0 1.5rem; display: inline-flex; }
+</style>

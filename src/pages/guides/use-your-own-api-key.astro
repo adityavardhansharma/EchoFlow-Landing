@@ -1,0 +1,50 @@
+---
+import ContentLayout from '../../layouts/ContentLayout.astro';
+import FAQ from '../../components/FAQ.astro';
+import { pages, faqJsonLd } from '../../lib/seo';
+
+const seo = pages.guideApiKey;
+const faqs = [
+  { question: 'What does BYOK mean?', answer: 'BYOK means bring your own API key (or bring your own key). You supply credentials from OpenRouter, OpenAI, Anthropic, Google, or other providers instead of paying EchoFlow a subscription.' },
+  { question: 'Where is my key stored?', answer: 'On your Android device. EchoFlow does not require an account. Cloud providers process prompts you send to their models.' },
+];
+---
+<ContentLayout
+  seo={seo}
+  kicker="Guide"
+  heading="How to use your own API key in EchoFlow"
+  lead="Set up bring your own API key (BYOK) for OpenRouter, OpenAI, Claude, Gemini, and custom endpoints."
+  breadcrumbs={[{ name: 'Home', path: '/' }, { name: 'Guides', path: '/guides' }]}
+  related={[
+    { label: 'Providers', href: '/providers' },
+    { label: 'OpenRouter', href: '/openrouter' },
+    { label: 'Custom Endpoints', href: '/custom-endpoints' },
+  ]}
+  jsonLd={faqJsonLd(faqs)}
+>
+  <h2>1. Install EchoFlow</h2>
+  <p><a href="/download">Download the APK</a> and open the app. No EchoFlow account is required.</p>
+
+  <h2>2. Choose a provider</h2>
+  <ul>
+    <li><strong>OpenRouter</strong> — easiest way to access many models with one key (<a href="/openrouter">details</a>)</li>
+    <li><strong>OpenAI</strong> — GPT models with your OpenAI API key</li>
+    <li><strong>Anthropic</strong> — Claude with your Anthropic key</li>
+    <li><strong>Google AI</strong> — Gemini with your Google API key</li>
+    <li><strong>Custom URL</strong> — <a href="/custom-endpoints">Ollama, LM Studio, self-hosted</a></li>
+  </ul>
+
+  <h2>3. Add your key in Settings</h2>
+  <p>Open Settings → Providers, paste your key, and save. Keys remain on your device.</p>
+
+  <h2>4. Pick models</h2>
+  <p>Browse the model directory or add custom model IDs. See <a href="/models">multi-model workflows</a>.</p>
+
+  <h2>Cost tips</h2>
+  <p>
+    A <strong>pay-as-you-go AI chat app</strong> rewards model choice: use smaller models for drafts,
+    frontier models for hard tasks. Free models on OpenRouter can reduce cost for experimentation.
+  </p>
+
+  <FAQ items={faqs} />
+</ContentLayout>

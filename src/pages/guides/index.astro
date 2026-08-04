@@ -1,0 +1,38 @@
+---
+import ContentLayout from '../../layouts/ContentLayout.astro';
+import { pages } from '../../lib/seo';
+import { guideLinks } from '../../lib/navigation';
+
+const seo = pages.guides;
+---
+<ContentLayout
+  seo={seo}
+  kicker="Guides"
+  heading="EchoFlow guides for Android"
+  lead="Task-focused tutorials for API keys, Ollama, PDFs, and power-user workflows."
+  showVideo={false}
+  related={[
+    { label: 'Download', href: '/download' },
+    { label: 'OpenRouter', href: '/openrouter' },
+    { label: 'Providers', href: '/providers' },
+  ]}
+>
+  <p>
+    These guides answer real questions people search for—setup steps, not keyword-stuffed FAQs.
+  </p>
+
+  <ul class="link-grid">
+    {guideLinks.map((link) => (
+      <li><a href={link.href}>{link.label}</a></li>
+    ))}
+  </ul>
+
+  <h2>Popular questions</h2>
+  <ul>
+    <li><a href="/guides/use-your-own-api-key">Is there an AI app where I can use my own API key?</a></li>
+    <li><a href="/guides/connect-ollama">Can I use Ollama from my Android phone?</a></li>
+    <li><a href="/guides/chat-with-pdf">Can an AI app analyse my PDFs?</a></li>
+    <li><a href="/models">Which AI app lets me use multiple models?</a></li>
+    <li><a href="/openrouter">Which Android app supports OpenRouter?</a></li>
+  </ul>
+</ContentLayout>

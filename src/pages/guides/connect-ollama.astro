@@ -1,0 +1,48 @@
+---
+import ContentLayout from '../../layouts/ContentLayout.astro';
+import FAQ from '../../components/FAQ.astro';
+import { pages, faqJsonLd } from '../../lib/seo';
+
+const seo = pages.guideOllama;
+const faqs = [
+  { question: 'Do I need the same Wi‑Fi network?', answer: 'Usually yes. Your phone and Ollama host must be on the same LAN unless you use a VPN that routes traffic between them.' },
+  { question: 'What URL do I use?', answer: 'Typically http://YOUR_PC_IP:11434/v1 with an OpenAI-compatible path—confirm in Ollama docs for your version.' },
+];
+---
+<ContentLayout
+  seo={seo}
+  kicker="Guide"
+  heading="How to connect Ollama to EchoFlow on Android"
+  lead="Chat with Ollama models from your phone using an OpenAI-compatible endpoint on your network."
+  breadcrumbs={[{ name: 'Home', path: '/' }, { name: 'Guides', path: '/guides' }]}
+  related={[
+    { label: 'Custom Endpoints', href: '/custom-endpoints' },
+    { label: 'Local Models', href: '/local-models' },
+    { label: 'Providers', href: '/providers' },
+  ]}
+  jsonLd={faqJsonLd(faqs)}
+>
+  <h2>Prerequisites</h2>
+  <ul>
+    <li>Ollama installed and running on a PC or server on your network</li>
+    <li>At least one model pulled in Ollama (<code>ollama pull llama3</code> etc.)</li>
+    <li>Phone and host on the same trusted Wi‑Fi (or VPN)</li>
+  </ul>
+
+  <h2>Steps</h2>
+  <ol>
+    <li>Find your PC's local IP (e.g. 192.168.1.42)</li>
+    <li>Ensure Ollama listens on the network interface (check Ollama docs for <code>OLLAMA_HOST</code>)</li>
+    <li>In EchoFlow → Settings → add a custom OpenAI-compatible endpoint pointing to your Ollama URL</li>
+    <li>Add a model name matching your Ollama model tag</li>
+    <li>Start a chat and verify responses</li>
+  </ol>
+
+  <h2>Security</h2>
+  <p>
+    Do not expose Ollama to the public internet without authentication. Use home LAN or a secured VPN.
+    See <a href="/custom-endpoints">custom endpoints</a> for broader self-hosted guidance.
+  </p>
+
+  <FAQ items={faqs} />
+</ContentLayout>

@@ -1,0 +1,60 @@
+---
+import ContentLayout from '../layouts/ContentLayout.astro';
+import FAQ from '../components/FAQ.astro';
+import { pages, faqJsonLd } from '../lib/seo';
+
+const seo = pages.deepResearch;
+const faqs = [
+  { question: 'What is Deep Research in EchoFlow?', answer: 'Deep Research is a multi-step AI investigation. You ask a question, EchoFlow searches and reads sources across several steps, then writes a structured report. Supported providers return citations in the report.' },
+  { question: 'Can research run in the background?', answer: 'Yes. Deep Research runs as a background task on Android with a progress notification—lock your phone and return when the report is ready.' },
+  { question: 'How is this different from web search in chat?', answer: 'Web search augments a single reply. Deep Research plans multiple searches, synthesises findings, and produces a longer document-style answer with citations where available.' },
+];
+---
+<ContentLayout
+  seo={seo}
+  kicker="Deep Research"
+  heading="AI research assistant for Android"
+  lead="Multi-step web research that runs in the background and returns cited reports from supported providers."
+  related={[
+    { label: 'Web Search', href: '/web-search' },
+    { label: 'Documents', href: '/documents' },
+    { label: 'Perplexity alternative', href: '/alternatives/perplexity' },
+  ]}
+  videoPoster="/brand/shot-deep-research.jpg"
+  jsonLd={faqJsonLd(faqs)}
+>
+  <p>
+    Quick answers are not always enough. EchoFlow's <strong>deep research AI app</strong>
+    capability investigates topics across multiple steps—searching, reading, and synthesising—
+    then delivers a <strong>structured report with citations</strong> when your configured
+    providers support them.
+  </p>
+
+  <img class="feature-shot" src="/brand/shot-research-run.jpg" alt="EchoFlow Deep Research progress on Android" width="800" height="520" loading="lazy" />
+
+  <h2>Built for real research tasks</h2>
+  <ul>
+    <li>Market and competitor scans before a decision</li>
+    <li>Literature-style summaries with linked sources</li>
+    <li>Fact-finding across conflicting pages</li>
+    <li>Background runs while you commute or focus on other work</li>
+  </ul>
+
+  <h2>Powered by search infrastructure you choose</h2>
+  <p>
+    Deep Research can use <strong>Exa</strong>, <strong>Parallel</strong>, <strong>Firecrawl</strong>,
+    or your own model configuration—combined with EchoFlow's <a href="/web-search">web search</a>
+    plumbing. You stay on a <strong>multi-model AI research app</strong> instead of locking into
+    one vendor's research UI.
+  </p>
+
+  <img class="feature-shot" src="/brand/shot-deep-research.jpg" alt="EchoFlow Deep Research cited report on Android" width="800" height="520" loading="lazy" />
+
+  <h2>Citations when providers supply them</h2>
+  <p>
+    EchoFlow displays citations and source links returned by the research pipeline. We do not
+    invent references—what you see depends on the search providers and models you configure.
+  </p>
+
+  <FAQ items={faqs} />
+</ContentLayout>

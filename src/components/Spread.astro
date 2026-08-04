@@ -22,7 +22,7 @@ const {
   <div class="spread-copy reveal">
     <span class="kicker" style={`color:${accent}`}>{kicker}</span>
     <h2 class="h2">{title}</h2>
-    <p class="lead muted">{body}</p>
+    <p class="lead muted" set:html={body} />
     {bullets.length > 0 && (
       <ul class="checks">
         {bullets.map((b) => (
@@ -53,6 +53,8 @@ const {
   .spread.reverse .spread-visual { order: 1; }
 
   .spread-copy > * + * { margin-top: 1.3rem; }
+  .spread-copy .lead :global(a) { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
+  .dark .spread-copy .lead :global(a) { color: var(--blue-bright); }
   .checks { list-style: none; padding: 0; display: grid; gap: .9rem; margin-top: 1.6rem; }
   .checks li { display: flex; align-items: center; gap: .8rem; font-weight: 500; font-size: 1.02rem; }
   .checks li :global(b) { font-weight: 700; }

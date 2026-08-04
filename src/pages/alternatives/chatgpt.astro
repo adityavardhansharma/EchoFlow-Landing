@@ -1,0 +1,59 @@
+---
+import ContentLayout from '../../layouts/ContentLayout.astro';
+import ComparisonTable from '../../components/ComparisonTable.astro';
+import FAQ from '../../components/FAQ.astro';
+import { pages, faqJsonLd } from '../../lib/seo';
+
+const seo = pages.altChatgpt;
+const faqs = [
+  { question: 'Is there a private alternative to ChatGPT?', answer: 'EchoFlow offers local chat storage, no EchoFlow account, and open-source code. Cloud ChatGPT still processes prompts you send to OpenAI—EchoFlow is private in terms of local history and BYOK control, not a magic offline ChatGPT.' },
+  { question: 'Can I use ChatGPT models in EchoFlow?', answer: 'You can access GPT models through OpenRouter or OpenAI API keys in EchoFlow, alongside Claude, Gemini, and others.' },
+];
+---
+<ContentLayout
+  seo={seo}
+  kicker="Comparison"
+  heading="ChatGPT alternative for Android"
+  lead="An open-source option with multiple models, your own API keys, and local chat storage—not a claim to be universally better."
+  breadcrumbs={[{ name: 'Home', path: '/' }, { name: 'Alternatives', path: '/alternatives' }]}
+  related={[
+    { label: 'All alternatives', href: '/alternatives' },
+    { label: 'Privacy', href: '/privacy' },
+    { label: 'Providers & BYOK', href: '/providers' },
+  ]}
+  jsonLd={faqJsonLd(faqs)}
+>
+  <p>
+    ChatGPT is the default name for AI chat. A <strong>ChatGPT alternative for Android</strong>
+    makes sense when you want <strong>open-source</strong> code, <strong>multiple models</strong>,
+    <strong>bring your own API key</strong> pricing, or <strong>no login</strong> to the client app.
+  </p>
+
+  <ComparisonTable
+    competitorName="ChatGPT (OpenAI app)"
+    rows={[
+      { label: 'Model access', echoflow: 'Many models via OpenRouter/BYOK—including GPT alongside Claude, Gemini, etc.', competitor: 'OpenAI models within OpenAI subscription or API' },
+      { label: 'Account', echoflow: 'No EchoFlow account; provider keys as needed', competitor: 'OpenAI account required' },
+      { label: 'Chat storage', echoflow: 'Local on device by default', competitor: 'Cloud sync within OpenAI account' },
+      { label: 'Pricing', echoflow: 'Free app; pay providers per API use', competitor: 'Free tier + Plus subscription' },
+      { label: 'Open source', echoflow: 'Yes (GitHub)', competitor: 'No' },
+      { label: 'Research & files', echoflow: 'Deep Research, documents, web search, images', competitor: 'Varies by plan and features' },
+      { label: 'Local models', echoflow: 'Supported GGUF on-device (optional)', competitor: 'Not a focus on Android' },
+    ]}
+  />
+
+  <h2>Who should consider EchoFlow</h2>
+  <p>
+    Android users who want a <strong>ChatGPT alternative with multiple models</strong>,
+    <strong>ChatGPT alternative with API key</strong> control, or a
+    <strong>ChatGPT alternative without login</strong> to the chat client itself.
+  </p>
+
+  <h2>Who should stay with ChatGPT</h2>
+  <p>
+    If you want the simplest OpenAI-native experience with minimal setup and are happy with
+    OpenAI's subscription and cloud history, the official app may be easier.
+  </p>
+
+  <FAQ items={faqs} />
+</ContentLayout>

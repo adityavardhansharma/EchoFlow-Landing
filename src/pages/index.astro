@@ -8,11 +8,35 @@ import Themes from '../components/Themes.astro';
 import Bento from '../components/Bento.astro';
 import CTA from '../components/CTA.astro';
 import Footer from '../components/Footer.astro';
+import VideoShowcase from '../components/VideoShowcase.astro';
+import { pages } from '../lib/seo';
+import { featureLinks } from '../lib/navigation';
+
+const seo = pages.home;
 ---
-<Base>
+<Base seo={seo}>
   <Nav />
   <main>
     <Hero />
+
+    <section class="paper platform-intro">
+      <div class="wrap-wide">
+        <span class="kicker" style="color:var(--blue)">All-in-one AI platform</span>
+        <h2 class="h2">The Android AI assistant built for power users</h2>
+        <p class="lead">
+          EchoFlow is an <strong>open-source AI app for Android</strong>—a
+          <strong>multi-model AI chatbot</strong> with <strong>bring your own API key</strong> support,
+          <strong>web search</strong>, <strong>document analysis</strong>,
+          <strong>Deep Research</strong>, <strong>image generation</strong>, and optional
+          <strong>local models</strong>. No account required. Chats stay on your phone.
+        </p>
+        <ul class="feature-links">
+          {featureLinks.map((link) => (
+            <li><a href={link.href}><strong>{link.label}</strong><span>{link.description}</span></a></li>
+          ))}
+        </ul>
+      </div>
+    </section>
 
     <section class="paper spreads">
       <div class="wrap-wide stack">
@@ -34,11 +58,11 @@ import Footer from '../components/Footer.astro';
           id="research"
           kicker="Deep Research"
           title="Research that runs itself."
-          body="Ask a real question and EchoFlow investigates the web across multiple steps, then writes a cited report. It runs in the background — lock your phone and come back to the answer."
+          body="Ask a real question and EchoFlow investigates the web across multiple steps, then writes a cited report. It runs in the background — lock your phone and come back to the answer. <a href='/deep-research'>Learn more →</a>"
           bullets={[
             "Powered by <b>Exa</b>, <b>Parallel</b>, <b>Firecrawl</b> — or your own model",
             "Runs in the <b>background</b> with a progress notification",
-            "<b>Cited</b>, structured reports you can trust",
+            "<b>Cited</b>, structured reports when providers return sources",
           ]}
           img="/brand/shot-research-run.jpg"
           tone="light"
@@ -49,7 +73,7 @@ import Footer from '../components/Footer.astro';
           id="local"
           kicker="On-device models"
           title="Run AI on your phone. Even offline."
-          body="Download a model once and chat with no internet, no cost, and no data leaving your device. Perfect for travel, flaky signal, or simply keeping everything private."
+          body="Download a model once and chat with no internet, no cost, and no data leaving your device. One feature in a broader platform — <a href='/local-models'>local models guide →</a>"
           bullets={[
             "Gemma, Qwen, DeepSeek & more, fully <b>on-device</b>",
             "Works <b>offline</b> — no key, no account",
@@ -62,11 +86,11 @@ import Footer from '../components/Footer.astro';
         <Spread
           kicker="Stored on your device"
           title="Your whole history, on your phone."
-          body="Every conversation is saved locally on your device — so your full chat history is there the instant you open the app, works with no internet at all, and never sits on someone else's server."
+          body="Every conversation is saved locally on your device — so your full chat history is there the instant you open the app, works with no internet at all, and never sits on someone else's server. <a href='/privacy'>Privacy details →</a>"
           bullets={[
             "All chats stored <b>locally</b> on your device",
             "Open past conversations <b>offline</b>, anytime",
-            "Never uploaded, never kept on a server",
+            "Cloud models still process prompts you send to them",
           ]}
           img="/brand/shot-sidebar.jpg"
           tone="light"
@@ -79,12 +103,27 @@ import Footer from '../components/Footer.astro';
     <Models />
     <Themes />
     <Bento />
+    <VideoShowcase
+      title="Watch EchoFlow on Android"
+      description="Multi-model chat, model switching, web search, and local storage—in a privacy-first open-source app."
+    />
     <CTA />
   </main>
   <Footer />
 </Base>
 
 <style>
+  .platform-intro { padding-block: clamp(3rem, 6vw, 5rem); }
+  .platform-intro .lead { margin-top: 1rem; max-width: 62ch; }
+  .platform-intro .lead strong { color: var(--on-paper); }
+  .feature-links { list-style: none; padding: 0; margin-top: 2rem; display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: .75rem; }
+  .feature-links a { display: flex; flex-direction: column; gap: .2rem; padding: .9rem 1rem;
+    border: 1px solid var(--line); border-radius: var(--r-m); background: var(--card);
+    transition: border-color .2s, transform .35s var(--spring); }
+  .feature-links a:hover { border-color: var(--blue); transform: translateY(-3px); }
+  .feature-links strong { font-family: var(--display); font-size: 1rem; }
+  .feature-links span { font-size: .85rem; color: var(--on-paper-soft); }
   .spreads { background: var(--paper); }
   .stack { display: grid; gap: clamp(4rem, 9vw, 7rem); }
 </style>

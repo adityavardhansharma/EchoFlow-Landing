@@ -1,0 +1,59 @@
+---
+import ContentLayout from '../layouts/ContentLayout.astro';
+import FAQ from '../components/FAQ.astro';
+import { pages, faqJsonLd } from '../lib/seo';
+
+const seo = pages.documents;
+const faqs = [
+  { question: 'Can an AI app analyse my PDFs?', answer: 'Yes. EchoFlow lets you attach PDFs and other documents to conversations. Ask questions, request summaries, extract data, and compare files with the model you choose.' },
+  { question: 'What file types are supported?', answer: 'EchoFlow supports document workflows including PDF, Word, CSV, and other common formats for chat and analysis. Check the latest release notes on GitHub for the current list.' },
+  { question: 'Are my documents uploaded to EchoFlow servers?', answer: 'EchoFlow is designed for local chat storage. Documents you attach are processed according to the model provider you send them to—see our privacy page for the full data flow.' },
+];
+---
+<ContentLayout
+  seo={seo}
+  kicker="Documents"
+  heading="Chat with PDFs and documents on Android"
+  lead="Upload files, ask questions, summarise content, and analyse structured data with your choice of AI model."
+  related={[
+    { label: 'Deep Research', href: '/deep-research' },
+    { label: 'Chat with PDF guide', href: '/guides/chat-with-pdf' },
+    { label: 'Models', href: '/models' },
+  ]}
+  videoPoster="/brand/shot-plus-menu.jpg"
+  jsonLd={faqJsonLd(faqs)}
+>
+  <p>
+    EchoFlow is an <strong>AI document assistant</strong> for Android. Whether you need to
+    <strong>chat with PDF</strong> files, <strong>ask questions about a PDF</strong> for study,
+    or run <strong>AI spreadsheet analysis</strong> on a CSV, you can do it in the same
+    <a href="/">all-in-one AI app</a> you use for everyday chat.
+  </p>
+
+  <img class="feature-shot" src="/brand/shot-plus-menu.jpg" alt="EchoFlow file attachment menu on Android" width="800" height="520" loading="lazy" />
+
+  <h2>Real document workflows</h2>
+  <ul>
+    <li><strong>Summarise</strong> — condense long PDFs into key points</li>
+    <li><strong>Ask questions</strong> — query specific sections or clauses</li>
+    <li><strong>Extract information</strong> — pull tables, dates, and entities</li>
+    <li><strong>Compare documents</strong> — spot differences across versions</li>
+    <li><strong>Analyse data</strong> — <strong>chat with CSV</strong> files and structured exports</li>
+  </ul>
+
+  <h2>AI chatbot with attachments</h2>
+  <p>
+    Attach documents directly in chat. EchoFlow is an <strong>AI assistant with file upload</strong>
+    built for mobile—useful for students, researchers, and professionals who work from their phone.
+    Pair documents with <a href="/web-search">web search</a> or <a href="/deep-research">Deep Research</a>
+    when you need both file context and live sources.
+  </p>
+
+  <h2>Pick the right model per document</h2>
+  <p>
+    Long-context models for big PDFs, fast models for quick summaries—EchoFlow's
+    <a href="/models">multi-model setup</a> lets you match the model to the file and task.
+  </p>
+
+  <FAQ items={faqs} />
+</ContentLayout>

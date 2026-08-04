@@ -1,0 +1,57 @@
+---
+import ContentLayout from '../layouts/ContentLayout.astro';
+import FAQ from '../components/FAQ.astro';
+import { pages, faqJsonLd } from '../lib/seo';
+
+const seo = pages.customEndpoints;
+const faqs = [
+  { question: 'Can I use Ollama from my Android phone?', answer: 'Yes. EchoFlow can connect to an Ollama server on your network using an OpenAI-compatible endpoint. Your phone and server must be on the same LAN or reachable securely—see our Ollama guide.' },
+  { question: 'Does EchoFlow work with LM Studio?', answer: 'Yes. Point EchoFlow at LM Studio\'s local OpenAI-compatible API when LM Studio is running on your PC and reachable from your phone.' },
+  { question: 'Is exposing a local server safe?', answer: 'Only expose inference endpoints on trusted networks. Do not port-forward Ollama or LM Studio to the public internet without proper authentication and TLS. We explain setup risks in our guides.' },
+];
+---
+<ContentLayout
+  seo={seo}
+  kicker="Custom endpoints"
+  heading="Ollama, LM Studio & self-hosted AI on Android"
+  lead="Connect EchoFlow to OpenAI-compatible endpoints on your network. Chat with home-server models from your phone."
+  related={[
+    { label: 'Connect Ollama guide', href: '/guides/connect-ollama' },
+    { label: 'Providers & BYOK', href: '/providers' },
+    { label: 'Local Models', href: '/local-models' },
+  ]}
+  jsonLd={faqJsonLd(faqs)}
+>
+  <p>
+    EchoFlow is an <strong>OpenAI-compatible Android client</strong> for
+    <strong>self-hosted AI Android</strong> workflows. Use it as an
+    <strong>Ollama Android client</strong> or <strong>LM Studio Android client</strong>
+    front-end when your server is running and reachable.
+  </p>
+
+  <img class="feature-shot" src="/brand/shot-settings.jpg" alt="EchoFlow custom endpoint configuration on Android" width="800" height="520" loading="lazy" />
+
+  <h2>Typical setups</h2>
+  <ul>
+    <li><strong>Ollama on a home PC</strong> — <a href="/guides/connect-ollama">connect Android to Ollama</a> over Wi‑Fi</li>
+    <li><strong>LM Studio</strong> — remote LM Studio client while the desktop app serves models</li>
+    <li><strong>Custom vLLM / LiteLLM / corporate gateways</strong> — any OpenAI-compatible base URL</li>
+    <li><strong>Local network AI chat</strong> — keep inference on hardware you control</li>
+  </ul>
+
+  <h2>Networking and security</h2>
+  <p>
+    Your phone must reach the server IP and port. Firewalls, VPNs, and guest Wi‑Fi isolation
+    can block connections—test on the same subnet first. Treat a <strong>home server AI client
+    Android</strong> setup like any LAN service: trusted network, no public exposure without
+    hardening.
+  </p>
+
+  <h2>Not the same as on-device models</h2>
+  <p>
+    <a href="/local-models">Local models</a> run on the phone itself. Custom endpoints run on
+    another machine and stream results to EchoFlow—useful when your PC has a GPU but your phone does not.
+  </p>
+
+  <FAQ items={faqs} />
+</ContentLayout>

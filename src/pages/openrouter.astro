@@ -1,0 +1,66 @@
+---
+import ContentLayout from '../layouts/ContentLayout.astro';
+import FAQ from '../components/FAQ.astro';
+import { pages, faqJsonLd } from '../lib/seo';
+
+const seo = pages.openrouter;
+const faqs = [
+  { question: 'Which Android app supports OpenRouter?', answer: 'EchoFlow is an open-source OpenRouter client for Android. Paste your OpenRouter API key, browse models, and chat with any model OpenRouter offers—including image generation in Imagine.' },
+  { question: 'Is EchoFlow an official OpenRouter app?', answer: 'No. EchoFlow is an independent open-source client. It is not affiliated with or endorsed by OpenRouter. You use your own OpenRouter account and API key.' },
+  { question: 'Can I use OpenRouter without a monthly subscription?', answer: 'OpenRouter charges per token used. EchoFlow itself is free. You pay only for the model usage your key consumes—often less than multiple separate AI subscriptions.' },
+];
+---
+<ContentLayout
+  seo={seo}
+  kicker="OpenRouter client"
+  heading="OpenRouter on Android — open-source client with bring your own API key"
+  lead="EchoFlow is a mobile OpenRouter client that puts hundreds of models in your pocket. Not affiliated with OpenRouter."
+  related={[
+    { label: 'Providers & BYOK', href: '/providers', description: 'Direct API keys too' },
+    { label: 'Models', href: '/models', description: 'Multi-model workflows' },
+    { label: 'Imagine', href: '/imagine', description: 'OpenRouter image generation' },
+  ]}
+  videoPoster="/brand/shot-cloud-models.jpg"
+  jsonLd={faqJsonLd(faqs)}
+>
+  <p>
+    If you want a <strong>OpenRouter Android app</strong> that feels native, fast, and private,
+    EchoFlow is built for you. It is an <strong>open-source OpenRouter client</strong>—a
+    <strong>BYOK OpenRouter app</strong> where your key stays on your device and your chats
+    stay in local storage.
+  </p>
+
+  <img class="feature-shot" src="/brand/shot-home.jpg" alt="EchoFlow OpenRouter chat interface on Android" width="800" height="520" loading="lazy" />
+
+  <h2>Why use an OpenRouter client on mobile?</h2>
+  <p>
+    OpenRouter gives you one API for hundreds of models. A dedicated
+    <strong>OpenRouter chat app</strong> on Android means you can use those models anywhere—
+    not just at a desktop browser. EchoFlow is a <strong>mobile OpenRouter client</strong>
+    with Material Design, offline chat history, and Android-native features like background
+    <a href="/deep-research">Deep Research</a>.
+  </p>
+
+  <h2>What EchoFlow adds beyond a basic client</h2>
+  <ul>
+    <li><strong>Local chat history</strong> — conversations stored on your phone (<a href="/privacy">privacy details</a>)</li>
+    <li><strong>Model switching</strong> — change models mid-chat (<a href="/models">multi-model guide</a>)</li>
+    <li><strong>Web search</strong> — connect models to live search providers</li>
+    <li><strong>Imagine</strong> — <a href="/imagine">OpenRouter image generation</a> in a separate creative workspace</li>
+    <li><strong>No account in EchoFlow</strong> — only your OpenRouter key, stored locally</li>
+  </ul>
+
+  <h2>Getting started</h2>
+  <ol>
+    <li>Create an OpenRouter account and generate an API key</li>
+    <li><a href="/download">Download EchoFlow</a> on Android</li>
+    <li>Paste your key in Settings — it never leaves your device unencrypted</li>
+    <li>Browse models or add custom IDs. See our <a href="/guides/use-your-own-api-key">BYOK guide</a> for details</li>
+  </ol>
+
+  <div class="callout">
+    <p><strong>Disclaimer:</strong> EchoFlow is not an official OpenRouter application and is not affiliated with OpenRouter. Trademarks belong to their respective owners.</p>
+  </div>
+
+  <FAQ items={faqs} />
+</ContentLayout>

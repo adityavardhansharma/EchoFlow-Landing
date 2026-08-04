@@ -1,0 +1,57 @@
+---
+import ContentLayout from '../layouts/ContentLayout.astro';
+import FAQ from '../components/FAQ.astro';
+import { pages, faqJsonLd, GITHUB_REPO } from '../lib/seo';
+
+const seo = pages.openSource;
+const faqs = [
+  { question: 'Is there an open-source AI chatbot for Android?', answer: 'Yes. EchoFlow is open-source on GitHub under a permissive license. You can inspect, fork, and contribute to the Android client.' },
+  { question: 'Where are releases published?', answer: 'APKs and release notes are on GitHub Releases. The download page links to the latest build.' },
+  { question: 'Can I customise EchoFlow?', answer: 'As FOSS software, you can modify themes, providers, and features. Contributions via pull requests are welcome—see CONTRIBUTING in the repository.' },
+];
+---
+<ContentLayout
+  seo={seo}
+  kicker="Open source"
+  heading="Open-source AI chatbot for Android"
+  lead="Free software on GitHub. Transparent features, community contributions, and releases you can verify."
+  related={[
+    { label: 'Download', href: '/download' },
+    { label: 'Privacy', href: '/privacy' },
+    { label: 'Guides', href: '/guides' },
+  ]}
+  jsonLd={faqJsonLd(faqs)}
+>
+  <p>
+    EchoFlow is a <strong>FOSS AI app Android</strong> users can trust because the code is
+    public. It is an <strong>open-source AI assistant</strong> and
+    <strong>open-source multi-model AI chat</strong> client—not a black box with marketing claims.
+  </p>
+
+  <h2>Why open source matters for AI apps</h2>
+  <ul>
+    <li><strong>Verify behaviour</strong> — see how keys, storage, and network calls work</li>
+    <li><strong>Customise</strong> — a <strong>customisable AI chat app</strong> you can adapt</li>
+    <li><strong>Contribute</strong> — fix bugs, add providers, improve UX</li>
+    <li><strong>No lock-in</strong> — the app remains usable even if one company changes terms</li>
+  </ul>
+
+  <h2>Repository & releases</h2>
+  <p>
+    Source, issues, and roadmaps live on
+    <a href={GITHUB_REPO} target="_blank" rel="noopener">GitHub</a>.
+    This site documents features; the repo is the source of truth for implementation details.
+    <a href="/download">Download the latest APK</a> from Releases.
+  </p>
+
+  <h2>Positioning among open-source AI apps</h2>
+  <p>
+    Some open-source projects focus only on local LLMs. EchoFlow is broader: a
+    <strong>privacy-friendly open-source AI app</strong> that also supports cloud BYOK,
+    <a href="/openrouter">OpenRouter</a>, <a href="/web-search">search</a>,
+    <a href="/documents">documents</a>, and <a href="/imagine">images</a>—while keeping
+    chats on your device.
+  </p>
+
+  <FAQ items={faqs} />
+</ContentLayout>

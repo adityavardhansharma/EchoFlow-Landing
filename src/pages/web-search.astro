@@ -1,0 +1,57 @@
+---
+import ContentLayout from '../layouts/ContentLayout.astro';
+import FAQ from '../components/FAQ.astro';
+import { pages, faqJsonLd } from '../lib/seo';
+
+const seo = pages.webSearch;
+const faqs = [
+  { question: 'Which AI app can search the internet?', answer: 'EchoFlow connects chat to web search through Exa, Parallel, Firecrawl, or OpenRouter search—depending on your configuration. Models can answer with current information instead of training cutoffs.' },
+  { question: 'Does EchoFlow show sources?', answer: 'When your chosen search provider and model return source links or citations, EchoFlow displays them in the reply. Availability depends on the provider and model you use.' },
+  { question: 'Is this the same as Deep Research?', answer: 'Web search gives models live context for a single reply. Deep Research runs multi-step investigation and writes a longer cited report. See the Deep Research page for details.' },
+];
+---
+<ContentLayout
+  seo={seo}
+  kicker="AI search"
+  heading="AI chat with live web search on Android"
+  lead="Give any model internet access. Get up-to-date answers with source links when your provider returns them."
+  related={[
+    { label: 'Deep Research', href: '/deep-research' },
+    { label: 'Models', href: '/models' },
+    { label: 'Perplexity alternative', href: '/alternatives/perplexity' },
+  ]}
+  videoPoster="/brand/shot-web-search.jpg"
+  jsonLd={faqJsonLd(faqs)}
+>
+  <p>
+    Static training data goes stale fast. EchoFlow is an <strong>AI app with web search</strong>
+    that lets you turn any supported model into an <strong>AI chatbot with internet access</strong>—
+    useful for news, prices, documentation, and anything that changes after a model's cutoff.
+  </p>
+
+  <img class="feature-shot" src="/brand/shot-web-search.jpg" alt="EchoFlow web search results in chat on Android" width="800" height="520" loading="lazy" />
+
+  <h2>Search providers you can use</h2>
+  <ul>
+    <li><strong>Exa</strong> — neural search optimised for AI workflows</li>
+    <li><strong>Parallel</strong> — fast web retrieval for chat context</li>
+    <li><strong>Firecrawl</strong> — fetch and parse page content</li>
+    <li><strong>OpenRouter</strong> — search-capable models where supported</li>
+  </ul>
+
+  <h2>AI assistant with sources</h2>
+  <p>
+    When providers return citations or links, EchoFlow surfaces them so you can verify answers.
+    This makes EchoFlow a practical <strong>AI search engine app</strong> for everyday questions—
+    and a foundation for deeper <a href="/deep-research">AI research workflows</a> when you need
+    more than a quick lookup.
+  </p>
+
+  <h2>Works with your model choice</h2>
+  <p>
+    Unlike single-model search apps, EchoFlow is a <strong>multi-model AI search app</strong>.
+    Pick the model that balances speed, cost, and quality—then enable search for that conversation.
+  </p>
+
+  <FAQ items={faqs} />
+</ContentLayout>

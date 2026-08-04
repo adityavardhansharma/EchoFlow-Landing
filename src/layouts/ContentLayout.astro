@@ -1,0 +1,72 @@
+---
+import Base from './Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import PageCTA from '../components/PageCTA.astro';
+import VideoShowcase from '../components/VideoShowcase.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
+import { breadcrumbJsonLd, type PageSEO } from '../lib/seo';
+import type { NavLink } from '../lib/navigation';
+
+interface Props {
+  seo: PageSEO;
+  kicker?: string;
+  heading?: string;
+  lead?: string;
+  breadcrumbs?: { name: string; path: string }[];
+  related?: NavLink[];
+  showVideo?: boolean;
+  videoPoster?: string;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const {
+  seo,
+  kicker,
+  heading,
+  lead,
+  breadcrumbs = [{ name: 'Home', path: '/' }],
+  related = [],
+  showVideo = true,
+  videoPoster = '/brand/app-demo-poster.jpg',
+  jsonLd = [],
+} = Astro.props;
+
+const crumbs = [...breadcrumbs, { name: seo.title.split(' | ')[0].split(' — ')[0], path: seo.path }];
+const allJsonLd = [
+  breadcrumbJsonLd(crumbs),
+  ...(Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : []),
+];
+---
+<Base seo={seo} jsonLd={allJsonLd}>
+  <Nav />
+  <main class="content-page">
+    <header class="page-hero dark">
+      <div class="wrap-wide">
+        <Breadcrumbs items={crumbs} />
+        {kicker && <span class="kicker">{kicker}</span>}
+        <h1 class="h2 page-title">{heading ?? seo.title.split(' | ')[0]}</h1>
+        {lead && <p class="lead muted page-lead">{lead}</p>}
+      </div>
+    </header>
+
+    <article class="page-body paper">
+      <div class="wrap prose">
+        <slot />
+      </div>
+    </article>
+
+    {related.length > 0 && <RelatedLinks links={related} />}
+    {showVideo && <VideoShowcase poster={videoPoster} />}
+    <PageCTA />
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .page-hero { padding-block: clamp(2.5rem, 5vw, 4rem) clamp(2rem, 4vw, 3rem); }
+  .page-title { margin-top: 1rem; max-width: 22ch; }
+  .page-lead { margin-top: 1.2rem; max-width: 58ch; }
+  .page-body { padding-block: clamp(2.5rem, 5vw, 4rem); }
+</style>
