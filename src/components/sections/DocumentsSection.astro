@@ -1,0 +1,108 @@
+---
+import PhoneFrame from '../PhoneFrame.astro';
+import Seal from '../Seal.astro';
+
+const formats = [
+  { name: 'PDF', ext: 'pdf', color: '#e74c3c', icon: 'M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm6 1v4h4' },
+  { name: 'Word', ext: 'docx', color: '#2b579a', icon: 'M6 3h9l5 5v13H6V3zm9 0v5h5M8 12h8M8 16h8M8 20h5' },
+  { name: 'Excel', ext: 'xlsx', color: '#217346', icon: 'M6 3h9l5 5v13H6V3zm9 0v5h5M8 11h8v2H8zm0 4h8v2H8zm0 4h8v2H8z' },
+  { name: 'PowerPoint', ext: 'pptx', color: '#d24726', icon: 'M6 3h9l5 5v13H6V3zm9 0v5h5M10 18a4 4 0 1 0 0-8 4 4 0 0 0 0 8z' },
+  { name: 'Markdown', ext: 'md', color: '#4a5568', icon: 'M6 4h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm2 5-3 4 3 4v-8zm4 0h2l2 3 2-3h2l-3 4 3 4h-2l-2-3-2 3h-2l3-4-3-4z' },
+  { name: 'CSV', ext: 'csv', color: '#0f766e', icon: 'M6 3h9l5 5v13H6V3zm9 0v5h5M8 12h8M8 16h8M8 20h8M12 12v8' },
+];
+---
+<section id="documents" class="dark documents">
+  <div class="atmos" aria-hidden="true"><span class="glow"></span></div>
+  <div class="wrap-wide grid">
+    <div class="copy">
+      <span class="kicker" style="color:var(--blue-bright)">Documents</span>
+      <h2 class="h2">PDF, Office, CSV<br />— ask anything.</h2>
+      <p class="lead muted">
+        Drop in files and chat with them. Summarise, extract tables, compare versions,
+        or study for an exam — with cloud models or fully offline on-device models.
+      </p>
+      <ul class="checks">
+        <li><Seal size={22} fill="var(--blue-600)"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round"><path d="m5 13 4 4L19 7"/></svg></Seal> PDF, Word, Excel, PowerPoint &amp; more</li>
+        <li><Seal size={22} fill="var(--blue-600)"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round"><path d="m5 13 4 4L19 7"/></svg></Seal> Works with <b>local on-device</b> models offline</li>
+        <li><Seal size={22} fill="var(--blue-600)"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round"><path d="m5 13 4 4L19 7"/></svg></Seal> Cloud models for larger files &amp; context</li>
+      </ul>
+      <a class="section-link" href="/documents">Document workflows →</a>
+    </div>
+
+    <div class="visual">
+      <div class="format-orbit" aria-hidden="true">
+        {formats.map((f, i) => (
+          <div class="format-chip" style={`--i:${i}; --c:${f.color}`}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d={f.icon} />
+            </svg>
+            <span>.{f.ext}</span>
+          </div>
+        ))}
+      </div>
+      <PhoneFrame tone="light" class="phone-doc">
+        <img src="/brand/v2/chat-green.jpg" alt="EchoFlow chat with document attachment in green theme" loading="lazy" width="288" height="624" />
+      </PhoneFrame>
+    </div>
+  </div>
+</section>
+
+<style>
+  .documents { overflow: hidden; padding-block: clamp(4.5rem, 9vw, 8rem); }
+  .atmos { position: absolute; inset: 0; pointer-events: none; }
+  .glow { position: absolute; width: 560px; height: 560px; left: -140px; bottom: -180px;
+    background: radial-gradient(circle, #1746a0, transparent 68%); filter: blur(80px); opacity: 0.45; }
+  .grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 5vw, 4rem); align-items: center; }
+  .copy > * + * { margin-top: 1.3rem; }
+  .checks { list-style: none; padding: 0; display: grid; gap: 0.8rem; }
+  .checks li { display: flex; align-items: center; gap: 0.75rem; font-weight: 500; }
+  .section-link { display: inline-block; margin-top: 0.5rem; color: var(--blue-bright);
+    font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+  .visual { position: relative; min-height: 520px; display: grid; place-items: center; }
+  .phone-doc { width: min(260px, 72vw); position: relative; z-index: 2;
+    filter: drop-shadow(0 44px 70px rgba(0,0,0,0.5)); animation: doc-in 1.1s var(--ease-out) both; }
+  .format-orbit { position: absolute; inset: 0; z-index: 1; }
+  .format-chip {
+    position: absolute; left: 50%; top: 50%;
+    display: flex; align-items: center; gap: 0.35rem;
+    padding: 0.45rem 0.65rem; border-radius: 12px;
+    background: rgba(255,255,255,0.95); color: var(--c);
+    border: 1px solid rgba(255,255,255,0.8);
+    box-shadow: 0 12px 28px -12px rgba(0,0,0,0.35);
+    font-family: var(--mono); font-size: 0.68rem; font-weight: 600;
+    transform:
+      translate(-50%, -50%)
+      rotate(calc(var(--i) * 60deg - 150deg))
+      translateX(150px)
+      rotate(calc(var(--i) * -60deg + 150deg))
+      scale(0.2);
+    opacity: 0;
+    animation: orbit-in 1.4s var(--spring) calc(var(--i) * 0.08s) forwards;
+  }
+  .format-chip svg { width: 18px; height: 18px; }
+  @keyframes orbit-in {
+    0% { opacity: 0; transform: translate(-50%,-50%) rotate(calc(var(--i)*60deg - 150deg)) translateX(220px) rotate(calc(var(--i)*-60deg + 150deg)) scale(0.5); }
+    70% { opacity: 1; }
+    100% { opacity: 1; transform: translate(-50%,-50%) rotate(calc(var(--i)*60deg - 150deg)) translateX(150px) rotate(calc(var(--i)*-60deg + 150deg)) scale(1); }
+  }
+  @keyframes doc-in {
+    from { opacity: 0; transform: scale(0.92) translateY(24px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  @media (max-width: 860px) {
+    .grid { grid-template-columns: 1fr; text-align: center; }
+    .copy { display: flex; flex-direction: column; align-items: center; }
+    .checks li { justify-content: center; text-align: left; }
+    .format-chip { transform: translate(-50%,-50%) rotate(calc(var(--i)*60deg - 150deg)) translateX(110px) rotate(calc(var(--i)*-60deg + 150deg)); }
+    @keyframes orbit-in {
+      100% { transform: translate(-50%,-50%) rotate(calc(var(--i)*60deg - 150deg)) translateX(110px) rotate(calc(var(--i)*-60deg + 150deg)) scale(1); }
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .format-chip, .phone-doc { animation: none; opacity: 1; transform: none; }
+    .format-chip { position: static; display: inline-flex; margin: 0.25rem; transform: none !important; }
+    .format-orbit { position: static; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.35rem; margin-bottom: 1.5rem; }
+    .visual { min-height: auto; display: flex; flex-direction: column; }
+  }
+</style>

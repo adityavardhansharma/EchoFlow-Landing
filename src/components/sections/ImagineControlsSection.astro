@@ -1,0 +1,50 @@
+---
+import PhoneFrame from '../PhoneFrame.astro';
+import PhonePlaceholder from '../PhonePlaceholder.astro';
+import Seal from '../Seal.astro';
+---
+<section id="imagine-controls" class="paper imagine-controls">
+  <div class="wrap-wide grid">
+    <div class="copy">
+      <span class="kicker" style="color:var(--c-ocean)">Fine control</span>
+      <h2 class="h2">Resolution, aspect,<br />and sound — yours.</h2>
+      <p class="lead muted">
+        Imagine exposes the knobs power users expect: aspect ratios, 720p through 4K,
+        audio on or off, and first-frame image input for video — without leaving the app.
+      </p>
+      <ul class="checks">
+        <li><Seal size={22} fill="var(--c-ocean)"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round"><path d="m5 13 4 4L19 7"/></svg></Seal> Aspect ratio presets per model</li>
+        <li><Seal size={22} fill="var(--c-ocean)"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round"><path d="m5 13 4 4L19 7"/></svg></Seal> Resolution &amp; cost hints where supported</li>
+        <li><Seal size={22} fill="var(--c-ocean)"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round"><path d="m5 13 4 4L19 7"/></svg></Seal> Image-to-video with a first frame</li>
+      </ul>
+    </div>
+
+    <div class="visual">
+      <PhoneFrame tone="light" class="phone-settings">
+        <img src="/brand/v2/imagine-settings.jpg" alt="EchoFlow Imagine video settings — aspect ratio and resolution" loading="lazy" width="288" height="624" />
+      </PhoneFrame>
+      <PhoneFrame tone="dark" class="phone-video">
+        <PhonePlaceholder label="Video mode demo" />
+      </PhoneFrame>
+    </div>
+  </div>
+</section>
+
+<style>
+  .imagine-controls { padding-block: clamp(4.5rem, 9vw, 8rem); background: linear-gradient(var(--paper), var(--paper-2)); }
+  .grid { display: grid; grid-template-columns: 1fr 0.9fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
+  .copy > * + * { margin-top: 1.3rem; }
+  .checks { list-style: none; padding: 0; display: grid; gap: 0.8rem; }
+  .checks li { display: flex; align-items: center; gap: 0.75rem; font-weight: 500; }
+  .visual { position: relative; min-height: 480px; display: grid; place-items: center; }
+  .visual :global(.phone) { position: absolute; }
+  .phone-settings { width: 228px; transform: translate(-18%, 6%) rotate(-3deg); z-index: 2;
+    filter: drop-shadow(0 30px 50px rgba(20,30,50,0.18)); }
+  .phone-video { width: 200px; transform: translate(34%, -10%) rotate(7deg); z-index: 1; opacity: 0.9; }
+  @media (max-width: 860px) {
+    .grid { grid-template-columns: 1fr; text-align: center; }
+    .copy { display: flex; flex-direction: column; align-items: center; }
+    .checks li { justify-content: center; text-align: left; }
+    .visual { min-height: 520px; margin-top: 1rem; }
+  }
+</style>

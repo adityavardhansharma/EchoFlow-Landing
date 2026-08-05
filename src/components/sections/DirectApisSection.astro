@@ -1,0 +1,75 @@
+---
+import PhoneFrame from '../PhoneFrame.astro';
+import Seal from '../Seal.astro';
+
+const brands = [
+  { name: 'OpenAI', color: '#10a37f', letter: 'O' },
+  { name: 'Claude', color: '#d97757', letter: 'C' },
+  { name: 'Gemini', color: '#4285f4', letter: 'G' },
+  { name: 'Cerebras', color: '#f97316', letter: 'Cb' },
+  { name: 'xAI', color: '#111827', letter: 'X' },
+  { name: 'DeepSeek', color: '#4f46e5', letter: 'D' },
+];
+---
+<section id="apis" class="dark direct-apis">
+  <div class="atmos" aria-hidden="true"><span class="glow"></span></div>
+  <div class="wrap-wide grid">
+    <div class="copy">
+      <span class="kicker" style="color:var(--blue-bright)">Direct cloud APIs</span>
+      <h2 class="h2">Brand keys.<br />Your models.</h2>
+      <p class="lead muted">
+        OpenRouter is great — and optional. Connect OpenAI, Anthropic, Google Gemini,
+        Cerebras, xAI and more directly. Add each brand's key, pick chat models per provider,
+        and pay only for what you use.
+      </p>
+      <ul class="checks">
+        <li><Seal size={22} fill="var(--blue-600)"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round"><path d="m5 13 4 4L19 7"/></svg></Seal> Per-brand keys stored on-device</li>
+        <li><Seal size={22} fill="var(--blue-600)"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round"><path d="m5 13 4 4L19 7"/></svg></Seal> Choose models inside each brand page</li>
+        <li><Seal size={22} fill="var(--blue-600)"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round"><path d="m5 13 4 4L19 7"/></svg></Seal> Images &amp; PDFs supported on direct cloud routes</li>
+      </ul>
+      <div class="brand-grid">
+        {brands.map((b) => (
+          <span class="brand-chip" style={`--brand:${b.color}`}>
+            <i>{b.letter}</i>{b.name}
+          </span>
+        ))}
+      </div>
+      <a class="section-link" href="/providers">BYOK setup →</a>
+    </div>
+
+    <div class="visual">
+      <PhoneFrame tone="light" class="phone-api">
+        <img src="/brand/v2/direct-apis.jpg" alt="EchoFlow Direct Cloud APIs settings with OpenAI, Claude, Gemini and more" loading="lazy" width="288" height="624" />
+      </PhoneFrame>
+    </div>
+  </div>
+</section>
+
+<style>
+  .direct-apis { overflow: hidden; padding-block: clamp(4.5rem, 9vw, 8rem); }
+  .atmos { position: absolute; inset: 0; pointer-events: none; }
+  .glow { position: absolute; width: 700px; height: 500px; left: 50%; top: -120px; transform: translateX(-50%);
+    background: radial-gradient(ellipse, #1746a0, transparent 70%); filter: blur(80px); opacity: 0.5; }
+  .grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 0.85fr;
+    gap: clamp(2rem, 5vw, 4rem); align-items: center; }
+  .copy > * + * { margin-top: 1.3rem; }
+  .checks { list-style: none; padding: 0; display: grid; gap: 0.8rem; }
+  .checks li { display: flex; align-items: center; gap: 0.75rem; font-weight: 500; }
+  .brand-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.25rem; }
+  .brand-chip { display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.4rem 0.7rem;
+    border-radius: 999px; border: 1px solid var(--line-dark); background: rgba(255,255,255,0.05);
+    font-size: 0.82rem; font-weight: 600; color: var(--on-ink-soft); }
+  .brand-chip i { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center;
+    font-style: normal; font-size: 0.62rem; font-weight: 800; color: #fff; background: var(--brand); }
+  .section-link { display: inline-block; margin-top: 0.5rem; color: var(--blue-bright);
+    font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+  .visual { display: grid; place-items: center; }
+  .phone-api { width: min(270px, 74vw); filter: drop-shadow(0 46px 72px rgba(0,0,0,0.5)); }
+  @media (max-width: 860px) {
+    .grid { grid-template-columns: 1fr; text-align: center; }
+    .copy { display: flex; flex-direction: column; align-items: center; }
+    .checks li { justify-content: center; text-align: left; }
+    .brand-grid { justify-content: center; }
+    .visual { margin-top: 1.5rem; }
+  }
+</style>
