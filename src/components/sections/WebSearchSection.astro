@@ -54,8 +54,8 @@ const providers = ['Exa', 'Parallel', 'Firecrawl', 'OpenRouter', 'Tavily'];
     font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
   .visual { position: relative; min-height: 500px; display: grid; place-items: center; }
   .visual :global(.phone) { position: absolute; }
-  .phone-back { width: 210px; transform: translate(30%, -6%) rotate(5deg); opacity: 0.95; z-index: 1; }
-  .phone-front { width: 236px; transform: translate(-24%, 8%) rotate(-4deg); z-index: 2;
+  .visual :global(.phone-back) { width: 210px; transform: translate(30%, -6%) rotate(5deg); opacity: 0.95; z-index: 1; }
+  .visual :global(.phone-front) { width: 236px; transform: translate(-24%, 8%) rotate(-4deg); z-index: 2;
     filter: drop-shadow(0 40px 60px rgba(0,0,0,0.45)); }
   @media (max-width: 860px) {
     .grid { grid-template-columns: 1fr; text-align: center; }

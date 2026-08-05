@@ -51,8 +51,8 @@ import Seal from './Seal.astro';
 
   .models-visual { position: relative; display: grid; place-items: center; min-height: 480px; }
   .models-visual :global(.phone) { position: absolute; }
-  .mv-back { width: 210px; transform: translate(28%, -8%) rotate(6deg); opacity: .92; z-index: 1; }
-  .mv-front { width: 232px; transform: translate(-22%, 10%) rotate(-5deg); z-index: 2; }
+  .models-visual :global(.mv-back) { width: 210px; transform: translate(28%, -8%) rotate(6deg); opacity: .92; z-index: 1; }
+  .models-visual :global(.mv-front) { width: 232px; transform: translate(-22%, 10%) rotate(-5deg); z-index: 2; }
 
   @media (max-width: 860px) {
     .models-grid { grid-template-columns: 1fr; text-align: center; }
@@ -61,6 +61,6 @@ import Seal from './Seal.astro';
     .models-visual { min-height: 540px; margin-top: 1.5rem; }
   }
   @media (max-width: 480px) {
-    .mv-back { width: 165px; } .mv-front { width: 185px; }
+    .models-visual :global(.mv-back) { width: 165px; } .models-visual :global(.mv-front) { width: 185px; }
   }
 </style>

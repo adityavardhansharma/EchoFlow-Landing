@@ -64,7 +64,7 @@ const brands = [
   .section-link { display: inline-block; margin-top: 0.5rem; color: var(--blue-bright);
     font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
   .visual { display: grid; place-items: center; }
-  .phone-api { width: min(270px, 74vw); filter: drop-shadow(0 46px 72px rgba(0,0,0,0.5)); }
+  .visual :global(.phone-api) { width: min(270px, 74vw); filter: drop-shadow(0 46px 72px rgba(0,0,0,0.5)); }
   @media (max-width: 860px) {
     .grid { grid-template-columns: 1fr; text-align: center; }
     .copy { display: flex; flex-direction: column; align-items: center; }

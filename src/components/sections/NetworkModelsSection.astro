@@ -5,6 +5,9 @@ import Seal from '../Seal.astro';
 <section id="network-models" class="paper network">
   <div class="wrap-wide grid">
     <div class="visual">
+      <PhoneFrame tone="light" class="phone-ollama">
+        <img src="/brand/v2/network-ollama.jpg" alt="EchoFlow custom API endpoints — Ollama server and OpenAI-compatible providers" loading="lazy" width="288" height="624" />
+      </PhoneFrame>
       <PhoneFrame tone="light" class="phone-picker">
         <img src="/brand/v2/model-picker.jpg" alt="EchoFlow model picker showing cloud APIs and local network models" loading="lazy" width="288" height="624" />
       </PhoneFrame>
@@ -38,11 +41,14 @@ import Seal from '../Seal.astro';
   .checks li { display: flex; align-items: center; gap: 0.75rem; font-weight: 500; }
   .links-row { display: flex; flex-wrap: wrap; gap: 1.2rem; margin-top: 0.5rem; }
   .links-row a { color: var(--blue); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
-  .visual { display: grid; place-items: center; }
-  .phone-picker { width: min(270px, 74vw); filter: drop-shadow(0 36px 56px rgba(20,30,50,0.2)); }
+  .visual { position: relative; min-height: 520px; display: grid; place-items: center; }
+  .visual :global(.phone) { position: absolute; }
+  .visual :global(.phone-ollama) { width: 210px; transform: translate(28%, -6%) rotate(5deg); opacity: 0.96; z-index: 1; }
+  .visual :global(.phone-picker) { width: 238px; transform: translate(-22%, 8%) rotate(-4deg); z-index: 2;
+    filter: drop-shadow(0 40px 60px rgba(20,30,50,0.24)); }
   @media (max-width: 860px) {
     .grid { grid-template-columns: 1fr; }
-    .visual { order: -1; }
+    .visual { order: -1; min-height: 560px; }
     .copy { text-align: center; display: flex; flex-direction: column; align-items: center; }
     .checks li { justify-content: center; text-align: left; }
     .links-row { justify-content: center; }
