@@ -1,0 +1,52 @@
+---
+import ContentLayout from '../../layouts/ContentLayout.astro';
+import { pages } from '../../lib/seo';
+import { alternativeLinks } from '../../lib/navigation';
+
+const seo = pages.alternatives;
+---
+<ContentLayout
+  seo={seo}
+  kicker="Comparisons"
+  heading="AI app alternatives — honest comparisons"
+  lead="Fair, factual differences between EchoFlow and other AI apps. We explain trade-offs—not claim universal superiority."
+  showVideo={false}
+  related={[
+    { label: 'Download EchoFlow', href: '/download' },
+    { label: 'Privacy', href: '/privacy' },
+    { label: 'Open Source', href: '/open-source' },
+  ]}
+>
+  <p>
+    People search for <strong>ChatGPT alternatives</strong>, <strong>Perplexity alternatives</strong>,
+    and <strong>open-source AI apps</strong> because they want different pricing, privacy, or model access.
+    These pages explain where EchoFlow fits—useful if you care about <strong>BYOK</strong>,
+    <strong>multi-model chat</strong>, <strong>local history</strong>, and <strong>Android-native</strong> design.
+  </p>
+
+  <h2>When EchoFlow is a strong fit</h2>
+  <ul>
+    <li>You want <strong>multiple AI models in one app</strong> with your own API keys</li>
+    <li>You prefer <strong>no EchoFlow account</strong> and chats stored on device</li>
+    <li>You need <strong>research, documents, search, and images</strong> in one open-source client</li>
+    <li>You use <strong>OpenRouter</strong> or self-hosted endpoints on mobile</li>
+  </ul>
+
+  <h2>When another app may suit you better</h2>
+  <ul>
+    <li>You want a single bundled subscription with zero setup—mainstream apps optimise for that</li>
+    <li>You need deep integration with one vendor's ecosystem (Google, Microsoft, etc.)</li>
+    <li>You only want the simplest possible chat UI with no configuration</li>
+  </ul>
+
+  <h2>Comparison pages</h2>
+  <ul class="link-grid">
+    {alternativeLinks.map((link) => (
+      <li><a href={link.href}>{link.label}</a></li>
+    ))}
+  </ul>
+
+  <div class="callout">
+    <p>EchoFlow is not affiliated with any competitor. Product names are used for descriptive comparison only. Features change—verify details in <a href="https://github.com/adityavardhansharma/EchoFlow">GitHub release notes</a>.</p>
+  </div>
+</ContentLayout>

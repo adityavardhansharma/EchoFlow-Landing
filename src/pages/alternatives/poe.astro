@@ -1,0 +1,41 @@
+---
+import ContentLayout from '../../layouts/ContentLayout.astro';
+import ComparisonTable from '../../components/ComparisonTable.astro';
+import { pages } from '../../lib/seo';
+
+const seo = pages.altPoe;
+---
+<ContentLayout
+  seo={seo}
+  kicker="Comparison"
+  heading="Poe alternative — multi-model chat for Android"
+  lead="Open-source, BYOK, and local history versus Poe's subscription model hub."
+  breadcrumbs={[{ name: 'Home', path: '/' }, { name: 'Alternatives', path: '/alternatives' }]}
+  related={[
+    { label: 'Models', href: '/models' },
+    { label: 'OpenRouter', href: '/openrouter' },
+    { label: 'All alternatives', href: '/alternatives' },
+  ]}
+>
+  <p>
+    Poe aggregates many bots behind one account. EchoFlow is an <strong>open-source Poe alternative</strong>
+    and <strong>multi-model alternative to Poe</strong> for users who prefer Android-native UX,
+    API-key pricing, and conversations stored locally.
+  </p>
+
+  <ComparisonTable
+    competitorName="Poe"
+    rows={[
+      { label: 'Model access', echoflow: 'OpenRouter/BYOK—you choose providers', competitor: 'Poe subscription unlocks bot access' },
+      { label: 'Platform', echoflow: 'Android-first open-source app', competitor: 'Web + mobile apps (Quora)' },
+      { label: 'Cost model', echoflow: 'Pay providers directly', competitor: 'Poe subscription tiers' },
+      { label: 'Open source', echoflow: 'Yes', competitor: 'No' },
+      { label: 'Chat storage', echoflow: 'Local on device', competitor: 'Poe account cloud' },
+    ]}
+  />
+
+  <p>
+    Poe can be convenient if you want a curated bot marketplace with one bill. EchoFlow suits
+    power users who want <strong>chat with different AI models</strong> under their own keys and data control.
+  </p>
+</ContentLayout>

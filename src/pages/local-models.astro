@@ -1,0 +1,64 @@
+---
+import ContentLayout from '../layouts/ContentLayout.astro';
+import FAQ from '../components/FAQ.astro';
+import { pages, faqJsonLd } from '../lib/seo';
+
+const seo = pages.localModels;
+const faqs = [
+  { question: 'Can I run an LLM offline on Android?', answer: 'Yes, for supported GGUF models. EchoFlow lets you download curated models or import your own and chat without internet—one feature within a broader multi-model AI platform.' },
+  { question: 'Is EchoFlow only an offline AI app?', answer: 'No. Local models are important but secondary. EchoFlow is primarily a multi-model cloud AI assistant with BYOK, search, documents, research, and images—local inference is optional.' },
+  { question: 'What models work on-device?', answer: 'EchoFlow supports GGUF models including curated picks like Gemma, Qwen, and DeepSeek variants. Performance depends on your device hardware.' },
+];
+---
+<ContentLayout
+  seo={seo}
+  kicker="Local models"
+  heading="Local LLM on Android — offline AI when you need it"
+  lead="Run supported GGUF models on your phone. One feature in EchoFlow's broader AI platform—not the whole product identity."
+  related={[
+    { label: 'Privacy', href: '/privacy' },
+    { label: 'Custom Endpoints', href: '/custom-endpoints' },
+    { label: 'Homepage', href: '/' },
+  ]}
+  videoPoster="/brand/shot-local-models.jpg"
+  jsonLd={faqJsonLd(faqs)}
+>
+  <p>
+    EchoFlow includes <strong>local LLM Android</strong> support for users who want
+    <strong>offline AI chat</strong>, travel without signal, or keep certain conversations
+    entirely on-device. It is an <strong>on-device AI app</strong> capability—not EchoFlow's
+    sole identity.
+  </p>
+
+  <img class="feature-shot" src="/brand/shot-local-models.jpg" alt="EchoFlow local on-device models screen on Android" width="800" height="520" loading="lazy" />
+
+  <h2>Offline chatbot for supported models</h2>
+  <ul>
+    <li>Download curated models or <strong>import your own</strong> GGUF files</li>
+    <li><strong>AI without internet Android</strong> — chat after models are downloaded</li>
+    <li>No API key required for local inference</li>
+    <li>Works alongside cloud models in the same app</li>
+  </ul>
+
+  <h2>Local vs cloud in EchoFlow</h2>
+  <p>
+    <strong>Local models</strong> run on your phone—useful for privacy-sensitive drafts and offline use.
+    <strong>Cloud models</strong> via <a href="/providers">BYOK</a> or <a href="/openrouter">OpenRouter</a>
+    access frontier capability, <a href="/web-search">web search</a>, and larger context.
+    EchoFlow lets you choose per conversation rather than forcing one mode.
+  </p>
+
+  <h2>Hardware expectations</h2>
+  <p>
+    Running a <strong>language model on phone</strong> depends on RAM and chipset. Smaller quantised
+    models work on mid-range devices; larger models suit flagship hardware. EchoFlow is a
+    <strong>GGUF Android app</strong> style runner—practical for real on-device use, not a demo.
+  </p>
+
+  <div class="callout">
+    <p>Looking for a full <strong>Android AI assistant</strong> with cloud and local options?
+    Start on the <a href="/">homepage</a>—local models are one part of a much larger toolkit.</p>
+  </div>
+
+  <FAQ items={faqs} />
+</ContentLayout>

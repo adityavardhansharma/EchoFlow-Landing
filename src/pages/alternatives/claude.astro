@@ -1,0 +1,41 @@
+---
+import ContentLayout from '../../layouts/ContentLayout.astro';
+import ComparisonTable from '../../components/ComparisonTable.astro';
+import { pages } from '../../lib/seo';
+
+const seo = pages.altClaude;
+---
+<ContentLayout
+  seo={seo}
+  kicker="Comparison"
+  heading="Claude alternative for Android"
+  lead="Use Claude alongside other models with BYOK—fair comparison with Anthropic's official app."
+  breadcrumbs={[{ name: 'Home', path: '/' }, { name: 'Alternatives', path: '/alternatives' }]}
+  related={[
+    { label: 'Providers & BYOK', href: '/providers' },
+    { label: 'Models', href: '/models' },
+    { label: 'All alternatives', href: '/alternatives' },
+  ]}
+>
+  <p>
+    Anthropic's Claude app is excellent for Claude-only workflows. EchoFlow is a
+    <strong>Claude alternative for Android</strong> when you want Claude <em>and</em> other models,
+    local chat history, or OpenRouter billing in one <strong>open-source</strong> client.
+  </p>
+
+  <ComparisonTable
+    competitorName="Claude (Anthropic app)"
+    rows={[
+      { label: 'Models', echoflow: 'Claude + GPT, Gemini, DeepSeek, etc.', competitor: 'Claude family' },
+      { label: 'API access', echoflow: 'Anthropic key or OpenRouter', competitor: 'Subscription / Pro plans' },
+      { label: 'Storage', echoflow: 'Local chats on device', competitor: 'Anthropic cloud account' },
+      { label: 'Android focus', echoflow: 'Native Material 3 app', competitor: 'Official Anthropic Android app' },
+      { label: 'Extras', echoflow: 'Search, research, PDFs, images', competitor: 'Focused Claude chat experience' },
+    ]}
+  />
+
+  <p>
+    Choose EchoFlow if you <strong>use Claude API on Android</strong> but do not want Claude to be
+    your only model. Choose Anthropic's app if you want the tightest official Claude experience.
+  </p>
+</ContentLayout>

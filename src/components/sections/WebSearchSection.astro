@@ -1,0 +1,67 @@
+---
+import PhoneFrame from '../PhoneFrame.astro';
+import Seal from '../Seal.astro';
+
+const providers = ['Exa', 'Parallel', 'Firecrawl', 'OpenRouter', 'Tavily'];
+---
+<section id="web-search" class="dark web-search">
+  <div class="atmos" aria-hidden="true"><span class="glow"></span></div>
+  <div class="wrap-wide grid">
+    <div class="copy">
+      <span class="kicker" style="color:var(--c-forest)">Web search</span>
+      <h2 class="h2">Live answers from<br />multiple providers.</h2>
+      <p class="lead muted">
+        Give any model real-time web access. EchoFlow searches across providers,
+        surfaces source cards you can tap through, and streams a cited answer back into chat.
+      </p>
+      <ul class="checks">
+        <li><Seal size={22} fill="var(--c-forest)"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round"><path d="m5 13 4 4L19 7"/></svg></Seal> Multi-provider search in one tap</li>
+        <li><Seal size={22} fill="var(--c-forest)"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round"><path d="m5 13 4 4L19 7"/></svg></Seal> Source cards with favicons &amp; snippets</li>
+        <li><Seal size={22} fill="var(--c-forest)"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round"><path d="m5 13 4 4L19 7"/></svg></Seal> Works with any cloud model you choose</li>
+      </ul>
+      <div class="provider-row" aria-label="Search providers">
+        {providers.map((p) => <span class="provider-pill">{p}</span>)}
+      </div>
+      <a class="section-link" href="/web-search">Web search details →</a>
+    </div>
+
+    <div class="visual">
+      <PhoneFrame tone="light" class="phone-back">
+        <img src="/brand/v2/web-search-sources.jpg" alt="EchoFlow web search source cards from multiple providers" loading="lazy" width="288" height="624" />
+      </PhoneFrame>
+      <PhoneFrame tone="light" class="phone-front">
+        <img src="/brand/v2/web-search-results.jpg" alt="EchoFlow live web search answer in chat" loading="lazy" width="288" height="624" />
+      </PhoneFrame>
+    </div>
+  </div>
+</section>
+
+<style>
+  .web-search { overflow: hidden; padding-block: clamp(4.5rem, 9vw, 8rem); }
+  .atmos { position: absolute; inset: 0; pointer-events: none; }
+  .glow { position: absolute; width: 640px; height: 480px; right: -120px; top: -80px;
+    background: radial-gradient(ellipse, #1c6e2e, transparent 70%); filter: blur(80px); opacity: 0.45; }
+  .grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 5vw, 4rem); align-items: center; }
+  .copy > * + * { margin-top: 1.3rem; }
+  .checks { list-style: none; padding: 0; display: grid; gap: 0.8rem; }
+  .checks li { display: flex; align-items: center; gap: 0.75rem; font-weight: 500; }
+  .provider-row { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.5rem; }
+  .provider-pill { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.08em;
+    text-transform: uppercase; padding: 0.35rem 0.65rem; border-radius: 999px;
+    border: 1px solid var(--line-dark); color: var(--on-ink-soft); background: rgba(255,255,255,0.04); }
+  .section-link { display: inline-block; margin-top: 0.5rem; color: var(--blue-bright);
+    font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+  .visual { position: relative; min-height: 500px; display: grid; place-items: center; }
+  .visual :global(.phone) { position: absolute; }
+  .visual :global(.phone-back) { width: 210px; transform: translate(30%, -6%) rotate(5deg); opacity: 0.95; z-index: 1; }
+  .visual :global(.phone-front) { width: 236px; transform: translate(-24%, 8%) rotate(-4deg); z-index: 2;
+    filter: drop-shadow(0 40px 60px rgba(0,0,0,0.45)); }
+  @media (max-width: 860px) {
+    .grid { grid-template-columns: 1fr; text-align: center; }
+    .copy { display: flex; flex-direction: column; align-items: center; }
+    .checks li { justify-content: center; text-align: left; }
+    .provider-row { justify-content: center; }
+    .visual { min-height: 540px; margin-top: 1.5rem; }
+  }
+</style>

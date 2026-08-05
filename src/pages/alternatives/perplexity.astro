@@ -1,0 +1,51 @@
+---
+import ContentLayout from '../../layouts/ContentLayout.astro';
+import ComparisonTable from '../../components/ComparisonTable.astro';
+import FAQ from '../../components/FAQ.astro';
+import { pages, faqJsonLd } from '../../lib/seo';
+
+const seo = pages.altPerplexity;
+const faqs = [
+  { question: 'Is EchoFlow an AI search engine?', answer: 'EchoFlow adds web search and Deep Research to multi-model chat. It is not a standalone search engine replacement—it is an AI app where search augments conversations and research tasks.' },
+];
+---
+<ContentLayout
+  seo={seo}
+  kicker="Comparison"
+  heading="Perplexity alternative for Android"
+  lead="Multi-model chat plus web search and Deep Research—with BYOK and local history."
+  breadcrumbs={[{ name: 'Home', path: '/' }, { name: 'Alternatives', path: '/alternatives' }]}
+  videoPoster="/brand/shot-deep-research.jpg"
+  related={[
+    { label: 'Web Search', href: '/web-search' },
+    { label: 'Deep Research', href: '/deep-research' },
+    { label: 'All alternatives', href: '/alternatives' },
+  ]}
+  jsonLd={faqJsonLd(faqs)}
+>
+  <p>
+    Perplexity popularised <strong>AI search with citations</strong>. EchoFlow is a
+    <strong>Perplexity alternative Android</strong> users may prefer when they want
+    <strong>open-source</strong> software, <strong>multiple models</strong>, and
+    <strong>bring your own API key</strong> search providers—not a single bundled search subscription.
+  </p>
+
+  <ComparisonTable
+    competitorName="Perplexity"
+    rows={[
+      { label: 'Core focus', echoflow: 'Multi-model AI platform with search & research', competitor: 'Search-first answer engine' },
+      { label: 'Citations', echoflow: 'Shown when providers return them', competitor: 'Core product feature' },
+      { label: 'Models', echoflow: 'User-selected via BYOK/OpenRouter', competitor: 'Curated model mix per product' },
+      { label: 'Pricing', echoflow: 'Free app + provider API costs', competitor: 'Free tier + Pro subscription' },
+      { label: 'Open source', echoflow: 'Yes', competitor: 'No' },
+      { label: 'Local storage', echoflow: 'Chats on device', competitor: 'Cloud account history' },
+    ]}
+  />
+
+  <p>
+    Perplexity may be simpler if you only want search. EchoFlow fits if you want search
+    <em>and</em> documents, images, local models, and model choice in one Android app.
+  </p>
+
+  <FAQ items={faqs} />
+</ContentLayout>

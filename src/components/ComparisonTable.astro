@@ -1,0 +1,42 @@
+---
+interface Row {
+  label: string;
+  echoflow: string;
+  competitor: string;
+}
+interface Props {
+  competitorName: string;
+  rows: Row[];
+}
+const { competitorName, rows } = Astro.props;
+---
+<div class="compare-wrap">
+  <table class="compare">
+    <thead>
+      <tr>
+        <th scope="col">Area</th>
+        <th scope="col">EchoFlow</th>
+        <th scope="col">{competitorName}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {rows.map((row) => (
+        <tr>
+          <th scope="row">{row.label}</th>
+          <td>{row.echoflow}</td>
+          <td>{row.competitor}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .compare-wrap { overflow-x: auto; margin: 1.5rem 0 2rem; }
+  .compare { width: 100%; border-collapse: collapse; font-size: .95rem; }
+  .compare th, .compare td { padding: .85rem 1rem; text-align: left; border: 1px solid var(--line);
+    vertical-align: top; }
+  .compare thead th { background: var(--paper-2); font-family: var(--display); }
+  .compare tbody th { background: var(--card); font-weight: 600; width: 18%; }
+  .compare td { color: var(--on-paper-soft); width: 41%; }
+</style>

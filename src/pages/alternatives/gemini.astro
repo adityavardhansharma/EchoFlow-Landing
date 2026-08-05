@@ -1,0 +1,41 @@
+---
+import ContentLayout from '../../layouts/ContentLayout.astro';
+import ComparisonTable from '../../components/ComparisonTable.astro';
+import { pages } from '../../lib/seo';
+
+const seo = pages.altGemini;
+---
+<ContentLayout
+  seo={seo}
+  kicker="Comparison"
+  heading="Gemini alternative app for Android"
+  lead="Use Gemini with other models, BYOK, and local storage—not only inside Google's ecosystem."
+  breadcrumbs={[{ name: 'Home', path: '/' }, { name: 'Alternatives', path: '/alternatives' }]}
+  related={[
+    { label: 'Providers & BYOK', href: '/providers' },
+    { label: 'Models', href: '/models' },
+    { label: 'All alternatives', href: '/alternatives' },
+  ]}
+>
+  <p>
+    Google's Gemini app is deeply integrated with Google accounts and services. EchoFlow is a
+    <strong>Gemini alternative app</strong> when you want to <strong>use Gemini API on Android</strong>
+    alongside Claude, GPT, and others—with open-source code and local chat history.
+  </p>
+
+  <ComparisonTable
+    competitorName="Google Gemini app"
+    rows={[
+      { label: 'Ecosystem', echoflow: 'Provider-agnostic', competitor: 'Google account & services' },
+      { label: 'Models', echoflow: 'Gemini + many others', competitor: 'Gemini models' },
+      { label: 'API/BYOK', echoflow: 'Full BYOK support', competitor: 'Consumer subscription model' },
+      { label: 'Open source', echoflow: 'Yes', competitor: 'No' },
+      { label: 'Extras', echoflow: 'Research, PDFs, OpenRouter, local LLMs', competitor: 'Google Assistant integration' },
+    ]}
+  />
+
+  <p>
+    Prefer Google's app for tight Workspace and Assistant integration. Prefer EchoFlow for a
+    <strong>multi-model AI app</strong> where Gemini is one option among many.
+  </p>
+</ContentLayout>

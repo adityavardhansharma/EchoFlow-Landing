@@ -3,13 +3,23 @@ import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
 import Hero from '../components/Hero.astro';
 import Spread from '../components/Spread.astro';
+import WebSearchSection from '../components/sections/WebSearchSection.astro';
+import ImagineSection from '../components/sections/ImagineSection.astro';
+import ImagineControlsSection from '../components/sections/ImagineControlsSection.astro';
+import ArtifactsSection from '../components/sections/ArtifactsSection.astro';
+import CapabilitiesSection from '../components/sections/CapabilitiesSection.astro';
+import DocumentsSection from '../components/sections/DocumentsSection.astro';
+import DirectApisSection from '../components/sections/DirectApisSection.astro';
+import NetworkModelsSection from '../components/sections/NetworkModelsSection.astro';
 import Models from '../components/Models.astro';
 import Themes from '../components/Themes.astro';
-import Bento from '../components/Bento.astro';
 import CTA from '../components/CTA.astro';
 import Footer from '../components/Footer.astro';
+import { pages } from '../lib/seo';
+
+const seo = pages.home;
 ---
-<Base>
+<Base seo={seo}>
   <Nav />
   <main>
     <Hero />
@@ -30,26 +40,64 @@ import Footer from '../components/Footer.astro';
           tone="light"
           accent="var(--c-lavender)"
         />
+      </div>
+    </section>
+
+    <WebSearchSection />
+    <ImagineSection />
+    <ImagineControlsSection />
+
+    <section class="paper spreads">
+      <div class="wrap-wide stack">
+        <ArtifactsSection />
+        <CapabilitiesSection />
+      </div>
+    </section>
+
+    <section class="paper spreads" id="research">
+      <div class="wrap-wide stack">
         <Spread
-          id="research"
           kicker="Deep Research"
           title="Research that runs itself."
-          body="Ask a real question and EchoFlow investigates the web across multiple steps, then writes a cited report. It runs in the background — lock your phone and come back to the answer."
+          body="Ask a real question and EchoFlow investigates the web across multiple steps, then writes a cited report. It runs in the background — lock your phone and come back to the answer. <a href='/deep-research'>Learn more →</a>"
           bullets={[
             "Powered by <b>Exa</b>, <b>Parallel</b>, <b>Firecrawl</b> — or your own model",
             "Runs in the <b>background</b> with a progress notification",
-            "<b>Cited</b>, structured reports you can trust",
+            "<b>Cited</b>, structured reports when providers return sources",
           ]}
           img="/brand/shot-research-run.jpg"
           tone="light"
           accent="var(--c-forest)"
           reverse
         />
+      </div>
+    </section>
+
+    <DocumentsSection />
+    <DirectApisSection />
+    <Models />
+    <NetworkModelsSection />
+
+    <section class="paper spreads" id="privacy">
+      <div class="wrap-wide stack">
+        <Spread
+          kicker="Stored on your device"
+          title="Your whole history, on your phone."
+          body="Every conversation is saved locally on your device — so your full chat history is there the instant you open the app, works with no internet at all, and never sits on someone else's server. <a href='/privacy'>Privacy details →</a>"
+          bullets={[
+            "All chats stored <b>locally</b> on your device",
+            "Open past conversations <b>offline</b>, anytime",
+            "Cloud models still process prompts you send to them",
+          ]}
+          img="/brand/shot-sidebar.jpg"
+          tone="light"
+          accent="var(--c-ocean)"
+        />
         <Spread
           id="local"
           kicker="On-device models"
           title="Run AI on your phone. Even offline."
-          body="Download a model once and chat with no internet, no cost, and no data leaving your device. Perfect for travel, flaky signal, or simply keeping everything private."
+          body="Download a model once and chat with no internet, no cost, and no data leaving your device. One feature in a broader platform — <a href='/local-models'>local models →</a>"
           bullets={[
             "Gemma, Qwen, DeepSeek & more, fully <b>on-device</b>",
             "Works <b>offline</b> — no key, no account",
@@ -58,27 +106,12 @@ import Footer from '../components/Footer.astro';
           img="/brand/shot-local-models.jpg"
           tone="light"
           accent="var(--c-sunset)"
-        />
-        <Spread
-          kicker="Stored on your device"
-          title="Your whole history, on your phone."
-          body="Every conversation is saved locally on your device — so your full chat history is there the instant you open the app, works with no internet at all, and never sits on someone else's server."
-          bullets={[
-            "All chats stored <b>locally</b> on your device",
-            "Open past conversations <b>offline</b>, anytime",
-            "Never uploaded, never kept on a server",
-          ]}
-          img="/brand/shot-sidebar.jpg"
-          tone="light"
-          accent="var(--c-ocean)"
           reverse
         />
       </div>
     </section>
 
-    <Models />
     <Themes />
-    <Bento />
     <CTA />
   </main>
   <Footer />

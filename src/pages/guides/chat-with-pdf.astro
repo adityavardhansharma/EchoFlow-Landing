@@ -1,0 +1,53 @@
+---
+import ContentLayout from '../../layouts/ContentLayout.astro';
+import FAQ from '../../components/FAQ.astro';
+import { pages, faqJsonLd } from '../../lib/seo';
+
+const seo = pages.guidePdf;
+const faqs = [
+  { question: 'How large a PDF can I use?', answer: 'Limits depend on the model context window and device memory. Use models with larger context for big files, or split documents into sections.' },
+  { question: 'Can I summarise a PDF quickly?', answer: 'Yes. Attach the file and ask for a summary, outline, or key takeaways. Pick a fast model for drafts, a stronger one for nuance.' },
+];
+---
+<ContentLayout
+  seo={seo}
+  kicker="Guide"
+  heading="How to chat with PDFs on Android using EchoFlow"
+  lead="Upload, question, summarise, and extract data from documents in a few steps."
+  breadcrumbs={[{ name: 'Home', path: '/' }, { name: 'Guides', path: '/guides' }]}
+  related={[
+    { label: 'Documents feature', href: '/documents' },
+    { label: 'Models', href: '/models' },
+    { label: 'Deep Research', href: '/deep-research' },
+  ]}
+  videoPoster="/brand/shot-plus-menu.jpg"
+  jsonLd={faqJsonLd(faqs)}
+>
+  <h2>1. Open a chat</h2>
+  <p>Start a new conversation and select a model with enough context for your file size.</p>
+
+  <h2>2. Attach your PDF</h2>
+  <p>Use the attachment control to pick a PDF from your device. See <a href="/documents">document features</a> for supported formats.</p>
+
+  <h2>3. Ask clear questions</h2>
+  <ul>
+    <li>"Summarise this in five bullet points"</li>
+    <li>"What are the payment terms in section 4?"</li>
+    <li>"Extract all dates and amounts into a table"</li>
+    <li>"Compare this PDF to [another attached file]"</li>
+  </ul>
+
+  <h2>4. Combine with research</h2>
+  <p>
+    For topics that need live data, pair file context with <a href="/web-search">web search</a> or
+    run a broader <a href="/deep-research">Deep Research</a> task separately.
+  </p>
+
+  <h2>Privacy reminder</h2>
+  <p>
+    Files sent to cloud models are processed by that provider. For sensitive documents, consider
+    <a href="/local-models">on-device models</a> or self-hosted endpoints.
+  </p>
+
+  <FAQ items={faqs} />
+</ContentLayout>

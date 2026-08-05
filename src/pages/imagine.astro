@@ -1,0 +1,57 @@
+---
+import ContentLayout from '../layouts/ContentLayout.astro';
+import FAQ from '../components/FAQ.astro';
+import { pages, faqJsonLd } from '../lib/seo';
+
+const seo = pages.imagine;
+const faqs = [
+  { question: 'Is image generation separate from chat?', answer: 'Yes. Imagine is EchoFlow\'s dedicated image workspace—related to chat but a distinct experience for text-to-image creation with supported models.' },
+  { question: 'Can I use my OpenRouter key for images?', answer: 'Yes. EchoFlow supports OpenRouter image models where available—an OpenRouter image generation workflow using your own API key.' },
+  { question: 'Does EchoFlow generate video?', answer: 'Not at this time. We do not target video-generation searches until the feature is publicly available.' },
+];
+---
+<ContentLayout
+  seo={seo}
+  kicker="Imagine"
+  heading="AI image generator for Android"
+  lead="Generate images with multiple models through your API key. A creative workspace separate from chat, inside the same app."
+  related={[
+    { label: 'OpenRouter', href: '/openrouter' },
+    { label: 'Models', href: '/models' },
+    { label: 'Providers & BYOK', href: '/providers' },
+  ]}
+  videoPoster="/brand/shot-home-lavender.jpg"
+  jsonLd={faqJsonLd(faqs)}
+>
+  <p>
+    EchoFlow Imagine is an <strong>AI image generation app</strong> experience within EchoFlow—
+    a <strong>text to image AI app</strong> for Android that uses your <strong>API key</strong>
+    instead of locking you into a single vendor's creative subscription.
+  </p>
+
+  <img class="feature-shot" src="/brand/shot-home-lavender.jpg" alt="EchoFlow Imagine image generation on Android" width="800" height="520" loading="lazy" />
+
+  <h2>Multi-model creative assistant</h2>
+  <p>
+    Different image models excel at different styles. EchoFlow is a
+    <strong>multi-model AI image generator</strong>—access models available through
+    <a href="/openrouter">OpenRouter</a> or your configured providers and switch when you
+    need another look.
+  </p>
+
+  <h2>Chat and images, clearly separated</h2>
+  <p>
+    Imagine is positioned alongside chat as a related but distinct experience—an
+    <strong>all-in-one AI chat and image app</strong> without cramming generation controls
+    into every conversation.
+  </p>
+
+  <h2>BYOK image generation</h2>
+  <p>
+    Pay providers per image instead of stacking another creative subscription. See
+    <a href="/providers">bring your own API key</a> setup and our
+    <a href="/guides/use-your-own-api-key">configuration guide</a>.
+  </p>
+
+  <FAQ items={faqs} />
+</ContentLayout>

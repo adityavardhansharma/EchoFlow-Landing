@@ -1,0 +1,33 @@
+---
+import type { NavLink } from '../lib/navigation';
+interface Props { links: NavLink[]; title?: string; }
+const { links, title = 'Related pages' } = Astro.props;
+---
+<section class="related paper">
+  <div class="wrap-wide">
+    <h2 class="h3">{title}</h2>
+    <ul>
+      {links.map((link) => (
+        <li>
+          <a href={link.href}>
+            <strong>{link.label}</strong>
+            {link.description && <span>{link.description}</span>}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .related { padding-block: clamp(2rem, 4vw, 3rem); border-top: 1px solid var(--line); }
+  .related h2 { margin-bottom: 1.2rem; }
+  .related ul { list-style: none; padding: 0; display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: .8rem; }
+  .related a { display: flex; flex-direction: column; gap: .25rem; padding: 1rem 1.1rem;
+    border: 1px solid var(--line); border-radius: var(--r-m); background: var(--card);
+    transition: border-color .25s, transform .35s var(--spring); }
+  .related a:hover { border-color: var(--blue); transform: translateY(-3px); }
+  .related strong { font-family: var(--display); font-size: 1.05rem; }
+  .related span { font-size: .9rem; color: var(--on-paper-soft); }
+</style>

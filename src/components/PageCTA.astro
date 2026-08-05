@@ -1,0 +1,23 @@
+---
+import PhoneFrame from './PhoneFrame.astro';
+import { RELEASES_URL } from '../lib/releases';
+const REPO = 'https://github.com/adityavardhansharma/EchoFlow';
+---
+<section class="page-cta dark">
+  <div class="wrap-wide cta-in">
+    <div>
+      <h2 class="h2">Try EchoFlow on Android</h2>
+      <p class="lead muted">Free, open-source, and built for users who want multiple models, their own API keys, and chats that stay on their phone.</p>
+    </div>
+    <div class="cta-btns">
+      <a class="btn btn-primary" href={RELEASES_URL} data-apk rel="noopener">Download APK</a>
+      <a class="btn btn-outline-ink" href={REPO} target="_blank" rel="noopener">View on GitHub</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .page-cta { padding-block: clamp(2.5rem, 5vw, 4rem); border-top: 1px solid var(--line-dark); }
+  .cta-in { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.5rem; }
+  .cta-btns { display: flex; flex-wrap: wrap; gap: .75rem; }
+</style>

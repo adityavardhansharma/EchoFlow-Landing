@@ -30,14 +30,14 @@ const REPO = 'https://github.com/adityavardhansharma/EchoFlow';
           src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1161749&theme=neutral&t=1780564201227"
         />
       </a>
-      <span class="kicker">A private AI app for Android</span>
+      <span class="kicker">Open-source AI app for Android</span>
       <h1 class="display">
-        Every model.<br /><span class="grad-blue">Made yours.</span>
+        Your multi-model<br /><span class="grad-blue">AI assistant.</span>
       </h1>
       <p class="lead muted">
-        Talk to any model — in the cloud with your OpenRouter key, or fully on-device.
-        Add web search and multi-step Deep Research when you need them. Everything stays
-        on your phone — no account, nothing on a server.
+        EchoFlow is a privacy-first <strong>AI chat app</strong> for Android—access GPT, Claude,
+        Gemini and more with your own API keys, search the web, analyse files, run Deep Research,
+        generate images, and optionally use local models. No account. Chats on your phone.
       </p>
       <div class="hero-cta">
         <a class="btn btn-primary" href={RELEASES_URL} data-apk rel="noopener">
@@ -50,10 +50,10 @@ const REPO = 'https://github.com/adityavardhansharma/EchoFlow';
         </a>
       </div>
       <ul class="hero-pills">
+        <li><b>Multi</b>-model</li>
         <li><b>BYO</b> API key</li>
-        <li><b>∞</b> models</li>
-        <li><b>On-device</b> too</li>
-        <li><b>0</b> tracking</li>
+        <li><b>Open</b> source</li>
+        <li><b>0</b> account</li>
       </ul>
     </div>
 
@@ -61,12 +61,11 @@ const REPO = 'https://github.com/adityavardhansharma/EchoFlow';
       <span class="hv-glow" aria-hidden="true"></span>
       <PhoneFrame tone="dark" class="hero-phone">
         <video
-          src="/brand/app-demo.webm"
-          poster="/brand/app-demo-poster.jpg"
+          src="/brand/v2/hero-demo.mp4"
+          poster="/brand/v2/hero-demo-poster.jpg"
           autoplay muted loop playsinline preload="auto"
         >
-          <source src="/brand/app-demo.webm" type="video/webm" />
-          <source src="/brand/app-demo.mp4" type="video/mp4" />
+          <source src="/brand/v2/hero-demo.mp4" type="video/mp4" />
         </video>
       </PhoneFrame>
       <Seal size={58} logo fill="var(--blue-600)" class="hv-seal" />
@@ -109,7 +108,7 @@ const REPO = 'https://github.com/adityavardhansharma/EchoFlow';
   .hero-visual { position: relative; display: grid; place-items: center; }
   .hv-glow { position: absolute; width: 115%; aspect-ratio: 1; border-radius: 50%;
     background: radial-gradient(circle, rgba(31,111,235,.45), transparent 64%); filter: blur(50px); z-index: 0; }
-  .hero-phone { width: min(300px, 78vw); position: relative; z-index: 1;
+  .hero-visual :global(.hero-phone) { width: min(300px, 78vw); position: relative; z-index: 1;
     filter: drop-shadow(0 50px 80px rgba(0,0,0,.55)); }
   .hv-seal { position: absolute; bottom: 4%; right: 6%; z-index: 2;
     filter: drop-shadow(0 12px 24px rgba(0,0,0,.45)); animation: bob 5s var(--ease) infinite alternate; }
