@@ -1,14 +1,19 @@
 ---
 import Seal from './Seal.astro';
-import { RELEASES_URL } from '../lib/releases';
 import { alternativeLinks, featureLinks, guideLinks, resourceLinks } from '../lib/navigation';
+/* v3 footer — the quiet index. Every deep page the navbar no longer links to
+   lives here, under a hand-off line and a giant wordmark sign-off. */
 const year = new Date().getFullYear();
 ---
-<footer class="dark footer">
+<footer class="footer">
   <div class="wrap-wide foot-in">
     <div class="foot-brand">
-      <a class="brand" href="/"><Seal size={32} logo fill="var(--blue-600)" /> EchoFlow</a>
-      <p class="muted">An open-source, privacy-first AI app for Android. Multiple models, your own API keys, web search, file analysis, research, image generation, and optional local models.</p>
+      <a class="brand" href="/"><Seal size={34} logo fill="var(--blue-600)" /> EchoFlow</a>
+      <p class="muted">
+        An open-source AI workspace for Android.
+        Your models, your keys, your device — and not a server of ours in sight.
+      </p>
+      <a class="foot-mail muted" href="mailto:echoflow@adityavs.tech">echoflow@adityavs.tech</a>
     </div>
     <nav class="cols" aria-label="Footer">
       <div>
@@ -21,39 +26,48 @@ const year = new Date().getFullYear();
         {resourceLinks.map((l) => <a href={l.href}>{l.label}</a>)}
       </div>
       <div>
-        <h4>Comparisons</h4>
+        <h4>Compare</h4>
         {alternativeLinks.map((l) => <a href={l.href}>{l.label}</a>)}
       </div>
       <div>
         <h4>Guides</h4>
         {guideLinks.map((l) => <a href={l.href}>{l.label}</a>)}
         <a href="https://github.com/adityavardhansharma/EchoFlow" target="_blank" rel="noopener">GitHub ↗</a>
-        <a href="mailto:echoflow@adityavs.tech">Contact</a>
       </div>
     </nav>
   </div>
+
   <div class="wrap-wide foot-base muted">
-    <span>© {year} EchoFlow</span>
-    <span>Open-source · Not affiliated with OpenRouter or any model provider</span>
+    <span>© {year} EchoFlow · MIT</span>
+    <span>Not affiliated with OpenRouter or any model provider</span>
     <a href="/download">Download APK</a>
   </div>
+
+  <div class="wordmark" aria-hidden="true">EchoFlow</div>
 </footer>
 
 <style>
-  .footer { padding-block: 3.5rem 2rem; border-top: 1px solid var(--line-dark); }
+  .footer { background: var(--paper-2); border-top: 1px solid var(--line);
+    padding-top: 3.5rem; overflow: hidden; }
   .foot-in { display: flex; justify-content: space-between; gap: 2.5rem; flex-wrap: wrap; }
   .brand { display: inline-flex; align-items: center; gap: .6rem; font-family: var(--display);
-    font-weight: 800; font-size: 1.2rem; letter-spacing: -.03em; }
-  .foot-brand p { margin-top: .8rem; max-width: 38ch; font-size: .92rem; }
-  .cols { display: flex; gap: 2.5rem; flex-wrap: wrap; }
-  .cols h4 { font-family: var(--mono); font-size: .72rem; letter-spacing: .12em; text-transform: uppercase;
-    color: var(--on-ink-soft); margin-bottom: .9rem; font-weight: 500; }
-  .cols a { display: block; color: var(--on-ink-soft); padding: .22rem 0; font-weight: 500;
+    font-weight: 800; font-size: 1.25rem; letter-spacing: -.03em; }
+  .foot-brand p { margin-top: .9rem; max-width: 34ch; font-size: .92rem; }
+  .foot-mail { display: inline-block; margin-top: .7rem; font-family: var(--mono); font-size: .8rem;
+    text-decoration: underline; text-underline-offset: 3px; }
+  .cols { display: flex; gap: clamp(1.6rem, 4vw, 3.5rem); flex-wrap: wrap; }
+  .cols h4 { font-family: var(--mono); font-size: .72rem; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--on-paper-soft); margin-bottom: .9rem; font-weight: 500; }
+  .cols a { display: block; color: var(--on-paper-soft); padding: .22rem 0; font-weight: 500;
     font-size: .9rem; transition: color .2s; }
-  .cols a:hover { color: var(--on-ink); }
+  .cols a:hover { color: var(--on-paper); }
   .foot-base { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap;
-    margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--line-dark);
+    margin-top: 2.8rem; padding-block: 1.4rem; border-top: 1px solid var(--line);
     font-family: var(--mono); font-size: .76rem; }
-  .foot-base a { color: var(--blue-bright); }
+  .foot-base a { color: var(--olive); text-decoration: underline; text-underline-offset: 3px; }
+  .wordmark { font-family: var(--display); font-weight: 800; letter-spacing: -.04em;
+    font-size: clamp(4.5rem, 16.5vw, 15rem); line-height: .78; text-align: center;
+    color: color-mix(in oklab, var(--on-paper) 8%, transparent);
+    user-select: none; margin-top: .5rem; transform: translateY(12%); }
   @media (max-width: 560px) { .cols { gap: 2rem; } }
 </style>
