@@ -1,9 +1,8 @@
 ---
 import Seal from './Seal.astro';
 import { RELEASES_URL } from '../lib/releases';
-/* v3 nav — a floating capsule. Brand, two anchors, GitHub, Download.
-   Everything else lives in the footer; the navbar sells nothing. */
-const REPO = 'https://github.com/adityavardhansharma/EchoFlow';
+/* v4 nav — a small floating capsule that hugs its content. Brand, two quiet
+   anchors, one Download pill. Everything else lives in the footer. */
 const isHome = Astro.url.pathname === '/';
 const anchor = (hash: string) => (isHome ? hash : `/${hash}`);
 ---
@@ -17,43 +16,33 @@ const anchor = (hash: string) => (isHome ? hash : `/${hash}`);
       <a href={anchor('#tour')}>Tour</a>
       <a href={anchor('#privacy')}>Privacy</a>
     </nav>
-    <div class="actions">
-      <a class="gh" href={REPO} target="_blank" rel="noopener" aria-label="EchoFlow on GitHub">
-        <svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.5-2.7 5.5-5.3 5.8.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5Z"/></svg>
-      </a>
-      <a class="btn btn-primary dl" href={RELEASES_URL} data-apk rel="noopener">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 3v10.6l3.3-3.3 1.4 1.4L12 17.4 6.3 11.7l1.4-1.4L11 13.6V3zM5 19h14v2H5z"/></svg>
-        Download
-      </a>
-    </div>
+    <a class="btn btn-primary dl" href={RELEASES_URL} data-apk rel="noopener">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M12 3v10.6l3.3-3.3 1.4 1.4L12 17.4 6.3 11.7l1.4-1.4L11 13.6V3zM5 19h14v2H5z"/></svg>
+      Get APK
+    </a>
   </div>
 </header>
 
 <style>
   .nav { position: sticky; top: .8rem; z-index: 80; display: flex; justify-content: center;
     padding-inline: 1rem; }
-  .nav-pill { display: flex; align-items: center; gap: 1.6rem;
-    width: min(880px, 100%); padding: .5rem .6rem .5rem 1rem;
+  .nav-pill { display: flex; align-items: center; gap: .5rem;
+    width: max-content; max-width: 100%; padding: .4rem .4rem .4rem .9rem;
     border-radius: var(--r-full);
     background: color-mix(in oklab, var(--card) 82%, transparent);
     backdrop-filter: blur(14px) saturate(1.2);
     border: 1px solid var(--line);
     box-shadow: 0 18px 44px -28px rgba(46,42,24,.5); }
-  .brand { display: inline-flex; align-items: center; gap: .55rem; font-family: var(--display);
-    font-weight: 800; font-size: 1.18rem; letter-spacing: -.03em; color: var(--on-paper); }
-  .links { display: flex; align-items: center; gap: .2rem; margin-inline: auto;
-    font-weight: 600; font-size: .92rem; color: var(--on-paper-soft); }
-  .links a { padding: .45rem .85rem; border-radius: var(--r-full);
+  .brand { display: inline-flex; align-items: center; gap: .5rem; font-family: var(--display);
+    font-weight: 600; font-size: 1.1rem; letter-spacing: -.02em; color: var(--on-paper); }
+  .links { display: flex; align-items: center;
+    font-weight: 500; font-size: .88rem; color: var(--on-paper-soft);
+    margin-inline: .4rem; padding-inline: .6rem; border-inline: 1px solid var(--line); }
+  .links a { padding: .4rem .65rem; border-radius: var(--r-full);
     transition: background .2s, color .2s; }
   .links a:hover { background: var(--paper-2); color: var(--on-paper); }
-  .actions { display: flex; align-items: center; gap: .35rem; }
-  .gh { display: grid; place-items: center; width: 38px; height: 38px;
-    border-radius: var(--r-full); color: var(--on-paper-soft);
-    transition: background .2s, color .2s; }
-  .gh:hover { background: var(--paper-2); color: var(--on-paper); }
-  .dl { padding: .55rem 1.1rem; font-size: .9rem; gap: .45rem; }
-  @media (max-width: 720px) {
+  .dl { padding: .5rem 1rem; font-size: .86rem; gap: .4rem; }
+  @media (max-width: 560px) {
     .links { display: none; }
-    .actions { margin-left: auto; }
   }
 </style>
