@@ -1,0 +1,37 @@
+---
+import Seal from './Seal.astro';
+import { RELEASES_URL } from '../lib/releases';
+const REPO = 'https://github.com/adityavardhansharma/EchoFlow';
+---
+<section class="finale">
+  <div class="fin-card dark" data-reveal>
+    <Seal size={84} logo fill="var(--blue-600)" class="fin-seal" />
+    <h2 class="fin-title">Put it on your phone.</h2>
+    <p class="muted">One APK. Android 7+. Free forever — it's your hardware and your keys.</p>
+    <div class="fin-cta">
+      <a class="btn btn-primary" href={RELEASES_URL} data-apk rel="noopener">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 3v10.6l3.3-3.3 1.4 1.4L12 17.4 6.3 11.7l1.4-1.4L11 13.6V3zM5 19h14v2H5z"/></svg>
+        Download the APK <span class="ver" data-apk-version></span>
+      </a>
+      <a class="btn btn-outline-ink" href={REPO} target="_blank" rel="noopener">View the source</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .finale { padding-block: 0 clamp(3rem, 6vw, 5rem); }
+  .fin-card { border-radius: var(--r-xl); padding: clamp(3rem, 7vw, 6rem) 2rem;
+    display: grid; justify-items: center; text-align: center; gap: 1.1rem;
+    width: min(1340px, 100% - 2.6rem); margin-inline: auto;
+    position: relative; overflow: hidden; }
+  .fin-card::before { content: ''; position: absolute; inset: -40%;
+    background: radial-gradient(circle at 50% 0%, rgba(31,111,235,.28), transparent 55%); }
+  .fin-card > :global(*) { position: relative; }
+  .fin-seal { animation: spin 40s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .fin-title { font-family: var(--display); font-weight: 800; letter-spacing: -.025em;
+    line-height: .98; font-size: clamp(2.4rem, 6vw, 4.8rem); }
+  .finale p { max-width: 44ch; }
+  .fin-cta { display: flex; flex-wrap: wrap; gap: .8rem; justify-content: center; margin-top: 1rem; }
+  .ver { font-family: var(--mono); font-size: .8em; opacity: .7; }
+</style>

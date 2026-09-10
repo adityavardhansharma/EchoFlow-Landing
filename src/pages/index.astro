@@ -2,18 +2,11 @@
 import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
 import Hero from '../components/Hero.astro';
-import Spread from '../components/Spread.astro';
-import WebSearchSection from '../components/sections/WebSearchSection.astro';
-import ImagineSection from '../components/sections/ImagineSection.astro';
-import ImagineControlsSection from '../components/sections/ImagineControlsSection.astro';
-import ArtifactsSection from '../components/sections/ArtifactsSection.astro';
-import CapabilitiesSection from '../components/sections/CapabilitiesSection.astro';
-import DocumentsSection from '../components/sections/DocumentsSection.astro';
-import DirectApisSection from '../components/sections/DirectApisSection.astro';
-import NetworkModelsSection from '../components/sections/NetworkModelsSection.astro';
-import Models from '../components/Models.astro';
-import Themes from '../components/Themes.astro';
-import CTA from '../components/CTA.astro';
+import Panel from '../components/Panel.astro';
+import PhoneFrame from '../components/PhoneFrame.astro';
+import ThemesPanel from '../components/ThemesPanel.astro';
+import PrivacyPanel from '../components/PrivacyPanel.astro';
+import Finale from '../components/Finale.astro';
 import Footer from '../components/Footer.astro';
 import { pages } from '../lib/seo';
 
@@ -24,100 +17,173 @@ const seo = pages.home;
   <main>
     <Hero />
 
-    <section class="paper spreads">
-      <div class="wrap-wide stack">
-        <Spread
-          id="design"
-          kicker="Material 3 Expressive"
-          title="Shapely, springy, alive."
-          body="EchoFlow is built head-to-toe on Google's Material 3 Expressive. Scalloped shapes, bold type and physics-based spring motion give every tap, swipe and transition a playful bounce — it doesn't just work, it delights."
-          bullets={[
-            "Real <b>Material Shapes</b> — the scalloped seals throughout",
-            "<b>Spring</b> physics on every tap and transition",
-            "Bold expressive type & soft, generous surfaces",
-          ]}
-          img="/brand/shot-reasoning.jpg"
-          tone="light"
-          accent="var(--c-lavender)"
-        />
+    <header class="tour-head" id="tour">
+      <div class="wrap" data-reveal>
+        <h2 class="h2">Take the tour.</h2>
+        <p class="muted">Nine stops. By the last one you'll know exactly what's on your phone.</p>
       </div>
-    </section>
+    </header>
 
-    <WebSearchSection />
-    <ImagineSection />
-    <ImagineControlsSection />
+    <div class="tour wrap-wide">
+      <Panel
+        id="models"
+        num="01"
+        kicker="Models"
+        title="Bring any brain."
+        body="OpenRouter's 400-model catalog, direct keys for OpenAI, Claude, Gemini, Grok, Cerebras and Sarvam — or a Gemma running on the phone itself, no internet required. Switch mid-conversation whenever one of them disappoints you."
+        facts={[
+          'Your keys go straight to the provider',
+          'On-device models — fully offline',
+          'Swap models mid-chat',
+        ]}
+        img="/brand/v3/10-chat-on-device-model.jpg"
+        alt="EchoFlow chat running Gemma 4 fully on-device"
+        tint="var(--c-ocean)"
+      />
 
-    <section class="paper spreads">
-      <div class="wrap-wide stack">
-        <ArtifactsSection />
-        <CapabilitiesSection />
-      </div>
-    </section>
+      <Panel
+        id="capabilities"
+        num="02"
+        kicker="The plus button"
+        title="Superpowers, filed under +."
+        body="Everything bigger than a message lives one tap away: attach images and PDFs, or send real work off to run on its own."
+        facts={[
+          '<b>Web search</b> — free for everyone, no key',
+          '<b>Deep Research</b> — background runs, cited reports',
+          '<b>Data Agent</b> — structured answers, not prose',
+          '<b>Echo Agents</b> — a model with its own tools',
+        ]}
+        img="/brand/v3/03-attach-and-capabilities-menu.jpg"
+        alt="EchoFlow attach and capabilities menu: web search, deep research, artifact, data agent"
+        tint="#41556e"
+        reverse
+      />
 
-    <section class="paper spreads" id="research">
-      <div class="wrap-wide stack">
-        <Spread
-          kicker="Deep Research"
-          title="Research that runs itself."
-          body="Ask a real question and EchoFlow investigates the web across multiple steps, then writes a cited report. It runs in the background — lock your phone and come back to the answer. <a href='/deep-research'>Learn more →</a>"
-          bullets={[
-            "Powered by <b>Exa</b>, <b>Parallel</b>, <b>Firecrawl</b> — or your own model",
-            "Runs in the <b>background</b> with a progress notification",
-            "<b>Cited</b>, structured reports when providers return sources",
-          ]}
-          img="/brand/shot-research-run.jpg"
-          tone="light"
-          accent="var(--c-forest)"
-          reverse
-        />
-      </div>
-    </section>
+      <Panel
+        id="dictation"
+        num="03"
+        kicker="Dictation"
+        title="Stop typing. Say it."
+        body="Tap the mic and talk — a live waveform takes over the composer and your words land in the box, ready to fix and send. It works in every chat, projects included."
+        facts={[
+          'Whisper-class models via OpenRouter',
+          'Saaras v4 with a Sarvam key',
+          'Long recordings chunked automatically',
+        ]}
+        img="/brand/v3/04-voice-mode-dark-theme.jpg"
+        alt="EchoFlow dictation waveform in the dark theme"
+        tint="var(--c-ocean)"
+        dark
+      />
 
-    <DocumentsSection />
-    <DirectApisSection />
-    <Models />
-    <NetworkModelsSection />
+      <Panel
+        id="network"
+        num="04"
+        kicker="Your network"
+        title="Your PC thinks. Your phone talks."
+        body="Point EchoFlow at the Ollama or LM Studio box on your desk and answers stream to your phone over Wi-Fi, token by token. No cloud, no key, no bill — the model never leaves your house."
+        facts={[
+          'Ollama · LM Studio · Jan · vLLM',
+          'Any OpenAI-compatible endpoint',
+          'You pick which models show up',
+        ]}
+        img="/brand/v3/09-custom-api-endpoints.jpg"
+        alt="EchoFlow custom API endpoint settings with Ollama and OpenAI-compatible providers"
+        tint="#456a8e"
+        reverse
+      />
 
-    <section class="paper spreads" id="privacy">
-      <div class="wrap-wide stack">
-        <Spread
-          kicker="Stored on your device"
-          title="Your whole history, on your phone."
-          body="Every conversation is saved locally on your device — so your full chat history is there the instant you open the app, works with no internet at all, and never sits on someone else's server. <a href='/privacy'>Privacy details →</a>"
-          bullets={[
-            "All chats stored <b>locally</b> on your device",
-            "Open past conversations <b>offline</b>, anytime",
-            "Cloud models still process prompts you send to them",
-          ]}
-          img="/brand/shot-sidebar.jpg"
-          tone="light"
-          accent="var(--c-ocean)"
-        />
-        <Spread
-          id="local"
-          kicker="On-device models"
-          title="Run AI on your phone. Even offline."
-          body="Download a model once and chat with no internet, no cost, and no data leaving your device. One feature in a broader platform — <a href='/local-models'>local models →</a>"
-          bullets={[
-            "Gemma, Qwen, DeepSeek & more, fully <b>on-device</b>",
-            "Works <b>offline</b> — no key, no account",
-            "Download curated picks or <b>import your own</b>",
-          ]}
-          img="/brand/shot-local-models.jpg"
-          tone="light"
-          accent="var(--c-sunset)"
-          reverse
-        />
-      </div>
-    </section>
+      <Panel
+        id="projects"
+        num="05"
+        kicker="Projects"
+        title="Give your chats a home."
+        body="A project holds files and instructions, and every chat inside starts already knowing them. Twelve PDFs about one warranty claim? Attach them once, argue as long as you need."
+        facts={[
+          'Files read on-device, kept as Markdown',
+          'Instructions set the tone once',
+          'Dictate inside project chats too',
+        ]}
+        tint="var(--c-rose)"
+      >
+        <div class="duo">
+          <PhoneFrame tone="light" class="p-phone duo-a">
+            <img src="/brand/v3/06-projects-list.jpg" alt="EchoFlow projects list" width="724" height="1568" loading="lazy" decoding="async" />
+          </PhoneFrame>
+          <PhoneFrame tone="light" class="p-phone duo-b">
+            <img src="/brand/v3/07-project-detail.jpg" alt="EchoFlow project with context files, instructions and conversations" width="724" height="1568" loading="lazy" decoding="async" />
+          </PhoneFrame>
+        </div>
+      </Panel>
 
-    <Themes />
-    <CTA />
+      <Panel
+        id="artifacts"
+        num="06"
+        kicker="The drawer"
+        title="Everything, one swipe away."
+        body="Pinned chats, search, Projects — and the Artifacts hub, where every page, report and document a model builds for you is kept, versioned, and ready to reopen."
+        facts={[
+          'Artifacts hub — all your generated things',
+          'Pin the conversations that matter',
+          'Search everything you\u2019ve ever said',
+        ]}
+        img="/brand/v3/01-navigation-drawer-conversations.jpg"
+        alt="EchoFlow navigation drawer with Projects, Artifacts and pinned conversations"
+        tint="var(--c-wall)"
+        reverse
+      />
+
+      <Panel
+        id="imagine"
+        num="07"
+        kicker="Imagine"
+        title="Picture something."
+        body="A second surface just for making things. Describe an image and edit it conversationally — “make the sky purple” — or ask for video and let it render with the app closed."
+        facts={[
+          'Image and video modes',
+          'Results as a contact sheet, not a chat log',
+          'Renders survive the app being killed',
+        ]}
+        img="/brand/v3/05-imagine-image-generation.jpg"
+        alt="EchoFlow Imagine surface for image and video generation"
+        tint="var(--c-lavender)"
+      />
+
+      <ThemesPanel />
+    </div>
+
+    <PrivacyPanel />
+    <Finale />
   </main>
   <Footer />
+
+  <script>
+    // Gentle scroll reveal. `.js` on <html> gates the hidden state, so nothing
+    // is invisible without JavaScript.
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            e.target.classList.add('is-in');
+            io.unobserve(e.target);
+          }
+        }
+      },
+      { threshold: 0.18 },
+    );
+    document.querySelectorAll('[data-reveal]').forEach((el) => io.observe(el));
+  </script>
 </Base>
 
 <style>
-  .spreads { background: var(--paper); }
-  .stack { display: grid; gap: clamp(4rem, 9vw, 7rem); }
+  .tour-head { padding-block: clamp(3.5rem, 7vw, 5.5rem) clamp(1.5rem, 3vw, 2.5rem);
+    text-align: center; }
+  .tour-head p { margin-top: .9rem; }
+  .tour { display: grid; gap: clamp(1.2rem, 2.5vw, 2rem);
+    padding-bottom: clamp(3rem, 6vw, 5rem); }
+
+  .duo { display: flex; align-items: center; justify-content: center; }
+  .duo :global(.p-phone) { width: min(225px, 42vw); }
+  .duo :global(.duo-a) { transform: rotate(-4deg) translateX(8%); z-index: 1; }
+  .duo :global(.duo-b) { transform: rotate(3deg) translateX(-8%) translateY(6%); z-index: 2; }
 </style>

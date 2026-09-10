@@ -1,0 +1,39 @@
+---
+/* The quiet, typographic panel. No screenshot — the absence is the point. */
+---
+<section class="priv" id="privacy">
+  <div class="wrap" data-reveal>
+    <span class="chip pv-chip"><b><span>09</span></b>Privacy</span>
+    <h2 class="pv-title">
+      No account.<br />No EchoFlow server.<br />No telemetry.
+    </h2>
+    <p class="pv-body muted">
+      There is nothing between you and your model. Keys go straight to the provider
+      you chose, chats live in a database on your phone, and the
+      <a href="https://github.com/adityavardhansharma/EchoFlow" target="_blank" rel="noopener">entire codebase</a>
+      is MIT-licensed so you don't have to take anyone's word for it.
+      <a href="/privacy">The fine print →</a>
+    </p>
+    <dl class="pv-stats">
+      <div><dt>0</dt><dd>accounts to create</dd></div>
+      <div><dt>0</dt><dd>servers in the middle</dd></div>
+      <div><dt>100%</dt><dd>open source, MIT</dd></div>
+    </dl>
+  </div>
+</section>
+
+<style>
+  .priv { padding-block: clamp(4rem, 9vw, 7.5rem); text-align: center; }
+  .priv .wrap > * + * { margin-top: 1.5rem; }
+  .pv-chip { color: var(--olive); }
+  .pv-chip b span { color: var(--paper); }
+  .pv-title { font-family: var(--display); font-weight: 800; line-height: 1.02;
+    letter-spacing: -.025em; font-size: clamp(2.4rem, 6vw, 4.6rem); }
+  .pv-body { max-width: 56ch; margin-inline: auto; font-size: clamp(1rem, 1.4vw, 1.15rem); }
+  .pv-body a { font-weight: 600; color: var(--olive); text-decoration: underline; text-underline-offset: 3px; }
+  .pv-stats { display: flex; justify-content: center; gap: clamp(1.6rem, 6vw, 4.5rem);
+    flex-wrap: wrap; margin-top: 2.6rem; }
+  .pv-stats dt { font-family: var(--display); font-weight: 800;
+    font-size: clamp(2.4rem, 5vw, 3.6rem); line-height: 1; }
+  .pv-stats dd { margin: .4rem 0 0; font-size: .92rem; color: var(--on-paper-soft); font-weight: 500; }
+</style>

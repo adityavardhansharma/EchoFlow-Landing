@@ -1,0 +1,92 @@
+---
+import PhoneFrame from './PhoneFrame.astro';
+import { flower } from '../lib/shapes';
+/* The one panel that demonstrates instead of tells: tap an accent seal and
+   the panel itself changes into that theme, exactly like the app's
+   Appearance screen in the screenshot beside it. */
+const d = flower(9, 50, 40);
+const accents = [
+  { name: 'Wallpaper', color: '#8a8a2c' },
+  { name: 'Mono', color: '#16181d' },
+  { name: 'Ocean', color: '#1763c6' },
+  { name: 'Forest', color: '#1c6e2e' },
+  { name: 'Sunset', color: '#b4540b' },
+  { name: 'Lavender', color: '#6750a4' },
+  { name: 'Rose', color: '#b01b49' },
+];
+---
+<section class="panel-slot" id="themes">
+  <article class="tpanel" style=`--tint:${accents[0].color}`>
+    <div class="t-copy" data-reveal>
+      <span class="chip t-chip"><b><span>08</span></b>Appearance</span>
+      <h2 class="h2">Wear it your way.</h2>
+      <p class="t-body">
+        Seven accents, light and dark, or Material You matching your wallpaper.
+        Don't take our word for it — <strong>tap a seal</strong> and watch this
+        panel change its clothes.
+      </p>
+      <div class="swatches" role="group" aria-label="Try an accent color">
+        {accents.map((a, i) => (
+          <button type="button" class:list={['swatch', { active: i === 0 }]} data-accent={a.color} aria-label={`${a.name} accent`}>
+            <svg viewBox="0 0 100 100" aria-hidden="true"><path d={d} fill={a.color} /></svg>
+            <span>{a.name}</span>
+          </button>
+        ))}
+      </div>
+    </div>
+    <div class="t-visual" data-reveal>
+      <PhoneFrame tone="light" class="p-phone">
+        <img src="/brand/v3/08-appearance-theme-settings.jpg" alt="EchoFlow appearance settings with theme and accent color choices" width="724" height="1568" loading="lazy" decoding="async" />
+      </PhoneFrame>
+    </div>
+  </article>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('#themes .swatch').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const panel = btn.closest<HTMLElement>('.tpanel');
+      if (!panel || !btn.dataset.accent) return;
+      panel.style.setProperty('--tint', btn.dataset.accent);
+      panel.querySelectorAll('.swatch').forEach((b) => b.classList.toggle('active', b === btn));
+    });
+  });
+</script>
+
+<style>
+  .panel-slot { padding-block: 0; }
+  .tpanel {
+    display: grid; grid-template-columns: 1.05fr .95fr; align-items: center;
+    gap: clamp(1.5rem, 4vw, 4rem);
+    border-radius: var(--r-xl);
+    padding: clamp(1.8rem, 4.5vw, 4.2rem);
+    background: color-mix(in oklab, var(--tint) 13%, var(--card));
+    border: 1px solid color-mix(in oklab, var(--tint) 24%, transparent);
+    transition: background .6s var(--ease), border-color .6s var(--ease);
+  }
+  .t-copy > * + * { margin-top: 1.25rem; }
+  .t-chip { color: color-mix(in oklab, var(--tint) 80%, var(--on-paper)); transition: color .6s; }
+  .t-chip b span { color: var(--card); }
+  .t-body { font-size: clamp(1.02rem, 1.4vw, 1.18rem); line-height: 1.6;
+    max-width: 46ch; color: var(--on-paper-soft); }
+  .t-body strong { color: color-mix(in oklab, var(--tint) 70%, var(--on-paper)); transition: color .6s; }
+
+  .swatches { display: flex; flex-wrap: wrap; gap: .4rem .9rem; padding-top: .4rem; }
+  .swatch { display: grid; justify-items: center; gap: .45rem; padding: .55rem .35rem .45rem;
+    border-radius: var(--r-m); transition: background .25s, transform .5s var(--spring); }
+  .swatch svg { width: 44px; height: 44px; transition: transform .5s var(--spring); }
+  .swatch span { font-size: .74rem; font-weight: 600; color: var(--on-paper-soft); }
+  .swatch:hover { transform: translateY(-3px); }
+  .swatch:hover svg { transform: rotate(14deg); }
+  .swatch.active { background: color-mix(in oklab, var(--tint) 14%, transparent); }
+  .swatch.active span { color: var(--on-paper); }
+
+  .t-visual { display: grid; place-items: center; }
+  .t-visual :global(.p-phone) { width: min(268px, 68vw);
+    filter: drop-shadow(0 34px 60px rgba(46,42,24,.3)); }
+
+  @media (max-width: 880px) {
+    .tpanel { grid-template-columns: 1fr; }
+    .t-visual { margin-top: 1.5rem; }
+  }
+</style>
