@@ -1,67 +1,48 @@
 ---
 import Seal from './Seal.astro';
 import { RELEASES_URL } from '../lib/releases';
-import { featureLinks } from '../lib/navigation';
-const REPO = 'https://github.com/adityavardhansharma/EchoFlow';
+/* v4 nav — a small floating capsule that hugs its content. Brand, two quiet
+   anchors, one Download pill. Everything else lives in the footer. */
 const isHome = Astro.url.pathname === '/';
+const anchor = (hash: string) => (isHome ? hash : `/${hash}`);
 ---
 <header class="nav">
-  <div class="wrap-wide nav-in">
+  <div class="nav-pill">
     <a class="brand" href="/" aria-label="EchoFlow home">
-      <Seal size={34} logo fill="var(--blue-600)" />
+      <Seal size={32} logo fill="var(--blue-600)" />
       <span>EchoFlow</span>
     </a>
     <nav class="links" aria-label="Primary">
-      <div class="dropdown">
-        <button type="button" class="drop-trigger" aria-haspopup="true" aria-expanded="false">Features</button>
-        <div class="drop-menu" role="menu">
-          {featureLinks.map((link) => (
-            <a href={link.href} role="menuitem">{link.label}</a>
-          ))}
-        </div>
-      </div>
-      <a href="/alternatives">Alternatives</a>
-      <a href="/guides">Guides</a>
-      <a href="/open-source">Open Source</a>
-      {isHome ? (
-        <>
-          <a href="#web-search">Search</a>
-          <a href="#imagine">Imagine</a>
-          <a href="#apis">APIs</a>
-          <a href="#themes">Themes</a>
-        </>
-      ) : (
-        <a href="/#web-search">Features</a>
-      )}
+      <a href={anchor('#tour')}>Tour</a>
+      <a href={anchor('#privacy')}>Privacy</a>
     </nav>
-    <a class="btn btn-light dl" href={RELEASES_URL} data-apk rel="noopener">
-      <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 3v10.6l3.3-3.3 1.4 1.4L12 17.4 6.3 11.7l1.4-1.4L11 13.6V3zM5 19h14v2H5z"/></svg>
-      Download
+    <a class="btn btn-primary dl" href={RELEASES_URL} data-apk rel="noopener">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M12 3v10.6l3.3-3.3 1.4 1.4L12 17.4 6.3 11.7l1.4-1.4L11 13.6V3zM5 19h14v2H5z"/></svg>
+      Get APK
     </a>
   </div>
 </header>
 
 <style>
-  .nav { position: sticky; top: 0; z-index: 80;
-    background: color-mix(in oklab, var(--ink) 78%, transparent);
-    backdrop-filter: blur(16px) saturate(1.3);
-    border-bottom: 1px solid var(--line-dark); }
-  .nav-in { display: flex; align-items: center; gap: 1.4rem; height: 66px; color: var(--on-ink); }
-  .brand { display: inline-flex; align-items: center; gap: .6rem; font-family: var(--display);
-    font-weight: 800; font-size: 1.22rem; letter-spacing: -.03em; }
-  .links { display: flex; align-items: center; gap: 1.4rem; margin-left: auto;
-    font-weight: 500; font-size: .95rem; color: var(--on-ink-soft); }
-  .links > a, .drop-trigger { position: relative; transition: color .2s; color: inherit;
-    background: none; border: 0; font: inherit; cursor: pointer; padding: 0; }
-  .links a:hover, .drop-trigger:hover { color: var(--on-ink); }
-  .dropdown { position: relative; }
-  .drop-menu { display: none; position: absolute; top: calc(100% + .6rem); left: -1rem;
-    min-width: 220px; background: var(--ink-2); border: 1px solid var(--line-dark);
-    border-radius: var(--r-m); padding: .5rem; box-shadow: 0 20px 40px rgba(0,0,0,.4); }
-  .dropdown:hover .drop-menu, .dropdown:focus-within .drop-menu { display: grid; }
-  .drop-menu a { display: block; padding: .55rem .75rem; border-radius: var(--r-s);
-    font-size: .9rem; white-space: nowrap; }
-  .drop-menu a:hover { background: rgba(255,255,255,.06); color: var(--on-ink); }
-  .dl { padding: .55rem 1.15rem; font-size: .95rem; }
-  @media (max-width: 900px) { .links { display: none; } }
+  .nav { position: sticky; top: .8rem; z-index: 80; display: flex; justify-content: center;
+    padding-inline: 1rem; }
+  .nav-pill { display: flex; align-items: center; gap: .5rem;
+    width: max-content; max-width: 100%; padding: .4rem .4rem .4rem .9rem;
+    border-radius: var(--r-full);
+    background: color-mix(in oklab, var(--card) 82%, transparent);
+    backdrop-filter: blur(14px) saturate(1.2);
+    border: 1px solid var(--line);
+    box-shadow: 0 18px 44px -28px rgba(46,42,24,.5); }
+  .brand { display: inline-flex; align-items: center; gap: .5rem; font-family: var(--display);
+    font-weight: 600; font-size: 1.1rem; letter-spacing: -.02em; color: var(--on-paper); }
+  .links { display: flex; align-items: center;
+    font-weight: 500; font-size: .88rem; color: var(--on-paper-soft);
+    margin-inline: .4rem; padding-inline: .6rem; border-inline: 1px solid var(--line); }
+  .links a { padding: .4rem .65rem; border-radius: var(--r-full);
+    transition: background .2s, color .2s; }
+  .links a:hover { background: var(--paper-2); color: var(--on-paper); }
+  .dl { padding: .5rem 1rem; font-size: .86rem; gap: .4rem; }
+  @media (max-width: 560px) {
+    .links { display: none; }
+  }
 </style>

@@ -1,0 +1,104 @@
+---
+import PhoneFrame from './PhoneFrame.astro';
+/* Full-bleed stop for the on-device document engine. The visual is the story:
+   little SVG documents drift into the phone and disappear — read on the
+   device, never uploaded. Motion is disabled for reduced-motion. */
+const badges = [
+  // resting position (% of stage), fill color, label, tilt — spread around the phone
+  { l: 10, t: 12, c: '#185abd', txt: 'DOC',  name: 'Word', r: -8 },
+  { l: 3,  t: 44, c: '#107c41', txt: 'XLS',  name: 'Excel', r: 6 },
+  { l: 13, t: 76, c: '#c43e1c', txt: 'PPT',  name: 'PowerPoint', r: -5 },
+  { l: 84, t: 10, c: '#d93025', txt: 'PDF',  name: 'PDF', r: 9 },
+  { l: 91, t: 42, c: '#6750a4', txt: 'EPUB', name: 'EPUB', r: -7 },
+  { l: 84, t: 74, c: '#0e7569', txt: 'CSV',  name: 'CSV', r: 5 },
+  { l: 30, t: 0,  c: '#8a8a2c', txt: 'RTF',  name: 'RTF', r: 7 },
+  { l: 66, t: 92, c: '#b4540b', txt: 'SCAN', name: 'Scanned page', r: -9 },
+];
+---
+<section class="reader" id="reader">
+  <div class="wrap" data-reveal>
+    <p class="r-kicker">03 — The reader</p>
+    <h2 class="r-title">Feed it anything.</h2>
+    <p class="r-body">
+      A document engine ships inside the APK: Word, Excel, PowerPoint, PDF, EPUB
+      become clean Markdown <em>on the phone</em>, scans go through on-device OCR —
+      so even a local model with no internet can read your files.
+      Nothing is uploaded just to open a document.
+    </p>
+  </div>
+
+  <div class="stage" data-reveal>
+    {badges.map((b, i) => (
+      <span
+        class="fdoc"
+        style={`--c:${b.c}; left:${b.l}%; top:${b.t}%; --dx:${(50 - b.l) * 4.4}px; --dy:${(46 - b.t) * 3.6}px; --r:${b.r}deg; animation-delay:${i * 1.1}s`}
+        title={b.name}
+      >
+        <svg viewBox="0 0 44 54" aria-hidden="true">
+          <path class="page" d="M6 7c0-3.3 2.7-6 6-6h16l14 14v31c0 3.3-2.7 6-6 6H12c-3.3 0-6-2.7-6-6z" />
+          <path class="fold" d="M28 1l14 14H32c-2.2 0-4-1.8-4-4z" />
+          <g class="tlines">
+            <rect x="12" y="22" width="20" height="2.6" rx="1.3" />
+            <rect x="12" y="28" width="24" height="2.6" rx="1.3" />
+            <rect x="12" y="34" width="16" height="2.6" rx="1.3" />
+          </g>
+        </svg>
+        <b>{b.txt}</b>
+      </span>
+    ))}
+    <PhoneFrame tone="light" class="r-phone">
+      <img src="/brand/v3/02-chat-home-light-theme.jpg" alt="EchoFlow ready for any attachment" width="724" height="1568" loading="lazy" decoding="async" />
+    </PhoneFrame>
+  </div>
+</section>
+
+<style>
+  .reader { text-align: center;
+    /* Full-bleed escape from the .tour column — the one stop that isn't a box. */
+    width: 100vw; margin-inline: calc(50% - 50vw);
+    padding-block: clamp(3.5rem, 7vw, 6rem);
+    margin-block: clamp(1.2rem, 2.5vw, 2rem);
+    border-block: 1px solid color-mix(in oklab, var(--olive) 22%, transparent);
+    background:
+      radial-gradient(120% 90% at 50% 0%, color-mix(in oklab, var(--butter) 34%, transparent), transparent 70%),
+      color-mix(in oklab, var(--butter) 14%, var(--paper));
+  }
+  .reader .wrap > * + * { margin-top: 1.2rem; }
+  .r-kicker { font-family: var(--mono); font-size: .78rem; font-weight: 700;
+    letter-spacing: .14em; text-transform: uppercase; color: var(--olive); }
+  .r-title { font-family: var(--display); font-weight: 600; line-height: 1.02;
+    letter-spacing: -.025em; font-size: clamp(2.1rem, 5vw, 3.9rem); }
+  .r-body { max-width: 56ch; margin-inline: auto; color: var(--on-paper-soft);
+    font-size: clamp(1rem, 1.4vw, 1.16rem); line-height: 1.65; }
+  .r-body em { font-style: normal; font-weight: 700; color: var(--olive); }
+
+  .stage { position: relative; margin: clamp(2.2rem, 4vw, 3.4rem) auto 0;
+    width: min(640px, 92vw); display: grid; place-items: center; }
+  .stage :global(.r-phone) { width: min(238px, 58vw); position: relative; z-index: 1;
+    filter: drop-shadow(0 30px 54px rgba(46,42,24,.32)); }
+
+  /* Little paper documents — folded corner, text lines, format tag — that get
+     pulled into the phone one by one. */
+  .fdoc { position: absolute; z-index: 2; width: 54px;
+    filter: drop-shadow(0 12px 20px rgba(46,42,24,.28));
+    animation: feed 9s var(--ease) infinite both; will-change: transform, opacity; }
+  .fdoc svg { width: 100%; height: auto; }
+  .fdoc .page { fill: #fffdf4; stroke: color-mix(in oklab, var(--c) 35%, transparent); stroke-width: 1.5; }
+  .fdoc .fold { fill: color-mix(in oklab, var(--c) 26%, #fff); }
+  .fdoc .tlines rect { fill: color-mix(in oklab, var(--c) 30%, #d8d2bd); }
+  .fdoc b { position: absolute; left: 50%; bottom: 4px; transform: translateX(-50%);
+    padding: .14rem .42rem; border-radius: var(--r-full);
+    background: var(--c); color: #fff;
+    font-family: var(--mono); font-weight: 700; font-size: .58rem; letter-spacing: .05em; }
+
+  @keyframes feed {
+    0%   { transform: translate(0, 0) rotate(var(--r)) scale(1); opacity: 0; }
+    6%   { opacity: 1; }
+    55%  { transform: translate(0, 0) rotate(var(--r)) scale(1); opacity: 1; }
+    92%  { transform: translate(var(--dx), var(--dy)) rotate(0deg) scale(.25); opacity: 0; }
+    100% { transform: translate(var(--dx), var(--dy)) rotate(0deg) scale(.25); opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .fdoc { animation: none; opacity: 1; }
+  }
+</style>

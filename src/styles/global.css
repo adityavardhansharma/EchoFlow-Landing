@@ -1,53 +1,58 @@
 /* =============================================================================
-   EchoFlow — landing page design system
+   EchoFlow — landing page design system, v3
 
-   Art direction: "Signal & Seal". EchoFlow is a bring-your-own-key OpenRouter
-   chat client. The site is editorial and confident: a deep-ocean cinematic hero
-   running the live app, flowing into airy warm-paper feature spreads that pair
-   REAL device screenshots with big typographic statements. The scalloped badge
-   "seal" from the app's icon buttons is the recurring stamp motif throughout.
+   Art direction: "Worn like the app". EchoFlow is a Material 3 Expressive
+   Android AI workspace, and the site borrows its wardrobe: a warm cream canvas
+   (the app's Wallpaper-light theme), huge friendly Bricolage type, scalloped
+   seal shapes, and a stack of big tonal panels — each panel tinted to match
+   the accent of the real screenshot it shows, so scrolling the page feels
+   like flipping through the app's own themes. Copy stays terse: every panel
+   is one idea, one screenshot, one line.
    ============================================================================= */
 
 :root {
   /* Type */
-  --display: 'Bricolage Grotesque', Georgia, serif;
-  --sans: 'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --display: 'Clash Display', 'Bricolage Grotesque', system-ui, sans-serif;
+  --sans: 'General Sans', 'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
 
-  /* Ocean brand (mirrors the app's default Ocean palette) */
+  /* Brand (the app's Ocean blue + the Wallpaper theme's olive/butter) */
   --blue:        #1763c6;
   --blue-600:    #1f6feb;
-  --blue-bright: #88b9ff;
+  --blue-bright: #8db9f2;
   --blue-deep:   #0b2a55;
-  --blue-ink:    #07101e;
+  --blue-ink:    #0a1626;
+  --olive:       #5f5f13;
+  --olive-deep:  #3f4008;
+  --butter:      #efe387;
 
   /* Surfaces */
-  --ink:         #08111f;   /* deep-ocean dark sections */
-  --ink-2:       #0d1b2e;
-  --ink-card:    #122337;
-  --paper:       #f4f2ec;   /* warm editorial light sections */
-  --paper-2:     #ebe8df;
-  --card:        #ffffff;
-  --line-dark:   rgba(180, 205, 240, 0.14);
-  --line:        rgba(20, 30, 50, 0.12);
+  --ink:         #0c0f16;   /* near-black, like the app's dark theme */
+  --ink-2:       #151a24;
+  --ink-card:    #1b2230;
+  --paper:       #f6f2e6;   /* warm cream, like the app's light wallpaper theme */
+  --paper-2:     #ece6d3;
+  --card:        #fdfbf3;
+  --line-dark:   rgba(200, 214, 240, 0.14);
+  --line:        rgba(46, 42, 24, 0.14);
 
   /* Text */
-  --on-ink:      #eaf1fb;
-  --on-ink-soft: #9fb2cc;
-  --on-paper:    #111722;
-  --on-paper-soft:#55606f;
+  --on-ink:      #eef1f8;
+  --on-ink-soft: #99a3b6;
+  --on-paper:    #201d12;
+  --on-paper-soft:#5f5b4a;
 
-  /* Theme accents (the app's seven palettes — used as small multi-theme cues) */
+  /* Theme accents (the app's seven palettes — the site wears them per panel) */
   --c-ocean:    #1763c6;
   --c-mono:     #16181d;
   --c-forest:   #1c6e2e;
   --c-sunset:   #b4540b;
   --c-lavender: #6750a4;
   --c-rose:     #b01b49;
-  --c-wall:     #5b8bd0;
+  --c-wall:     #8a8a2c;
 
   /* Shape scale (mirrors app dp radii) */
-  --r-s: 14px; --r-m: 20px; --r-l: 28px; --r-xl: 36px; --r-full: 999px;
+  --r-s: 14px; --r-m: 20px; --r-l: 28px; --r-xl: 40px; --r-full: 999px;
 
   --spring: linear(0,.009 .8%,.035 1.7%,.141 3.7%,.723 9.8%,.938 12.4%,1.02 14%,1.063 15.7%,1.07 17.6%,1.054 19.6%,1 24.4%,.984 27%,.99 36%,1 49%,1);
   --ease: cubic-bezier(.2,0,0,1);
@@ -73,7 +78,8 @@ body {
 img, svg, video { display: block; max-width: 100%; }
 a { color: inherit; text-decoration: none; }
 button { font-family: inherit; cursor: pointer; border: 0; background: none; }
-::selection { background: var(--blue); color: #fff; }
+::selection { background: var(--butter); color: var(--olive-deep); }
+.dark ::selection { background: var(--blue-600); color: #fff; }
 
 /* ---- Layout ---- */
 .wrap { width: min(var(--maxw), 100% - 2.6rem); margin-inline: auto; }
@@ -87,21 +93,22 @@ section { padding-block: clamp(4.5rem, 9vw, 8rem); position: relative; }
 /* ---- Type ---- */
 .display {
   font-family: var(--display);
-  font-weight: 800;
+  font-weight: 600;
   line-height: 0.96;
-  letter-spacing: -0.025em;
-  font-size: clamp(2.8rem, 7.2vw, 6rem);
+  letter-spacing: -0.022em;
+  font-size: clamp(2.9rem, 7.6vw, 6.6rem);
+  text-wrap: balance;
 }
 .h2 {
   font-family: var(--display);
-  font-weight: 800;
+  font-weight: 600;
   line-height: 1.0;
   letter-spacing: -0.02em;
   font-size: clamp(2.2rem, 5vw, 3.8rem);
 }
 .h3 {
   font-family: var(--display);
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: -0.015em;
   font-size: clamp(1.35rem, 2.4vw, 1.85rem);
   line-height: 1.08;
@@ -121,6 +128,20 @@ section { padding-block: clamp(4.5rem, 9vw, 8rem); position: relative; }
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 
+/* ---- Chips (M3 assist-chip look; numbered panel kickers) ---- */
+.chip {
+  display: inline-flex; align-items: center; gap: .55rem;
+  border-radius: var(--r-full); padding: .42rem 1rem .42rem .55rem;
+  background: color-mix(in oklab, currentColor 9%, transparent);
+  font-family: var(--mono); font-size: .74rem; font-weight: 500;
+  letter-spacing: .14em; text-transform: uppercase; line-height: 1;
+}
+.chip b {
+  display: inline-grid; place-items: center; width: 1.7em; height: 1.7em;
+  border-radius: var(--r-full); background: currentColor; font-weight: 600;
+}
+.chip b span { color: var(--paper); font-family: var(--mono); font-size: .82em; }
+
 /* ---- Buttons (match the app's pill buttons) ---- */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: .6rem;
@@ -129,18 +150,29 @@ section { padding-block: clamp(4.5rem, 9vw, 8rem); position: relative; }
   transition: transform .5s var(--spring), box-shadow .3s, background .25s, color .25s;
 }
 .btn:active { transform: scale(.95); }
-.btn-primary { background: var(--blue-600); color: #fff;
-  box-shadow: 0 14px 34px -14px rgba(31,111,235,.8); }
-.btn-primary:hover { background: #2a7bff; transform: translateY(-2px); }
-.btn-light { background: #fff; color: var(--blue-ink); }
-.btn-light:hover { transform: translateY(-2px); box-shadow: 0 14px 30px -16px rgba(0,0,0,.5); }
+.btn-primary { background: var(--on-paper); color: var(--paper);
+  box-shadow: 0 16px 34px -16px rgba(32,29,18,.55); }
+.btn-primary:hover { background: #000; transform: translateY(-2px); }
+.dark .btn-primary { background: var(--paper); color: var(--on-paper); }
+.dark .btn-primary:hover { background: #fff; }
+.btn-light { background: var(--card); color: var(--on-paper); border: 1px solid var(--line); }
+.btn-light:hover { transform: translateY(-2px); box-shadow: 0 14px 30px -18px rgba(0,0,0,.45); }
 .btn-outline-ink { border: 1.5px solid var(--line-dark); color: var(--on-ink); }
 .btn-outline-ink:hover { background: rgba(255,255,255,.06); }
 .btn-outline { border: 1.5px solid var(--line); color: var(--on-paper); }
-.btn-outline:hover { background: rgba(20,30,50,.05); }
+.btn-outline:hover { background: rgba(46,42,24,.06); }
 
-/* Reveal class kept as a harmless no-op (scroll animation removed for smoothness). */
+/* ---- Scroll reveal (progressive; content is visible without JS) ---- */
+[data-reveal] { opacity: 1; transform: none; }
+.js [data-reveal] { opacity: 0; transform: translateY(26px);
+  transition: opacity .7s var(--ease-out), transform .9s var(--spring); }
+.js [data-reveal].is-in { opacity: 1; transform: none; }
+
+/* Legacy no-op kept for subpages */
 .reveal { opacity: 1; transform: none; }
+
+/* ---- Ticker marquee ---- */
+@keyframes ticker { to { transform: translateX(-50%); } }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important;
@@ -150,9 +182,9 @@ section { padding-block: clamp(4.5rem, 9vw, 8rem); position: relative; }
 /* ---- Content pages (SEO feature & guide pages) ---- */
 .prose { max-width: 72ch; }
 .prose > * + * { margin-top: 1.1rem; }
-.prose h2 { font-family: var(--display); font-weight: 800; font-size: clamp(1.5rem, 3vw, 2rem);
+.prose h2 { font-family: var(--display); font-weight: 600; font-size: clamp(1.5rem, 3vw, 2rem);
   letter-spacing: -.02em; margin-top: 2.2rem; line-height: 1.15; }
-.prose h3 { font-family: var(--display); font-weight: 700; font-size: 1.25rem; margin-top: 1.6rem; }
+.prose h3 { font-family: var(--display); font-weight: 600; font-size: 1.25rem; margin-top: 1.6rem; }
 .prose p, .prose li { line-height: 1.7; color: var(--on-paper-soft); }
 .prose strong { color: var(--on-paper); font-weight: 600; }
 .prose ul, .prose ol { padding-left: 1.4rem; display: grid; gap: .5rem; }
