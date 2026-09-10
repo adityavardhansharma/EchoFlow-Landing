@@ -44,7 +44,7 @@ const structuredData = [websiteJsonLd(), softwareAppJsonLd(), ...extraLd];
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonical} />
-    <meta name="theme-color" content="#08111f" />
+    <meta name="theme-color" content="#f6f2e6" />
     <link rel="icon" type="image/png" href="/brand/echoflow-mark.png" />
 
     <meta property="og:type" content="website" />
@@ -73,6 +73,7 @@ const structuredData = [websiteJsonLd(), softwareAppJsonLd(), ...extraLd];
     />
   </head>
   <body>
+    <script is:inline>document.documentElement.classList.add('js');</script>
     <slot />
     <SpeedInsights />
     <script>
