@@ -4,7 +4,7 @@ export const DEFAULT_OG_IMAGE = '/brand/shot-home-ocean.jpg';
 export const GITHUB_REPO = 'https://github.com/adityavardhansharma/EchoFlow';
 
 export const TAGLINE =
-  'An open-source, privacy-first AI app for Android that lets you access multiple AI models, use your own API keys, search the web, analyse files, conduct research, generate media, and optionally run supported models locally.';
+  'An open-source, privacy-first AI workspace for Android: chat with any model using your own API keys or fully on-device, search the web free with no key, dictate messages, organise chats into Projects, keep generated Artifacts, run Deep Research, and stream from Ollama on your own network.';
 
 export interface PageSEO {
   path: string;
@@ -21,7 +21,7 @@ export const pages: Record<string, PageSEO> = {
     path: '/',
     title: 'EchoFlow — Open-Source AI App for Android | Multi-Model AI Chatbot',
     description:
-      'EchoFlow is a free, open-source AI chat app for Android. Access GPT, Claude, Gemini and more with your own API key, search the web, analyse files, and keep chats on your phone — no account required.',
+      'EchoFlow is a free, open-source AI app for Android. Chat with GPT, Claude, Gemini or on-device models, search the web free with no API key, dictate messages, organise chats into Projects, and keep everything on your phone — no account required.',
     primaryKeyword: 'AI app for Android',
     secondaryKeywords: [
       'AI chatbot app',
