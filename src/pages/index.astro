@@ -2,10 +2,11 @@
 import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
 import Hero from '../components/Hero.astro';
-import Panel from '../components/Panel.astro';
+import Stop from '../components/Stop.astro';
 import PhoneFrame from '../components/PhoneFrame.astro';
 import ReaderBand from '../components/ReaderBand.astro';
-import ArtifactsPanel from '../components/ArtifactsPanel.astro';
+import NotifyStack from '../components/NotifyStack.astro';
+import ArtifactShelf from '../components/ArtifactShelf.astro';
 import ThemesPanel from '../components/ThemesPanel.astro';
 import PrivacyPanel from '../components/PrivacyPanel.astro';
 import Finale from '../components/Finale.astro';
@@ -22,37 +23,32 @@ const seo = pages.home;
     <header class="tour-head" id="tour">
       <div class="wrap" data-reveal>
         <h2 class="h2">Take the tour.</h2>
-        <p class="muted">One idea per stop. By the last one you'll know exactly what's on your phone.</p>
+        <p class="muted">Follow the line — one idea per stop.</p>
       </div>
     </header>
 
     <div class="tour wrap-wide">
-      <Panel
+      <Stop
         id="models"
         num="01"
         kicker="Models"
         title="Bring any brain."
-        body="OpenRouter's 400-model catalog, direct keys for OpenAI, Claude, Gemini, Grok, Cerebras, xAI and Sarvam — and real on-device models: download Gemma, Qwen or DeepSeek in-app, search Hugging Face's mobile builds, or import your own GGUF. Switch mid-conversation whenever one of them disappoints you."
-        facts={[
-          'On-device: LiteRT catalog + GGUF import',
-          'Your keys go straight to the provider',
-          'Swap models mid-chat',
-        ]}
+        body="The entire OpenRouter catalog, direct keys to the big providers — or a model that lives on the phone itself. Pull one in-app, import your own GGUF, swap mid-chat."
         img="/brand/v3/10-chat-on-device-model.jpg"
         alt="EchoFlow chat running a local model fully on-device"
         tint="var(--c-ocean)"
       />
 
-      <Panel
+      <Stop
         id="capabilities"
         num="02"
         kicker="The plus button"
         title="Superpowers, filed under +."
-        body="Everything bigger than a message lives one tap away: attach images and PDFs, or send real work off to run on its own."
-        facts={[
+        body="Everything bigger than a message, one tap away."
+        list={[
           '<b>Web search</b> — free for everyone, no key',
-          '<b>Deep Research</b> — background runs, cited reports',
-          '<b>Data Agent</b> — structured answers, not prose',
+          '<b>Deep Research</b> — cited reports, runs in the background',
+          '<b>Data Agent</b> — answers as tables, not prose',
           '<b>Echo Agents</b> — a model with its own tools',
         ]}
         img="/brand/v3/03-attach-and-capabilities-menu.jpg"
@@ -63,99 +59,102 @@ const seo = pages.home;
 
       <ReaderBand />
 
-      <div class="tour-duo">
-        <Panel
-          id="dictation"
-          num="04"
-          kicker="Dictation"
-          title="Stop typing. Say it."
-          body="Tap the mic and talk — a live waveform takes over the composer and your words land as editable text, in every chat and project. Dictation has its own model picker and its own key, independent of whatever's answering you."
-          facts={[
-            'GPT Transcribe · Grok · Nemotron · Chirp, via OpenRouter',
-            'Or Saaras v4 on a Sarvam key — 22 Indian languages, auto-detected',
-          ]}
-          img="/brand/v3/04-voice-mode-dark-theme.jpg"
-          alt="EchoFlow dictation waveform in the dark theme"
-          tint="var(--c-ocean)"
-          dark
-          compact
-        />
+      <Stop
+        id="dictation"
+        num="04"
+        kicker="Dictation"
+        title="Stop typing. Say it."
+        body="Dictate in any chat or project. It has its own model and its own key, independent of who's answering — and it speaks 22 Indian languages."
+        img="/brand/v3/04-voice-mode-dark-theme.jpg"
+        alt="EchoFlow dictation waveform in the dark theme"
+        tint="var(--c-ocean)"
+        darkShot
+        reverse
+      />
 
-        <Panel
-          id="imagine"
-          num="05"
-          kicker="Imagine"
-          title="Picture something."
-          body="A second surface just for making things. Describe an image and edit it conversationally — “make the sky purple” — or ask for video and let it render with the app closed."
-          facts={[
-            'Image and video modes',
-            'A contact sheet, not a chat log',
-          ]}
-          img="/brand/v3/05-imagine-image-generation.jpg"
-          alt="EchoFlow Imagine surface for image and video generation"
-          tint="var(--c-lavender)"
-          compact
-        />
-      </div>
+      <Stop
+        id="imagine"
+        num="05"
+        kicker="Imagine"
+        title="Picture something."
+        body="Describe it, then refine it out loud — “make the sky purple.” Ask for video and close the app; it renders anyway."
+        tint="var(--c-lavender)"
+      >
+        <div class="imag">
+          <PhoneFrame tone="light" class="s-phone imag-phone">
+            <img src="/brand/v3/05-imagine-image-generation.jpg" alt="EchoFlow Imagine surface for image and video generation" width="724" height="1568" loading="lazy" decoding="async" />
+          </PhoneFrame>
+          <figure class="print">
+            <img src="/brand/v3/imagine-print-dog.jpg" alt="Image generated in EchoFlow: a golden retriever driving a red convertible" width="596" height="552" loading="lazy" decoding="async" />
+            <figcaption>“a dog in a Ferrari”</figcaption>
+          </figure>
+        </div>
+      </Stop>
 
-      <Panel
-        id="network"
+      <Stop
+        id="background"
         num="06"
+        kicker="Background work"
+        title="Walk away. It pings you."
+        body="Research, video renders and downloads keep running with the screen off, then land as one tidy notification. Plain replies never buzz — that's not news."
+        tint="var(--c-forest)"
+        reverse
+      >
+        <NotifyStack />
+      </Stop>
+
+      <Stop
+        id="network"
+        num="07"
         kicker="Your network"
         title="Your PC thinks. Your phone talks."
-        body="Point EchoFlow at the Ollama or LM Studio box on your desk and answers stream to your phone over Wi-Fi, token by token. No cloud, no key, no bill — the model never leaves your house."
-        facts={[
-          'Ollama · LM Studio · Jan · vLLM',
-          'Any OpenAI-compatible endpoint',
-          'You pick which models show up',
-        ]}
+        body="Point it at the Ollama or LM Studio box on your desk and answers stream over Wi-Fi, token by token. No cloud, no key, no bill — the model never leaves your house."
         img="/brand/v3/09-custom-api-endpoints.jpg"
         alt="EchoFlow custom API endpoint settings with Ollama and OpenAI-compatible providers"
         tint="#456a8e"
-        reverse
       />
 
-      <Panel
+      <Stop
         id="projects"
-        num="07"
+        num="08"
         kicker="Projects"
         title="Give your chats a home."
-        body="A project holds files and instructions, and every chat inside starts already knowing them. Twelve PDFs about one warranty claim? Attach them once, argue as long as you need."
-        facts={[
-          'Files read by the on-device engine',
-          'Instructions set the tone once',
-          'Dictate inside project chats too',
-        ]}
+        body="A project is a room that already knows your files and your rules. Drop the lease and its amendments in once — every chat inside starts briefed, and stays that way."
         tint="var(--c-rose)"
+        reverse
       >
         <div class="duo">
-          <PhoneFrame tone="light" class="p-phone duo-a">
+          <PhoneFrame tone="light" class="s-phone duo-a">
             <img src="/brand/v3/06-projects-list.jpg" alt="EchoFlow projects list" width="724" height="1568" loading="lazy" decoding="async" />
           </PhoneFrame>
-          <PhoneFrame tone="light" class="p-phone duo-b">
+          <PhoneFrame tone="light" class="s-phone duo-b">
             <img src="/brand/v3/07-project-detail.jpg" alt="EchoFlow project with context files, instructions and conversations" width="724" height="1568" loading="lazy" decoding="async" />
           </PhoneFrame>
         </div>
-      </Panel>
+      </Stop>
 
-      <Panel
+      <Stop
         id="drawer"
-        num="08"
+        num="09"
         kicker="The drawer"
         title="Everything, one swipe away."
-        body="Pinned chats, full-text search, Projects, the Artifact Gallery — the whole app hangs off one swipe from the edge."
-        facts={[
-          'Pin the conversations that matter',
-          'Search everything you\u2019ve ever said',
-          'Projects and Artifacts, one tap deep',
-        ]}
+        body="Pinned chats, full-text search, Projects, the Artifact Gallery — the whole app hangs off the left edge."
         img="/brand/v3/01-navigation-drawer-conversations.jpg"
         alt="EchoFlow navigation drawer with Projects, Artifacts and pinned conversations"
         tint="var(--c-wall)"
-        reverse
       />
 
-      <ArtifactsPanel />
+      <Stop
+        id="artifacts"
+        num="10"
+        kicker="Artifacts"
+        title="Ask for a thing. Keep the thing."
+        body="Pages, reports and documents a model builds don't scroll away — they land in the gallery, versioned, ready to reopen and revise."
+        tint="var(--c-sunset)"
+        reverse
+      >
+        <ArtifactShelf />
+      </Stop>
 
       <ThemesPanel />
     </div>
@@ -187,15 +186,34 @@ const seo = pages.home;
   .tour-head { padding-block: clamp(3.5rem, 7vw, 5.5rem) clamp(1.5rem, 3vw, 2.5rem);
     text-align: center; }
   .tour-head p { margin-top: .9rem; }
-  .tour { display: grid; gap: clamp(1.2rem, 2.5vw, 2rem);
-    padding-bottom: clamp(3rem, 6vw, 5rem); }
 
-  .tour-duo { display: grid; grid-template-columns: 1fr 1fr;
-    gap: clamp(1.2rem, 2.5vw, 2rem); align-items: stretch; }
-  @media (max-width: 880px) { .tour-duo { grid-template-columns: 1fr; } }
+  /* The trail: a dotted spine down the center that every stop's node sits on. */
+  .tour { position: relative; display: grid; row-gap: clamp(3.2rem, 7vw, 6rem);
+    padding-bottom: clamp(3rem, 6vw, 5rem); }
+  .tour::before { content: ''; position: absolute; inset-block: -1.5rem 0; left: 50%;
+    width: 2px; transform: translateX(-50%);
+    background-image: linear-gradient(to bottom,
+      color-mix(in oklab, var(--olive) 40%, transparent) 55%, transparent 0);
+    background-size: 2px 15px;
+    mask-image: linear-gradient(transparent, #000 2%, #000 98%, transparent); }
+  @media (max-width: 880px) { .tour::before { display: none; } }
 
   .duo { display: flex; align-items: center; justify-content: center; }
-  .duo :global(.p-phone) { width: min(225px, 42vw); }
+  .duo :global(.s-phone) { width: min(212px, 40vw); }
   .duo :global(.duo-a) { transform: rotate(-4deg) translateX(8%); z-index: 1; }
   .duo :global(.duo-b) { transform: rotate(3deg) translateX(-8%) translateY(6%); z-index: 2; }
+
+  .imag { position: relative; display: grid; place-items: center;
+    padding-right: clamp(4rem, 10vw, 8rem); padding-bottom: 2.5rem; }
+  .imag :global(.imag-phone) { width: min(246px, 60vw); }
+  .print { position: absolute; margin: 0; z-index: 2; right: 0; bottom: 0;
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: .55rem .55rem .5rem; width: min(206px, 44vw);
+    box-shadow: 0 24px 44px -24px rgba(46,42,24,.55);
+    transform: rotate(6deg);
+    transition: transform .5s var(--spring); }
+  .print:hover { transform: rotate(2deg) translateY(-4px); }
+  .print img { width: 100%; height: auto; border-radius: 9px; display: block; }
+  .print figcaption { font-family: var(--mono); font-size: .72rem; text-align: center;
+    padding-top: .45rem; color: var(--on-paper-soft); }
 </style>

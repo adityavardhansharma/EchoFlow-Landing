@@ -1,8 +1,8 @@
 ---
 import Seal from './Seal.astro';
 import { RELEASES_URL } from '../lib/releases';
-/* v3 nav — a floating capsule. Brand, three anchors into the tour, GitHub,
-   Download. Everything else lives in the footer; the navbar sells nothing. */
+/* v3 nav — a floating capsule. Brand, two anchors, GitHub, Download.
+   Everything else lives in the footer; the navbar sells nothing. */
 const REPO = 'https://github.com/adityavardhansharma/EchoFlow';
 const isHome = Astro.url.pathname === '/';
 const anchor = (hash: string) => (isHome ? hash : `/${hash}`);
@@ -15,7 +15,6 @@ const anchor = (hash: string) => (isHome ? hash : `/${hash}`);
     </a>
     <nav class="links" aria-label="Primary">
       <a href={anchor('#tour')}>Tour</a>
-      <a href={anchor('#themes')}>Themes</a>
       <a href={anchor('#privacy')}>Privacy</a>
     </nav>
     <div class="actions">

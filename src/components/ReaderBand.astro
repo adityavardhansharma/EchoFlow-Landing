@@ -1,41 +1,44 @@
 ---
-/* Full-bleed stop for the on-device document engine: a bundled native parser
-   (anydoc) turns office files into Markdown on the phone, with on-device ML Kit
-   OCR as the fallback for scans. Deliberately not a card — it breaks the
-   box-after-box rhythm of the tour. */
-const formats = [
-  'PDF', 'DOCX', 'DOC', 'XLSX', 'XLS', 'PPTX', 'PPT', 'CSV',
-  'EPUB', 'RTF', 'ODT', 'ODS', 'ODP', 'MD', 'TXT', 'scans → OCR',
+import PhoneFrame from './PhoneFrame.astro';
+/* Full-bleed stop for the on-device document engine. The visual is the story:
+   file-format badges drift into the phone and disappear — read on the device,
+   never uploaded. Badges are pure CSS; motion is disabled for reduced-motion. */
+const badges = [
+  // resting position (% of stage), fill color, label — spread around the phone
+  { l: 12, t: 14, c: '#185abd', txt: 'W',    name: 'Word' },
+  { l: 5,  t: 44, c: '#107c41', txt: 'X',    name: 'Excel' },
+  { l: 14, t: 76, c: '#c43e1c', txt: 'P',    name: 'PowerPoint' },
+  { l: 84, t: 12, c: '#d93025', txt: 'PDF',  name: 'PDF' },
+  { l: 92, t: 42, c: '#6750a4', txt: 'EPUB', name: 'EPUB' },
+  { l: 85, t: 74, c: '#0e7569', txt: 'CSV',  name: 'CSV' },
+  { l: 30, t: 2,  c: '#8a8a2c', txt: 'RTF',  name: 'RTF' },
+  { l: 68, t: 94, c: '#b4540b', txt: 'SCAN', name: 'Scanned page' },
 ];
 ---
 <section class="reader" id="reader">
   <div class="wrap" data-reveal>
-    <span class="chip r-chip"><b><span>03</span></b>The reader</span>
-    <h2 class="r-title">Your files never leave<br />to be read.</h2>
+    <p class="r-kicker">03 — The reader</p>
+    <h2 class="r-title">Feed it anything.</h2>
     <p class="r-body">
-      A native document engine ships inside the APK. Word, Excel, PowerPoint, PDF,
-      EPUB — it turns them into clean Markdown <em>on the phone</em>, and scanned
-      pages fall through to on-device OCR. That's how Projects ingest files, how
-      chat attachments work, and how even a local model with no internet gets to
-      read your documents.
+      A document engine ships inside the APK: Word, Excel, PowerPoint, PDF, EPUB
+      become clean Markdown <em>on the phone</em>, scans go through on-device OCR —
+      so even a local model with no internet can read your files.
+      Nothing is uploaded just to open a document.
     </p>
   </div>
 
-  <div class="fmt-ticker" aria-hidden="true">
-    <div class="fmt-track">
-      {[0, 1].map(() => (
-        <ul>
-          {formats.map((f) => <li>{f}</li>)}
-        </ul>
-      ))}
-    </div>
+  <div class="stage" data-reveal>
+    {badges.map((b, i) => (
+      <span
+        class="fbadge"
+        style={`--c:${b.c}; left:${b.l}%; top:${b.t}%; --dx:${(50 - b.l) * 4.4}px; --dy:${(46 - b.t) * 3.6}px; animation-delay:${i * 1.1}s`}
+        title={b.name}
+      >{b.txt}</span>
+    ))}
+    <PhoneFrame tone="light" class="r-phone">
+      <img src="/brand/v3/02-chat-home-light-theme.jpg" alt="EchoFlow ready for any attachment" width="724" height="1568" loading="lazy" decoding="async" />
+    </PhoneFrame>
   </div>
-
-  <ul class="r-facts wrap" data-reveal>
-    <li>Parsed to Markdown, on-device</li>
-    <li>OCR for scans &amp; image-only PDFs</li>
-    <li>Nothing uploaded just to read a file</li>
-  </ul>
 </section>
 
 <style>
@@ -49,26 +52,39 @@ const formats = [
       radial-gradient(120% 90% at 50% 0%, color-mix(in oklab, var(--butter) 34%, transparent), transparent 70%),
       color-mix(in oklab, var(--butter) 14%, var(--paper));
   }
-  .reader .wrap > * + * { margin-top: 1.3rem; }
-  .r-chip { color: var(--olive); }
-  .r-chip b span { color: var(--paper); }
+  .reader .wrap > * + * { margin-top: 1.2rem; }
+  .r-kicker { font-family: var(--mono); font-size: .78rem; font-weight: 700;
+    letter-spacing: .14em; text-transform: uppercase; color: var(--olive); }
   .r-title { font-family: var(--display); font-weight: 800; line-height: 1.02;
     letter-spacing: -.025em; font-size: clamp(2.1rem, 5vw, 3.9rem); }
-  .r-body { max-width: 58ch; margin-inline: auto; color: var(--on-paper-soft);
+  .r-body { max-width: 56ch; margin-inline: auto; color: var(--on-paper-soft);
     font-size: clamp(1rem, 1.4vw, 1.16rem); line-height: 1.65; }
   .r-body em { font-style: normal; font-weight: 700; color: var(--olive); }
 
-  .fmt-ticker { margin-top: clamp(2rem, 4vw, 3rem); overflow: hidden;
-    mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
-  .fmt-track { display: flex; width: max-content; animation: ticker 30s linear infinite reverse; }
-  .fmt-ticker ul { list-style: none; padding: 0; display: flex; gap: .55rem; padding-right: .55rem; }
-  .fmt-ticker li { font-family: var(--mono); font-weight: 600; font-size: .88rem;
-    white-space: nowrap; padding: .5rem 1rem; border-radius: var(--r-s);
-    color: var(--olive-deep); background: color-mix(in oklab, var(--butter) 55%, var(--paper));
-    border: 1px solid color-mix(in oklab, var(--olive) 30%, transparent); }
+  .stage { position: relative; margin: clamp(2.2rem, 4vw, 3.4rem) auto 0;
+    width: min(640px, 92vw); display: grid; place-items: center; }
+  .stage :global(.r-phone) { width: min(238px, 58vw); position: relative; z-index: 1;
+    filter: drop-shadow(0 30px 54px rgba(46,42,24,.32)); }
 
-  .r-facts { list-style: none; padding: 0; margin-top: clamp(1.8rem, 3.5vw, 2.6rem);
-    display: flex; flex-wrap: wrap; gap: .5rem 2.2rem; justify-content: center; }
-  .r-facts li { font-size: .9rem; font-weight: 600; color: var(--on-paper-soft); }
-  .r-facts li::before { content: '✿ '; color: var(--olive); }
+  .fbadge { position: absolute; z-index: 2; display: grid; place-items: center;
+    min-width: 46px; height: 46px; padding-inline: .55rem;
+    /* file-icon silhouette: one clipped corner */
+    border-radius: 12px 55% 12px 12px; background: var(--c); color: #fff;
+    font-family: var(--mono); font-weight: 700; font-size: .8rem; letter-spacing: .02em;
+    box-shadow: 0 12px 24px -12px color-mix(in oklab, var(--c) 70%, #000);
+    animation: feed 9s var(--ease) infinite both; will-change: transform, opacity; }
+  .fbadge::after { content: ''; position: absolute; top: 3px; right: 3px;
+    width: 9px; height: 9px; border-radius: 2px 55% 2px 55%;
+    background: color-mix(in oklab, var(--c) 45%, #fff); }
+
+  @keyframes feed {
+    0%   { transform: translate(0, 0) scale(1); opacity: 0; }
+    6%   { opacity: 1; }
+    55%  { transform: translate(0, 0) scale(1); opacity: 1; }
+    92%  { transform: translate(var(--dx), var(--dy)) scale(.3); opacity: 0; }
+    100% { transform: translate(var(--dx), var(--dy)) scale(.3); opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .fbadge { animation: none; opacity: 1; }
+  }
 </style>

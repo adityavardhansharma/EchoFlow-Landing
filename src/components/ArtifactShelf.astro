@@ -1,0 +1,45 @@
+---
+import { flower } from '../lib/shapes';
+/* The Artifact Gallery as a fanned shelf of cards. Stand-in visual until the
+   real gallery screenshot lands — then swap this for a PhoneFrame. */
+const mark = flower(8, 50, 42);
+const cards = [
+  { type: 'Page', title: 'Industrial Brutalist Calculator', meta: 'v3 · 4,512 chars' },
+  { type: 'Report', title: 'Warranty claim — evidence & timeline', meta: 'v2 · Deep Research' },
+  { type: 'Document', title: 'October trip — shared budget', meta: 'v5 · edited today' },
+];
+---
+<div class="shelf" aria-hidden="true">
+  {cards.map((c) => (
+    <div class="acard">
+      <svg viewBox="0 0 100 100"><path d={mark} /></svg>
+      <span class="a-type">{c.type}</span>
+      <strong>{c.title}</strong>
+      <span class="a-meta">{c.meta}</span>
+    </div>
+  ))}
+</div>
+
+<style>
+  .shelf { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(.6rem, 1.5vw, 1rem); width: min(560px, 92vw); align-items: start; }
+  .acard { display: grid; gap: .5rem; align-content: start;
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: var(--r-m); padding: 1.1rem 1rem 1rem; min-height: 172px;
+    box-shadow: 0 22px 40px -26px rgba(46,42,24,.5);
+    transition: transform .5s var(--spring), box-shadow .5s; }
+  .acard:nth-child(1) { transform: rotate(-3.5deg) translateY(10px); }
+  .acard:nth-child(2) { transform: rotate(1.5deg) translateY(-8px); }
+  .acard:nth-child(3) { transform: rotate(4deg) translateY(14px); }
+  .acard:hover { transform: rotate(0) translateY(-4px);
+    box-shadow: 0 30px 48px -24px rgba(46,42,24,.55); }
+  .acard svg { width: 26px; height: 26px; fill: var(--tint, var(--c-sunset)); opacity: .9; }
+  .a-type { font-family: var(--mono); font-size: .68rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .08em;
+    color: color-mix(in oklab, var(--tint, var(--c-sunset)) 75%, var(--on-paper)); }
+  .acard strong { font-family: var(--display); font-weight: 700; line-height: 1.2;
+    font-size: .95rem; letter-spacing: -.01em; }
+  .a-meta { font-size: .76rem; color: var(--on-paper-soft); }
+
+  @media (max-width: 880px) { .acard { min-height: 0; } }
+</style>

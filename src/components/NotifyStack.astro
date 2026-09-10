@@ -1,0 +1,45 @@
+---
+import { flower } from '../lib/shapes';
+/* Stylized Android notification bundle — the "it's ready" pings that land when
+   background work finishes. Swap for a real screenshot when one exists. */
+const mark = flower(8, 50, 44);
+const notes = [
+  { title: 'Deep Research finished', line: '“EV vs hybrid — 5-year cost” · report ready', when: 'now' },
+  { title: 'Video rendered', line: '“push through a doorway into a lit kitchen”', when: '2m' },
+  { title: 'Qwen3 0.6B downloaded', line: 'Ready to run offline', when: '9m' },
+];
+---
+<div class="nstack" aria-hidden="true">
+  {notes.map((n) => (
+    <div class="note">
+      <span class="n-icon"><svg viewBox="0 0 100 100"><path d={mark} /></svg></span>
+      <span class="n-body">
+        <span class="n-app">EchoFlow · {n.when}</span>
+        <strong>{n.title}</strong>
+        <span class="n-line">{n.line}</span>
+      </span>
+    </div>
+  ))}
+</div>
+
+<style>
+  .nstack { display: grid; gap: .7rem; width: min(400px, 88vw); }
+  .note { display: flex; gap: .85rem; align-items: flex-start;
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: var(--r-m); padding: .95rem 1.05rem;
+    box-shadow: 0 20px 36px -26px rgba(46,42,24,.55);
+    transition: transform .5s var(--spring); }
+  .note:nth-child(1) { transform: rotate(-1.2deg); }
+  .note:nth-child(2) { transform: rotate(.8deg) translateX(14px); }
+  .note:nth-child(3) { transform: rotate(-.6deg) translateX(-6px); }
+  .note:hover { transform: rotate(0) translateX(0); }
+  .n-icon { flex: none; width: 34px; height: 34px; display: grid; place-items: center; }
+  .n-icon svg { width: 100%; fill: var(--blue); }
+  .n-body { display: grid; gap: .12rem; min-width: 0; }
+  .n-app { font-family: var(--mono); font-size: .68rem; font-weight: 600;
+    letter-spacing: .06em; text-transform: uppercase; color: var(--on-paper-soft); }
+  .n-body strong { font-family: var(--display); font-weight: 700; font-size: .95rem;
+    letter-spacing: -.01em; }
+  .n-line { font-size: .82rem; color: var(--on-paper-soft);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+</style>
