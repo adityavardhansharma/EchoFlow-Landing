@@ -1,0 +1,74 @@
+---
+/* Full-bleed stop for the on-device document engine: a bundled native parser
+   (anydoc) turns office files into Markdown on the phone, with on-device ML Kit
+   OCR as the fallback for scans. Deliberately not a card — it breaks the
+   box-after-box rhythm of the tour. */
+const formats = [
+  'PDF', 'DOCX', 'DOC', 'XLSX', 'XLS', 'PPTX', 'PPT', 'CSV',
+  'EPUB', 'RTF', 'ODT', 'ODS', 'ODP', 'MD', 'TXT', 'scans → OCR',
+];
+---
+<section class="reader" id="reader">
+  <div class="wrap" data-reveal>
+    <span class="chip r-chip"><b><span>03</span></b>The reader</span>
+    <h2 class="r-title">Your files never leave<br />to be read.</h2>
+    <p class="r-body">
+      A native document engine ships inside the APK. Word, Excel, PowerPoint, PDF,
+      EPUB — it turns them into clean Markdown <em>on the phone</em>, and scanned
+      pages fall through to on-device OCR. That's how Projects ingest files, how
+      chat attachments work, and how even a local model with no internet gets to
+      read your documents.
+    </p>
+  </div>
+
+  <div class="fmt-ticker" aria-hidden="true">
+    <div class="fmt-track">
+      {[0, 1].map(() => (
+        <ul>
+          {formats.map((f) => <li>{f}</li>)}
+        </ul>
+      ))}
+    </div>
+  </div>
+
+  <ul class="r-facts wrap" data-reveal>
+    <li>Parsed to Markdown, on-device</li>
+    <li>OCR for scans &amp; image-only PDFs</li>
+    <li>Nothing uploaded just to read a file</li>
+  </ul>
+</section>
+
+<style>
+  .reader { text-align: center;
+    /* Full-bleed escape from the .tour column — the one stop that isn't a box. */
+    width: 100vw; margin-inline: calc(50% - 50vw);
+    padding-block: clamp(3.5rem, 7vw, 6rem);
+    margin-block: clamp(1.2rem, 2.5vw, 2rem);
+    border-block: 1px solid color-mix(in oklab, var(--olive) 22%, transparent);
+    background:
+      radial-gradient(120% 90% at 50% 0%, color-mix(in oklab, var(--butter) 34%, transparent), transparent 70%),
+      color-mix(in oklab, var(--butter) 14%, var(--paper));
+  }
+  .reader .wrap > * + * { margin-top: 1.3rem; }
+  .r-chip { color: var(--olive); }
+  .r-chip b span { color: var(--paper); }
+  .r-title { font-family: var(--display); font-weight: 800; line-height: 1.02;
+    letter-spacing: -.025em; font-size: clamp(2.1rem, 5vw, 3.9rem); }
+  .r-body { max-width: 58ch; margin-inline: auto; color: var(--on-paper-soft);
+    font-size: clamp(1rem, 1.4vw, 1.16rem); line-height: 1.65; }
+  .r-body em { font-style: normal; font-weight: 700; color: var(--olive); }
+
+  .fmt-ticker { margin-top: clamp(2rem, 4vw, 3rem); overflow: hidden;
+    mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
+  .fmt-track { display: flex; width: max-content; animation: ticker 30s linear infinite reverse; }
+  .fmt-ticker ul { list-style: none; padding: 0; display: flex; gap: .55rem; padding-right: .55rem; }
+  .fmt-ticker li { font-family: var(--mono); font-weight: 600; font-size: .88rem;
+    white-space: nowrap; padding: .5rem 1rem; border-radius: var(--r-s);
+    color: var(--olive-deep); background: color-mix(in oklab, var(--butter) 55%, var(--paper));
+    border: 1px solid color-mix(in oklab, var(--olive) 30%, transparent); }
+
+  .r-facts { list-style: none; padding: 0; margin-top: clamp(1.8rem, 3.5vw, 2.6rem);
+    display: flex; flex-wrap: wrap; gap: .5rem 2.2rem; justify-content: center; }
+  .r-facts li { font-size: .9rem; font-weight: 600; color: var(--on-paper-soft); }
+  .r-facts li::before { content: '✿ '; color: var(--olive); }
+</style>

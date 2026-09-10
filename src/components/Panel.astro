@@ -16,16 +16,17 @@ interface Props {
   tint?: string;        // CSS color the surface leans toward
   dark?: boolean;
   reverse?: boolean;
+  compact?: boolean;    // single-column card for side-by-side rows
 }
 const {
   id, num, kicker, title, body,
   facts = [], img, alt = '',
-  tint = 'var(--c-ocean)', dark = false, reverse = false,
+  tint = 'var(--c-ocean)', dark = false, reverse = false, compact = false,
 } = Astro.props;
 const stamp = flower(10, 50, 42);
 ---
 <section class="panel-slot" id={id}>
-  <article class:list={['panel', { dark, reverse }]} style={`--tint:${tint}`}>
+  <article class:list={['panel', { dark, reverse, compact }]} style={`--tint:${tint}`}>
     <svg class="stamp" viewBox="0 0 100 100" aria-hidden="true"><path d={stamp} /></svg>
     <div class="p-copy" data-reveal>
       <span class="chip p-chip"><b><span>{num}</span></b>{kicker}</span>
@@ -95,9 +96,22 @@ const stamp = flower(10, 50, 42);
   .facts li :global(b) { font-weight: 800; }
 
   .p-visual { display: grid; place-items: center; }
-  .p-visual :global(.p-phone) { width: min(268px, 68vw);
+  .p-visual :global(.p-phone) { width: min(268px, 68vw); transform: rotate(-1.7deg);
+    transition: transform .6s var(--spring);
     filter: drop-shadow(0 34px 60px rgba(46,42,24,.3)); }
+  .panel.reverse .p-visual :global(.p-phone) { transform: rotate(1.7deg); }
+  .panel:hover .p-visual :global(.p-phone) { transform: rotate(0deg); }
   .dark .p-visual :global(.p-phone) { filter: drop-shadow(0 34px 60px rgba(0,0,0,.6)); }
+
+  /* Compact: a single-column card sized for two-up rows. */
+  .panel.compact { grid-template-columns: 1fr; align-items: start; height: 100%;
+    align-content: start; padding: clamp(1.8rem, 3vw, 3rem); }
+  .panel.compact .h2 { font-size: clamp(1.75rem, 2.6vw, 2.5rem); }
+  .panel.compact .p-body { font-size: clamp(.98rem, 1.2vw, 1.08rem); }
+  .panel.compact .p-visual { margin-top: clamp(1.4rem, 2.5vw, 2.2rem); }
+  .panel.compact .p-visual :global(.p-phone) { width: min(232px, 62vw); }
+
+  .panel-slot { height: 100%; }
 
   @media (max-width: 880px) {
     .panel { grid-template-columns: 1fr; }
