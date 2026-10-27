@@ -1,6 +1,18 @@
-export const SITE_URL = 'https://echoflow.app';
+// Absolute URLs (canonical, og:image, JSON-LD) must point at a host that actually
+// serves this site, or link previews fall back to a blank placeholder. On Vercel
+// builds this resolves to the project's production domain automatically; set
+// PUBLIC_SITE_URL to pin a custom domain explicitly.
+const env = typeof process !== 'undefined' ? process.env : {};
+export const SITE_URL = (
+  env.PUBLIC_SITE_URL ||
+  (env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${env.VERCEL_PROJECT_PRODUCTION_URL}` : '') ||
+  'https://echo-flow-landing.vercel.app'
+).replace(/\/$/, '');
 export const SITE_NAME = 'EchoFlow';
-export const DEFAULT_OG_IMAGE = '/brand/shot-home-ocean.jpg';
+/** 1200x630 social banner — the link preview image for every page. */
+export const DEFAULT_OG_IMAGE = '/brand/og-banner.jpg';
+export const OG_IMAGE_ALT =
+  'EchoFlow — Talk to any AI. Answer to no one. The open-source AI workspace for Android.';
 export const GITHUB_REPO = 'https://github.com/adityavardhansharma/EchoFlow';
 
 export const TAGLINE =
@@ -47,7 +59,6 @@ export const pages: Record<string, PageSEO> = {
       'compare AI models in one app',
     ],
     intent: 'informational',
-    ogImage: '/brand/shot-cloud-models.jpg',
   },
   openrouter: {
     path: '/openrouter',
@@ -64,7 +75,6 @@ export const pages: Record<string, PageSEO> = {
       'use OpenRouter on Android',
     ],
     intent: 'commercial',
-    ogImage: '/brand/shot-cloud-models.jpg',
   },
   providers: {
     path: '/providers',
@@ -81,7 +91,6 @@ export const pages: Record<string, PageSEO> = {
       'OpenAI-compatible Android app',
     ],
     intent: 'commercial',
-    ogImage: '/brand/shot-settings.jpg',
   },
   webSearch: {
     path: '/web-search',
@@ -97,7 +106,6 @@ export const pages: Record<string, PageSEO> = {
       'AI app that searches the web',
     ],
     intent: 'informational',
-    ogImage: '/brand/shot-web-search.jpg',
   },
   deepResearch: {
     path: '/deep-research',
@@ -113,7 +121,6 @@ export const pages: Record<string, PageSEO> = {
       'multi-model AI search app',
     ],
     intent: 'informational',
-    ogImage: '/brand/shot-deep-research.jpg',
   },
   documents: {
     path: '/documents',
@@ -130,7 +137,6 @@ export const pages: Record<string, PageSEO> = {
       'AI spreadsheet analysis',
     ],
     intent: 'informational',
-    ogImage: '/brand/shot-plus-menu.jpg',
   },
   imagine: {
     path: '/imagine',
@@ -146,7 +152,6 @@ export const pages: Record<string, PageSEO> = {
       'AI image generator using API key',
     ],
     intent: 'commercial',
-    ogImage: '/brand/shot-home-lavender.jpg',
   },
   privacy: {
     path: '/privacy',
@@ -163,7 +168,6 @@ export const pages: Record<string, PageSEO> = {
       'local-first AI chat app',
     ],
     intent: 'informational',
-    ogImage: '/brand/shot-sidebar.jpg',
   },
   localModels: {
     path: '/local-models',
@@ -180,7 +184,6 @@ export const pages: Record<string, PageSEO> = {
       'local AI assistant',
     ],
     intent: 'informational',
-    ogImage: '/brand/shot-local-models.jpg',
   },
   customEndpoints: {
     path: '/custom-endpoints',
@@ -196,7 +199,6 @@ export const pages: Record<string, PageSEO> = {
       'home server AI client Android',
     ],
     intent: 'informational',
-    ogImage: '/brand/shot-settings.jpg',
   },
   openSource: {
     path: '/open-source',
@@ -212,7 +214,6 @@ export const pages: Record<string, PageSEO> = {
       'customisable AI chat app',
     ],
     intent: 'navigational',
-    ogImage: '/brand/echoflow-mark.png',
   },
   download: {
     path: '/download',
@@ -284,7 +285,6 @@ export const pages: Record<string, PageSEO> = {
       'AI research assistant',
     ],
     intent: 'comparison',
-    ogImage: '/brand/shot-deep-research.jpg',
   },
   altPoe: {
     path: '/alternatives/poe',

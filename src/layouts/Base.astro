@@ -2,6 +2,8 @@
 import '../styles/global.css';
 import SpeedInsights from '@vercel/speed-insights/astro';
 import {
+  DEFAULT_OG_IMAGE,
+  OG_IMAGE_ALT,
   SITE_NAME,
   absoluteImage,
   absoluteUrl,
@@ -24,7 +26,7 @@ const {
   seo,
   title = seo?.title ?? 'EchoFlow — Open-Source AI App for Android',
   description = seo?.description ?? '',
-  ogImage = seo?.ogImage ?? '/brand/shot-home-ocean.jpg',
+  ogImage = seo?.ogImage ?? DEFAULT_OG_IMAGE,
   canonicalPath = seo?.path ?? '/',
   noindex = false,
   jsonLd = [],
@@ -53,13 +55,22 @@ const structuredData = [websiteJsonLd(), softwareAppJsonLd(), ...extraLd];
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={image} />
-    <meta property="og:image:alt" content="EchoFlow — AI app for Android screenshot" />
+    <meta property="og:image:secure_url" content={image} />
+    {ogImage === DEFAULT_OG_IMAGE && (
+      <>
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+      </>
+    )}
+    <meta property="og:image:alt" content={OG_IMAGE_ALT} />
     <meta property="og:locale" content="en_US" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={image} />
+    <meta name="twitter:image:alt" content={OG_IMAGE_ALT} />
 
     {structuredData.map((data) => (
       <script type="application/ld+json" set:html={JSON.stringify(data)} />
