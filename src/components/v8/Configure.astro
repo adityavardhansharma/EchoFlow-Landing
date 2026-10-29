@@ -62,6 +62,44 @@ const engines = ['Off', 'EchoCrawl', 'Exa', 'Parallel', 'Firecrawl'];
   </div>
 </section>
 
+<script>
+  const root = document.querySelector<HTMLElement>('[data-cfg]');
+  if (root) {
+    const KEY = 'echoflow-v8-config';
+    const $ = <T extends Element>(q: string) => root.querySelector<T>(q)!;
+    const card = $<HTMLElement>('[data-card]');
+    const by = $<HTMLElement>('[data-c-by]'), note = $<HTMLElement>('[data-c-note]');
+    const src = $<HTMLElement>('[data-c-src]'), adv = $<HTMLElement>('[data-c-adv]');
+    const adviser = $<HTMLInputElement>('[data-adviser]');
+
+    let state = { run: 'cloud', engine: 'EchoCrawl', adviser: false, theme: 'light' };
+    try { state = { ...state, ...JSON.parse(localStorage.getItem(KEY) || '{}') }; } catch {}
+
+    const flash = (el: HTMLElement) => { el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash'); };
+    const radio = (attr: string, value: string) =>
+      root.querySelectorAll<HTMLButtonElement>(`[${attr}]`).forEach((b) => b.setAttribute('aria-checked', String(b.getAttribute(attr) === value)));
+
+    const render = (changed?: HTMLElement) => {
+      const run = root.querySelector<HTMLButtonElement>(`[data-run="${state.run}"]`)!;
+      by.textContent = run.dataset.model!;
+      note.textContent = run.dataset.note!;
+      src.textContent = state.engine === 'Off' ? 'No web search · answered from the model alone' : `Sources · ${state.engine} · 4 pages`;
+      adv.hidden = !state.adviser;
+      adviser.checked = state.adviser;
+      card.classList.toggle('is-dark', state.theme === 'dark');
+      radio('data-run', state.run); radio('data-engine', state.engine); radio('data-theme', state.theme);
+      if (changed) flash(changed);
+      try { localStorage.setItem(KEY, JSON.stringify(state)); } catch {}
+    };
+
+    root.querySelectorAll<HTMLButtonElement>('[data-run]').forEach((b) => b.addEventListener('click', () => { state.run = b.dataset.run!; render(by); }));
+    root.querySelectorAll<HTMLButtonElement>('[data-engine]').forEach((b) => b.addEventListener('click', () => { state.engine = b.dataset.engine!; render(src); }));
+    root.querySelectorAll<HTMLButtonElement>('[data-theme]').forEach((b) => b.addEventListener('click', () => { state.theme = b.dataset.theme!; render(); }));
+    adviser.addEventListener('change', () => { state.adviser = adviser.checked; render(adv); });
+    render();
+  }
+</script>
+
 <style>
   .cfg { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); }
   .hold {
@@ -93,12 +131,13 @@ const engines = ['Off', 'EchoCrawl', 'Exa', 'Parallel', 'Firecrawl'];
 
   .seg { display: flex; flex-wrap: wrap; gap: 6px; }
   .seg button {
-    min-height: 44px; padding: 0 1.1rem; border: 1px solid #4a4a47; font-size: var(--step-small);
-    transition: background-color var(--t-hover) ease, color var(--t-hover) ease, border-color var(--t-hover) ease;
+    min-height: 44px; padding: 0 1.1rem; background: #2f2f2d; font-size: var(--step-small);
+    transition: background-color var(--t-hover) ease, color var(--t-hover) ease, transform var(--t-press) var(--ease-out);
   }
-  .seg button[aria-checked='true'] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+  .seg button:active { transform: scale(0.96); }
+  .seg button[aria-checked='true'] { background: var(--accent); color: var(--accent-ink); }
   @media (hover: hover) and (pointer: fine) {
-    .seg button:hover:not([aria-checked='true']) { border-color: var(--ink); }
+    .seg button:hover:not([aria-checked='true']) { background: #3d3d3a; }
   }
   .tog { display: inline-flex; align-items: center; gap: 0.9rem; cursor: pointer; min-height: 44px; }
   .tog input { position: absolute; opacity: 0; width: 1px; height: 1px; }
