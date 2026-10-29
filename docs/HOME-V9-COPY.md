@@ -39,3 +39,36 @@ art: no anime frames, characters or emblems.
 Friedrich *Monk by the Sea* (1808–10) · Aivazovsky *The Ninth Wave* (1850) · Hokusai *The Great Wave off Kanagawa* ·
 Goya (attr.) *The Colossus* · Herbert Ponting, the Great Wall (1907) · Mediterranean portolan chart (c. 1320) ·
 *Winged Victory of Samothrace*, 1860s photograph (Art Institute of Chicago).
+
+## Run report
+
+- **Direction:** The place carries it. Hero *Swatch column beside the view*, type Newsreader, signature: colour by chapter (each chapter is one swatch sampled from the hero painting, and the swatch column links to them).
+- **Palette:** the dealt black and crimson are kept (crimson only on the action and the download underline). The chapter grounds are sampled from Friedrich's painting.
+- **Departures from the sheet:**
+  - The ports heading sits above the held stage, not on it, so no large text is pinned over the picture.
+  - The hold is just over one screen.
+  - On phones the route's app piece is not pinned, so nothing covers the statements.
+- **Attack on Titan:** the "walls, then the sea" story is told with public-domain art only (Goya's giant, the 1907 Great Wall, the Winged Victory, the open sea). There are no anime frames, characters or emblems.
+- **Owner-supplied stills:** an optional slot. It shows nothing until the site owner adds their own images and a `credits.json` under `public/brand/v9/aot/`, and using them is the owner's call.
+- **Live things:**
+  - the swatch column as navigation;
+  - the port cards crossing the held *Ninth Wave* as you scroll;
+  - the app piece that follows the route statements.
+- **Gate:** lint 0 FAIL, 0 WARN. `inspect.mjs`: 0 FAIL at 1440, 768 and 390. Two WARNs remain:
+  - the travelling cards carry their names over the held painting, which is the blueprint's own device;
+  - ten font sizes at 768px, because the clamped steps resolve to separate values there.
+
+```
+ROUND 2
+Seen in one second: Beyond the walls over Friedrich's sea
+Idea: the walls of one AI company left behind; every provider, key and machine is open sea
+Live thing: the ports crossing the held Ninth Wave; the swatch column
+Layout words: hero=view+swatches / walls=list / ports=held carousel / route=pinned split / stills=(optional) / close=strip+field / footer=columns+name
+Scores: design 8 · usability 7.5 · creativity 8 · content 8 → overall 7.9
+Top three problems:
+1. The walls section leaves columns 1–4 empty by design; it reads airy at 1440.
+2. App screenshots on the port cards mix the app's purple and olive themes.
+3. The route's app piece is rebuilt in a system face, a second typeface beside Newsreader.
+```
+
+Pictures: all public domain or CC0, credited in the footer and in `public/brand/v9/credits.json`. The app's screenshots and recordings are the project's own.
