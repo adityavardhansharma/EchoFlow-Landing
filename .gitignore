@@ -25,3 +25,9 @@ Thumbs.db
 .vscode/
 .agents/
 skills-lock.json
+
+# taste-skill working files (inspector screenshots, scene sheets)
+.taste-skill/inspect/
+.taste-skill/scenes/
+.taste-skill/before/
+.taste-skill/after/
