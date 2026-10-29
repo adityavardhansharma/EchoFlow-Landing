@@ -42,3 +42,34 @@ is consulted and the theme, and the answer on the left changes as you go.
 - *Jupiter and Mercury with Philemon and Baucis*, Nicolaes Lauwers, c. 1650 (Art Institute of Chicago, CC0)
 
 Added at the owner's request: Cabanel's *Echo* (1874, public domain) and Carracci's *Mercury and the Graces* (1589, CC0): classical nudes from the myth, kept as art.
+
+## Run report
+
+- **Direction:** The dark room. Hero *Title from the top edge to the bottom edge*, type Bodoni Moda and Jost, palette charcoal and sage. Signature move: masked headline.
+- **Treatment:** six public-domain or CC0 artworks, two-tone Bayer-dithered into the page's charcoal and sage, in the style of Nous Research's Hermes pages. No Nous assets or branding are used.
+- **Redraws:**
+  - Showcase: *Input half, output half* became *Lit panel, dark row*, so it doesn't repeat v5 and suits a dark room.
+  - Close: the dealt *First step, already open* is kept, but its dialog is the app's real first choice (on the phone, cloud, or your network) over the Hermes engraving.
+- **Idea:** Echo could only repeat; EchoFlow keeps her name and answers in any voice. Hermes, the messenger, carries your message straight to the provider.
+- **Live things:**
+  - the draggable row of lit app panels;
+  - the pinned answer card, which changes with where the model runs, the search engine, Echo Adviser and the theme, and remembers the choices;
+  - the install dialog's choice.
+- **Gate:** lint 0 FAIL, 0 WARN. `inspect.mjs` 0 FAIL at 1440, 768 and 390. Two WARNs are deliberate: the row scrolls sideways and bleeds to the right edge.
+
+```
+ROUND 1
+Seen in one second: EchoFlow / answers over Echo and Narcissus
+Idea: the myth of Echo as a dark gallery; EchoFlow answers in any voice
+Live thing: pinned answer card with four real controls
+Layout words: hero=full-bleed / row=carousel / myth=exhibit+text / configure=pinned split / how=call-and-response column / close=field+dialog / footer=columns+name
+Scores: design 8 · usability 7.5 · creativity 8.5 · content 8 → overall 8.0
+Top three problems:
+1. The page is long (11 screens); the Configure blocks sit 50vh apart by design and feel slow on a phone.
+2. The light app panels are much brighter than the dithered art; one dark-theme panel would sit better in the room.
+3. The Ollama model names in How it works are samples.
+```
+
+**Sample content to confirm:** the Ollama models (llama3.1:8b, qwen2.5:7b, gemma3:4b) and the IP address 192.168.1.20 are examples.
+
+**Pictures:** the credits are in the footer and in `public/brand/v8/credits.json`. The app footage (voice call, web search recording) is the project's own.
