@@ -1,0 +1,151 @@
+---
+/* The row — lit panel, dark row. Real pieces of the app, at true size, in a
+   row you can drag. Only the panel at the centre is lit; the others wait in
+   the dark. Its name and two lines sit beside it and change as it arrives. */
+const panels = [
+  { id: 'models', name: 'Any model', text: 'OpenRouter, OpenAI, Anthropic, Gemini, Cerebras, xAI and Sarvam on your own keys, the PC on your desk, or a model on the phone.' },
+  { id: 'fusion', name: 'Echo Fusion', text: 'One prompt goes to several models at once; a judge compares the answers and writes the one you read.' },
+  { id: 'adviser', name: 'Echo Adviser', text: 'When an answer gets hard, the model you are talking to can ask a stronger one for help, mid-reply.' },
+  { id: 'research', name: 'Deep Research', text: 'A long investigation that runs in the background and returns a structured report with its sources.' },
+  { id: 'browser', name: 'Browser Flow', text: 'The model drives a live browser, and asks you first before it enters a new site or sends anything.' },
+  { id: 'voice', name: 'Talk to it', text: 'A real voice call with a persona. It listens while it speaks, so tap anywhere to cut in.' },
+];
+---
+<section class="row-sec" id="row" aria-labelledby="row-title" data-row-sec>
+  <h2 id="row-title" class="sr-only">The tools, one at a time</h2>
+
+  <div class="row" data-row tabindex="0" aria-label="EchoFlow tools; scroll sideways">
+    <!-- 1. model picker -->
+    <article class="panel" data-ui data-panel="0" aria-label={panels[0].name}>
+      <p class="p-title">Choose a model</p>
+      <ul class="pick">
+        <li class="on"><b>OpenRouter</b><span>Every cloud model on one key</span></li>
+        <li><b>Anthropic Claude</b><span>Your key</span></li>
+        <li><b>Google Gemini</b><span>Your key</span></li>
+        <li><b>Cerebras · xAI · Sarvam</b><span>Your keys</span></li>
+        <li><b>Ollama</b><span>http://192.168.1.20:11434</span></li>
+        <li><b>On this phone</b><span>Gemma 3 1B · 562 MB</span></li>
+      </ul>
+    </article>
+
+    <!-- 2. echo fusion -->
+    <article class="panel" data-ui data-panel="1" aria-label={panels[1].name}>
+      <p class="p-title">Echo Fusion</p>
+      <p class="bubble">Is it worth learning Rust in 2026?</p>
+      <ul class="fuse">
+        <li><b>Model A</b><span>Yes, for systems work and tooling…</span></li>
+        <li><b>Model B</b><span>Depends on your goals; if you ship web apps…</span></li>
+        <li><b>Model C</b><span>Learn it for its ideas even if you never…</span></li>
+      </ul>
+      <p class="judge"><b>Judge</b> All three agree it pays off for systems and tooling; they differ on web work. Combined answer below.</p>
+    </article>
+
+    <!-- 3. echo adviser -->
+    <article class="panel" data-ui data-panel="2" aria-label={panels[2].name}>
+      <p class="p-title">Chat</p>
+      <p class="bubble">Prove there are infinitely many primes.</p>
+      <p class="chip">Asked the adviser model</p>
+      <p>Suppose there are only finitely many, p₁ … pₙ. Their product plus one, N = p₁·p₂·…·pₙ + 1, leaves remainder 1 when divided by every pᵢ, so any prime factor of N is a prime not on the list. Contradiction.</p>
+    </article>
+
+    <!-- 4. deep research -->
+    <article class="panel" data-ui data-panel="3" aria-label={panels[3].name}>
+      <p class="p-title">Deep Research</p>
+      <p class="q">What is the three-body problem?</p>
+      <p class="prog">Searching 3 of 5</p>
+      <ul class="steps">
+        <li class="done">What is the three-body problem in physics</li>
+        <li class="done">Three-body problem: novel by Liu Cixin</li>
+        <li class="done">Why the three-body problem has no general solution</li>
+        <li>Three-body problem in mathematics</li>
+        <li>Plot summary and remembrance of Earth’s past</li>
+      </ul>
+      <p class="foot">8 sources · runs in the background</p>
+    </article>
+
+    <!-- 5. browser flow -->
+    <article class="panel" data-ui data-panel="4" aria-label={panels[4].name}>
+      <p class="p-title">Browser Flow</p>
+      <div class="dialog">
+        <p class="d-t">Open a new site?</p>
+        <p>The model wants to go to <b>en.wikipedia.org</b> to check a date.</p>
+        <div class="d-b"><span>Not now</span><span class="ok">Allow</span></div>
+      </div>
+    </article>
+
+    <!-- 6. voice: a real screenshot -->
+    <figure class="panel shot" data-ui data-panel="5" aria-label={panels[5].name}>
+      <img src="/brand/v5/voice-call.jpg" width="720" height="1480" loading="lazy" decoding="async"
+        alt="EchoFlow voice call with the Jessica persona and a live waveform" />
+    </figure>
+  </div>
+
+  <div class="label" aria-live="polite">
+    <p class="l-name" data-l-name>{panels[0].name}</p>
+    <p class="l-text" data-l-text>{panels[0].text}</p>
+    <div class="l-nav">
+      <button type="button" class="link" data-prev>Previous</button>
+      <button type="button" class="link" data-next>Next</button>
+    </div>
+  </div>
+  <script type="application/json" data-panels set:html={JSON.stringify(panels)} />
+</section>
+
+<style>
+  .row-sec { position: relative; min-height: 96svh; display: grid; align-content: center; padding-block: 4rem; }
+  .row {
+    display: flex; align-items: center; gap: 26vw; overflow-x: auto; overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory; scrollbar-width: none;
+    padding-inline: calc(50vw - 210px); cursor: grab;
+  }
+  .row::-webkit-scrollbar { display: none; }
+  .row.is-drag { cursor: grabbing; scroll-snap-type: none; }
+
+  .panel {
+    flex: none; width: 420px; scroll-snap-align: center;
+    background: #f7f6f2; color: #1c1c1c; border-radius: 22px; padding: 22px;
+    font-size: 15px; line-height: 1.45; display: grid; gap: 12px; align-content: start;
+    opacity: 0.22; transition: opacity 500ms var(--ease-out), transform 500ms var(--ease-out);
+    transform: scale(0.94); user-select: none;
+  }
+  .panel.is-lit { opacity: 1; transform: none; }
+  .p-title { font-weight: 500; font-size: 20px; letter-spacing: -0.01em; }
+  .pick, .fuse, .steps { display: grid; gap: 6px; }
+  .pick li { display: grid; padding: 10px 12px; border-radius: 14px; background: #ecebe5; }
+  .pick li span, .fuse li span { color: #55564f; font-size: 14px; }
+  .pick li.on { background: #1c1c1c; color: #f1f1ef; }
+  .pick li.on span { color: #c9cac4; }
+  .bubble { justify-self: end; max-width: 86%; background: #1c1c1c; color: #f1f1ef; border-radius: 18px 18px 6px 18px; padding: 10px 14px; }
+  .fuse li { display: grid; padding: 10px 12px; border-radius: 14px; background: #ecebe5; }
+  .judge { background: #dfe6dd; border-radius: 14px; padding: 10px 12px; }
+  .chip { justify-self: start; font-size: 14px; background: #dfe6dd; border-radius: 999px; padding: 4px 12px; }
+  .q { font-weight: 500; }
+  .prog { font-size: 14px; color: #55564f; }
+  .steps li { font-size: 14px; padding-left: 22px; position: relative; color: #55564f; }
+  .steps li::before { content: ''; position: absolute; left: 2px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: #c9cac4; }
+  .steps li.done { color: #1c1c1c; }
+  .steps li.done::before { background: #5f7a5e; }
+  .foot { font-size: 14px; color: #55564f; }
+  .dialog { background: #ffffff; border-radius: 20px; padding: 18px; display: grid; gap: 10px; box-shadow: 0 18px 40px -18px rgb(0 0 0 / 0.35); } /* taste-skill-ignore: open dialog, data-ui */
+  .d-t { font-weight: 500; font-size: 18px; }
+  .d-b { display: flex; justify-content: flex-end; gap: 10px; }
+  .d-b span { padding: 8px 16px; border-radius: 999px; }
+  .d-b .ok { background: #1c1c1c; color: #f1f1ef; }
+  .shot { padding: 0; overflow: hidden; height: 520px; }
+  .shot img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+
+  .label {
+    position: absolute; top: 50%; left: calc(50vw + 250px); transform: translateY(-260px);
+    width: 24ch; display: grid; gap: 0.6rem; pointer-events: auto;
+  }
+  .l-name { font-family: var(--font-display); font-size: var(--step-lead); }
+  .l-text { color: var(--muted); }
+  .l-nav { display: flex; gap: 1.25rem; margin-top: 0.75rem; font-size: var(--step-small); }
+
+  @media (max-width: 60em) {
+    .row-sec { min-height: 0; padding-block: 3rem; }
+    .row { gap: 7vw; padding-inline: 7vw; }
+    .panel { width: min(86vw, 420px); }
+    .label { position: static; transform: none; width: auto; margin: 2rem var(--margin) 0; }
+  }
+</style>
