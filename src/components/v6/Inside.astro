@@ -6,6 +6,8 @@ const rows = [
   { title: 'Any model', body: 'OpenRouter’s whole catalogue on one key, direct keys to the big providers, or a model that never leaves the phone. Swap mid-chat.', img: '/brand/shot-cloud-models.jpg', w: 720, h: 1560, ratio: '4 / 5', size: 240, pos: '50% 8%', alt: 'EchoFlow cloud models screen with an OpenRouter key saved and a model list' },
   { title: 'Everything under +', body: 'Web search with no key, Deep Research with cited reports, artifacts that stay, a data agent that answers in tables.', img: '/brand/v3/03-attach-and-capabilities-menu.jpg', w: 945, h: 2048, ratio: '3 / 2', size: 320, pos: '50% 62%', alt: 'The plus menu: attach image or files, web search, Deep Research, artifact, data agent' },
   { title: 'Talk to it', body: 'A real voice call with a persona. It listens while it speaks, so tap anywhere to cut in.', img: '/brand/v5/voice-call.jpg', w: 720, h: 1480, ratio: '1 / 1', size: 180, pos: '50% 36%', alt: 'Voice call with the Jessica persona and a live waveform' },
+  { title: 'Projects', body: 'A room that already knows your files and your rules. Every chat inside starts briefed.', img: '/brand/v3/06-projects-list.jpg', w: 945, h: 2048, ratio: '4 / 5', size: 280, pos: '50% 12%', alt: 'EchoFlow projects list with two projects' },
+  { title: 'Your own PC', body: 'Point it at Ollama or LM Studio on your desk and answers stream over Wi-Fi. No cloud, no key, no bill.', img: '/brand/v3/09-custom-api-endpoints.jpg', w: 945, h: 2048, ratio: '3 / 2', size: 360, pos: '50% 34%', alt: 'Custom API endpoint screen with Ollama on localhost:11434 switched on' },
 ];
 ---
 <section class="chapter f-sunset inside" id="inside" aria-labelledby="in-title">
@@ -40,5 +42,16 @@ const rows = [
   .r-pic img { width: 100%; height: 100%; object-fit: cover; transition: transform 900ms var(--ease-out); }
   @media (hover: hover) and (pointer: fine) {
     .row:hover .r-pic img { transform: scale(1.04); }
+  }
+
+  @media (max-width: 48em) {
+    .in-head { grid-column: 1 / -1; min-height: 40svh; font-size: 11vw; }
+    .rows { gap: 4rem; }
+    .r-text, .r-pic { grid-column: 1 / -1; }
+    .r-text h3 { font-size: 26px; }
+    .r-pic { margin-top: 1.5rem; justify-self: start; }
+    .row:nth-child(3n + 1) .r-pic { width: 100%; }
+    .row:nth-child(3n + 2) .r-pic { width: 70%; justify-self: end; }
+    .row:nth-child(3n) .r-pic { width: 55%; }
   }
 </style>

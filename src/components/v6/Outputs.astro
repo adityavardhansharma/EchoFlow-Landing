@@ -3,6 +3,16 @@
    things EchoFlow makes, as buttons; the selected one lies on the stage as
    the real output, cropped by the stage's bottom edge. */
 const outputs = ['Research report', 'Data table', 'Artifact', 'Image'];
+const cpp = `#include <iostream>
+
+int main() {
+  int rows = 5;
+  for (int i = 1; i <= rows; ++i) {
+    std::cout << std::string(rows - i, ' ')
+              << std::string(2 * i - 1, '*') << '\\n';
+  }
+}`;
+const runOut = '    *\n   ***\n  *****\n *******\n*********';
 ---
 <section class="chapter f-mono out" id="outputs" aria-labelledby="out-title">
   <h2 id="out-title" class="sr-only">What EchoFlow makes</h2>
@@ -46,20 +56,8 @@ const outputs = ['Research report', 'Data table', 'Artifact', 'Image'];
       <article class="sheet code" id="out-sheet-2" role="tabpanel" aria-labelledby="out-tab-2" data-ui data-sheet="2" hidden>
         <p class="d-meta">Artifact · version 2 · saved to the gallery</p>
         <h3 class="d-title">Pyramid pattern in C++</h3>
-<pre><code>#include &lt;iostream&gt;
-
-int main() {
-  int rows = 5;
-  for (int i = 1; i &lt;= rows; ++i) {
-    std::cout &lt;&lt; std::string(rows - i, ' ')
-              &lt;&lt; std::string(2 * i - 1, '*') &lt;&lt; '\n';
-  }
-}</code></pre>
-<pre class="run"><code>    *
-   ***
-  *****
- *******
-*********</code></pre>
+<pre><code set:text={cpp} /></pre>
+<pre class="run"><code set:text={runOut} /></pre>
       </article>
 
       <!-- image -->
