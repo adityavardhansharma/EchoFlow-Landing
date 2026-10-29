@@ -20,6 +20,14 @@ import { RELEASES_URL } from '../../lib/releases';
     </p>
   </div>
 
+  <figure class="clip" data-rise style="--i:1">
+    <video autoplay muted loop playsinline preload="metadata" poster="/brand/v5/clip-maths-poster.jpg" width="540" height="1090"
+      aria-label="Screen recording: EchoFlow explaining quadratic equations with rendered maths">
+      <source src="/brand/v5/clip-maths.webm" type="video/webm" />
+      <source src="/brand/v5/clip-maths.mp4" type="video/mp4" />
+    </video>
+  </figure>
+
   <p class="sub" data-rise>
     EchoFlow is a free, open-source AI chat app for Android. Bring an OpenRouter key, your own
     provider keys or your PC, or run a model on the phone itself.
@@ -47,15 +55,14 @@ import { RELEASES_URL } from '../../lib/releases';
   .above { color: var(--ocean); clip-path: inset(0 0 calc(100% - var(--fs) * 1.29) 0); }
   .below { color: var(--ocean-ink); clip-path: inset(calc(var(--fs) * 1.29) 0 0 0); }
 
+  /* the real app, rising out of the water at the right */
+  .clip { position: absolute; right: 8.333%; bottom: 0; width: clamp(220px, 21vw, 320px); height: calc(100% - var(--seam) - 2rem); overflow: hidden; z-index: 1; }
+  .clip video { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+
   .sub {
-    position: absolute; left: 50%; bottom: 40px; transform: translateX(-50%);
-    width: min(100% - 32px, 46ch); text-align: center; color: var(--ocean-ink);
+    position: absolute; left: 28px; bottom: 40px;
+    width: min(100% - 32px, 40ch); color: var(--ocean-ink);
     font-size: var(--step-lead); line-height: 1.35;
-  }
-  @media (prefers-reduced-motion: no-preference) {
-    :global(.js) .sub[data-rise] { transform: translate(-50%, 16px); }
-    @keyframes sub-rise { to { opacity: 1; transform: translate(-50%, 0); } }
-    :global(.js) .sub[data-rise] { animation-name: sub-rise; }
   }
 
   @media (max-width: 48em) {
@@ -63,9 +70,7 @@ import { RELEASES_URL } from '../../lib/releases';
     .mark, .act { top: 16px; }
     .mark { left: 16px; }
     .act { right: 16px; min-height: 2.75rem; padding: 0 1rem; }
-    .sub { left: 16px; transform: none; text-align: left; bottom: 24px; font-size: var(--step-body); }
-    @media (prefers-reduced-motion: no-preference) {
-      :global(.js) .sub[data-rise] { transform: translateY(16px); animation-name: v6-rise; }
-    }
+    .sub { left: 16px; bottom: 24px; width: calc(100% - 32px); font-size: var(--step-body); }
+    .clip { right: 16px; width: 40vw; height: auto; top: calc(var(--seam) + 2.5rem); bottom: 11.5rem; }
   }
 </style>
