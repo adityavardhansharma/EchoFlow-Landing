@@ -1,0 +1,54 @@
+---
+/* The walls — rows with margin photographs, on the mist ground. Each row
+   names a wall EchoFlow does not have; the first picture is a real wall,
+   the rest are the app itself. */
+const rows = [
+  { title: 'Every provider', body: 'Not one company’s models. OpenRouter, OpenAI, Anthropic, Gemini, Cerebras, xAI and Sarvam, each on a key you own.', img: '/brand/v9/wall-1907.jpg', w: 1275, h: 1474, ratio: '4 / 5', size: 240, pos: '50% 40%', alt: 'The Great Wall of China in 1907, photographed by Herbert Ponting, running over the ridges' },
+  { title: 'No account', body: 'No sign-up, no EchoFlow server, no telemetry. Chats, settings and keys stay on the phone.', img: '/brand/shot-settings.jpg', w: 720, h: 1560, ratio: '3 / 2', size: 320, pos: '50% 22%', alt: 'EchoFlow settings: appearance, cloud models, web search, Deep Research, Data Agent and local models' },
+  { title: 'Your own keys', body: 'Pay the provider directly at their price. No subscription stacked on top.', img: '/brand/shot-cloud-models.jpg', w: 720, h: 1560, ratio: '1 / 1', size: 180, pos: '50% 18%', alt: 'Cloud models screen with an OpenRouter key saved on the device' },
+  { title: 'Your own PC', body: 'Ollama, LM Studio, Jan, vLLM or LocalAI on your network: the phone chats, your machine thinks.', img: '/brand/v3/09-custom-api-endpoints.jpg', w: 945, h: 2048, ratio: '4 / 5', size: 260, pos: '50% 30%', alt: 'Custom API endpoint screen with Ollama on localhost switched on' },
+  { title: 'The phone itself', body: 'Download a model once and keep talking with no signal at all.', img: '/brand/v3/10-chat-on-device-model.jpg', w: 945, h: 2048, ratio: '3 / 2', size: 300, pos: '50% 42%', alt: 'A chat running Gemma on-device in EchoFlow' },
+];
+---
+<section class="walls c-mist" id="walls" aria-labelledby="walls-title">
+  <div class="grid">
+    <h2 id="walls-title" class="head w-head" data-reveal>No walls here</h2>
+  </div>
+  <ul class="rows">
+    {rows.map((r) => (
+      <li class="row grid" data-reveal>
+        <div class="r-text">
+          <h3>{r.title}</h3>
+          <p>{r.body}</p>
+        </div>
+        <figure class="r-pic" style={`--w:${r.size}px; aspect-ratio:${r.ratio}`}>
+          <img src={r.img} alt={r.alt} width={r.w} height={r.h} loading="lazy" decoding="async" style={`object-position:${r.pos}`} />
+        </figure>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  .walls { padding: clamp(4rem, 8vw, 7rem) var(--margin) clamp(6rem, 10vw, 9rem); }
+  .w-head { grid-column: 5 / 13; min-height: 34svh; display: flex; align-items: center; }
+  .rows { display: grid; gap: clamp(5rem, 8vw, 7.5rem); }
+  .row { align-items: start; }
+  .r-text { grid-column: 5 / 10; display: grid; gap: 0.8rem; }
+  .r-text h3 { font-size: var(--step-sub); font-weight: 300; }
+  .r-text p { max-width: 34ch; }
+  .r-pic { grid-column: 10 / 13; justify-self: end; width: min(var(--w), 100%); margin: 0; overflow: hidden; }
+  .r-pic img { width: 100%; height: 100%; object-fit: cover; transition: transform 900ms var(--ease-out); }
+  @media (hover: hover) and (pointer: fine) {
+    .row:hover .r-pic img { transform: scale(1.04); }
+  }
+  @media (max-width: 48em) {
+    .w-head { grid-column: 1 / -1; min-height: 30svh; font-size: 11vw; }
+    .rows { gap: 4rem; }
+    .r-text, .r-pic { grid-column: 1 / -1; }
+    .r-pic { margin-top: 1.5rem; justify-self: start; }
+    .row:nth-child(3n + 1) .r-pic { width: 100%; }
+    .row:nth-child(3n + 2) .r-pic { width: 70%; justify-self: end; }
+    .row:nth-child(3n) .r-pic { width: 55%; }
+  }
+</style>

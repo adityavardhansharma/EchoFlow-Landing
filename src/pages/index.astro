@@ -1,6 +1,7 @@
 ---
 import Home from '../layouts/Home.astro';
 import Hero from '../components/v9/Hero.astro';
+import Walls from '../components/v9/Walls.astro';
 import { pages } from '../lib/seo';
 
 const seo = pages.home;
@@ -8,5 +9,6 @@ const seo = pages.home;
 <Home seo={seo}>
   <main id="top">
     <Hero />
+    <Walls />
   </main>
 </Home>
