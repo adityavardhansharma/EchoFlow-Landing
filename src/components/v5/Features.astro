@@ -1,0 +1,121 @@
+---
+/* Features — staggered fragment cells. Each cell is one capability: a short
+   text part and a real piece of the app docked to the opposite edge, cropped
+   by the cell. Row one runs text-top, fragment-top, text-top; row two the
+   reverse, so the fragments form a checkerboard. */
+---
+<section class="feat wrap" id="inside" aria-labelledby="feat-title">
+  <h2 id="feat-title" class="head" data-reveal>What’s inside</h2>
+
+  <div class="cells">
+    <article class="cell text-top" data-reveal style="--i:0">
+      <div class="c-text">
+        <h3>Any model</h3>
+        <p>OpenRouter’s whole catalogue, direct keys to the big providers, the PC on your desk, or a model that never leaves the phone.</p>
+      </div>
+      <div class="c-frag dock-bottom">
+        <ul class="models" data-ui aria-label="Model sources in EchoFlow">
+          <li><span class="m-name">OpenRouter</span><span class="m-meta">Cloud · every model on one key</span><span class="m-tag on">Key saved</span></li>
+          <li><span class="m-name">Gemma 3 1B</span><span class="m-meta">On-device · 562 MB</span><span class="m-tag">Download</span></li>
+          <li><span class="m-name">Qwen3 0.6B</span><span class="m-meta">On-device · 498 MB</span><span class="m-tag">Download</span></li>
+          <li><span class="m-name">Ollama API</span><span class="m-meta">http://localhost:11434</span><span class="m-tag on">On</span></li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="cell frag-top" data-reveal style="--i:1">
+      <div class="c-frag dock-top">
+        <div class="plus" data-ui aria-label="The plus menu">
+          <p class="p-group">Attach</p>
+          <p class="p-row">Image</p>
+          <p class="p-row">Files</p>
+          <p class="p-group">Capabilities</p>
+          <p class="p-row">Web search</p>
+          <p class="p-row is-hover">Deep Research</p>
+          <p class="p-row">Artifact</p>
+          <p class="p-row">Data Agent</p>
+          <p class="p-group">Echo Labs</p>
+          <p class="p-row">Echo Agents</p>
+        </div>
+      </div>
+      <div class="c-text">
+        <h3>Everything under +</h3>
+        <p>Web search, Deep Research with cited reports, artifacts you keep, a data agent that answers in tables, and agents with their own tools.</p>
+      </div>
+    </article>
+
+    <article class="cell text-top" data-reveal style="--i:2">
+      <div class="c-text">
+        <h3>Talk to it</h3>
+        <p>A real voice call with a persona you pick. It listens while it speaks, so you can tap anywhere to cut in.</p>
+      </div>
+      <figure class="c-frag dock-bottom pic">
+        <img src="/brand/v5/voice-call.jpg" alt="EchoFlow voice call with the Jessica persona: “Hey! What’s on your mind?” over a live waveform"
+          width="720" height="1480" loading="lazy" decoding="async" style="object-position: 50% 30%" />
+      </figure>
+    </article>
+  </div>
+</section>
+
+<style>
+  .feat { margin-top: var(--section); }
+  .feat > h2 { margin-bottom: 3.5rem; }
+  .cells { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+
+  .cell {
+    position: relative; overflow: hidden;
+    height: clamp(420px, 32vw, 460px);
+    background: var(--surface);
+    display: flex; flex-direction: column; justify-content: space-between;
+    transition: background-color var(--t-repaint) ease;
+  }
+  .c-text { padding: 24px; display: grid; gap: 8px; }
+  .c-text h3 { font-size: var(--step-lead); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; }
+  .c-text p { font-size: 1rem; line-height: 1.45; color: var(--muted); max-width: 38ch; }
+
+  .c-frag { flex: 1; min-height: 0; display: flex; overflow: hidden; }
+  .dock-bottom { align-items: flex-end; }
+  .dock-top { align-items: flex-end; } /* anchored low, cropped by the cell's top edge */
+
+  /* pictures fill their part of the cell, cropped by it */
+  .pic { margin: 0; }
+  .pic img, .pic video { width: 100%; height: 100%; object-fit: cover; transition: transform 900ms var(--ease-soft); }
+  @media (hover: hover) and (pointer: fine) {
+    .cell:hover .pic img, .cell:hover .pic video { transform: scale(1.04); }
+  }
+
+  /* ---- fragments: the app's own conventions apply inside data-ui ---- */
+  .models {
+    width: 100%; margin: 0 0 -1px; padding: 14px; display: grid; gap: 8px;
+    background: var(--lift); border-radius: 24px 24px 0 0;
+    font-size: 14px; line-height: 1.3;
+    transition: background-color var(--t-repaint) ease;
+  }
+  .models li { display: grid; grid-template-columns: 1fr auto; column-gap: 12px; padding: 10px 12px; border-radius: 16px; background: var(--bg); transition: background-color var(--t-repaint) ease; }
+  .m-name { font-weight: 600; }
+  .m-meta { grid-column: 1; color: var(--muted); font-size: 13px; }
+  .m-tag { grid-column: 2; grid-row: 1 / 3; align-self: center; font-size: 13px; font-weight: 600; padding: 6px 10px; border-radius: 999px; background: color-mix(in oklab, var(--accent) 12%, var(--lift)); }
+  .m-tag.on { background: var(--accent); color: var(--accent-ink); }
+
+  .plus {
+    width: 78%; margin-left: 24px; padding: 10px 8px 14px; display: grid;
+    background: var(--lift); border-radius: 0 0 22px 22px;
+    font-size: 14px; line-height: 1.2;
+    box-shadow: 0 18px 40px -18px rgb(0 0 0 / 0.35);
+    transition: background-color var(--t-repaint) ease;
+  }
+  .p-group { color: var(--muted); font-size: 13px; padding: 10px 12px 4px; }
+  .p-row { padding: 8px 12px; border-radius: 12px; font-weight: 600; }
+  .p-row.is-hover { background: color-mix(in oklab, var(--accent) 14%, var(--lift)); }
+
+  @media (max-width: 60em) {
+    .cells { grid-template-columns: 1fr; gap: 6px; }
+    .cell { height: auto; }
+    .cell.frag-top { flex-direction: column-reverse; }
+    .c-frag { flex: none; }
+    .pic { height: 360px; }
+    .cell:nth-child(even) .c-frag { justify-content: flex-end; }
+    .cell:nth-child(even) .plus { margin-left: 0; margin-right: 24px; border-radius: 22px 22px 0 0; }
+    .cell.frag-top .c-frag { align-items: flex-end; }
+  }
+</style>
