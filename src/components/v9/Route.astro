@@ -112,12 +112,12 @@ const steps = [
   .f-switch { justify-self: center; font-size: 14px; color: #5b5b5b; background: #efefe6; border-radius: 999px; padding: 4px 12px; }
 
   @media (max-width: 48em) {
-    .r-grid { display: flex; flex-direction: column-reverse; }
+    .r-grid { display: flex; flex-direction: column; }
     .pin { margin-inline: calc(var(--margin) * -1); }
     .stage { position: relative; top: 0; height: 46svh; }
     .frag { min-height: 0; transform: scale(0.86); }
     .says { padding-bottom: 4rem; }
-    .step { min-height: 0; padding-top: 2.5rem; }
+    .step, .step:last-child { min-height: 0; padding-top: 2.5rem; }
     .say, .line { max-width: none; }
   }
 </style>
