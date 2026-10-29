@@ -13,12 +13,14 @@ const stages = [
 ---
 <section class="steps" id="how" aria-labelledby="steps-title" data-steps>
   <div class="s-clause">
+    <div class="s-in" data-reveal>
     <h2 id="steps-title" class="head" aria-live="polite" data-clause>{stages[0].clause}</h2>
     <p class="lead s-detail" data-detail>{stages[0].detail}</p>
+    </div>
   </div>
 
   <div class="s-stage">
-    <div class="phone" data-ui>
+    <div class="phone" data-ui data-reveal style="--i:2">
       <!-- 1. the release -->
       <div class="st" data-st="0">
         <div class="rel">
@@ -59,7 +61,7 @@ const stages = [
     </div>
   </div>
 
-  <div class="s-control">
+  <div class="s-control" data-reveal style="--i:3">
     <div class="track" style="--p: 0">
       <span class="fill" aria-hidden="true"></span>
       <input type="range" min="0" max="3" step="1" value="0" aria-labelledby="steps-title" aria-valuetext={stages[0].name} data-range />
@@ -109,6 +111,7 @@ const stages = [
     display: grid; align-content: start; gap: 1.25rem;
     transition: background-color var(--t-repaint) ease;
   }
+  .s-in { display: grid; gap: 1.25rem; }
   .s-clause h2 { max-width: 9ch; min-height: 2lh; }
   .s-detail { max-width: 34ch; }
   .s-stage {

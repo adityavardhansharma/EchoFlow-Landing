@@ -116,6 +116,11 @@
   /* pictures fill their part of the cell, cropped by it */
   .pic { margin: 0; }
   .pic img, .pic video { width: 100%; height: 100%; object-fit: cover; transition: transform 900ms var(--ease-soft); }
+  /* pictures settle from a slight scale as their cell arrives */
+  @media (prefers-reduced-motion: no-preference) {
+    :global(.js) .cell[data-reveal] .pic img, :global(.js) .cell[data-reveal] .pic video { transform: scale(1.08); transition: transform 1400ms var(--ease-soft); }
+    :global(.js) .cell[data-reveal].is-in .pic img, :global(.js) .cell[data-reveal].is-in .pic video { transform: none; }
+  }
   @media (hover: hover) and (pointer: fine) {
     .cell:hover .pic img, .cell:hover .pic video { transform: scale(1.04); }
   }

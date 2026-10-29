@@ -10,26 +10,26 @@ const year = new Date().getFullYear();
 <footer class="tf" aria-labelledby="tf-title">
   <h2 id="tf-title" class="sr-only">EchoFlow</h2>
 
-  <div class="t t-statement">
+  <div class="t t-statement" data-reveal style="--i:0">
     <p class="t-big">An open-source AI workspace for Android. Your models, your keys, your phone.</p>
     <p class="t-legal">© {year} EchoFlow · MIT licence. Not affiliated with OpenRouter or any model provider.</p>
   </div>
 
-  <nav class="t t-nav" aria-label="Features">
+  <nav class="t t-nav" data-reveal style="--i:1" aria-label="Features">
     <p class="t-head">Features</p>
     <ul>
       {featureLinks.map((l) => <li><a class="link" href={l.href}>{l.label}</a></li>)}
     </ul>
   </nav>
 
-  <nav class="t t-compare" aria-label="Compare">
+  <nav class="t t-compare" data-reveal style="--i:2" aria-label="Compare">
     <p class="t-head">Compare</p>
     <ul>
       {alternativeLinks.map((l) => <li><a class="link" href={l.href}>{l.label.replace(' alternative', '')}</a></li>)}
     </ul>
   </nav>
 
-  <div class="t t-contact">
+  <div class="t t-contact" data-reveal style="--i:3">
     <p class="t-head">Guides and help</p>
     <ul>
       {guideLinks.map((l) => <li><a class="link" href={l.href}>{l.label}</a></li>)}
@@ -37,11 +37,11 @@ const year = new Date().getFullYear();
     <a class="t-mail link" href="mailto:echoflow@adityavs.tech">echoflow@adityavs.tech</a>
   </div>
 
-  <a class="t t-word" href="https://github.com/adityavardhansharma/EchoFlow" target="_blank" rel="noopener" aria-label="EchoFlow on GitHub">
+  <a class="t t-word" data-reveal href="https://github.com/adityavardhansharma/EchoFlow" target="_blank" rel="noopener" aria-label="EchoFlow on GitHub">
     <span aria-hidden="true">EchoFlow</span>
   </a>
 
-  <a class="t t-go" href={RELEASES_URL} data-apk>
+  <a class="t t-go" data-reveal style="--i:1" href={RELEASES_URL} data-apk>
     <span class="t-go-text">Get the APK</span>
     <svg viewBox="0 0 48 48" width="56" height="56" aria-hidden="true">
       <path d="M12 36 36 12M16 12h20v20" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="square" />

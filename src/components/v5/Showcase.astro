@@ -13,16 +13,16 @@ const prompts = {
   <div class="field-out" aria-hidden="true"></div>
 
   <div class="in">
-    <label class="in-label" for="show-prompt">Your question</label>
-    <textarea id="show-prompt" class="in-text" rows="4" spellcheck="false" data-prompt>{prompts.maths}</textarea>
-    <div class="in-try" role="group" aria-label="Recorded examples">
+    <label class="in-label" for="show-prompt" data-reveal>Your question</label>
+    <textarea id="show-prompt" data-reveal style="--i:1" class="in-text" rows="4" spellcheck="false" data-prompt>{prompts.maths}</textarea>
+    <div class="in-try" data-reveal style="--i:2" role="group" aria-label="Recorded examples">
       <button type="button" data-try={prompts.maths}>Maths</button>
       <button type="button" data-try={prompts.search}>Web search</button>
     </div>
   </div>
 
   <div class="out">
-    <div class="chat" data-ui aria-live="polite">
+    <div class="chat" data-ui aria-live="polite" data-reveal style="--i:2">
       <p class="bubble" data-echo>{prompts.maths}</p>
       <p class="who"><Seal size={22} logo fill="var(--accent)" /> EchoFlow</p>
 
@@ -56,8 +56,8 @@ const prompts = {
   </div>
 
   <h2 id="show-title" class="head">
-    <span class="h-in">Plain question,</span>
-    <span class="h-out">proper answer</span>
+    <span class="h-in" data-reveal>Plain question,</span>
+    <span class="h-out" data-reveal style="--i:1">proper answer</span>
   </h2>
 </section>
 
