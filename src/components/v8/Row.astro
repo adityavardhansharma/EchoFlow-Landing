@@ -91,6 +91,64 @@ const panels = [
   <script type="application/json" data-panels set:html={JSON.stringify(panels)} />
 </section>
 
+<script>
+  const sec = document.querySelector<HTMLElement>('[data-row-sec]');
+  if (sec) {
+    const row = sec.querySelector<HTMLElement>('[data-row]')!;
+    const panels = [...sec.querySelectorAll<HTMLElement>('[data-panel]')];
+    const data = JSON.parse(sec.querySelector('[data-panels]')!.textContent || '[]');
+    const name = sec.querySelector<HTMLElement>('[data-l-name]')!;
+    const text = sec.querySelector<HTMLElement>('[data-l-text]')!;
+    let current = -1;
+
+    // light the panel nearest the row's centre, and name it
+    const light = () => {
+      const mid = row.getBoundingClientRect().left + row.clientWidth / 2;
+      let best = 0, dist = Infinity;
+      panels.forEach((p, i) => {
+        const r = p.getBoundingClientRect();
+        const d = Math.abs(r.left + r.width / 2 - mid);
+        if (d < dist) { dist = d; best = i; }
+      });
+      if (best === current) return;
+      current = best;
+      panels.forEach((p, i) => p.classList.toggle('is-lit', i === best));
+      name.textContent = data[best].name;
+      text.textContent = data[best].text;
+    };
+    let raf = 0;
+    row.addEventListener('scroll', () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(light); }, { passive: true });
+    addEventListener('resize', light);
+    light();
+
+    const go = (i: number) => {
+      const p = panels[Math.max(0, Math.min(panels.length - 1, i))];
+      row.scrollTo({ left: p.offsetLeft - (row.clientWidth - p.clientWidth) / 2, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    };
+    sec.querySelector('[data-prev]')!.addEventListener('click', () => go(current - 1));
+    sec.querySelector('[data-next]')!.addEventListener('click', () => go(current + 1));
+    row.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(current + 1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
+    });
+
+    // drag with a mouse; touch and trackpads scroll natively
+    let startX = 0, startLeft = 0, dragging = false;
+    row.addEventListener('pointerdown', (e) => {
+      if (e.pointerType !== 'mouse') return;
+      dragging = true; startX = e.clientX; startLeft = row.scrollLeft;
+      row.classList.add('is-drag'); row.setPointerCapture(e.pointerId);
+    });
+    row.addEventListener('pointermove', (e) => { if (dragging) row.scrollLeft = startLeft - (e.clientX - startX); });
+    const end = () => {
+      if (!dragging) return;
+      dragging = false; row.classList.remove('is-drag'); go(current);
+    };
+    row.addEventListener('pointerup', end);
+    row.addEventListener('pointercancel', end);
+  }
+</script>
+
 <style>
   .row-sec { position: relative; min-height: 96svh; display: grid; align-content: center; padding-block: 4rem; }
   .row {
