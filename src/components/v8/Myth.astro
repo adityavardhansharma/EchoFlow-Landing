@@ -1,0 +1,48 @@
+---
+/* The myth — one lit exhibit and the reason for the name. Poussin's "Echo
+   and Narcissus" (c. 1630), dithered, beside the features that carry her
+   name in the app. */
+const echoes = [
+  { name: 'Echo Adviser', text: 'asks a stronger model for help mid-answer' },
+  { name: 'Echo Fusion', text: 'sends one prompt to several models and lets a judge combine them' },
+  { name: 'Echo Agents', text: 'gives a model search, fetch and a worker for subtasks' },
+  { name: 'EchoCrawl', text: 'searches the web for any model, with no key' },
+  { name: 'EchoOCR', text: 'reads scanned and photographed documents into the chat' },
+];
+---
+<section class="myth wrap" id="myth" aria-labelledby="myth-title">
+  <div class="grid m-grid">
+    <figure class="exhibit" data-reveal>
+      <img class="dither" src="/brand/v8/echo-poussin.png" width="1070" height="754" loading="lazy" decoding="async"
+        alt="Echo and Narcissus by Nicolas Poussin: Narcissus lies dead by the water while Echo fades into the rock behind him, in dithered dots" />
+      <figcaption>Echo and Narcissus, Nicolas Poussin, about 1630</figcaption>
+    </figure>
+
+    <div class="m-text">
+      <h2 id="myth-title" class="head" data-reveal>Why Echo</h2>
+      <p class="statement" data-reveal style="--i:1">
+        In Ovid, the nymph Echo could only give back the last words she heard. EchoFlow keeps her name and
+        drops the curse: it answers in whichever voice you choose.
+      </p>
+      <ul class="echoes" data-reveal style="--i:2">
+        {echoes.map((e) => <li><b>{e.name}</b> {e.text}.</li>)}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .myth { padding-block: clamp(6rem, 12vw, 11rem); }
+  .m-grid { align-items: center; row-gap: 3rem; }
+  .exhibit { grid-column: 1 / 8; margin: 0; }
+  .exhibit img { width: 100%; height: auto; }
+  .exhibit figcaption { margin-top: 0.9rem; font-size: var(--step-small); color: var(--muted); }
+  .m-text { grid-column: 9 / 13; display: grid; gap: 1.75rem; }
+  .statement { font-size: var(--step-lead); line-height: 1.45; max-width: 30ch; }
+  .echoes { display: grid; gap: 0.6rem; color: var(--muted); }
+  .echoes b { color: var(--ink); font-weight: 500; }
+
+  @media (max-width: 60em) {
+    .exhibit, .m-text { grid-column: 1 / -1; }
+  }
+</style>
