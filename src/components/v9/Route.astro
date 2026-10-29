@@ -79,11 +79,11 @@ const steps = [
 <style>
   .route { padding: clamp(4rem, 8vw, 7rem) var(--margin) 0; }
   .says { grid-column: 1 / 6; }
-  .r-head { font-size: 28px; font-weight: 400; margin-bottom: 2rem; }
+  .r-head { font-size: var(--step-lead); font-weight: 400; margin-bottom: 2rem; }
   .step { min-height: 80vh; display: grid; align-content: start; gap: 0.75rem; padding-top: 4vh; }
   .step:last-child { min-height: 60vh; }
-  .say { font-size: clamp(28px, 2.4vw, 32px); line-height: 1.15; font-weight: 300; max-width: 18ch; transition: font-weight 300ms ease; }
-  .line { font-size: 1rem; max-width: 36ch; }
+  .say { font-size: var(--step-sub); line-height: 1.15; font-weight: 300; max-width: 18ch; transition: font-weight 300ms ease; }
+  .line { max-width: 36ch; }
   .step.on .say { font-weight: 500; }
 
   .pin { grid-column: 7 / 13; }
@@ -93,12 +93,12 @@ const steps = [
   }
   .frag {
     width: min(100% - 48px, 460px); min-height: 380px; background: #fbfbf9; color: #1b1b1b; border-radius: 26px;
-    padding: 24px; font-family: system-ui, 'Segoe UI', Roboto, sans-serif; font-size: 15px; line-height: 1.4;
+    padding: 24px; font-family: system-ui, 'Segoe UI', Roboto, sans-serif; font-size: 14px; line-height: 1.4;
   }
   .st { display: none; gap: 12px; }
   .frag[data-state='0'] .st0, .frag[data-state='1'] .st1, .frag[data-state='2'] .st2 { display: grid; animation: st-in 220ms var(--ease-out); }
   @keyframes st-in { from { opacity: 0; transform: translateY(6px); } }
-  .f-title { font-size: 22px; font-weight: 600; }
+  .f-title { font-size: var(--step-lead); font-weight: 600; }
   .f-sub, .f-lab { color: #5b5b5b; font-size: 14px; }
   .f-field { background: #eeeee4; border-radius: 14px; padding: 12px 14px; letter-spacing: 0.04em; }
   .f-ok { color: #3f6d4a; font-size: 14px; }
@@ -109,14 +109,15 @@ const steps = [
   .f-list li.add { background: transparent; color: #5f6127; font-weight: 600; }
   .f-chip { justify-self: start; background: #efefe6; border-radius: 999px; padding: 6px 12px; font-size: 14px; font-weight: 600; }
   .f-me { justify-self: end; max-width: 86%; background: #5f6127; color: #ffffff; border-radius: 18px 18px 6px 18px; padding: 10px 14px; }
-  .f-switch { justify-self: center; font-size: 13px; color: #5b5b5b; background: #efefe6; border-radius: 999px; padding: 4px 12px; }
+  .f-switch { justify-self: center; font-size: 14px; color: #5b5b5b; background: #efefe6; border-radius: 999px; padding: 4px 12px; }
 
   @media (max-width: 48em) {
     .r-grid { display: flex; flex-direction: column-reverse; }
     .pin { margin-inline: calc(var(--margin) * -1); }
     .stage { position: relative; top: 0; height: 46svh; }
     .frag { min-height: 0; transform: scale(0.86); }
-    .step { min-height: 60svh; }
-    .say { font-size: 22px; }
+    .says { padding-bottom: 4rem; }
+    .step { min-height: 0; padding-top: 2.5rem; }
+    .say, .line { max-width: none; }
   }
 </style>

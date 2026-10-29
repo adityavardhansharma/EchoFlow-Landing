@@ -49,14 +49,14 @@ const swatches = [
   }
   .sent {
     position: absolute; left: 28px; bottom: 28px; width: min(36%, 40ch); color: #ffffff;
-    font-size: 1.125rem; line-height: 1.45; padding: 14px 16px; background: rgb(10 10 10 / 0.62);
+    font-size: var(--step-body); line-height: 1.45; padding: 14px 16px; background: rgb(10 10 10 / 0.62);
   }
   .act { position: absolute; left: 50%; bottom: 36px; transform: translateX(-50%); white-space: nowrap; }
   .cap { position: absolute; right: 20px; bottom: 16px; font-size: var(--step-small); color: rgb(255 255 255 / 0.85); background: rgb(10 10 10 / 0.5); padding: 2px 8px; }
 
   .swatches { grid-column: 11 / 13; display: grid; grid-template-rows: repeat(5, 1fr); border-radius: 12px; overflow: hidden; }
   .sw {
-    padding: 20px; font-size: 1rem; font-weight: 500; text-decoration: none;
+    padding: 20px; font-size: var(--step-small); font-weight: 500; text-decoration: none;
     transition: padding-left var(--t-ui) var(--ease-out);
   }
   @media (hover: hover) and (pointer: fine) {
@@ -72,10 +72,10 @@ const swatches = [
     .view { grid-column: 1; height: 64svh; min-height: 440px; border-radius: 12px 12px 0 0; }
     .mark { top: 18px; left: 18px; }
     .title { top: 16%; font-size: 12vw; }
-    .sent { left: 12px; right: 12px; width: auto; bottom: 84px; font-size: 1rem; padding: 12px 14px; }
+    .sent { left: 12px; right: 12px; width: auto; bottom: 84px; font-size: 18px; padding: 12px 14px; }
     .act { bottom: 20px; }
     .cap { display: none; }
     .swatches { grid-column: 1; grid-template-rows: none; border-radius: 0 0 12px 12px; }
-    .sw { height: 52px; padding: 0 16px; display: flex; align-items: center; font-size: 15px; }
+    .sw { height: 52px; padding: 0 16px; display: flex; align-items: center; }
   }
 </style>

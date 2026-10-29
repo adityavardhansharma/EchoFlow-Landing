@@ -5,7 +5,7 @@
 const rows = [
   { title: 'Every provider', body: 'Not one company’s models. OpenRouter, OpenAI, Anthropic, Gemini, Cerebras, xAI and Sarvam, each on a key you own.', img: '/brand/v9/wall-1907.jpg', w: 1275, h: 1474, ratio: '4 / 5', size: 240, pos: '50% 40%', alt: 'The Great Wall of China in 1907, photographed by Herbert Ponting, running over the ridges' },
   { title: 'No account', body: 'No sign-up, no EchoFlow server, no telemetry. Chats, settings and keys stay on the phone.', img: '/brand/shot-settings.jpg', w: 720, h: 1560, ratio: '3 / 2', size: 320, pos: '50% 22%', alt: 'EchoFlow settings: appearance, cloud models, web search, Deep Research, Data Agent and local models' },
-  { title: 'Your own keys', body: 'Pay the provider directly at their price. No subscription stacked on top.', img: '/brand/shot-cloud-models.jpg', w: 720, h: 1560, ratio: '1 / 1', size: 180, pos: '50% 18%', alt: 'Cloud models screen with an OpenRouter key saved on the device' },
+  { title: 'Your own keys', body: 'Pay the provider directly at their price. No subscription stacked on top.', video: '/brand/v5/clip-web-search', w: 540, h: 1090, ratio: '1 / 1', size: 220, pos: '50% 30%', alt: 'Screen recording: EchoFlow searching the web and answering with a table' },
   { title: 'Your own PC', body: 'Ollama, LM Studio, Jan, vLLM or LocalAI on your network: the phone chats, your machine thinks.', img: '/brand/v3/09-custom-api-endpoints.jpg', w: 945, h: 2048, ratio: '4 / 5', size: 260, pos: '50% 30%', alt: 'Custom API endpoint screen with Ollama on localhost switched on' },
   { title: 'The phone itself', body: 'Download a model once and keep talking with no signal at all.', img: '/brand/v3/10-chat-on-device-model.jpg', w: 945, h: 2048, ratio: '3 / 2', size: 300, pos: '50% 42%', alt: 'A chat running Gemma on-device in EchoFlow' },
 ];
@@ -22,7 +22,14 @@ const rows = [
           <p>{r.body}</p>
         </div>
         <figure class="r-pic" style={`--w:${r.size}px; aspect-ratio:${r.ratio}`}>
-          <img src={r.img} alt={r.alt} width={r.w} height={r.h} loading="lazy" decoding="async" style={`object-position:${r.pos}`} />
+          {r.video ? (
+            <video autoplay muted loop playsinline preload="metadata" poster={`${r.video}-poster.jpg`} width={r.w} height={r.h} aria-label={r.alt} style={`object-position:${r.pos}`}>
+              <source src={`${r.video}.webm`} type="video/webm" />
+              <source src={`${r.video}.mp4`} type="video/mp4" />
+            </video>
+          ) : (
+            <img src={r.img} alt={r.alt} width={r.w} height={r.h} loading="lazy" decoding="async" style={`object-position:${r.pos}`} />
+          )}
         </figure>
       </li>
     ))}
@@ -38,9 +45,9 @@ const rows = [
   .r-text h3 { font-size: var(--step-sub); font-weight: 300; }
   .r-text p { max-width: 34ch; }
   .r-pic { grid-column: 10 / 13; justify-self: end; width: min(var(--w), 100%); margin: 0; overflow: hidden; }
-  .r-pic img { width: 100%; height: 100%; object-fit: cover; transition: transform 900ms var(--ease-out); }
+  .r-pic img, .r-pic video { width: 100%; height: 100%; object-fit: cover; transition: transform 900ms var(--ease-out); }
   @media (hover: hover) and (pointer: fine) {
-    .row:hover .r-pic img { transform: scale(1.04); }
+    .row:hover .r-pic img, .row:hover .r-pic video { transform: scale(1.04); }
   }
   @media (max-width: 48em) {
     .w-head { grid-column: 1 / -1; min-height: 30svh; font-size: 11vw; }
