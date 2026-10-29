@@ -58,6 +58,24 @@ const steps = [
   </div>
 </section>
 
+<script>
+  // the statement nearest the middle of the screen sets the fragment's state
+  const sec = document.querySelector<HTMLElement>('[data-route]');
+  if (sec && 'IntersectionObserver' in window) {
+    const frag = sec.querySelector<HTMLElement>('[data-state]')!;
+    const steps = [...sec.querySelectorAll<HTMLElement>('[data-step]')];
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        if (!e.isIntersecting) continue;
+        const i = (e.target as HTMLElement).dataset.step!;
+        frag.dataset.state = i;
+        steps.forEach((s) => s.classList.toggle('on', s.dataset.step === i));
+      }
+    }, { rootMargin: '-45% 0px -45% 0px' });
+    steps.forEach((s) => io.observe(s));
+  }
+</script>
+
 <style>
   .route { padding: clamp(4rem, 8vw, 7rem) var(--margin) 0; }
   .says { grid-column: 1 / 6; }
