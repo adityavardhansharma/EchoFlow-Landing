@@ -18,14 +18,14 @@
   --ink: color-mix(in oklab, var(--accent) 10%, var(--cocoa));
   --muted: color-mix(in oklab, var(--ink) 72%, var(--bg));
   --deep: color-mix(in oklab, var(--accent) 16%, #1d1511);
-  --deep-ink: #f1ece3;
+  --deep-ink: #eeedea;
   --deep-muted: color-mix(in oklab, var(--deep-ink) 70%, var(--deep));
 
   --font-display: 'Schibsted Grotesk', 'Helvetica Neue', Arial, sans-serif;
   --font-text: 'Schibsted Grotesk', 'Helvetica Neue', Arial, sans-serif;
 
   --step-small: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
-  --step-body: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+  --step-body: clamp(1rem, 0.96rem + 0.15vw, 1.0625rem);
   --step-lead: clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem);
   --step-head: clamp(2.25rem, 1.3rem + 3.6vw, 4.75rem);
   --step-display: clamp(2.75rem, 0.9rem + 4.9vw, 5.75rem);
@@ -54,10 +54,10 @@
   --bg: color-mix(in oklab, var(--accent) 9%, #15110e);
   --lift: color-mix(in oklab, var(--bg) 88%, #ffffff);
   --surface: color-mix(in oklab, var(--accent) 12%, #241d18);
-  --ink: #efe9df;
+  --ink: #eeedea;
   --muted: color-mix(in oklab, var(--ink) 68%, var(--bg));
   --deep: color-mix(in oklab, var(--accent) 10%, #0b0907);
-  --deep-ink: #efe9df;
+  --deep-ink: #eeedea;
   color-scheme: dark;
 }
 

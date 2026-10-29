@@ -105,14 +105,14 @@ const prompts = {
   .field-out { grid-area: 1 / 2 / 3 / 3; background: var(--lift); transition: background-color var(--t-repaint) ease; }
 
   .in {
-    grid-area: 1 / 1; color: var(--deep-ink);
+    grid-area: 1 / 1; color: var(--deep-ink); background: var(--deep);
     padding: clamp(5rem, 13svh, 9rem) var(--margin) 3rem calc(var(--margin) + 8.333%);
     display: grid; align-content: start; gap: 1rem;
   }
-  .in-label { font-size: 0.9375rem; font-weight: 600; color: var(--deep-muted); }
+  .in-label { font-size: var(--step-body); font-weight: 600; color: var(--deep-muted); }
   .in-text {
     width: min(100%, 34ch); field-sizing: content; min-height: 5lh; resize: none;
-    font-size: clamp(1.25rem, 1rem + 0.6vw, 1.5rem); line-height: 1.3; font-weight: 600;
+    font-size: var(--step-lead); line-height: 1.3; font-weight: 600;
     background: color-mix(in oklab, var(--deep) 86%, #ffffff); color: var(--deep-ink);
     border: 0; border-radius: var(--radius); padding: 0.9rem 1rem;
     transition: background-color var(--t-repaint) ease;
@@ -120,7 +120,7 @@ const prompts = {
   .in-text:focus-visible { outline-color: var(--deep-ink); }
   .in-try { display: flex; flex-wrap: wrap; gap: 0.5rem; }
   .in-try button {
-    min-height: 2.75rem; padding: 0 1.1rem; font-weight: 600; font-size: 0.9375rem;
+    min-height: 2.75rem; padding: 0 1.1rem; font-weight: 600; font-size: var(--step-body);
     background: color-mix(in oklab, var(--deep) 78%, #ffffff); color: var(--deep-ink);
     transition: background-color var(--t-hover) ease, transform var(--t-press) var(--ease-out);
   }
@@ -129,12 +129,12 @@ const prompts = {
     .in-try button:hover { background: color-mix(in oklab, var(--deep) 66%, #ffffff); }
   }
 
-  .out { grid-area: 1 / 2; padding: clamp(5rem, 13svh, 9rem) var(--margin) 3rem; display: grid; justify-items: center; align-content: start; }
+  .out { grid-area: 1 / 2; background: var(--lift); padding: clamp(5rem, 13svh, 9rem) var(--margin) 3rem; display: grid; justify-items: center; align-content: start; }
 
   /* ---- the chat fragment, at the app's own sizes ---- */
   .chat {
     width: min(100%, 480px); display: grid; gap: 12px;
-    font-size: 15px; line-height: 1.5; color: var(--ink);
+    font-size: var(--step-small); line-height: 1.5; color: var(--ink);
   }
   .bubble {
     justify-self: end; max-width: 84%;
@@ -142,36 +142,36 @@ const prompts = {
     border-radius: 22px 22px 6px 22px; padding: 12px 16px; font-weight: 600;
     transition: background-color var(--t-repaint) ease;
   }
-  .who { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 14px; }
+  .who { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: var(--step-small); }
   .answer { display: grid; gap: 10px; }
   .answer[hidden] { display: none; }
   .answer.swap { animation: show-swap 320ms var(--ease-out); }
   @keyframes show-swap { from { opacity: 0; transform: translateY(8px); } }
   .chip {
-    justify-self: start; font-size: 13px; font-weight: 600;
+    justify-self: start; font-size: var(--step-small); font-weight: 600;
     background: color-mix(in oklab, var(--accent) 14%, var(--lift)); border-radius: 999px; padding: 6px 12px;
   }
   .sub { font-weight: 800; letter-spacing: -0.02em; margin-top: 4px; }
-  .math { font-family: 'Times New Roman', Times, serif; font-style: italic; font-size: 18px; }
+  .math { font-family: 'Times New Roman', Times, serif; font-style: italic; font-size: 1.15em; }
   .formula { display: flex; align-items: center; gap: 8px; }
   .frac { display: inline-grid; text-align: center; }
   .frac span:first-child { border-bottom: 1.5px solid currentColor; padding: 0 4px 2px; }
   .frac span:last-child { padding-top: 2px; }
-  .chat table { border-collapse: collapse; font-size: 14px; background: color-mix(in oklab, var(--accent) 6%, var(--lift)); }
+  .chat table { border-collapse: collapse; font-size: var(--step-small); background: color-mix(in oklab, var(--accent) 6%, var(--lift)); }
   .chat th, .chat td { text-align: left; padding: 9px 12px; border-bottom: 1px solid color-mix(in oklab, var(--ink) 14%, transparent); }
   .chat th { font-weight: 600; }
 
   .head { display: contents; }
   .h-in, .h-out { padding: 0 var(--margin) clamp(1.5rem, 3vw, 2rem); align-self: end; }
-  .h-in { grid-area: 2 / 1; color: var(--deep-ink); padding-left: calc(var(--margin) + 8.333%); }
-  .h-out { grid-area: 2 / 2; text-align: right; }
+  .h-in { grid-area: 2 / 1; color: var(--deep-ink); background: var(--deep); padding-left: calc(var(--margin) + 8.333%); }
+  .h-out { grid-area: 2 / 2; text-align: right; background: var(--lift); }
 
   @media (max-width: 60em) {
     .show { grid-template-columns: 1fr; grid-template-rows: auto auto auto auto; min-height: 0; }
     .field-in { grid-area: 1 / 1 / 3 / 2; }
     .field-out { grid-area: 3 / 1 / 5 / 2; }
     .in { grid-area: 1 / 1; padding: 4rem var(--margin) 2rem; }
-    .in-text { font-size: 1.125rem; width: 100%; }
+    .in-text { width: 100%; }
     .h-in { grid-area: 2 / 1; padding-left: var(--margin); padding-bottom: 1.25rem; }
     .h-out { grid-area: 3 / 1; text-align: left; align-self: start; padding-top: 1.25rem; padding-bottom: 0; }
     .out { grid-area: 4 / 1; padding: 2rem var(--margin) 4rem; }

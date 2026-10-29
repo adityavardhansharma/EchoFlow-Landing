@@ -59,32 +59,32 @@ const REPO = 'https://github.com/adityavardhansharma/EchoFlow';
 <style>
   .dl {
     display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter);
-    min-height: min(90svh, 880px);
+    min-height: min(78svh, 740px);
     margin-top: var(--section);
     padding-inline: var(--margin);
     background: var(--accent); color: var(--accent-ink);
     transition: background-color var(--t-repaint) ease, color var(--t-repaint) ease;
   }
   .dl-copy { grid-column: 1 / 6; align-self: end; padding-block: 40px; display: grid; gap: 1.5rem; }
-  .dl-copy h2 { font-size: clamp(3.5rem, 7vw, 7rem); line-height: 0.92; }
+  .dl-copy h2 { line-height: 0.92; }
   .dl-line { max-width: 34ch; }
   .dl-stage { grid-column: 7 / 12; align-self: center; display: grid; justify-items: center; padding-block: 4rem; }
 
-  /* ---- the dialog: an open surface, so it casts the app's shadow ---- */
+  /* ---- the dialog: an open surface, so it keeps the app's elevation ---- */
   .dialog {
     width: min(100%, 440px); padding: 24px; display: grid; gap: 18px;
     background: var(--bg); color: var(--ink); border-radius: 28px;
-    box-shadow: 0 30px 60px -24px rgb(0 0 0 / 0.45);
-    font-size: 15px; line-height: 1.4;
+    box-shadow: 0 30px 60px -24px rgb(0 0 0 / 0.45); /* taste-skill-ignore: open dialog, data-ui */
+    font-size: var(--step-small); line-height: 1.4;
     transition: background-color var(--t-repaint) ease;
   }
   .dlg-head { display: flex; align-items: center; gap: 14px; }
-  .dlg-title { font-size: 22px; font-weight: 800; letter-spacing: -0.03em; }
-  .dlg-sub { color: var(--muted); font-size: 14px; }
+  .dlg-title { font-size: var(--step-lead); font-weight: 800; letter-spacing: -0.03em; }
+  .dlg-sub { color: var(--muted); font-size: var(--step-small); }
   .dlg-seg { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; background: var(--surface); padding: 5px; border-radius: 999px; }
-  .dlg-seg button { min-height: 42px; border-radius: 999px; font-weight: 600; font-size: 14px; transition: background-color var(--t-ui) var(--ease-out), color var(--t-ui) ease; }
+  .dlg-seg button { min-height: 42px; border-radius: 999px; font-weight: 600; font-size: var(--step-small); transition: background-color var(--t-ui) var(--ease-out), color var(--t-ui) ease; }
   .dlg-seg button[aria-checked='true'] { background: var(--ink); color: var(--bg); }
-  .dlg-info { color: var(--muted); font-size: 14px; min-height: 3lh; }
+  .dlg-info { color: var(--muted); font-size: var(--step-small); min-height: 3lh; }
   .dlg-btn {
     display: grid; place-items: center; min-height: 52px; border-radius: 999px;
     background: var(--accent); color: var(--accent-ink); font-weight: 600; text-decoration: none;
