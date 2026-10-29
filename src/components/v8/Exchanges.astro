@@ -34,7 +34,7 @@ import Seal from '../Seal.astro';
     <div class="xchg last" data-reveal>
       <p class="say">Then ask it anything, with the web if you like.</p>
       <p class="call" data-ui>What is the recent viral project that converts GitHub data into football playing cards?</p>
-      <figure class="resp wide" data-ui>
+      <figure class="resp wide">
         <video autoplay muted loop playsinline preload="metadata" poster="/brand/v5/clip-web-search-poster.jpg" width="540" height="1090"
           aria-label="Screen recording: EchoFlow searches the web and answers with GitFut, a table of football stats and its sources">
           <source src="/brand/v5/clip-web-search.webm" type="video/webm" />
@@ -49,20 +49,20 @@ import Seal from '../Seal.astro';
 <style>
   .ex { padding-block: clamp(6rem, 12vw, 10rem); }
   .col { margin-left: 25%; width: min(560px, 100%); display: grid; gap: 88px; }
-  .ex-head { font-size: 28px; margin-bottom: -32px; }
+  .ex-head { font-size: var(--step-sub); margin-bottom: -32px; }
   .xchg { display: grid; gap: 16px; }
-  .say { font-size: 20px; font-weight: 500; }
+  .say { font-size: var(--step-lead); font-weight: 500; line-height: 1.3; }
   .call { background: var(--surface); border-radius: 8px; padding: 20px; font-size: var(--step-small); color: var(--ink); overflow-wrap: anywhere; }
   .lab { color: var(--muted); font-size: var(--step-small); margin-bottom: 8px; }
   .field { background: #1c1c1c; border-radius: 8px; padding: 10px 12px; }
-  .resp { margin-left: 56px; background: #f7f6f2; color: #1c1c1c; border-radius: 18px; padding: 18px; font-size: var(--step-small); }
+  .resp { margin-left: 56px; background: #f4f4f2; color: #1c1c1c; border-radius: 18px; padding: 18px; font-size: var(--step-small); }
   .rel { display: flex; gap: 14px; align-items: center; }
-  .r-t { font-weight: 500; font-size: 18px; }
+  .r-t { font-weight: 500; font-size: var(--step-lead); }
   .r-s { color: #55564f; }
-  .on { font-size: 13px; background: #dfe6dd; border-radius: 999px; padding: 2px 10px; margin-left: 6px; vertical-align: 2px; }
+  .on { font-size: var(--step-small); background: #dfe6dd; border-radius: 999px; padding: 2px 10px; margin-left: 6px; vertical-align: 2px; }
   .ml { margin-top: 10px; display: grid; gap: 6px; }
   .ml li { background: #ecebe5; border-radius: 12px; padding: 8px 12px; }
-  .resp.wide { width: 760px; max-width: calc(100vw - 25vw - var(--margin)); padding: 0; overflow: hidden; background: transparent; margin-left: 56px; }
+  .resp.wide { width: 760px; max-width: calc(75vw - 56px - var(--margin) * 2); padding: 0; overflow: hidden; background: transparent; margin-left: 56px; }
   .resp.wide video { width: 100%; height: 520px; object-fit: cover; object-position: 50% 30%; border-radius: 18px; }
   .resp.wide figcaption { color: var(--muted); padding-top: 10px; }
 
@@ -77,7 +77,7 @@ import Seal from '../Seal.astro';
 
   @media (max-width: 60em) {
     .col { margin-left: 0; width: 100%; gap: 64px; }
-    .ex-head { font-size: 24px; margin-bottom: -24px; }
+    .ex-head { margin-bottom: -24px; }
     .resp, .resp.wide { margin-left: 0; }
     .resp.wide { width: calc(100% + var(--margin) * 2); max-width: none; margin-inline: calc(var(--margin) * -1); }
     .resp.wide video { height: 70svh; border-radius: 0; }

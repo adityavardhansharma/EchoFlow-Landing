@@ -16,8 +16,9 @@
   --font-text: 'Jost', 'Helvetica Neue', Arial, sans-serif;
 
   --step-small: clamp(0.875rem, 0.85rem + 0.1vw, 0.9375rem);
-  --step-body: clamp(1rem, 0.96rem + 0.15vw, 1.125rem);
+  --step-body: clamp(1rem, 0.96rem + 0.22vw, 1.125rem);
   --step-lead: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+  --step-sub: clamp(1.75rem, 1.2rem + 1.6vw, 2.75rem);
   --step-head: clamp(2.5rem, 1.4rem + 4vw, 5.5rem);
   --step-display: clamp(4.5rem, 1rem + 12vw, 12.5rem);
 
@@ -73,7 +74,7 @@ p { max-width: 62ch; text-wrap: pretty; }
 .lines .line { display: block; overflow: hidden; padding-bottom: 0.1em; margin-bottom: -0.1em; }
 .lines [data-line] { display: block; }
 @media (prefers-reduced-motion: no-preference) {
-  .js .lines [data-line] { transform: translateY(108%); animation: v8-line 1000ms var(--ease-expo) forwards; animation-delay: calc(var(--i, 0) * 110ms + 150ms); }
+  .js .lines [data-line] { transform: translateY(108%); animation: v8-line 900ms var(--ease-expo) forwards; animation-delay: calc(var(--i, 0) * 110ms + 100ms); }
   .js [data-rise] { opacity: 0; transform: translateY(16px); animation: v8-rise 800ms var(--ease-out) forwards; animation-delay: calc(var(--i, 0) * 90ms + 500ms); }
   .js [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity 900ms var(--ease-out), transform 1100ms var(--ease-expo); transition-delay: calc(var(--i, 0) * 80ms); }
   .js [data-reveal].is-in { opacity: 1; transform: none; }

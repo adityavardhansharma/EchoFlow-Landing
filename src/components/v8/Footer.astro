@@ -47,13 +47,13 @@ const year = new Date().getFullYear();
   .cols .first { color: var(--stone-ink); font-weight: 500; margin-bottom: 0.4rem; }
   .cols a { color: var(--stone-ink); }
   .word {
-    grid-row: 3; font-family: var(--font-display); font-weight: 500; font-size: 22vw; line-height: 0.8;
-    letter-spacing: -0.04em; white-space: nowrap; margin-left: -0.04em;
+    grid-row: 3; font-family: var(--font-display); font-weight: 500; font-size: 19vw; line-height: 0.8;
+    letter-spacing: -0.04em; white-space: nowrap; margin-left: -0.04em; max-width: 100%; overflow: hidden;
   }
   .legal { grid-row: 4; margin-top: 20px; font-size: var(--step-small); }
 
   @media (max-width: 60em) {
     .cols { grid-template-columns: 1fr 1fr; row-gap: 2rem; }
-    .word { font-size: 21vw; margin-top: 20svh; }
+    .word { font-size: 19vw; margin-top: 20svh; }
   }
 </style>

@@ -110,24 +110,24 @@ const engines = ['Off', 'EchoCrawl', 'Exa', 'Parallel', 'Firecrawl'];
 
   .card {
     position: relative; width: min(420px, calc(100% - 32px)); padding: 22px; display: grid; gap: 12px;
-    background: #f7f6f2; color: #1c1c1c; border-radius: 22px; font-size: 15px; line-height: 1.5;
+    background: #f4f4f2; color: #1c1c1c; border-radius: 22px; font-size: var(--step-small); line-height: 1.5;
     transition: background-color 400ms ease, color 400ms ease;
   }
   .card.is-dark { background: #121212; color: #ecebe5; }
-  .c-by { font-size: 13px; font-weight: 500; color: #5f7a5e; }
+  .c-by { font-size: var(--step-small); font-weight: 500; color: #5f7a5e; }
   .c-q { justify-self: end; max-width: 86%; background: #1c1c1c; color: #f1f1ef; border-radius: 18px 18px 6px 18px; padding: 10px 14px; }
   .card.is-dark .c-q { background: #8fa68e; color: #121212; }
-  .c-adv { justify-self: start; font-size: 13px; background: #dfe6dd; color: #1c1c1c; border-radius: 999px; padding: 4px 12px; }
+  .c-adv { justify-self: start; font-size: var(--step-small); background: #dfe6dd; color: #1c1c1c; border-radius: 999px; padding: 4px 12px; }
   .c-adv[hidden] { display: none; }
-  .c-src, .c-note { font-size: 13px; opacity: 0.75; }
+  .c-src, .c-note { font-size: var(--step-small); }
   .flash { animation: flash 420ms var(--ease-out); }
   @keyframes flash { from { opacity: 0.25; } }
 
   .ctrls { grid-column: 8 / 13; padding: clamp(4rem, 9vh, 6rem) var(--margin) 25vh 0; display: grid; gap: 50vh; align-content: start; }
-  .cfg-head { font-size: clamp(2.5rem, 3vw, 2.75rem); margin-bottom: -40vh; }
+  .cfg-head { font-size: var(--step-sub); margin-bottom: -40vh; }
   .blk { display: grid; gap: 1rem; max-width: 44ch; }
-  .b-say { font-family: var(--font-display); font-size: clamp(1.75rem, 2.2vw, 2rem); line-height: 1.1; }
-  .b-body { color: var(--muted); }
+  .b-say { font-family: var(--font-display); font-size: var(--step-lead); line-height: 1.1; }
+  .b-body { color: var(--ink); }
 
   .seg { display: flex; flex-wrap: wrap; gap: 6px; }
   .seg button {
@@ -149,11 +149,10 @@ const engines = ['Off', 'EchoCrawl', 'Exa', 'Parallel', 'Firecrawl'];
 
   @media (max-width: 60em) {
     .cfg { grid-template-columns: 1fr; }
-    .hold { grid-column: 1; top: 0; height: 42svh; z-index: 1; }
+    .hold { grid-column: 1; position: relative; height: 56svh; }
     .card { transform: scale(0.82); }
     .ctrls { grid-column: 1; padding: 2.5rem var(--margin) 4rem; gap: 4rem; }
     .cfg-head { margin-bottom: 0; }
-    .b-say { font-size: 22px; }
     .seg button { flex: 1 1 auto; }
   }
 </style>

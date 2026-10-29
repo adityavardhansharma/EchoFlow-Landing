@@ -50,24 +50,24 @@ const where = [
   }
   .engr { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; mix-blend-mode: multiply; opacity: 0.32; }
   .c-copy { position: relative; grid-column: 1 / 6; align-self: end; padding-block: 40px; display: grid; gap: 1.25rem; }
-  .c-head { font-size: clamp(56px, 7vw, 112px); line-height: 0.92; }
-  .c-line { font-size: 17px; max-width: 34ch; }
+  .c-head { font-size: var(--step-head); line-height: 0.92; }
+  .c-line { font-size: var(--step-body); max-width: 34ch; }
   .c-cap { font-size: var(--step-small); max-width: 36ch; }
   .c-stage { position: relative; grid-column: 7 / 12; align-self: center; display: grid; justify-items: center; padding-block: 4rem; }
 
   .dialog {
     width: min(100%, 440px); padding: 24px; display: grid; gap: 16px;
-    background: #f7f6f2; color: #1c1c1c; border-radius: 26px; font-size: 15px; line-height: 1.45;
+    background: #f4f4f2; color: #1c1c1c; border-radius: 26px; font-size: var(--step-small); line-height: 1.45;
     box-shadow: 0 30px 60px -24px rgb(0 0 0 / 0.5); /* taste-skill-ignore: open dialog, data-ui */
   }
-  .dlg-t { font-size: 22px; font-weight: 500; letter-spacing: -0.01em; }
+  .dlg-t { font-size: var(--step-lead); font-weight: 500; letter-spacing: -0.01em; }
   .dlg-seg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; background: #ecebe5; padding: 4px; border-radius: 999px; }
-  .dlg-seg button { min-height: 44px; border-radius: 999px; font-size: 14px; transition: background-color var(--t-ui) var(--ease-out), color var(--t-ui) ease; }
+  .dlg-seg button { min-height: 44px; border-radius: 999px; font-size: var(--step-small); transition: background-color var(--t-ui) var(--ease-out), color var(--t-ui) ease; }
   .dlg-seg button[aria-checked='true'] { background: #1c1c1c; color: #f1f1ef; }
   .dlg-info { color: #4a4b45; min-height: 4.4em; }
   .dlg-btn { display: grid; place-items: center; min-height: 52px; border-radius: 999px; background: #1c1c1c; color: #f1f1ef; font-weight: 500; text-decoration: none; transition: transform var(--t-press) var(--ease-out); }
   .dlg-btn:active { transform: scale(0.97); }
-  .dlg-small { font-size: 13px; color: #4a4b45; text-align: center; }
+  .dlg-small { font-size: var(--step-small); color: #4a4b45; text-align: center; }
 
   @media (max-width: 60em) {
     .close { grid-template-columns: 1fr; min-height: 84svh; align-content: space-between; }
