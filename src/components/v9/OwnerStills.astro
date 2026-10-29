@@ -1,0 +1,41 @@
+---
+/* Owner-supplied stills. Nothing renders unless the site owner places their
+   own images in public/brand/v9/aot/ together with a credits.json:
+   [{ "file": "01.jpg", "alt": "…", "credit": "…" }]. Using third-party
+   frames is the owner's decision and responsibility; this slot only shows
+   what they provide, each with its credit. */
+import fs from 'node:fs';
+import path from 'node:path';
+
+type Still = { file: string; alt: string; credit: string };
+const dir = path.join(process.cwd(), 'public/brand/v9/aot');
+let stills: Still[] = [];
+try {
+  const list = JSON.parse(fs.readFileSync(path.join(dir, 'credits.json'), 'utf8')) as Still[];
+  stills = list.filter((s) => s.file && s.alt && s.credit && fs.existsSync(path.join(dir, s.file))).slice(0, 4);
+} catch {
+  stills = [];
+}
+---
+{stills.length > 0 && (
+  <section class="stills" aria-labelledby="stills-title">
+    <h2 id="stills-title" class="s-head" data-reveal>Beyond the walls, the sea</h2>
+    <div class="s-row">
+      {stills.map((s, i) => (
+        <figure data-reveal style={`--i:${i}`}>
+          <img src={`/brand/v9/aot/${s.file}`} alt={s.alt} loading="lazy" decoding="async" />
+          <figcaption>{s.credit}</figcaption>
+        </figure>
+      ))}
+    </div>
+  </section>
+)}
+
+<style>
+  .stills { background: var(--bg); padding: clamp(4rem, 8vw, 7rem) var(--margin); display: grid; gap: 2.5rem; }
+  .s-head { font-size: var(--step-head); }
+  .s-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 10px; }
+  .s-row figure { margin: 0; }
+  .s-row img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+  .s-row figcaption { margin-top: 0.6rem; font-size: var(--step-small); color: var(--muted); }
+</style>
