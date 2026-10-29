@@ -1,0 +1,56 @@
+---
+/* Footer — columns above, wordmark below, on the deepest swatch: the sea. */
+import { alternativeLinks, featureLinks, guideLinks } from '../../lib/navigation';
+import { RELEASES_URL } from '../../lib/releases';
+const year = new Date().getFullYear();
+const credits = [
+  ['Monk by the Sea', 'Caspar David Friedrich, 1808–10', 'https://commons.wikimedia.org/wiki/File:Caspar_David_Friedrich_-_Der_M%C3%B6nch_am_Meer_-_Google_Art_Project.jpg'],
+  ['The Ninth Wave', 'Ivan Aivazovsky, 1850', 'https://commons.wikimedia.org/wiki/File:Hovhannes_Aivazovsky_-_The_Ninth_Wave_-_Google_Art_Project.jpg'],
+  ['The Great Wave off Kanagawa', 'Katsushika Hokusai', 'https://commons.wikimedia.org/wiki/File:Tsunami_by_hokusai_19th_century.jpg'],
+  ['The Colossus', 'attributed to Francisco de Goya', 'https://commons.wikimedia.org/wiki/File:El_coloso.jpg'],
+  ['The Great Wall', 'Herbert Ponting, 1907', 'https://commons.wikimedia.org/wiki/File:Greatwall_large.jpg'],
+  ['Mediterranean chart', 'about 1320', 'https://commons.wikimedia.org/wiki/File:Mediterranean_chart_fourteenth_century2.jpg'],
+  ['Winged Victory of Samothrace', '1860s photograph, Art Institute of Chicago', 'https://www.artic.edu/artworks/212217'],
+];
+---
+<footer class="foot c-sea" id="footer" aria-labelledby="foot-title">
+  <h2 id="foot-title" class="sr-only">EchoFlow</h2>
+  <div class="cols">
+    <ul>
+      <li class="first">EchoFlow</li>
+      <li><a class="link" href={RELEASES_URL} data-apk>Download the APK</a></li>
+      <li><a class="link" href="https://github.com/adityavardhansharma/EchoFlow" target="_blank" rel="noopener">Source on GitHub</a></li>
+      <li><a class="link" href="mailto:echoflow@adityavs.tech">echoflow@adityavs.tech</a></li>
+    </ul>
+    <ul>
+      <li class="first">Features</li>
+      {featureLinks.map((l) => <li><a class="link" href={l.href}>{l.label}</a></li>)}
+    </ul>
+    <ul>
+      <li class="first">Compare and learn</li>
+      {alternativeLinks.map((l) => <li><a class="link" href={l.href}>{l.label}</a></li>)}
+      {guideLinks.map((l) => <li><a class="link" href={l.href}>{l.label}</a></li>)}
+    </ul>
+    <ul>
+      <li class="first">Pictures, all public domain</li>
+      {credits.map(([t, by, href]) => <li><a class="link" href={href} target="_blank" rel="noopener">{t}</a>, {by}</li>)}
+    </ul>
+  </div>
+  <p class="word" aria-hidden="true">EchoFlow</p>
+  <p class="legal">© {year} EchoFlow · MIT. Not affiliated with OpenRouter or any model provider.</p>
+</footer>
+
+<style>
+  .foot { min-height: 100svh; display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr auto auto; padding: 40px var(--margin) 24px; }
+  .cols { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gutter); }
+  .cols ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.35rem; align-content: start; font-size: 1rem; color: #c4c4c8; }
+  .cols .first { color: var(--sea-ink); font-weight: 500; margin-bottom: 0.4rem; }
+  .cols a { color: var(--sea-ink); }
+  .word { grid-row: 3; font-weight: 300; font-size: 21vw; line-height: 0.8; letter-spacing: -0.05em; white-space: nowrap; margin-left: -0.04em; overflow: hidden; }
+  .legal { grid-row: 4; margin-top: 20px; font-size: var(--step-small); }
+
+  @media (max-width: 48em) {
+    .cols { grid-template-columns: 1fr 1fr; row-gap: 2rem; }
+    .word { margin-top: 20svh; }
+  }
+</style>
