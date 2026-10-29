@@ -115,7 +115,7 @@ const runOut = '    *\n   ***\n  *****\n *******\n*********';
   }
 
   /* ---- the sheets: real outputs at true size ---- */
-  .sheet { width: 560px; max-width: calc(100% - 32px); min-height: 100%; align-content: start; background: #ffffff; color: #0a0a0a; padding: 32px; font-size: var(--step-small); line-height: 1.55; display: grid; gap: 12px; }
+  .sheet { width: 560px; max-width: calc(100% - 32px); min-height: calc(100% + 48px); align-content: start; background: #ffffff; color: #0a0a0a; padding: 32px; font-size: var(--step-small); line-height: 1.55; display: grid; gap: 12px; }
   .sheet[hidden] { display: none; }
   .sheet.swap { animation: sheet-in 200ms var(--ease-out); }
   @keyframes sheet-in { from { opacity: 0; } }
