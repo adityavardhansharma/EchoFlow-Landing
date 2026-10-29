@@ -1,0 +1,87 @@
+/* EchoFlow v9 — "The place carries it" (taste-skill): freedom beyond the
+   walls. Black ground, crimson only on the action, and five chapter grounds
+   sampled from Friedrich's "Monk by the Sea", light to dark. */
+
+:root {
+  --bg: #0a0a0a;
+  --surface: #151515;
+  --ink: #efefef;
+  --muted: #a3a3a3;
+  --accent: #b11226;
+  --accent-ink: #ffffff;
+  --paper: #f4f4f2;
+
+  --mist: #b4bcc6;  --mist-ink: #0a0a0a;
+  --sky: #7f94b8;   --sky-ink: #0a0a0a;
+  --sand: #6e6d69;  --sand-ink: #f4f4f2;
+  --shore: #3e3c3a; --shore-ink: #efefef;
+  --sea: #212128;   --sea-ink: #efefef;
+
+  --font: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --step-small: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
+  --step-body: clamp(1.125rem, 1.05rem + 0.3vw, 1.3125rem);
+  --step-lead: clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem);
+  --step-sub: clamp(1.75rem, 1.2rem + 1.8vw, 3rem);
+  --step-head: clamp(2.5rem, 1.3rem + 4.4vw, 5rem);
+  --step-display: clamp(4rem, 1.2rem + 7.8vw, 8.25rem);
+
+  --margin: clamp(1rem, 2.2vw, 2rem);
+  --gutter: clamp(0.75rem, 1.4vw, 1.5rem);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --t-press: 140ms; --t-hover: 200ms; --t-ui: 260ms;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: var(--font); font-optical-sizing: auto; font-size: var(--step-body); line-height: 1.55;
+  -webkit-font-smoothing: antialiased; font-kerning: normal;
+}
+h1, h2, h3, p, figure, ul, ol { margin: 0; }
+ul[class], ol[class] { padding: 0; list-style: none; }
+img, video, svg { display: block; max-width: 100%; }
+img, video { height: auto; }
+button, input { font: inherit; color: inherit; }
+button { background: none; border: 0; padding: 0; cursor: pointer; }
+a { color: inherit; }
+::selection { background: var(--accent); color: var(--accent-ink); }
+:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+
+h1, h2, h3 { font-weight: 300; letter-spacing: -0.03em; line-height: 0.95; text-wrap: balance; }
+.head { font-size: var(--step-head); }
+p { max-width: 60ch; text-wrap: pretty; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.wrap { padding-inline: var(--margin); }
+.grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); }
+
+.c-mist { background: var(--mist); color: var(--mist-ink); }
+.c-sky { background: var(--sky); color: var(--sky-ink); }
+.c-sand { background: var(--sand); color: var(--sand-ink); }
+.c-shore { background: var(--shore); color: var(--shore-ink); }
+.c-sea { background: var(--sea); color: var(--sea-ink); }
+
+.button {
+  display: inline-flex; align-items: center; justify-content: center; min-height: 3.25rem; padding: 0 1.6rem;
+  background: var(--accent); color: var(--accent-ink); font-size: 1.125rem; font-weight: 500; text-decoration: none;
+  transition: transform var(--t-press) var(--ease-out), filter var(--t-hover) ease;
+}
+.button:active { transform: scale(0.97); }
+.link { text-decoration: underline; text-decoration-thickness: 0.06em; text-underline-offset: 0.2em; text-decoration-color: transparent; transition: text-decoration-color var(--t-hover) ease; }
+@media (hover: hover) and (pointer: fine) {
+  .button:hover { filter: brightness(1.12); }
+  .link:hover { text-decoration-color: currentColor; }
+}
+
+.lines .line { display: block; overflow: hidden; padding-bottom: 0.1em; margin-bottom: -0.1em; }
+.lines [data-line] { display: block; }
+@media (prefers-reduced-motion: no-preference) {
+  .js .lines [data-line] { transform: translateY(108%); animation: v9-line 900ms var(--ease-expo) forwards; animation-delay: calc(var(--i, 0) * 110ms + 100ms); }
+  .js [data-rise] { opacity: 0; transform: translateY(16px); animation: v9-rise 800ms var(--ease-out) forwards; animation-delay: calc(var(--i, 0) * 90ms + 450ms); }
+  .js [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity 800ms var(--ease-out), transform 1000ms var(--ease-expo); transition-delay: calc(var(--i, 0) * 80ms); }
+  .js [data-reveal].is-in { opacity: 1; transform: none; }
+}
+@keyframes v9-line { to { transform: none; } }
+@keyframes v9-rise { to { opacity: 1; transform: none; } }
