@@ -1,18 +1,11 @@
 ---
 import '../styles/global.css';
 import SpeedInsights from '@vercel/speed-insights/astro';
-import {
-  DEFAULT_OG_IMAGE,
-  OG_IMAGE_ALT,
-  SITE_NAME,
-  absoluteImage,
-  absoluteUrl,
-  softwareAppJsonLd,
-  websiteJsonLd,
-  type PageSEO,
-} from '../lib/seo';
+import SeoHead from '../components/SeoHead.astro';
+import ApkLinks from '../components/ApkLinks.astro';
+import type { PageSEO } from '../lib/seo';
 
-interface Props {
+type Props = {
   seo?: PageSEO;
   title?: string;
   description?: string;
@@ -20,62 +13,13 @@ interface Props {
   canonicalPath?: string;
   noindex?: boolean;
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
-}
-
-const {
-  seo,
-  title = seo?.title ?? 'EchoFlow — Open-Source AI App for Android',
-  description = seo?.description ?? '',
-  ogImage = seo?.ogImage ?? DEFAULT_OG_IMAGE,
-  canonicalPath = seo?.path ?? '/',
-  noindex = false,
-  jsonLd = [],
-} = Astro.props;
-
-const canonical = absoluteUrl(canonicalPath);
-const image = absoluteImage(ogImage);
-const extraLd = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
-const structuredData = [websiteJsonLd(), softwareAppJsonLd(), ...extraLd];
+};
 ---
+
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
-    {noindex && <meta name="robots" content="noindex, nofollow" />}
-    <link rel="canonical" href={canonical} />
-    <meta name="theme-color" content="#f6f2e6" />
-    <link rel="icon" type="image/png" href="/brand/echoflow-mark.png" />
-
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content={SITE_NAME} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={image} />
-    <meta property="og:image:secure_url" content={image} />
-    {ogImage === DEFAULT_OG_IMAGE && (
-      <>
-        <meta property="og:image:type" content="image/jpeg" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-      </>
-    )}
-    <meta property="og:image:alt" content={OG_IMAGE_ALT} />
-    <meta property="og:locale" content="en_US" />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={image} />
-    <meta name="twitter:image:alt" content={OG_IMAGE_ALT} />
-
-    {structuredData.map((data) => (
-      <script type="application/ld+json" set:html={JSON.stringify(data)} />
-    ))}
-
+    <SeoHead {...Astro.props} />
     <link rel="preconnect" href="https://api.fontshare.com" />
     <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -93,65 +37,6 @@ const structuredData = [websiteJsonLd(), softwareAppJsonLd(), ...extraLd];
     <script is:inline>document.documentElement.classList.add('js');</script>
     <slot />
     <SpeedInsights />
-    <script>
-      import { RELEASES_URL, fetchLatestRelease, findApkAsset } from '../lib/releases';
-
-      const links = document.querySelectorAll('a[data-apk]');
-      let apkUrlPromise;
-
-      async function getLatestApkUrl() {
-        if (!apkUrlPromise) {
-          apkUrlPromise = fetchLatestRelease().then((release) => {
-            const apk = findApkAsset(release);
-            if (!apk?.browser_download_url) {
-              throw new Error('No APK asset found in latest GitHub release');
-            }
-
-            links.forEach((link) => {
-              link.setAttribute('href', apk.browser_download_url);
-              link.setAttribute('download', '');
-            });
-
-            if (release.tag_name) {
-              document.querySelectorAll('[data-apk-version]').forEach((el) => {
-                el.textContent = release.tag_name;
-              });
-            }
-
-            return apk.browser_download_url;
-          });
-        }
-
-        try {
-          return await apkUrlPromise;
-        } catch (error) {
-          apkUrlPromise = undefined;
-          throw error;
-        }
-      }
-
-      links.forEach((link) => {
-        link.addEventListener('click', async (event) => {
-          if (link.getAttribute('href') !== RELEASES_URL) return;
-
-          event.preventDefault();
-          link.setAttribute('aria-busy', 'true');
-
-          try {
-            window.location.href = await getLatestApkUrl();
-          } catch {
-            link.removeAttribute('aria-busy');
-          }
-        });
-      });
-
-      if (links.length) {
-        getLatestApkUrl().catch(() => {
-          links.forEach((link) => {
-            link.removeAttribute('aria-busy');
-          });
-        });
-      }
-    </script>
+    <ApkLinks />
   </body>
 </html>
