@@ -35,3 +35,29 @@ an artifact, an image) and the real output lies on the stage.
 ## Sample content to confirm
 
 - Stage durations are estimates for the bar's proportions; confirm before launch.
+
+## Run report
+
+- **Direction:** Colour chapters. Hero *Waterline headline*, type General Sans, signature move: masked headline.
+- **Palette:** the dealt blue/red/black proportions are kept, but the colours are the app's own accents (Ocean, Mono, Sunset, Forest, Rose), because the subject has unmistakable colours of its own.
+- **Redraws:**
+  - CTA: *A sentence with a blank* became *Three photographs, then a field*, because the action is a download, not an email.
+  - Footer: *A footer of tiles* became *Name first, places under it*, so it doesn't repeat v5.
+- **Departure:** the hero blueprint asks for no image. A real screen recording rises out of the Ocean field anyway, because real footage was requested for this version.
+- **Live thing:** the output index, where four real outputs swap on the stage. The timing bar also fills stage by stage.
+- **Gate:** lint 0 FAIL, 0 WARN. `inspect.mjs`: 0 FAIL. One WARN remains: a blank-gap at 768px, which is the deliberate rest before "What's inside".
+
+```
+ROUND 1
+Seen in one second: the waterline headline
+Idea: the app's seven accents become the page's chapters
+Live thing: output index with four real outputs
+Layout words: hero=waterline / outputs=index / inside=list / timing=band / close=strip+field / footer=name-first
+Scores: design 7.5 · usability 7.5 · creativity 7.5 · content 8 → overall 7.6
+Top three problems:
+1. Inside leaves columns 1–4 empty by design; on a 1440 screen this reads airy rather than placed.
+2. Stage durations in the timing bar are estimates (see "Sample content").
+3. The hero clip shows a light-theme app on the Ocean field; a dark-theme recording would sit better.
+```
+
+Imagery: all the project's own screenshots and recordings (`public/brand/v3`, `public/brand/v5`, `public/brand/shot-*.jpg`). No stock or open-collection pictures, so nothing to credit.
