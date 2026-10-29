@@ -4,10 +4,10 @@
    it: every place a message from EchoFlow can sail to. */
 const ports = [
   { name: 'OpenRouter', text: 'Every cloud model on one key, from one catalogue.', img: '/brand/v9/chart-1320.jpg', w: 1800, h: 1316, pos: '40% 45%', alt: 'A Mediterranean portolan chart from about 1320, its rhumb lines crossing the sea between ports', tone: '#5f6b78' },
-  { name: 'The big providers', text: 'OpenAI, Anthropic and Gemini, each on a key you own.', img: '/brand/shot-cloud-models.jpg', w: 720, h: 1560, pos: '50% 46%', alt: 'EchoFlow cloud models list with keys saved on the device', tone: '#6b5d4f' },
+  { name: 'The big providers', text: 'OpenAI, Anthropic and Gemini, each on a key you own.', img: '/brand/shot-cloud-models.jpg', w: 720, h: 1560, pos: '50% 12%', alt: 'EchoFlow cloud models list with keys saved on the device', tone: '#6b5d4f' },
   { name: 'And further out', text: 'Cerebras, xAI and Sarvam, in the same chat.', img: '/brand/v9/wave-hokusai.jpg', w: 1800, h: 1232, pos: '30% 40%', alt: 'The Great Wave off Kanagawa by Katsushika Hokusai: a great wave curling over boats, Mount Fuji small beyond', tone: '#4f5e56' },
-  { name: 'Your own PC', text: 'Ollama, LM Studio or any OpenAI-compatible server, over Wi-Fi.', img: '/brand/v3/09-custom-api-endpoints.jpg', w: 945, h: 2048, pos: '50% 28%', alt: 'Custom API endpoint settings with Ollama switched on', tone: '#66525a' },
-  { name: 'The phone', text: 'Gemma, Qwen or your own model file. No signal needed.', img: '/brand/v3/10-chat-on-device-model.jpg', w: 945, h: 2048, pos: '50% 40%', alt: 'A chat answered by a model running on the phone', tone: '#5d5f4c' },
+  { name: 'Your own PC', text: 'Ollama, LM Studio or any OpenAI-compatible server, over Wi-Fi.', img: '/brand/v3/09-custom-api-endpoints.jpg', w: 945, h: 2048, pos: '50% 34%', alt: 'Custom API endpoint settings with Ollama switched on', tone: '#66525a' },
+  { name: 'The phone', text: 'Gemma, Qwen or your own model file. No signal needed.', img: '/brand/v3/10-chat-on-device-model.jpg', w: 945, h: 2048, pos: '50% 96%', alt: 'A chat answered by a model running on the phone', tone: '#5d5f4c' },
 ];
 ---
 <section class="ports c-sky" id="ports" aria-labelledby="ports-title" data-ports>
@@ -82,7 +82,7 @@ const ports = [
   .card img { width: 100%; height: 100%; object-fit: cover; }
   .panel { padding: 20px 24px; display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; }
   .panel h3 { font-size: var(--step-sub); font-weight: 300; }
-  .panel p { font-size: var(--step-small); max-width: 26ch; text-align: right; line-height: 1.4; }
+  .panel p { font-size: 1rem; max-width: 26ch; text-align: right; line-height: 1.4; }
 
   /* live: the stage is held for two screens while the cards cross it */
   .ports.is-live .stage-wrap { height: 220svh; }
