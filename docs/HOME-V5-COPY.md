@@ -68,3 +68,49 @@ their own clock, exactly like the app.
 ## Sample content to confirm before launch
 
 - None invented: every label, model name and size is taken from the app's screenshots.
+
+## Run report
+
+**Direction:** The product performs (seed 54831197), type Schibsted Grotesk, palette "Bone, green,
+chocolate", signature move: masked headline.
+
+**Redraws and departures**
+- `section:cta` redrawn from *A sentence with a blank* (an email form) to *First step, already open*:
+  the page's one action is a download, not a sign-up.
+- Footer: the blueprint's "city and local time" tile was replaced by a Compare tile (local-time
+  strips are listed as filler in `references/copy.md` §6).
+- Palette: the dealt proportions are kept, but the accent is the app's real Forest `#1c6e2e` instead
+  of the dealt `#456f3a`, because the Appearance fragment prints real app values.
+- Hero on phones: the title comes first and the live panel second (house rule: an h1 on the first
+  screen outranks the blueprint's fragment-first phone layout).
+
+**Idea:** On this page, EchoFlow's Appearance screen becomes the control that repaints the page.
+**Live thing:** seven accents and System/Light/Dark re-theme the whole site (remembered per visitor);
+the preview greets by the visitor's clock. Also live: the editable question with recorded answers,
+the four-stage slider, the APK/source switch.
+
+**Gate:** `lint.mjs` 0 FAIL, 0 WARN. `inspect.mjs` on the production build: 0 FAIL, 0 WARN at 1440,
+768 and 390.
+
+```
+ROUND 2
+Seen in one second: the headline and the Appearance panel beside it
+Idea (one sentence): the app's Appearance screen repaints the page
+Live thing: accent and theme picker; greeting by local time
+Layout words by section: hero=split / showcase=split (inverted tones) / features=grid / how=split with slider / download=field + dialog / footer=tiles
+Scores: design 7.5 · usability 8 · creativity 7.5 · content 8 → overall 7.7
+Caps applied: none
+Top three problems (most visible first):
+1. Hero, showcase and steps are all two-field splits; the features grid is the only break. A future pass could make the steps a pinned scene.
+2. The voice-call and Projects crops are screenshots with their own type; they read a little busier than the HTML fragments.
+3. Mono and Lavender are close to the dark ground in dark mode; the swatch ring is the only cue.
+```
+
+**Imagery (all the project's own)**
+- `public/brand/v5/voice-call.jpg`, `greet-*.jpg`, `imagine-empty.jpg`: today's screenshots, status bar cropped.
+- `public/brand/v5/clip-web-search.{mp4,webm}` (+ poster): screen recording, used as the muted loop in "Web search, free".
+- `public/brand/v5/clip-maths.{mp4,webm}` (+ poster): screen recording, encoded for later use.
+- `public/brand/v3/imagine-print-dog.jpg`, `public/brand/v3/07-project-detail.jpg`: existing app captures.
+- No open-collection or stock photographs were used, so there is nothing to credit.
+
+**Not shown on purpose:** the drawer screenshot (personal conversation titles).
