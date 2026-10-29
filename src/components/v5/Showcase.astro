@@ -1,0 +1,178 @@
+---
+import Seal from '../Seal.astro';
+/* Showcase — input half, output half. The dark field holds the prompt the
+   visitor can edit; the light field holds the answer as the app renders it.
+   Both answers were recorded from the app (Photos/Screen_Recording_20261029_*). */
+const prompts = {
+  maths: 'Explain quadratic equations',
+  search: 'What is the recent viral project that converts GitHub data into football playing cards?',
+};
+---
+<section class="show" id="answers" aria-labelledby="show-title">
+  <div class="field-in" aria-hidden="true"></div>
+  <div class="field-out" aria-hidden="true"></div>
+
+  <div class="in">
+    <label class="in-label" for="show-prompt" data-reveal>Your question</label>
+    <textarea id="show-prompt" data-reveal style="--i:1" class="in-text" rows="4" spellcheck="false" data-prompt>{prompts.maths}</textarea>
+    <div class="in-try" data-reveal style="--i:2" role="group" aria-label="Recorded examples">
+      <button type="button" data-try={prompts.maths}>Maths</button>
+      <button type="button" data-try={prompts.search}>Web search</button>
+    </div>
+  </div>
+
+  <div class="out">
+    <div class="chat" data-ui aria-live="polite" data-reveal style="--i:2">
+      <p class="bubble" data-echo>{prompts.maths}</p>
+      <p class="who"><Seal size={22} logo fill="var(--accent)" /> EchoFlow</p>
+
+      <div class="answer" data-answer="maths">
+        <p class="chip">Reasoning</p>
+        <p>A <b>quadratic equation</b> is an equation in which the highest power of the variable is 2. Its standard form is</p>
+        <p class="math">ax² + bx + c = 0, &nbsp; a ≠ 0</p>
+        <p class="sub">The quadratic formula</p>
+        <p class="math formula">x = <span class="frac"><span>−b ± √(b² − 4ac)</span><span>2a</span></span></p>
+        <p>The <b>discriminant</b>, b² − 4ac, tells you how many real solutions there are: two if it is positive, one if it is zero, none if it is negative.</p>
+      </div>
+
+      <div class="answer" data-answer="search" hidden>
+        <p class="chip">Searched the web · 5 sources</p>
+        <p>The project you’re thinking of is <b>GitFut</b>, a viral open-source tool that turns your GitHub stats into a football player card.</p>
+        <table>
+          <thead><tr><th scope="col">Football stat</th><th scope="col">Scouted from</th></tr></thead>
+          <tbody>
+            <tr><td>PAC (Pace)</td><td>Commits in the last year</td></tr>
+            <tr><td>SHO (Shooting)</td><td>Stars earned across repos</td></tr>
+          </tbody>
+        </table>
+        <p>Each card gets an overall rating out of 99, plus position, pace, shooting, dribbling, defending, passing and physical.</p>
+      </div>
+
+      <div class="answer" data-answer="other" hidden>
+        <p class="chip">Not recorded</p>
+        <p>This page only replays answers recorded in the app. Install EchoFlow and send it there, to any model you like.</p>
+      </div>
+    </div>
+  </div>
+
+  <h2 id="show-title" class="head">
+    <span class="h-in" data-reveal>Plain question,</span>
+    <span class="h-out" data-reveal style="--i:1">proper answer</span>
+  </h2>
+</section>
+
+<script>
+  const area = document.querySelector<HTMLTextAreaElement>('[data-prompt]');
+  const echo = document.querySelector<HTMLElement>('[data-echo]');
+  const answers = [...document.querySelectorAll<HTMLElement>('[data-answer]')];
+
+  const pick = (text: string) => {
+    const t = text.toLowerCase();
+    if (/quadratic|equation|formula|discriminant/.test(t)) return 'maths';
+    if (/github|football|gitfut|viral/.test(t)) return 'search';
+    return 'other';
+  };
+
+  let current = 'maths';
+  let timer = 0;
+  const update = () => {
+    if (!area || !echo) return;
+    echo.textContent = area.value.trim() || '…';
+    const next = pick(area.value);
+    if (next === current) return;
+    current = next;
+    answers.forEach((a) => {
+      const on = a.dataset.answer === next;
+      a.hidden = !on;
+      if (on) { a.classList.remove('swap'); void a.offsetWidth; a.classList.add('swap'); }
+    });
+  };
+
+  area?.addEventListener('input', () => { clearTimeout(timer); timer = window.setTimeout(update, 120); });
+  document.querySelectorAll<HTMLButtonElement>('[data-try]').forEach((b) =>
+    b.addEventListener('click', () => { if (area) { area.value = b.dataset.try!; update(); } })
+  );
+</script>
+
+<style>
+  .show {
+    display: grid; grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr auto;
+    min-height: min(90svh, 900px);
+  }
+  .field-in { grid-area: 1 / 1 / 3 / 2; background: var(--deep); transition: background-color var(--t-repaint) ease; }
+  .field-out { grid-area: 1 / 2 / 3 / 3; background: var(--lift); transition: background-color var(--t-repaint) ease; }
+
+  .in {
+    grid-area: 1 / 1; color: var(--deep-ink); background: var(--deep);
+    padding: clamp(4rem, 9vw, 8rem) var(--margin) 3rem calc(var(--margin) + 8.333%);
+    display: grid; align-content: start; gap: 1rem;
+  }
+  .in-label { font-size: var(--step-body); font-weight: 600; color: var(--deep-muted); }
+  .in-text {
+    width: min(100%, 34ch); field-sizing: content; min-height: 5lh; resize: none;
+    font-size: var(--step-lead); line-height: 1.3; font-weight: 600;
+    background: color-mix(in oklab, var(--deep) 86%, #ffffff); color: var(--deep-ink);
+    border: 0; border-radius: var(--radius); padding: 0.9rem 1rem;
+    transition: background-color var(--t-repaint) ease;
+  }
+  .in-text:focus-visible { outline-color: var(--deep-ink); }
+  .in-try { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .in-try button {
+    min-height: 2.75rem; padding: 0 1.1rem; font-weight: 600; font-size: var(--step-body);
+    background: color-mix(in oklab, var(--deep) 78%, #ffffff); color: var(--deep-ink);
+    transition: background-color var(--t-hover) ease, transform var(--t-press) var(--ease-out);
+  }
+  .in-try button:active { transform: scale(0.96); }
+  @media (hover: hover) and (pointer: fine) {
+    .in-try button:hover { background: color-mix(in oklab, var(--deep) 66%, #ffffff); }
+  }
+
+  .out { grid-area: 1 / 2; background: var(--lift); padding: clamp(4rem, 9vw, 8rem) var(--margin) 3rem; display: grid; justify-items: center; align-content: start; }
+
+  /* ---- the chat fragment, at the app's own sizes ---- */
+  .chat {
+    width: min(100%, 480px); display: grid; gap: 12px;
+    font-size: var(--step-small); line-height: 1.5; color: var(--ink);
+  }
+  .bubble {
+    justify-self: end; max-width: 84%;
+    background: var(--accent); color: var(--accent-ink);
+    border-radius: 22px 22px 6px 22px; padding: 12px 16px; font-weight: 600;
+    transition: background-color var(--t-repaint) ease;
+  }
+  .who { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: var(--step-small); }
+  .answer { display: grid; gap: 10px; }
+  .answer[hidden] { display: none; }
+  .answer.swap { animation: show-swap 320ms var(--ease-out); }
+  @keyframes show-swap { from { opacity: 0; transform: translateY(8px); } }
+  .chip {
+    justify-self: start; font-size: var(--step-small); font-weight: 600;
+    background: color-mix(in oklab, var(--accent) 14%, var(--lift)); border-radius: 999px; padding: 6px 12px;
+  }
+  .sub { font-weight: 800; letter-spacing: -0.02em; margin-top: 4px; }
+  .math { font-family: 'Times New Roman', Times, serif; font-style: italic; font-size: 1.15em; }
+  .formula { display: flex; align-items: center; gap: 8px; }
+  .frac { display: inline-grid; text-align: center; }
+  .frac span:first-child { border-bottom: 1.5px solid currentColor; padding: 0 4px 2px; }
+  .frac span:last-child { padding-top: 2px; }
+  .chat table { border-collapse: collapse; font-size: var(--step-small); background: color-mix(in oklab, var(--accent) 6%, var(--lift)); }
+  .chat th, .chat td { text-align: left; padding: 9px 12px; border-bottom: 1px solid color-mix(in oklab, var(--ink) 14%, transparent); }
+  .chat th { font-weight: 600; }
+
+  .head { display: contents; }
+  .h-in, .h-out { padding: 0 var(--margin) clamp(1.5rem, 3vw, 2rem); align-self: end; }
+  .h-in { grid-area: 2 / 1; color: var(--deep-ink); background: var(--deep); padding-left: calc(var(--margin) + 8.333%); }
+  .h-out { grid-area: 2 / 2; text-align: right; background: var(--lift); }
+
+  @media (max-width: 60em) {
+    .show { grid-template-columns: 1fr; grid-template-rows: auto auto auto auto; min-height: 0; }
+    .field-in { grid-area: 1 / 1 / 3 / 2; }
+    .field-out { grid-area: 3 / 1 / 5 / 2; }
+    .in { grid-area: 1 / 1; padding: 4rem var(--margin) 2rem; }
+    .in-text { width: 100%; }
+    .h-in { grid-area: 2 / 1; padding-left: var(--margin); padding-bottom: 1.25rem; }
+    .h-out { grid-area: 3 / 1; text-align: left; align-self: start; padding-top: 1.25rem; padding-bottom: 0; }
+    .out { grid-area: 4 / 1; padding: 2rem var(--margin) 4rem; }
+  }
+</style>

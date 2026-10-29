@@ -1,0 +1,76 @@
+---
+/* Shared <head> meta: title, canonical, Open Graph, Twitter and JSON-LD. */
+import {
+  DEFAULT_OG_IMAGE,
+  OG_IMAGE_ALT,
+  SITE_NAME,
+  absoluteImage,
+  absoluteUrl,
+  softwareAppJsonLd,
+  websiteJsonLd,
+  type PageSEO,
+} from '../lib/seo';
+
+interface Props {
+  seo?: PageSEO;
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  canonicalPath?: string;
+  noindex?: boolean;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  themeColor?: string;
+}
+
+const {
+  seo,
+  title = seo?.title ?? 'EchoFlow — Open-Source AI App for Android',
+  description = seo?.description ?? '',
+  ogImage = seo?.ogImage ?? DEFAULT_OG_IMAGE,
+  canonicalPath = seo?.path ?? '/',
+  noindex = false,
+  jsonLd = [],
+  themeColor = '#f6f2e6',
+} = Astro.props;
+
+const canonical = absoluteUrl(canonicalPath);
+const image = absoluteImage(ogImage);
+const extraLd = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
+const structuredData = [websiteJsonLd(), softwareAppJsonLd(), ...extraLd];
+---
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{title}</title>
+<meta name="description" content={description} />
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+<link rel="canonical" href={canonical} />
+<meta name="theme-color" content={themeColor} />
+<link rel="icon" type="image/png" href="/brand/echoflow-mark.png" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={SITE_NAME} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={image} />
+<meta property="og:image:secure_url" content={image} />
+{ogImage === DEFAULT_OG_IMAGE && (
+  <>
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+  </>
+)}
+<meta property="og:image:alt" content={OG_IMAGE_ALT} />
+<meta property="og:locale" content="en_US" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={image} />
+<meta name="twitter:image:alt" content={OG_IMAGE_ALT} />
+
+{structuredData.map((data) => (
+  <script type="application/ld+json" set:html={JSON.stringify(data)} />
+))}
+

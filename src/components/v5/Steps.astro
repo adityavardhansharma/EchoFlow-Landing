@@ -1,0 +1,193 @@
+---
+/* How it works — drag through the stages. One real range input drives both
+   fields: the clause on the left (it is the heading) and the app's state on
+   the right. Nothing depends on scroll. */
+import Seal from '../Seal.astro';
+
+const stages = [
+  { name: 'Install', clause: 'First, install the APK', detail: 'Download EchoFlow.apk from GitHub releases and open it. No account and no store in between.' },
+  { name: 'Pick a brain', clause: 'Then pick a brain', detail: 'OpenRouter for every model on one key, your own provider keys, a model on the phone, or the PC on your desk.' },
+  { name: 'Ask', clause: 'Now ask it anything', detail: 'Type it, say it or attach a file. Web search and Deep Research wait under the + button.' },
+  { name: 'Walk away', clause: 'Finally, walk away', detail: 'Long jobs keep going with the screen off and land as one notification. Plain replies never buzz.' },
+];
+---
+<section class="steps" id="how" aria-labelledby="steps-title" data-steps>
+  <div class="s-clause">
+    <div class="s-in" data-reveal>
+    <h2 id="steps-title" class="head" aria-live="polite" data-clause>{stages[0].clause}</h2>
+    <p class="lead s-detail" data-detail>{stages[0].detail}</p>
+    </div>
+  </div>
+
+  <div class="s-stage">
+    <div class="phone" data-ui data-reveal style="--i:2">
+      <!-- 1. the release -->
+      <div class="st" data-st="0">
+        <div class="rel">
+          <Seal size={48} logo fill="var(--accent)" />
+          <p class="rel-name">EchoFlow</p>
+          <p class="rel-meta">Latest release · <span data-apk-version>GitHub</span></p>
+          <p class="rel-file">EchoFlow.apk</p>
+          <p class="rel-btn">Install</p>
+        </div>
+      </div>
+      <!-- 2. the providers -->
+      <div class="st" data-st="1" hidden>
+        <p class="ph-title">Choose a provider</p>
+        <ul class="prov">
+          <li class="on"><b>OpenRouter</b><span>One key, every model</span></li>
+          <li><b>Direct keys</b><span>OpenAI, Anthropic, Google and more</span></li>
+          <li><b>On this phone</b><span>Gemma, Qwen, your own GGUF</span></li>
+          <li><b>Your PC</b><span>Ollama or LM Studio over Wi-Fi</span></li>
+        </ul>
+      </div>
+      <!-- 3. the chat -->
+      <div class="st" data-st="2" hidden>
+        <div class="ask">
+          <p class="ask-greet">Clear <b>morning</b></p>
+          <p class="ask-sub">Clear thinking</p>
+          <p class="ask-box">Explain quadratic equations<span class="caret" aria-hidden="true"></span></p>
+        </div>
+      </div>
+      <!-- 4. the notification -->
+      <div class="st" data-st="3" hidden>
+        <div class="note">
+          <p class="note-app"><Seal size={20} logo fill="var(--accent)" /> EchoFlow · now</p>
+          <p class="note-title">Deep Research finished</p>
+          <p class="note-body">“What is the three-body problem” · 8 sources</p>
+        </div>
+        <p class="note-after">Research, video renders and downloads keep running with the screen off.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="s-control" data-reveal style="--i:3">
+    <div class="track" style="--p: 0">
+      <span class="fill" aria-hidden="true"></span>
+      <input type="range" min="0" max="3" step="1" value="0" aria-labelledby="steps-title" aria-valuetext={stages[0].name} data-range />
+    </div>
+    <ol class="s-names">
+      {stages.map((s, i) => <li data-name={i} class:list={{ on: i === 0 }}>{s.name}</li>)}
+    </ol>
+  </div>
+</section>
+
+<script define:vars={{ stages }}>
+  const root = document.querySelector('[data-steps]');
+  if (root) {
+    const range = root.querySelector('[data-range]');
+    const clause = root.querySelector('[data-clause]');
+    const detail = root.querySelector('[data-detail]');
+    const track = root.querySelector('.track');
+    const states = [...root.querySelectorAll('[data-st]')];
+    const names = [...root.querySelectorAll('[data-name]')];
+    const show = (i) => {
+      track.style.setProperty('--p', String(i / 3));
+      range.setAttribute('aria-valuetext', stages[i].name);
+      clause.textContent = stages[i].clause;
+      detail.textContent = stages[i].detail;
+      clause.classList.remove('swap'); void clause.offsetWidth; clause.classList.add('swap');
+      states.forEach((s) => {
+        const on = Number(s.dataset.st) === i;
+        s.hidden = !on;
+        if (on) { s.classList.remove('swap'); void s.offsetWidth; s.classList.add('swap'); }
+      });
+      names.forEach((n) => n.classList.toggle('on', Number(n.dataset.name) === i));
+    };
+    range.addEventListener('input', () => show(Number(range.value)));
+    names.forEach((n) => n.addEventListener('click', () => { range.value = n.dataset.name; show(Number(n.dataset.name)); }));
+  }
+</script>
+
+<style>
+  .steps {
+    display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr auto;
+    min-height: min(80svh, 760px);
+    margin-top: var(--section);
+  }
+  .s-clause {
+    grid-area: 1 / 1 / 3 / 2; background: var(--surface);
+    padding: clamp(3rem, 6vw, 5rem) var(--margin) 7.5rem;
+    display: grid;
+    transition: background-color var(--t-repaint) ease;
+  }
+  .s-in { display: grid; align-content: space-between; gap: 2rem; }
+  .s-clause h2 { max-width: 9ch; min-height: 2lh; }
+  .s-detail { max-width: 34ch; }
+  .s-stage {
+    grid-area: 1 / 2 / 3 / 3; background: var(--deep);
+    display: grid; justify-items: center; align-content: start; padding: clamp(3rem, 6vw, 5rem) var(--margin) 7.5rem;
+    transition: background-color var(--t-repaint) ease;
+  }
+
+  .swap { animation: steps-in 200ms var(--ease-out); }
+  @keyframes steps-in { from { opacity: 0; } }
+
+  /* ---- the control ---- */
+  .s-control { grid-area: 2 / 1 / 3 / 3; padding: 0 28px 28px; align-self: end; z-index: 1; }
+  .track { position: relative; height: 40px; display: grid; align-items: center; }
+  .track::before { content: ''; position: absolute; left: 0; right: 0; height: 8px; background: color-mix(in oklab, var(--muted) 45%, transparent); }
+  .fill { position: absolute; left: 0; height: 8px; width: calc(var(--p) * 100%); background: var(--ink); transition: width var(--t-ui) var(--ease-out); }
+  .track input { position: relative; width: 100%; height: 40px; margin: 0; background: none; appearance: none; -webkit-appearance: none; cursor: grab; }
+  .track input:active { cursor: grabbing; }
+  .track input::-webkit-slider-runnable-track { height: 40px; background: none; }
+  .track input::-moz-range-track { height: 40px; background: none; }
+  .track input::-webkit-slider-thumb { -webkit-appearance: none; width: 32px; height: 32px; margin-top: 4px; background: var(--accent); border: 0; border-radius: 0; transition: transform var(--t-press) var(--ease-out); }
+  .track input::-moz-range-thumb { width: 32px; height: 32px; background: var(--accent); border: 0; border-radius: 0; }
+  .track input:active::-webkit-slider-thumb { transform: scale(1.12); }
+  .s-names { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 10px; }
+  .s-names li { font-size: var(--step-body); font-weight: 600; color: var(--muted); cursor: pointer; transition: color var(--t-hover) ease; }
+  .s-names li:nth-child(2) { text-align: center; transform: translateX(-16%); }
+  .s-names li:nth-child(3) { text-align: center; transform: translateX(16%); }
+  .s-names li:last-child { text-align: right; }
+  .s-names li.on { color: var(--ink); }
+  .s-names li:nth-child(n+3) { color: color-mix(in oklab, var(--deep-ink) 70%, var(--deep)); background: var(--deep); }
+  .s-names li:nth-child(n+3).on { color: var(--deep-ink); }
+
+  /* ---- the phone fragment ---- */
+  .phone {
+    width: min(100%, 400px); min-height: 460px; padding: 22px;
+    background: var(--bg); color: var(--ink); border-radius: 30px;
+    font-size: var(--step-small); line-height: 1.4; display: grid; align-content: center;
+    transition: background-color var(--t-repaint) ease;
+  }
+  .st[hidden] { display: none; }
+  .rel { display: grid; justify-items: center; gap: 6px; text-align: center; }
+  .rel-name { font-size: var(--step-lead); font-weight: 800; letter-spacing: -0.03em; margin-top: 8px; }
+  .rel-meta, .rel-file { color: var(--muted); font-size: var(--step-small); }
+  .rel-file { margin-top: 18px; background: var(--lift); padding: 10px 16px; border-radius: 14px; width: 100%; }
+  .rel-btn { margin-top: 10px; width: 100%; background: var(--accent); color: var(--accent-ink); font-weight: 600; padding: 12px; border-radius: 999px; }
+
+  .ph-title { font-size: var(--step-lead); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 14px; }
+  .prov { display: grid; gap: 8px; }
+  .prov li { display: grid; padding: 12px 14px; border-radius: 16px; background: var(--lift); }
+  .prov li span { color: var(--muted); font-size: var(--step-small); }
+  .prov li.on { background: var(--accent); color: var(--accent-ink); }
+  .prov li.on span { color: inherit; opacity: 0.85; }
+
+  .ask { display: grid; justify-items: center; text-align: center; gap: 4px; }
+  .ask-greet { font-size: var(--step-lead); font-weight: 800; letter-spacing: -0.04em; }
+  .ask-greet b { color: var(--accent); }
+  .ask-sub { color: var(--muted); }
+  .ask-box { margin-top: 120px; width: 100%; text-align: left; background: var(--lift); padding: 14px 18px; border-radius: 999px; font-weight: 600; }
+  .caret { display: inline-block; width: 2px; height: 1.1em; margin-left: 2px; vertical-align: -0.2em; background: var(--accent); animation: caret 1s steps(1) infinite; }
+  @keyframes caret { 50% { opacity: 0; } }
+
+  .note { background: var(--lift); border-radius: 22px; padding: 16px 18px; display: grid; gap: 4px; box-shadow: 0 16px 36px -16px rgb(0 0 0 / 0.4); } /* taste-skill-ignore: notification, data-ui */
+  .note-app { display: flex; align-items: center; gap: 8px; font-size: var(--step-small); color: var(--muted); }
+  .note-title { font-weight: 800; }
+  .note-body { color: var(--muted); font-size: var(--step-small); }
+  .note-after { color: var(--muted); font-size: var(--step-small); margin-top: 18px; text-align: center; }
+
+  @media (max-width: 60em) {
+    .steps { grid-template-columns: 1fr; grid-template-rows: auto auto auto; min-height: 0; }
+    .s-stage { grid-area: 1 / 1; padding: 3rem var(--margin); min-height: 46svh; }
+    .s-control { grid-area: 3 / 1; padding: 0 var(--margin) 3rem; background: var(--surface); }
+    .track input::-webkit-slider-thumb { width: 40px; height: 40px; margin-top: 0; }
+    .s-names { grid-template-columns: 1fr 1fr; gap: 6px; }
+    .s-names li, .s-names li:nth-child(n) { text-align: left; transform: none; color: var(--muted); background: none; }
+    .s-names li.on, .s-names li:nth-child(n).on { color: var(--ink); }
+    .s-clause { grid-area: 2 / 1; padding: 2.5rem var(--margin) 2rem; }
+    .s-clause h2 { font-size: 9vw; }
+  }
+</style>
