@@ -116,7 +116,7 @@ const stages = [
   .s-detail { max-width: 34ch; }
   .s-stage {
     grid-area: 1 / 2 / 3 / 3; background: var(--deep);
-    display: grid; place-items: center; padding: 3rem var(--margin) 7.5rem;
+    display: grid; justify-items: center; align-content: start; padding: clamp(3rem, 6vw, 5rem) var(--margin) 7.5rem;
     transition: background-color var(--t-repaint) ease;
   }
 

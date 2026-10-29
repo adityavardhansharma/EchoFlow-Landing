@@ -60,7 +60,6 @@ const REPO = 'https://github.com/adityavardhansharma/EchoFlow';
   .dl {
     display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter);
     min-height: min(78svh, 740px);
-    margin-top: var(--section);
     padding-inline: var(--margin);
     background: var(--accent); color: var(--accent-ink);
     transition: background-color var(--t-repaint) ease, color var(--t-repaint) ease;
@@ -68,7 +67,7 @@ const REPO = 'https://github.com/adityavardhansharma/EchoFlow';
   .dl-copy { grid-column: 1 / 6; align-self: end; padding-block: 40px; display: grid; gap: 1.5rem; }
   .dl-copy h2 { line-height: 0.92; }
   .dl-line { max-width: 34ch; }
-  .dl-stage { grid-column: 7 / 12; align-self: center; display: grid; justify-items: center; padding-block: 4rem; }
+  .dl-stage { grid-column: 7 / 12; align-self: start; display: grid; justify-items: center; padding-block: 4rem; }
 
   /* ---- the dialog: an open surface, so it keeps the app's elevation ---- */
   .dialog {
@@ -97,7 +96,7 @@ const REPO = 'https://github.com/adityavardhansharma/EchoFlow';
   }
 
   @media (max-width: 60em) {
-    .dl { grid-template-columns: 1fr; min-height: 84svh; align-content: space-between; }
+    .dl { grid-template-columns: 1fr; min-height: 84svh; align-content: space-between; margin-top: var(--section); }
     .dl-copy { grid-column: 1; align-self: start; padding-top: 3.5rem; }
     .dl-copy h2 { font-size: 13vw; }
     .dl-stage { grid-column: 1; padding-block: 2rem var(--margin); }
