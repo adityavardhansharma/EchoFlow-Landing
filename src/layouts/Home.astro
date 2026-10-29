@@ -25,7 +25,7 @@ const { seo } = Astro.props;
         root.classList.add('js');
         try {
           var saved = JSON.parse(localStorage.getItem('echoflow-appearance') || 'null');
-          if (saved && /^#[0-9a-f]{6}$/i.test(saved.accent)) root.style.setProperty('--accent', saved.accent);
+          if (saved && /^#[0-9a-f]{6}$/i.test(saved.accent)) root.style.setProperty('--accent-base', saved.accent);
           if (saved && saved.theme === 'dark') root.dataset.theme = 'dark';
           if (saved && saved.theme === 'system' && matchMedia('(prefers-color-scheme: dark)').matches) root.dataset.theme = 'dark';
         } catch (e) {}

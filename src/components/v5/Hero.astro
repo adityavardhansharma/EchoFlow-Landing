@@ -82,6 +82,69 @@ const themes = ['System', 'Light', 'Dark'];
   </div>
 </section>
 
+<script>
+  type Theme = 'system' | 'light' | 'dark';
+  const KEY = 'echoflow-appearance';
+  const root = document.documentElement;
+  const panel = document.querySelector<HTMLElement>('[data-appearance]');
+
+  if (panel) {
+    const swatches = [...panel.querySelectorAll<HTMLButtonElement>('[data-accent]')];
+    const themes = [...panel.querySelectorAll<HTMLButtonElement>('[data-theme-choice]')];
+    const readout = panel.querySelector<HTMLElement>('[data-readout]');
+    const darkQuery = matchMedia('(prefers-color-scheme: dark)');
+
+    let state = { accent: '#1c6e2e', theme: 'light' as Theme };
+    try {
+      const saved = JSON.parse(localStorage.getItem(KEY) || 'null');
+      if (saved) state = { ...state, ...saved };
+    } catch {}
+
+    const label = (t: Theme) => t[0].toUpperCase() + t.slice(1);
+
+    const check = (group: HTMLButtonElement[], on: HTMLButtonElement | undefined) => {
+      group.forEach((b) => {
+        const active = b === on;
+        b.setAttribute('aria-checked', String(active));
+        b.tabIndex = active ? 0 : -1;
+      });
+    };
+
+    const apply = (save: boolean) => {
+      const sw = swatches.find((b) => b.dataset.accent === state.accent) ?? swatches[3];
+      root.style.setProperty('--accent-base', sw.dataset.accent!);
+      const dark = state.theme === 'dark' || (state.theme === 'system' && darkQuery.matches);
+      if (dark) root.dataset.theme = 'dark';
+      else delete root.dataset.theme;
+      check(swatches, sw);
+      check(themes, themes.find((b) => b.dataset.themeChoice === state.theme));
+      if (readout) readout.textContent = `${sw.dataset.name} · ${sw.dataset.accent} · ${label(state.theme)}`;
+      if (save) {
+        try { localStorage.setItem(KEY, JSON.stringify(state)); } catch {}
+      }
+    };
+
+    // Radio-group behaviour: click to choose, arrows move the choice.
+    const wire = (group: HTMLButtonElement[], pick: (b: HTMLButtonElement) => void) => {
+      group.forEach((b, i) => {
+        b.addEventListener('click', () => { pick(b); apply(true); });
+        b.addEventListener('keydown', (e) => {
+          const step = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0;
+          if (!step) return;
+          e.preventDefault();
+          const next = group[(i + step + group.length) % group.length];
+          pick(next); apply(true); next.focus();
+        });
+      });
+    };
+    wire(swatches, (b) => { state.accent = b.dataset.accent!; });
+    wire(themes, (b) => { state.theme = b.dataset.themeChoice as Theme; });
+    darkQuery.addEventListener('change', () => { if (state.theme === 'system') apply(false); });
+
+    apply(false);
+  }
+</script>
+
 <style>
   .hero {
     display: grid; grid-template-columns: 1fr 1fr;

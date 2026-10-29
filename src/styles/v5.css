@@ -5,7 +5,8 @@
    default state. */
 
 :root {
-  --accent: #1c6e2e;
+  --accent-base: #1c6e2e;   /* set by the Appearance fragment */
+  --accent: var(--accent-base);
   --accent-ink: #ffffff;
 
   --bone: #e5e1d8;
@@ -48,6 +49,8 @@
 }
 
 :root[data-theme='dark'] {
+  --accent: color-mix(in oklab, var(--accent-base) 64%, #ffffff);
+  --accent-ink: #120e0b;
   --bg: color-mix(in oklab, var(--accent) 9%, #15110e);
   --lift: color-mix(in oklab, var(--bg) 88%, #ffffff);
   --surface: color-mix(in oklab, var(--accent) 12%, #241d18);
