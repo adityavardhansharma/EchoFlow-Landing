@@ -1,0 +1,79 @@
+---
+/* Close — first step, already open. The sage field, the one light thing on
+   the page, with Lauwers' engraving of Mercury (Hermes, the messenger) at
+   Philemon and Baucis' table printed into it, and the app's own first
+   choice open at true size. */
+import { RELEASES_URL } from '../../lib/releases';
+
+const where = [
+  { id: 'phone', label: 'On the phone', info: 'Download a model once and chat with no key and no internet. Gemma 3 1B is 562 MB.' },
+  { id: 'cloud', label: 'Cloud', info: 'Paste a key from OpenRouter, OpenAI, Anthropic, Gemini, Cerebras, xAI or Sarvam. Requests go straight to them.' },
+  { id: 'net', label: 'Your network', info: 'Point it at Ollama, LM Studio or any OpenAI-compatible server on your own machine.' },
+];
+---
+<section class="close" id="download" aria-labelledby="close-title" data-close>
+  <img class="engr dither" src="/brand/v8/hermes-lauwers.png" width="1400" height="1213" alt="" loading="lazy" decoding="async" />
+
+  <div class="c-copy">
+    <h2 id="close-title" class="c-head" data-reveal>Yours<br /> to run</h2>
+    <p class="c-line" data-reveal style="--i:1">The APK comes straight from GitHub. No account, and your keys and chats stay on the phone.</p>
+    <p class="c-cap" data-reveal style="--i:2">In the engraving: Jupiter and Mercury at Philemon and Baucis’ table, Nicolaes Lauwers, about 1650.</p>
+  </div>
+
+  <div class="c-stage">
+    <div class="dialog" data-ui role="group" aria-labelledby="dlg-t" data-reveal style="--i:1">
+      <p class="dlg-t" id="dlg-t">Where should your model run?</p>
+      <div class="dlg-seg" role="radiogroup" aria-label="Where your model runs">
+        {where.map((w, i) => <button type="button" role="radio" aria-checked={i === 0 ? 'true' : 'false'} data-where={w.info}>{w.label}</button>)}
+      </div>
+      <p class="dlg-info" data-where-info>{where[0].info}</p>
+      <a class="dlg-btn" href={RELEASES_URL} data-apk>Download the APK</a>
+      <p class="dlg-small">You can change this any time, mid-chat.</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  const seg = document.querySelectorAll<HTMLButtonElement>('[data-where]');
+  const info = document.querySelector<HTMLElement>('[data-where-info]');
+  seg.forEach((b) => b.addEventListener('click', () => {
+    seg.forEach((x) => x.setAttribute('aria-checked', String(x === b)));
+    if (info) info.textContent = b.dataset.where!;
+  }));
+</script>
+
+<style>
+  .close {
+    position: relative; overflow: hidden; min-height: 90svh;
+    display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter);
+    padding-inline: var(--margin); background: var(--accent); color: var(--accent-ink);
+  }
+  .engr { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; mix-blend-mode: multiply; opacity: 0.32; }
+  .c-copy { position: relative; grid-column: 1 / 6; align-self: end; padding-block: 40px; display: grid; gap: 1.25rem; }
+  .c-head { font-size: clamp(56px, 7vw, 112px); line-height: 0.92; }
+  .c-line { font-size: 17px; max-width: 34ch; }
+  .c-cap { font-size: var(--step-small); max-width: 36ch; }
+  .c-stage { position: relative; grid-column: 7 / 12; align-self: center; display: grid; justify-items: center; padding-block: 4rem; }
+
+  .dialog {
+    width: min(100%, 440px); padding: 24px; display: grid; gap: 16px;
+    background: #f7f6f2; color: #1c1c1c; border-radius: 26px; font-size: 15px; line-height: 1.45;
+    box-shadow: 0 30px 60px -24px rgb(0 0 0 / 0.5); /* taste-skill-ignore: open dialog, data-ui */
+  }
+  .dlg-t { font-size: 22px; font-weight: 500; letter-spacing: -0.01em; }
+  .dlg-seg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; background: #ecebe5; padding: 4px; border-radius: 999px; }
+  .dlg-seg button { min-height: 44px; border-radius: 999px; font-size: 14px; transition: background-color var(--t-ui) var(--ease-out), color var(--t-ui) ease; }
+  .dlg-seg button[aria-checked='true'] { background: #1c1c1c; color: #f1f1ef; }
+  .dlg-info { color: #4a4b45; min-height: 4.4em; }
+  .dlg-btn { display: grid; place-items: center; min-height: 52px; border-radius: 999px; background: #1c1c1c; color: #f1f1ef; font-weight: 500; text-decoration: none; transition: transform var(--t-press) var(--ease-out); }
+  .dlg-btn:active { transform: scale(0.97); }
+  .dlg-small { font-size: 13px; color: #4a4b45; text-align: center; }
+
+  @media (max-width: 60em) {
+    .close { grid-template-columns: 1fr; min-height: 84svh; align-content: space-between; }
+    .c-copy { grid-column: 1; align-self: start; padding-top: 3.5rem; }
+    .c-head { font-size: 13vw; }
+    .c-stage { grid-column: 1; padding-block: 2rem var(--margin); }
+    .dialog { width: 100%; }
+  }
+</style>
