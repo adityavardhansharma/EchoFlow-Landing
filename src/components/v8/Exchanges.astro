@@ -1,0 +1,77 @@
+---
+/* How it works — call and response. Three exchanges in one column: what you
+   give the app, and what comes back. The last answer is a real recording and
+   breaks out of the column. */
+import Seal from '../Seal.astro';
+---
+<section class="ex wrap" id="how" aria-labelledby="ex-title">
+  <div class="col">
+    <h2 id="ex-title" class="ex-head" data-reveal>How it works</h2>
+
+    <div class="xchg" data-reveal>
+      <p class="say">First, install it.</p>
+      <p class="call" data-ui>github.com/adityavardhansharma/EchoFlow/releases</p>
+      <div class="resp" data-ui>
+        <div class="rel">
+          <Seal size={40} logo fill="#5f7a5e" />
+          <div><p class="r-t">EchoFlow</p><p class="r-s">Latest release · <span data-apk-version>on GitHub</span> · Android 7 and up</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="xchg" data-reveal>
+      <p class="say">Then point it at your PC, or skip this and use a key.</p>
+      <div class="call" data-ui>
+        <p class="lab">Settings · Echo Labs · Custom API Endpoint</p>
+        <p class="field">http://192.168.1.20:11434</p>
+      </div>
+      <div class="resp" data-ui>
+        <p class="r-t">Ollama API <span class="on">On</span></p>
+        <ul class="ml"><li>llama3.1:8b</li><li>qwen2.5:7b</li><li>gemma3:4b</li></ul>
+      </div>
+    </div>
+
+    <div class="xchg last" data-reveal>
+      <p class="say">Then ask it anything, with the web if you like.</p>
+      <p class="call" data-ui>What is the recent viral project that converts GitHub data into football playing cards?</p>
+      <figure class="resp wide" data-ui>
+        <video autoplay muted loop playsinline preload="metadata" poster="/brand/v5/clip-web-search-poster.jpg" width="540" height="1090"
+          aria-label="Screen recording: EchoFlow searches the web and answers with GitFut, a table of football stats and its sources">
+          <source src="/brand/v5/clip-web-search.webm" type="video/webm" />
+          <source src="/brand/v5/clip-web-search.mp4" type="video/mp4" />
+        </video>
+        <figcaption>Recorded in the app: web search, then the answer with a table and its sources.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<style>
+  .ex { padding-block: clamp(6rem, 12vw, 10rem); }
+  .col { margin-left: 25%; width: min(560px, 100%); display: grid; gap: 88px; }
+  .ex-head { font-size: 28px; margin-bottom: -32px; }
+  .xchg { display: grid; gap: 16px; }
+  .say { font-size: 20px; font-weight: 500; }
+  .call { background: var(--surface); border-radius: 8px; padding: 20px; font-size: var(--step-small); color: var(--ink); overflow-wrap: anywhere; }
+  .lab { color: var(--muted); font-size: var(--step-small); margin-bottom: 8px; }
+  .field { background: #1c1c1c; border-radius: 8px; padding: 10px 12px; }
+  .resp { margin-left: 56px; background: #f7f6f2; color: #1c1c1c; border-radius: 18px; padding: 18px; font-size: var(--step-small); }
+  .rel { display: flex; gap: 14px; align-items: center; }
+  .r-t { font-weight: 500; font-size: 18px; }
+  .r-s { color: #55564f; }
+  .on { font-size: 13px; background: #dfe6dd; border-radius: 999px; padding: 2px 10px; margin-left: 6px; vertical-align: 2px; }
+  .ml { margin-top: 10px; display: grid; gap: 6px; }
+  .ml li { background: #ecebe5; border-radius: 12px; padding: 8px 12px; }
+  .resp.wide { width: 760px; max-width: calc(100vw - 25vw - var(--margin)); padding: 0; overflow: hidden; background: transparent; margin-left: 56px; }
+  .resp.wide video { width: 100%; height: 520px; object-fit: cover; object-position: 50% 30%; border-radius: 18px; }
+  .resp.wide figcaption { color: var(--muted); padding-top: 10px; }
+
+  @media (max-width: 60em) {
+    .col { margin-left: 0; width: 100%; gap: 64px; }
+    .ex-head { font-size: 24px; margin-bottom: -24px; }
+    .resp, .resp.wide { margin-left: 0; }
+    .resp.wide { width: calc(100% + var(--margin) * 2); max-width: none; margin-inline: calc(var(--margin) * -1); }
+    .resp.wide video { height: 70svh; border-radius: 0; }
+    .resp.wide figcaption { padding-inline: var(--margin); }
+  }
+</style>
