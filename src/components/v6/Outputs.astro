@@ -1,0 +1,122 @@
+---
+/* Outputs — output index, live sheet. Chapter field: Mono. The names of four
+   things EchoFlow makes, as buttons; the selected one lies on the stage as
+   the real output, cropped by the stage's bottom edge. */
+const outputs = ['Research report', 'Data table', 'Artifact', 'Image'];
+---
+<section class="chapter f-mono out" id="outputs" aria-labelledby="out-title">
+  <h2 id="out-title" class="sr-only">What EchoFlow makes</h2>
+  <div class="grid out-grid">
+    <div class="names" role="tablist" aria-label="Outputs" data-reveal>
+      {outputs.map((o, i) => (
+        <button type="button" role="tab" id={`out-tab-${i}`} aria-selected={i === 0 ? 'true' : 'false'} aria-controls={`out-sheet-${i}`} tabindex={i === 0 ? 0 : -1} data-out={i}>{o}</button>
+      ))}
+      <p class="names-note">Every one of these comes out of a chat. Ask for it in plain words.</p>
+    </div>
+
+    <div class="stage" data-reveal style="--i:1">
+      <!-- research report -->
+      <article class="sheet doc" id="out-sheet-0" role="tabpanel" aria-labelledby="out-tab-0" data-ui data-sheet="0">
+        <p class="d-meta">Deep Research · 5 searches · 8 sources</p>
+        <h3 class="d-title">The three-body problem</h3>
+        <p>Three masses moving under each other’s gravity. Unlike two bodies, which trace neat ellipses, three have no general closed-form solution: Poincaré showed in the 1890s that their paths can be chaotic.</p>
+        <p class="d-sub">What is solvable</p>
+        <p>Special cases are. Euler and Lagrange found configurations that stay fixed in shape; Lagrange’s points L4 and L5 are where Jupiter’s Trojan asteroids gather.</p>
+        <p class="d-sub">Why it still matters</p>
+        <p>Spacecraft trajectories, star systems and planetary stability are all three-body problems, solved numerically step by step.</p>
+        <ol class="d-src"><li>Physics: three-body problem</li><li>Poincaré, Les méthodes nouvelles</li><li>Lagrange points and Trojans</li></ol>
+      </article>
+
+      <!-- data table -->
+      <article class="sheet table" id="out-sheet-1" role="tabpanel" aria-labelledby="out-tab-1" data-ui data-sheet="1" hidden>
+        <p class="d-meta">Data Agent · answered as a table</p>
+        <h3 class="d-title">Models that run on the phone</h3>
+        <table>
+          <thead><tr><th scope="col">Model</th><th scope="col">Download</th><th scope="col">Good for</th></tr></thead>
+          <tbody>
+            <tr><td>Qwen3 0.6B</td><td class="n">498 MB</td><td>Quick everyday replies</td></tr>
+            <tr><td>Gemma 3 1B</td><td class="n">562 MB</td><td>Small, sharp instruction model</td></tr>
+            <tr><td>Qwen 2.5 1.5B</td><td class="n">≈2.5 GB RAM</td><td>All-rounder, 4K context</td></tr>
+          </tbody>
+        </table>
+        <p class="d-foot">All three run offline. No key, no account.</p>
+      </article>
+
+      <!-- artifact -->
+      <article class="sheet code" id="out-sheet-2" role="tabpanel" aria-labelledby="out-tab-2" data-ui data-sheet="2" hidden>
+        <p class="d-meta">Artifact · version 2 · saved to the gallery</p>
+        <h3 class="d-title">Pyramid pattern in C++</h3>
+<pre><code>#include &lt;iostream&gt;
+
+int main() {
+  int rows = 5;
+  for (int i = 1; i &lt;= rows; ++i) {
+    std::cout &lt;&lt; std::string(rows - i, ' ')
+              &lt;&lt; std::string(2 * i - 1, '*') &lt;&lt; '\n';
+  }
+}</code></pre>
+<pre class="run"><code>    *
+   ***
+  *****
+ *******
+*********</code></pre>
+      </article>
+
+      <!-- image -->
+      <figure class="sheet pic" id="out-sheet-3" role="tabpanel" aria-labelledby="out-tab-3" data-ui data-sheet="3" hidden>
+        <img src="/brand/v3/imagine-print-dog.jpg" width="596" height="552" loading="lazy" decoding="async"
+          alt="Made in EchoFlow’s Imagine mode: a golden retriever in driving goggles in a red convertible at sunset" />
+        <figcaption>Imagine · “a golden retriever in goggles, red convertible, sunset coast road”</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<style>
+  .out { padding-bottom: 0; }
+  .out-grid { min-height: 88svh; align-items: start; }
+  .names { grid-column: 1 / 6; display: grid; gap: 0.15em; justify-items: start; padding-top: 2rem; }
+  .names button {
+    font-size: clamp(36px, 4vw, 64px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.1;
+    color: color-mix(in oklab, var(--mono-ink) 62%, var(--mono)); text-align: left;
+    transition: color var(--t-hover) ease, transform var(--t-ui) var(--ease-out);
+  }
+  .names button[aria-selected='true'] { color: var(--mono-ink); }
+  @media (hover: hover) and (pointer: fine) {
+    .names button:hover { color: var(--mono-ink); transform: translateX(6px); }
+  }
+  .names-note { margin-top: 2rem; max-width: 30ch; }
+
+  .stage {
+    grid-column: 7 / 13; align-self: stretch; position: relative; overflow: hidden;
+    min-height: 88svh; background: color-mix(in oklab, var(--mono) 88%, #ffffff);
+    padding: 72px 0 0 64px;
+  }
+
+  /* ---- the sheets: real outputs at true size ---- */
+  .sheet { width: 560px; max-width: calc(100% - 32px); background: #ffffff; color: #0a0a0a; padding: 32px; font-size: 15px; line-height: 1.55; display: grid; gap: 12px; }
+  .sheet[hidden] { display: none; }
+  .sheet.swap { animation: sheet-in 200ms var(--ease-out); }
+  @keyframes sheet-in { from { opacity: 0; } }
+  .d-meta { font-size: 13px; color: #5d5d5d; }
+  .d-title { font-size: 28px; letter-spacing: -0.02em; line-height: 1.05; }
+  .d-sub { font-weight: 700; margin-top: 6px; }
+  .d-src { font-size: 13px; color: #5d5d5d; padding-left: 1.2em; margin: 6px 0 0; }
+  .d-foot { font-size: 13px; color: #5d5d5d; }
+  .sheet table { border-collapse: collapse; font-size: 14px; }
+  .sheet th, .sheet td { text-align: left; padding: 10px 12px 10px 0; border-bottom: 1px solid #e3e3e3; }
+  .sheet .n { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .sheet.code { width: 480px; }
+  .sheet pre { margin: 0; background: #f3f3f3; padding: 16px; font-size: 13px; line-height: 1.5; overflow-x: auto; }
+  .sheet pre.run { background: var(--mono); color: var(--mono-ink); }
+  .sheet.pic { width: 440px; padding: 0; gap: 0; }
+  .sheet.pic img { width: 100%; height: auto; }
+  .sheet.pic figcaption { padding: 14px 18px; font-size: 13px; color: #5d5d5d; }
+
+  @media (max-width: 60em) {
+    .names { grid-column: 1 / -1; display: flex; gap: 1.25rem; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0 0 1rem; }
+    .names button { font-size: 22px; white-space: nowrap; scroll-snap-align: start; }
+    .names-note { display: none; }
+    .stage { grid-column: 1 / -1; min-height: 70svh; margin-inline: calc(var(--margin) * -1); padding: 16px 0 0 16px; }
+  }
+</style>
