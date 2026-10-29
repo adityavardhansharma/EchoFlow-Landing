@@ -1,0 +1,62 @@
+---
+/* v5 homepage shell. Shares the SEO head and APK resolver with Base, but
+   carries its own stylesheet and type instead of the v4 global look. */
+import '../styles/v5.css';
+import SpeedInsights from '@vercel/speed-insights/astro';
+import SeoHead from '../components/SeoHead.astro';
+import ApkLinks from '../components/ApkLinks.astro';
+import type { PageSEO } from '../lib/seo';
+
+type Props = { seo: PageSEO };
+const { seo } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <SeoHead seo={seo} themeColor="#e5e1d8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;600;800&display=swap" rel="stylesheet" />
+    <script is:inline>
+      // Before first paint: enable motion states and restore the visitor's
+      // chosen accent and theme so the page never flashes the default.
+      (function () {
+        var root = document.documentElement;
+        root.classList.add('js');
+        try {
+          var saved = JSON.parse(localStorage.getItem('echoflow-appearance') || 'null');
+          if (saved && /^#[0-9a-f]{6}$/i.test(saved.accent)) root.style.setProperty('--accent', saved.accent);
+          if (saved && saved.theme === 'dark') root.dataset.theme = 'dark';
+          if (saved && saved.theme === 'system' && matchMedia('(prefers-color-scheme: dark)').matches) root.dataset.theme = 'dark';
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <slot />
+    <SpeedInsights />
+    <ApkLinks />
+    <script>
+      // Reveal each [data-reveal] once as it enters; never leaves content hidden.
+      const targets = document.querySelectorAll<HTMLElement>('[data-reveal]');
+      if (!('IntersectionObserver' in window)) {
+        targets.forEach((el) => el.classList.add('is-in'));
+      } else {
+        const io = new IntersectionObserver((entries) => {
+          for (const entry of entries) {
+            if (!entry.isIntersecting) continue;
+            entry.target.classList.add('is-in');
+            io.unobserve(entry.target);
+          }
+        }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+        targets.forEach((el) => io.observe(el));
+        addEventListener('load', () => setTimeout(() => {
+          targets.forEach((el) => {
+            const r = el.getBoundingClientRect();
+            if (r.top < innerHeight && r.bottom > 0) el.classList.add('is-in');
+          });
+        }, 2000));
+      }
+    </script>
+  </body>
+</html>
