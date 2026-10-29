@@ -143,6 +143,22 @@ const themes = ['System', 'Light', 'Dark'];
 
     apply(false);
   }
+
+  // The app's empty chat greets you by the clock; so does its preview here.
+  const greetings = [
+    { from: 5, a: 'Clear', b: 'morning', sub: 'Clear thinking' },
+    { from: 12, a: 'A fresh', b: 'start', sub: 'Let’s talk ideas' },
+    { from: 21, a: '', b: 'Nightcap?', sub: 'Let’s make it a thought' },
+  ];
+  const hour = new Date().getHours();
+  const g = hour < 5 ? greetings[2] : [...greetings].reverse().find((x) => hour >= x.from)!;
+  const set = (sel: string, text: string) => {
+    const el = document.querySelector<HTMLElement>(sel);
+    if (el) el.textContent = text;
+  };
+  set('[data-greet-a]', g.a);
+  set('[data-greet-b]', g.b);
+  set('[data-greet-sub]', g.sub);
 </script>
 
 <style>
