@@ -2,7 +2,7 @@
  "version": 1,
  "at": "2026-10-29T11:58:28.142Z",
  "seed": 54831197,
- "redraws": 0,
+ "redraws": 1,
  "input": {
   "brief": "EchoFlow, an open-source Android AI chat app: any model (OpenRouter, direct keys, on-device, your own Ollama PC), voice calls, image and video generation, deep research, projects, many themes",
   "sector": "ai-product",
@@ -316,26 +316,28 @@
    ]
   },
   {
-   "id": "cta-blank-in-the-sentence",
+   "id": "cta-first-step-already-open",
    "role": "cta",
-   "name": "A sentence with a blank",
-   "shape": "statement",
+   "name": "First step, already open",
+   "shape": "split",
    "tags": [
-    "type-led",
-    "ui-led"
+    "ui-led",
+    "colour-field"
    ],
    "directions": [
-    "sentence-as-layout",
     "product-performs",
-    "type-only-statement",
-    "one-motif",
-    "colour-chapters"
+    "colour-chapters",
+    "loud-flat-poster",
+    "split-stage",
+    "dark-room",
+    "one-motif"
    ],
    "needs": [],
-   "blueprint": "The closing sentence has a gap in it, and the gap is the form. A sentence of five to eight words is set at about 6vw on two lines, flush left across columns 1–11; there is no separate heading. Where the reader's email (or name, or city) belongs, an `<input>` sits inline on the baseline: a filled block of the one-step tone, exactly one line-height tall and about 7em wide, with the placeholder in the same face and size in the softer ink, no border, and the page's radius or motif corner. The sentence's last word is the submit `<button>`, set in the same type on a block of the accent colour of the same height. Field and button use `em` units so they scale with the sentence. One line at 16px under the sentence, in the softer ink, says what happens after sending. Nothing else is in the section.",
-   "mobile": "The sentence is set at 10vw on two lines; the input drops to a line of its own between them at full width and one line-height tall, and the final word, as the button, ends the second line. The explaining line follows at 15px.",
+   "blueprint": "The page ends with the product's first screen already open. A full-bleed field in the accent colour, 90svh tall. Right, in columns 7–11, vertically centred: the product's own create dialog at true size, 440px wide, root marked data-ui, with its real title ('Name your workspace'), one text field holding an editable, believable example, one two-option segmented choice and its primary button. Inside the fragment the product's conventions apply, including the shadow its dialog normally casts. The field accepts typing, the choice switches, and the primary button is the page's only action: it carries the typed value into sign-up. Left, in columns 1–5, anchored to the bottom with 40px margins: the closing line, two to four words at clamp(56px, 7vw, 112px), leading 0.92, on two lines, and under it one sentence at 17px saying what happens after the button. The upper-left stays empty.",
+   "mobile": "The closing line leads at 13vw on two lines, top-left, with its sentence beneath at 16px. The dialog follows at full width inside 16px margins, at true size, its primary button 52px tall and full width. The field is at least 84svh; the dialog sits in its lower half.",
    "seenIn": [
-    "opl-shelf"
+    "opl-near",
+    "opl-midnight-2"
    ]
   },
   {

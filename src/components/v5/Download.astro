@@ -1,0 +1,106 @@
+---
+/* Download — "first step, already open". The accent field, with EchoFlow's
+   install dialog open at true size. Its two-way choice switches the one
+   action between the latest APK and the source on GitHub. */
+import Seal from '../Seal.astro';
+import { RELEASES_URL } from '../../lib/releases';
+
+const REPO = 'https://github.com/adityavardhansharma/EchoFlow';
+---
+<section class="dl" id="download" aria-labelledby="dl-title">
+  <div class="dl-copy">
+    <h2 id="dl-title" class="display" data-reveal>Free, open<br /> and yours</h2>
+    <p class="dl-line" data-reveal style="--i:1">
+      The APK comes straight from GitHub releases. No account, no sign-in, no server of ours in between.
+    </p>
+  </div>
+
+  <div class="dl-stage">
+    <div class="dialog" data-ui role="group" aria-labelledby="dlg-title" data-reveal style="--i:2">
+      <div class="dlg-head">
+        <Seal size={44} logo fill="var(--accent)" />
+        <div>
+          <p class="dlg-title" id="dlg-title">Install EchoFlow</p>
+          <p class="dlg-sub">Latest release · <span data-apk-version>on GitHub</span></p>
+        </div>
+      </div>
+
+      <div class="dlg-seg" role="radiogroup" aria-label="How to get it">
+        <button type="button" role="radio" aria-checked="true" data-get="apk">Android APK</button>
+        <button type="button" role="radio" aria-checked="false" data-get="src">Source code</button>
+      </div>
+
+      <p class="dlg-info" data-get-info>One APK file from the latest GitHub release. Android may ask you to allow installs from your browser.</p>
+
+      <a class="dlg-btn" href={RELEASES_URL} data-apk data-get-btn>Download for Android</a>
+      <a class="dlg-btn is-src" href={REPO} target="_blank" rel="noopener" data-get-src hidden>Open on GitHub</a>
+    </div>
+  </div>
+</section>
+
+<script>
+  const seg = document.querySelectorAll<HTMLButtonElement>('[data-get]');
+  const apk = document.querySelector<HTMLElement>('[data-get-btn]');
+  const src = document.querySelector<HTMLElement>('[data-get-src]');
+  const info = document.querySelector<HTMLElement>('[data-get-info]');
+  const copy = {
+    apk: 'One APK file from the latest GitHub release. Android may ask you to allow installs from your browser.',
+    src: 'MIT licensed. Read it, build it yourself, or send a pull request.',
+  };
+  seg.forEach((b) => b.addEventListener('click', () => {
+    const which = b.dataset.get as 'apk' | 'src';
+    seg.forEach((x) => x.setAttribute('aria-checked', String(x === b)));
+    if (apk) apk.hidden = which !== 'apk';
+    if (src) src.hidden = which !== 'src';
+    if (info) info.textContent = copy[which];
+  }));
+</script>
+
+<style>
+  .dl {
+    display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter);
+    min-height: min(90svh, 880px);
+    margin-top: var(--section);
+    padding-inline: var(--margin);
+    background: var(--accent); color: var(--accent-ink);
+    transition: background-color var(--t-repaint) ease, color var(--t-repaint) ease;
+  }
+  .dl-copy { grid-column: 1 / 6; align-self: end; padding-block: 40px; display: grid; gap: 1.5rem; }
+  .dl-copy h2 { font-size: clamp(3.5rem, 7vw, 7rem); line-height: 0.92; }
+  .dl-line { max-width: 34ch; }
+  .dl-stage { grid-column: 7 / 12; align-self: center; display: grid; justify-items: center; padding-block: 4rem; }
+
+  /* ---- the dialog: an open surface, so it casts the app's shadow ---- */
+  .dialog {
+    width: min(100%, 440px); padding: 24px; display: grid; gap: 18px;
+    background: var(--bg); color: var(--ink); border-radius: 28px;
+    box-shadow: 0 30px 60px -24px rgb(0 0 0 / 0.45);
+    font-size: 15px; line-height: 1.4;
+    transition: background-color var(--t-repaint) ease;
+  }
+  .dlg-head { display: flex; align-items: center; gap: 14px; }
+  .dlg-title { font-size: 22px; font-weight: 800; letter-spacing: -0.03em; }
+  .dlg-sub { color: var(--muted); font-size: 14px; }
+  .dlg-seg { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; background: var(--surface); padding: 5px; border-radius: 999px; }
+  .dlg-seg button { min-height: 42px; border-radius: 999px; font-weight: 600; font-size: 14px; transition: background-color var(--t-ui) var(--ease-out), color var(--t-ui) ease; }
+  .dlg-seg button[aria-checked='true'] { background: var(--ink); color: var(--bg); }
+  .dlg-info { color: var(--muted); font-size: 14px; min-height: 3lh; }
+  .dlg-btn {
+    display: grid; place-items: center; min-height: 52px; border-radius: 999px;
+    background: var(--accent); color: var(--accent-ink); font-weight: 600; text-decoration: none;
+    transition: transform var(--t-press) var(--ease-out), filter var(--t-hover) ease, background-color var(--t-repaint) ease;
+  }
+  .dlg-btn[hidden] { display: none; }
+  .dlg-btn:active { transform: scale(0.97); }
+  @media (hover: hover) and (pointer: fine) {
+    .dlg-btn:hover { filter: brightness(1.12); }
+  }
+
+  @media (max-width: 60em) {
+    .dl { grid-template-columns: 1fr; min-height: 84svh; align-content: space-between; }
+    .dl-copy { grid-column: 1; align-self: start; padding-top: 3.5rem; }
+    .dl-copy h2 { font-size: 13vw; }
+    .dl-stage { grid-column: 1; padding-block: 2rem var(--margin); }
+    .dialog { width: 100%; }
+  }
+</style>
