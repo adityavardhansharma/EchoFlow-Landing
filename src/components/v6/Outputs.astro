@@ -98,7 +98,7 @@ const runOut = '    *\n   ***\n  *****\n *******\n*********';
   .out-grid { min-height: 88svh; align-items: start; }
   .names { grid-column: 1 / 6; display: grid; gap: 0.15em; justify-items: start; padding-top: 2rem; }
   .names button {
-    font-size: clamp(36px, 4vw, 64px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.1;
+    font-size: var(--step-sub); font-weight: 700; letter-spacing: -0.02em; line-height: 1.1;
     color: color-mix(in oklab, var(--mono-ink) 62%, var(--mono)); text-align: left;
     transition: color var(--t-hover) ease, transform var(--t-ui) var(--ease-out);
   }
@@ -110,34 +110,34 @@ const runOut = '    *\n   ***\n  *****\n *******\n*********';
 
   .stage {
     grid-column: 7 / 13; align-self: stretch; position: relative; overflow: hidden;
-    min-height: 88svh; background: color-mix(in oklab, var(--mono) 88%, #ffffff);
+    height: 84svh; min-height: 560px; background: color-mix(in oklab, var(--mono) 88%, #ffffff);
     padding: 72px 0 0 64px;
   }
 
   /* ---- the sheets: real outputs at true size ---- */
-  .sheet { width: 560px; max-width: calc(100% - 32px); background: #ffffff; color: #0a0a0a; padding: 32px; font-size: 15px; line-height: 1.55; display: grid; gap: 12px; }
+  .sheet { width: 560px; max-width: calc(100% - 32px); min-height: 100%; align-content: start; background: #ffffff; color: #0a0a0a; padding: 32px; font-size: var(--step-small); line-height: 1.55; display: grid; gap: 12px; }
   .sheet[hidden] { display: none; }
   .sheet.swap { animation: sheet-in 200ms var(--ease-out); }
   @keyframes sheet-in { from { opacity: 0; } }
-  .d-meta { font-size: 13px; color: #5d5d5d; }
-  .d-title { font-size: 28px; letter-spacing: -0.02em; line-height: 1.05; }
+  .d-meta { font-size: var(--step-small); color: #5d5d5d; }
+  .d-title { font-size: var(--step-lead); letter-spacing: -0.02em; line-height: 1.05; }
   .d-sub { font-weight: 700; margin-top: 6px; }
-  .d-src { font-size: 13px; color: #5d5d5d; padding-left: 1.2em; margin: 6px 0 0; }
-  .d-foot { font-size: 13px; color: #5d5d5d; }
-  .sheet table { border-collapse: collapse; font-size: 14px; }
+  .d-src { font-size: var(--step-small); color: #5d5d5d; padding-left: 1.2em; margin: 6px 0 0; }
+  .d-foot { font-size: var(--step-small); color: #5d5d5d; }
+  .sheet table { border-collapse: collapse; font-size: var(--step-small); }
   .sheet th, .sheet td { text-align: left; padding: 10px 12px 10px 0; border-bottom: 1px solid #e3e3e3; }
   .sheet .n { font-variant-numeric: tabular-nums; white-space: nowrap; }
   .sheet.code { width: 480px; }
-  .sheet pre { margin: 0; background: #f3f3f3; padding: 16px; font-size: 13px; line-height: 1.5; overflow-x: auto; }
+  .sheet pre { margin: 0; background: #f3f3f3; padding: 16px; font-size: var(--step-small); line-height: 1.5; overflow-x: auto; }
   .sheet pre.run { background: var(--mono); color: var(--mono-ink); }
   .sheet.pic { width: 440px; padding: 0; gap: 0; }
   .sheet.pic img { width: 100%; height: auto; }
-  .sheet.pic figcaption { padding: 14px 18px; font-size: 13px; color: #5d5d5d; }
+  .sheet.pic figcaption { padding: 14px 18px; font-size: var(--step-small); color: #5d5d5d; }
 
   @media (max-width: 60em) {
     .names { grid-column: 1 / -1; display: flex; gap: 1.25rem; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0 0 1rem; }
     .names button { font-size: 22px; white-space: nowrap; scroll-snap-align: start; }
     .names-note { display: none; }
-    .stage { grid-column: 1 / -1; min-height: 70svh; margin-inline: calc(var(--margin) * -1); padding: 16px 0 0 16px; }
+    .stage { grid-column: 1 / -1; height: 70svh; min-height: 0; margin-inline: calc(var(--margin) * -1); padding: 16px 0 0 16px; }
   }
 </style>

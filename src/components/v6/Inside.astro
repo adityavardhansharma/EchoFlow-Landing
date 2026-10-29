@@ -32,11 +32,11 @@ const rows = [
 
 <style>
   .inside { padding-bottom: clamp(5rem, 9vw, 8rem); }
-  .in-head { grid-column: 5 / 13; min-height: 52svh; display: flex; align-items: center; }
+  .in-head { grid-column: 5 / 13; min-height: 30svh; display: flex; align-items: center; }
   .rows { display: grid; gap: clamp(5rem, 8vw, 7.5rem); }
   .row { align-items: start; }
   .r-text { grid-column: 5 / 10; display: grid; gap: 0.9rem; }
-  .r-text h3 { font-size: clamp(28px, 3vw, 48px); }
+  .r-text h3 { font-size: var(--step-sub); }
   .r-text p { max-width: 34ch; }
   .r-pic { grid-column: 10 / 13; justify-self: end; width: min(var(--w), 100%); margin: 0; overflow: hidden; }
   .r-pic img { width: 100%; height: 100%; object-fit: cover; transition: transform 900ms var(--ease-out); }
@@ -48,7 +48,6 @@ const rows = [
     .in-head { grid-column: 1 / -1; min-height: 40svh; font-size: 11vw; }
     .rows { gap: 4rem; }
     .r-text, .r-pic { grid-column: 1 / -1; }
-    .r-text h3 { font-size: 26px; }
     .r-pic { margin-top: 1.5rem; justify-self: start; }
     .row:nth-child(3n + 1) .r-pic { width: 100%; }
     .row:nth-child(3n + 2) .r-pic { width: 70%; justify-self: end; }

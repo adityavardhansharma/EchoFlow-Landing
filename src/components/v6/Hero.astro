@@ -14,10 +14,11 @@ import { RELEASES_URL } from '../../lib/releases';
       <span class="line"><span data-line style="--i:0">Every model</span></span>
       <span class="line"><span data-line style="--i:1">in one app</span></span>
     </h1>
-    <p class="copy below lines" aria-hidden="true">
-      <span class="line"><span data-line style="--i:0">Every model</span></span>
-      <span class="line"><span data-line style="--i:1">in one app</span></span>
-    </p>
+    <!-- the under-water copy is drawn, not text: it repeats the h1 for the eye only -->
+    <div class="copy below lines" aria-hidden="true">
+      <span class="line"><span data-line data-text="Every model" style="--i:0"></span></span>
+      <span class="line"><span data-line data-text="in one app" style="--i:1"></span></span>
+    </div>
   </div>
 
   <figure class="clip" data-rise style="--i:1">
@@ -52,7 +53,8 @@ import { RELEASES_URL } from '../../lib/releases';
   }
   .copy { font-size: var(--fs); font-weight: 700; line-height: 0.86; letter-spacing: -0.03em; text-align: center; margin: 0; }
   .below { position: absolute; inset: 0; }
-  .above { color: var(--ocean); clip-path: inset(0 0 calc(100% - var(--fs) * 1.29) 0); }
+  .above { position: relative; z-index: 1; color: var(--ocean); clip-path: inset(0 0 calc(100% - var(--fs) * 1.29) 0); }
+  .below [data-text]::before { content: attr(data-text); }
   .below { color: var(--ocean-ink); clip-path: inset(calc(var(--fs) * 1.29) 0 0 0); }
 
   /* the real app, rising out of the water at the right */

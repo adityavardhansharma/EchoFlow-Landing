@@ -26,7 +26,7 @@ const stages = [
   .timing { display: grid; align-content: center; gap: 64px; }
   .bar { display: flex; gap: 6px; margin: 0; padding: 0; list-style: none; }
   .seg { flex: var(--grow) 1 0; min-width: 12%; position: relative; height: 22vh; min-height: 160px; padding: 20px; margin-bottom: 7rem; }
-  .seg-time { display: block; font-size: clamp(20px, 2vw, 30px); font-weight: 700; letter-spacing: -0.01em; line-height: 1.1; }
+  .seg-time { display: block; font-size: var(--step-lead); font-weight: 700; letter-spacing: -0.01em; line-height: 1.1; }
   .seg-clause { position: absolute; top: calc(100% + 16px); left: 0; width: 22ch; max-width: 100%; color: var(--ink); font-size: var(--step-body); }
 
   /* the bar fills like the app's own progress bar as it arrives */
@@ -43,7 +43,6 @@ const stages = [
     .timing h2 { font-size: 11vw; }
     .bar { flex-direction: column; height: 70svh; }
     .seg { flex: var(--grow) 1 0; min-width: 0; min-height: 96px; height: auto; margin-bottom: 0; display: grid; align-content: start; gap: 6px; }
-    .seg-time { font-size: 22px; }
-    .seg-clause { position: static; color: inherit; width: auto; font-size: 16px; }
+    .seg-clause { position: static; color: inherit; width: auto; font-size: var(--step-small); }
   }
 </style>
