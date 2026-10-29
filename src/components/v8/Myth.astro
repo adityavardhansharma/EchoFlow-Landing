@@ -19,6 +19,10 @@ const echoes = [
     </figure>
 
     <div class="m-text">
+      <figure class="small" data-reveal>
+        <img class="dither" src="/brand/v8/echo-engraving.png" width="900" height="1493" loading="lazy" decoding="async"
+          alt="An engraving of Echo rising through the air, from a nineteenth-century carte-de-visite in the Rijksmuseum" />
+      </figure>
       <h2 id="myth-title" class="head" data-reveal>Why Echo</h2>
       <p class="statement" data-reveal style="--i:1">
         In Ovid, the nymph Echo could only give back the last words she heard. EchoFlow keeps her name and
@@ -38,6 +42,8 @@ const echoes = [
   .exhibit img { width: 100%; height: auto; }
   .exhibit figcaption { margin-top: 0.9rem; font-size: var(--step-small); color: var(--muted); }
   .m-text { grid-column: 9 / 13; display: grid; gap: 1.75rem; }
+  .small { margin: 0; width: 140px; aspect-ratio: 3 / 4; overflow: hidden; }
+  .small img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
   .statement { font-size: var(--step-lead); line-height: 1.45; max-width: 30ch; }
   .echoes { display: grid; gap: 0.6rem; }
   .echoes b { color: var(--ink); font-weight: 500; }
