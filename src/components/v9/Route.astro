@@ -1,0 +1,104 @@
+---
+/* Your route — pinned fragment, changing state. On the sand ground, one
+   piece of the app holds still while three statements pass; it changes to
+   match the one in view. The model names are the ones in the app's own
+   screenshots. */
+const steps = [
+  { say: 'Paste your own key.', line: 'OpenRouter, OpenAI, Anthropic, Gemini, Cerebras, xAI or Sarvam. It is saved on the phone and goes nowhere else.' },
+  { say: 'Then pick any model.', line: 'Fetch the provider’s list, or type a model ID the catalogue does not have yet.' },
+  { say: 'Switch mid-chat, keep the thread.', line: 'Change the model between two messages; the conversation stays where it is.' },
+];
+---
+<section class="route c-sand" id="route" aria-labelledby="route-title" data-route>
+  <div class="grid r-grid">
+    <div class="says">
+      <h2 id="route-title" class="r-head">Your route</h2>
+      {steps.map((s, i) => (
+        <div class:list={['step', { on: i === 0 }]} data-step={i}>
+          <p class="say">{s.say}</p>
+          <p class="line">{s.line}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="pin">
+      <div class="stage">
+        <div class="frag" data-ui data-state="0">
+          <!-- state 0: the key -->
+          <div class="st st0">
+            <p class="f-title">Cloud models</p>
+            <p class="f-sub">OpenRouter key and model list</p>
+            <p class="f-lab">API key</p>
+            <p class="f-field">sk-or-v1-••••••••••••••••••••••••</p>
+            <p class="f-ok">A key is saved on this device</p>
+            <p class="f-btn">Save key</p>
+          </div>
+          <!-- state 1: the models -->
+          <div class="st st1">
+            <p class="f-title">Your models</p>
+            <ul class="f-list">
+              <li>MiniMax M3</li>
+              <li class="sel">Deepseek V4 Free</li>
+              <li>Nvidia Omni Free</li>
+              <li>Gemini 2.0 Flash</li>
+              <li class="add">+ Browse the model directory</li>
+            </ul>
+          </div>
+          <!-- state 2: the switch -->
+          <div class="st st2">
+            <p class="f-chip">Deepseek V4 Free</p>
+            <p class="f-me">Summarise the three-body problem in two lines.</p>
+            <p class="f-ai">Three masses under mutual gravity have no general closed-form solution; their motion is usually chaotic and solved numerically.</p>
+            <p class="f-switch">Switched to Gemini 2.0 Flash · history kept</p>
+            <p class="f-me">Now give me one real-world example.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .route { padding: clamp(4rem, 8vw, 7rem) var(--margin) 0; }
+  .says { grid-column: 1 / 6; }
+  .r-head { font-size: 28px; font-weight: 400; margin-bottom: 2rem; }
+  .step { min-height: 80vh; display: grid; align-content: start; gap: 0.75rem; padding-top: 4vh; }
+  .step:last-child { min-height: 60vh; }
+  .say { font-size: clamp(28px, 2.4vw, 32px); line-height: 1.15; font-weight: 300; max-width: 18ch; transition: font-weight 300ms ease; }
+  .line { font-size: 1rem; max-width: 36ch; }
+  .step.on .say { font-weight: 500; }
+
+  .pin { grid-column: 7 / 13; }
+  .stage {
+    position: sticky; top: 14vh; height: min(560px, 72vh); display: grid; place-items: center;
+    background: #5a5955; border-radius: 0;
+  }
+  .frag {
+    width: min(100% - 48px, 460px); min-height: 380px; background: #fbfbf9; color: #1b1b1b; border-radius: 26px;
+    padding: 24px; font-family: system-ui, 'Segoe UI', Roboto, sans-serif; font-size: 15px; line-height: 1.4;
+  }
+  .st { display: none; gap: 12px; }
+  .frag[data-state='0'] .st0, .frag[data-state='1'] .st1, .frag[data-state='2'] .st2 { display: grid; animation: st-in 220ms var(--ease-out); }
+  @keyframes st-in { from { opacity: 0; transform: translateY(6px); } }
+  .f-title { font-size: 22px; font-weight: 600; }
+  .f-sub, .f-lab { color: #5b5b5b; font-size: 14px; }
+  .f-field { background: #eeeee4; border-radius: 14px; padding: 12px 14px; letter-spacing: 0.04em; }
+  .f-ok { color: #3f6d4a; font-size: 14px; }
+  .f-btn { background: #5f6127; color: #ffffff; border-radius: 999px; padding: 12px; text-align: center; font-weight: 600; }
+  .f-list { display: grid; gap: 8px; }
+  .f-list li { background: #efefe6; border-radius: 14px; padding: 12px 14px; }
+  .f-list li.sel { background: #5f6127; color: #ffffff; }
+  .f-list li.add { background: transparent; color: #5f6127; font-weight: 600; }
+  .f-chip { justify-self: start; background: #efefe6; border-radius: 999px; padding: 6px 12px; font-size: 14px; font-weight: 600; }
+  .f-me { justify-self: end; max-width: 86%; background: #5f6127; color: #ffffff; border-radius: 18px 18px 6px 18px; padding: 10px 14px; }
+  .f-switch { justify-self: center; font-size: 13px; color: #5b5b5b; background: #efefe6; border-radius: 999px; padding: 4px 12px; }
+
+  @media (max-width: 48em) {
+    .r-grid { display: flex; flex-direction: column-reverse; }
+    .pin { margin-inline: calc(var(--margin) * -1); }
+    .stage { position: relative; top: 0; height: 46svh; }
+    .frag { min-height: 0; transform: scale(0.86); }
+    .step { min-height: 60svh; }
+    .say { font-size: 22px; }
+  }
+</style>
