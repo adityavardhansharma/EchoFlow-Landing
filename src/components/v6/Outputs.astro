@@ -72,6 +72,29 @@ int main() {
   </div>
 </section>
 
+<script>
+  const tabs = [...document.querySelectorAll<HTMLButtonElement>('[data-out]')];
+  const sheets = [...document.querySelectorAll<HTMLElement>('[data-sheet]')];
+  const select = (i: number, focus = false) => {
+    tabs.forEach((t, j) => {
+      t.setAttribute('aria-selected', String(i === j));
+      t.tabIndex = i === j ? 0 : -1;
+    });
+    sheets.forEach((s, j) => {
+      s.hidden = i !== j;
+      if (i === j) { s.classList.remove('swap'); void s.offsetWidth; s.classList.add('swap'); }
+    });
+    if (focus) tabs[i].focus();
+  };
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => select(i));
+    t.addEventListener('keydown', (e) => {
+      const step = e.key === 'ArrowDown' || e.key === 'ArrowRight' ? 1 : e.key === 'ArrowUp' || e.key === 'ArrowLeft' ? -1 : 0;
+      if (step) { e.preventDefault(); select((i + step + tabs.length) % tabs.length, true); }
+    });
+  });
+</script>
+
 <style>
   .out { padding-bottom: 0; }
   .out-grid { min-height: 88svh; align-items: start; }
