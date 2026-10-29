@@ -12,7 +12,7 @@ const steps = [
 <section class="route c-sand" id="route" aria-labelledby="route-title" data-route>
   <div class="grid r-grid">
     <div class="says">
-      <h2 id="route-title" class="r-head">Your route</h2>
+      <h2 id="route-title" class="r-head" data-reveal>Your route</h2>
       {steps.map((s, i) => (
         <div class:list={['step', { on: i === 0 }]} data-step={i}>
           <p class="say">{s.say}</p>
@@ -21,7 +21,7 @@ const steps = [
       ))}
     </div>
 
-    <div class="pin">
+    <div class="pin" data-reveal style="--i:1">
       <div class="stage">
         <div class="frag" data-ui data-state="0">
           <!-- state 0: the key -->
