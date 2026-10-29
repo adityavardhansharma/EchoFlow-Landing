@@ -1,0 +1,86 @@
+/* EchoFlow v6 — "Colour chapters" (taste-skill). Every section is one of the
+   app's own accent colours at full strength, floor to ceiling, with its own
+   ink. Fields butt edge to edge; nothing fades between them. */
+
+:root {
+  --paper: #ffffff;
+  --ink: #0a0a0a;
+  --muted: #5d5d5d;
+
+  --ocean: #1763c6;   --ocean-ink: #ffffff;
+  --mono: #16181d;    --mono-ink: #ffffff;
+  --sunset: #b4540b;  --sunset-ink: #ffffff;
+  --forest: #1c6e2e;  --forest-ink: #ffffff;
+  --rose: #b01b49;    --rose-ink: #ffffff;
+  --wallpaper: #8a8a2c; --wallpaper-ink: #0a0a0a;
+
+  --accent: var(--ocean);
+  --accent-ink: #ffffff;
+
+  --font: 'General Sans', 'Helvetica Neue', Arial, sans-serif;
+  --step-small: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
+  --step-body: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+  --step-lead: clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem);
+  --step-sub: clamp(1.75rem, 1rem + 2.6vw, 3.25rem);
+  --step-head: clamp(2.5rem, 1.2rem + 5vw, 6.5rem);
+  --step-display: clamp(3.75rem, 1rem + 9.5vw, 9rem);
+
+  --margin: clamp(1rem, 2vw, 1.75rem);
+  --gutter: clamp(0.75rem, 1.4vw, 1.5rem);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --t-press: 140ms; --t-hover: 180ms; --t-ui: 240ms;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font-family: var(--font); font-size: var(--step-body); line-height: 1.45;
+  -webkit-font-smoothing: antialiased; font-kerning: normal;
+}
+h1, h2, h3, p, figure, ul, ol { margin: 0; }
+ul[class], ol[class] { padding: 0; list-style: none; }
+img, video, svg { display: block; max-width: 100%; }
+img, video { height: auto; }
+button, input { font: inherit; color: inherit; }
+button { background: none; border: 0; padding: 0; cursor: pointer; }
+a { color: inherit; }
+::selection { background: var(--ink); color: var(--paper); }
+:focus-visible { outline: 3px solid currentColor; outline-offset: 3px; }
+
+h1, h2, h3 { font-weight: 700; letter-spacing: -0.02em; line-height: 0.9; text-wrap: balance; }
+.head { font-size: var(--step-head); }
+.lead { font-size: var(--step-lead); line-height: 1.35; }
+p { max-width: 60ch; text-wrap: pretty; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* a chapter: one field, its own ink, at least 90svh */
+.chapter { position: relative; min-height: 90svh; padding: clamp(4rem, 8vw, 7rem) var(--margin); }
+.f-ocean { background: var(--ocean); color: var(--ocean-ink); }
+.f-mono { background: var(--mono); color: var(--mono-ink); }
+.f-sunset { background: var(--sunset); color: var(--sunset-ink); }
+.f-forest { background: var(--forest); color: var(--forest-ink); }
+.f-rose { background: var(--rose); color: var(--rose-ink); }
+.grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); }
+
+.button {
+  display: inline-flex; align-items: center; justify-content: center; min-height: 3rem; padding: 0 1.25rem;
+  background: var(--accent); color: var(--accent-ink); font-weight: 500; text-decoration: none;
+  transition: transform var(--t-press) var(--ease-out), background-color var(--t-hover) ease;
+}
+.button:active { transform: scale(0.97); }
+.link { text-decoration: underline; text-decoration-thickness: 0.08em; text-underline-offset: 0.2em; text-decoration-color: transparent; transition: text-decoration-color var(--t-hover) ease; }
+@media (hover: hover) and (pointer: fine) { .link:hover { text-decoration-color: currentColor; } }
+
+/* motion helpers: content stays visible without script */
+.lines .line { display: block; overflow: hidden; padding-bottom: 0.08em; margin-bottom: -0.08em; }
+.lines [data-line] { display: block; }
+@media (prefers-reduced-motion: no-preference) {
+  .js .lines [data-line] { transform: translateY(108%); animation: v6-line 900ms var(--ease-expo) forwards; animation-delay: calc(var(--i, 0) * 110ms + 120ms); }
+  .js [data-rise] { opacity: 0; transform: translateY(16px); animation: v6-rise 700ms var(--ease-out) forwards; animation-delay: calc(var(--i, 0) * 90ms + 420ms); }
+  .js [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity 700ms var(--ease-out), transform 900ms var(--ease-expo); transition-delay: calc(var(--i, 0) * 80ms); }
+  .js [data-reveal].is-in { opacity: 1; transform: none; }
+}
+@keyframes v6-line { to { transform: none; } }
+@keyframes v6-rise { to { opacity: 1; transform: none; } }
