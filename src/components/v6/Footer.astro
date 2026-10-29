@@ -38,9 +38,9 @@ const year = new Date().getFullYear();
     margin: -0.13em 0 0 -0.04em; white-space: nowrap;
   }
   .places { margin-top: 72px; align-items: start; }
-  .where { grid-column: 1 / 6; display: grid; gap: 0.35rem; font-size: var(--step-lead); font-weight: 500; letter-spacing: -0.01em; }
+  .where { list-style: none; padding: 0; grid-column: 1 / 6; display: grid; gap: 0.35rem; font-size: var(--step-lead); font-weight: 500; letter-spacing: -0.01em; }
   .cols { grid-column: 7 / 13; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gutter); }
-  .cols ul { display: grid; gap: 0.4rem; align-content: start; font-size: var(--step-small); min-width: 0; }
+  .cols ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.4rem; align-content: start; font-size: var(--step-small); min-width: 0; }
   .legal { grid-row: 4; display: flex; justify-content: space-between; gap: 1rem; padding-top: 96px; font-size: 13px; }
 
   @media (max-width: 48em) {
