@@ -1,0 +1,71 @@
+---
+/* Hero — waterline headline. Paper above, Ocean below, meeting at half
+   height; the seam cuts through the headline's second line and the letters
+   change ink as they cross it. */
+import { RELEASES_URL } from '../../lib/releases';
+---
+<section class="hero" aria-labelledby="hero-title">
+  <div class="sea" aria-hidden="true"></div>
+  <a class="mark" href="/">EchoFlow</a>
+  <a class="button act" href={RELEASES_URL} data-apk>Download</a>
+
+  <div class="title">
+    <h1 id="hero-title" class="copy above lines">
+      <span class="line"><span data-line style="--i:0">Every model</span></span>
+      <span class="line"><span data-line style="--i:1">in one app</span></span>
+    </h1>
+    <p class="copy below lines" aria-hidden="true">
+      <span class="line"><span data-line style="--i:0">Every model</span></span>
+      <span class="line"><span data-line style="--i:1">in one app</span></span>
+    </p>
+  </div>
+
+  <p class="sub" data-rise>
+    EchoFlow is a free, open-source AI chat app for Android. Bring an OpenRouter key, your own
+    provider keys or your PC, or run a model on the phone itself.
+  </p>
+</section>
+
+<style>
+  .hero {
+    --fs: clamp(72px, 9vw, 140px);
+    --seam: 50%;
+    position: relative; height: 100svh; min-height: 560px; overflow: hidden;
+    background: var(--paper);
+  }
+  .sea { position: absolute; left: 0; right: 0; bottom: 0; top: var(--seam); background: var(--ocean); }
+  .mark { position: absolute; top: 28px; left: 28px; font-weight: 700; font-size: var(--step-lead); letter-spacing: -0.02em; text-decoration: none; z-index: 2; }
+  .act { position: absolute; top: 28px; right: 28px; z-index: 2; }
+
+  .title {
+    position: absolute; left: 50%; width: min(100% - 32px, 1200px);
+    top: calc(var(--seam) - var(--fs) * 1.29);
+    transform: translateX(-50%);
+  }
+  .copy { font-size: var(--fs); font-weight: 700; line-height: 0.86; letter-spacing: -0.03em; text-align: center; margin: 0; }
+  .below { position: absolute; inset: 0; }
+  .above { color: var(--ocean); clip-path: inset(0 0 calc(100% - var(--fs) * 1.29) 0); }
+  .below { color: var(--ocean-ink); clip-path: inset(calc(var(--fs) * 1.29) 0 0 0); }
+
+  .sub {
+    position: absolute; left: 50%; bottom: 40px; transform: translateX(-50%);
+    width: min(100% - 32px, 46ch); text-align: center; color: var(--ocean-ink);
+    font-size: var(--step-lead); line-height: 1.35;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    :global(.js) .sub[data-rise] { transform: translate(-50%, 16px); }
+    @keyframes sub-rise { to { opacity: 1; transform: translate(-50%, 0); } }
+    :global(.js) .sub[data-rise] { animation-name: sub-rise; }
+  }
+
+  @media (max-width: 48em) {
+    .hero { --fs: 15.5vw; --seam: 46%; }
+    .mark, .act { top: 16px; }
+    .mark { left: 16px; }
+    .act { right: 16px; min-height: 2.75rem; padding: 0 1rem; }
+    .sub { left: 16px; transform: none; text-align: left; bottom: 24px; font-size: var(--step-body); }
+    @media (prefers-reduced-motion: no-preference) {
+      :global(.js) .sub[data-rise] { transform: translateY(16px); animation-name: v6-rise; }
+    }
+  }
+</style>
