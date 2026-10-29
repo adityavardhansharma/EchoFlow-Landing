@@ -12,7 +12,7 @@ const stages = [
 <section class="chapter timing" id="how" aria-labelledby="how-title">
   <h2 id="how-title" class="head" data-reveal>How long it takes</h2>
 
-  <ol class="bar" data-ui data-bar>
+  <ol class="bar" data-ui data-bar data-reveal>
     {stages.map((s, i) => (
       <li class={`seg f-${s.field}`} style={`--grow:${s.grow}; --i:${i}`}>
         <span class="seg-time">{s.time}</span>
@@ -28,6 +28,15 @@ const stages = [
   .seg { flex: var(--grow) 1 0; min-width: 12%; position: relative; height: 22vh; min-height: 160px; padding: 20px; margin-bottom: 7rem; }
   .seg-time { display: block; font-size: clamp(20px, 2vw, 30px); font-weight: 700; letter-spacing: -0.01em; line-height: 1.1; }
   .seg-clause { position: absolute; top: calc(100% + 16px); left: 0; width: 22ch; max-width: 100%; color: var(--ink); font-size: var(--step-body); }
+
+  /* the bar fills like the app's own progress bar as it arrives */
+  @media (prefers-reduced-motion: no-preference) {
+    :global(.js) .bar[data-reveal] { opacity: 1; transform: none; }
+    :global(.js) .bar[data-reveal] .seg { transform: scaleX(0); transform-origin: left; transition: transform 900ms var(--ease-expo); transition-delay: calc(var(--i) * 260ms); }
+    :global(.js) .bar[data-reveal] .seg > * { opacity: 0; transition: opacity 400ms ease; transition-delay: calc(var(--i) * 260ms + 500ms); }
+    :global(.js) .bar[data-reveal].is-in .seg { transform: none; }
+    :global(.js) .bar[data-reveal].is-in .seg > * { opacity: 1; }
+  }
 
   @media (max-width: 48em) {
     .timing { gap: 2.5rem; }
