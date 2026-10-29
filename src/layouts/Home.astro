@@ -1,0 +1,40 @@
+---
+/* v8 homepage shell: shares SEO head and APK resolver with Base. */
+import '../styles/room.css';
+import SpeedInsights from '@vercel/speed-insights/astro';
+import SeoHead from '../components/SeoHead.astro';
+import ApkLinks from '../components/ApkLinks.astro';
+import type { PageSEO } from '../lib/seo';
+
+type Props = { seo: PageSEO };
+const { seo } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <SeoHead seo={seo} themeColor="#1c1c1c" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;1,6..96,500&family=Jost:wght@400;500&display=swap" rel="stylesheet" />
+    <script is:inline>document.documentElement.classList.add('js');</script>
+  </head>
+  <body>
+    <slot />
+    <SpeedInsights />
+    <ApkLinks />
+    <script>
+      const targets = document.querySelectorAll<HTMLElement>('[data-reveal]');
+      if (!('IntersectionObserver' in window)) targets.forEach((el) => el.classList.add('is-in'));
+      else {
+        const io = new IntersectionObserver((entries) => {
+          for (const e of entries) if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+        }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+        targets.forEach((el) => io.observe(el));
+        addEventListener('load', () => setTimeout(() => targets.forEach((el) => {
+          const r = el.getBoundingClientRect();
+          if (r.top < innerHeight && r.bottom > 0) el.classList.add('is-in');
+        }), 2000));
+      }
+    </script>
+  </body>
+</html>

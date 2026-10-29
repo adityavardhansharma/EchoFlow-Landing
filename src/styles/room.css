@@ -1,0 +1,83 @@
+/* EchoFlow v8 — "The dark room" (taste-skill), after the myth of Echo.
+   One charcoal field from top to bottom; pictures are lit exhibits,
+   two-tone dithered into the page's own charcoal and sage. */
+
+:root {
+  --bg: #1c1c1c;
+  --surface: #262626;
+  --ink: #f1f1ef;
+  --muted: #a3a49f;
+  --accent: #8fa68e;
+  --accent-ink: #1c1c1c;
+  --stone: #c8c5ba;
+  --stone-ink: #1c1c1c;
+
+  --font-display: 'Bodoni Moda', Didot, 'Times New Roman', serif;
+  --font-text: 'Jost', 'Helvetica Neue', Arial, sans-serif;
+
+  --step-small: clamp(0.875rem, 0.85rem + 0.1vw, 0.9375rem);
+  --step-body: clamp(1rem, 0.96rem + 0.22vw, 1.125rem);
+  --step-lead: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+  --step-sub: clamp(1.75rem, 1.2rem + 1.6vw, 2.75rem);
+  --step-head: clamp(2.5rem, 1.4rem + 4vw, 5.5rem);
+  --step-display: clamp(4.5rem, 1rem + 12vw, 12.5rem);
+
+  --margin: clamp(1rem, 2.2vw, 2rem);
+  --gutter: clamp(0.75rem, 1.4vw, 1.5rem);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --t-press: 140ms; --t-hover: 200ms; --t-ui: 260ms;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: var(--font-text); font-size: var(--step-body); line-height: 1.6; letter-spacing: 0.01em;
+  -webkit-font-smoothing: antialiased; font-kerning: normal;
+}
+h1, h2, h3, p, figure, ul, ol { margin: 0; }
+ul[class], ol[class] { padding: 0; list-style: none; }
+img, video, svg { display: block; max-width: 100%; }
+img, video { height: auto; }
+button, input, select { font: inherit; color: inherit; letter-spacing: inherit; }
+button { background: none; border: 0; padding: 0; cursor: pointer; }
+a { color: inherit; }
+::selection { background: var(--accent); color: var(--accent-ink); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+h1, h2, h3 { font-family: var(--font-display); font-weight: 500; font-optical-sizing: auto; letter-spacing: -0.02em; line-height: 0.95; text-wrap: balance; }
+.head { font-size: var(--step-head); }
+.lead { font-size: var(--step-lead); line-height: 1.45; }
+.muted { color: var(--muted); }
+p { max-width: 62ch; text-wrap: pretty; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.wrap { padding-inline: var(--margin); }
+.grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); }
+
+/* dithered pictures keep their dots crisp */
+.dither { image-rendering: pixelated; }
+
+.button {
+  display: inline-flex; align-items: center; justify-content: center; min-height: 3.25rem; padding: 0 1.6rem;
+  background: var(--accent); color: var(--accent-ink); font-size: 1.125rem; font-weight: 500; text-decoration: none;
+  transition: transform var(--t-press) var(--ease-out), filter var(--t-hover) ease;
+}
+.button:active { transform: scale(0.97); }
+.link { text-decoration: underline; text-decoration-thickness: 0.06em; text-underline-offset: 0.22em; text-decoration-color: transparent; transition: text-decoration-color var(--t-hover) ease; }
+@media (hover: hover) and (pointer: fine) {
+  .button:hover { filter: brightness(1.1); }
+  .link:hover { text-decoration-color: currentColor; }
+}
+
+.lines .line { display: block; overflow: hidden; padding-bottom: 0.1em; margin-bottom: -0.1em; }
+.lines [data-line] { display: block; }
+@media (prefers-reduced-motion: no-preference) {
+  .js .lines [data-line] { transform: translateY(108%); animation: v8-line 900ms var(--ease-expo) forwards; animation-delay: calc(var(--i, 0) * 110ms + 100ms); }
+  .js [data-rise] { opacity: 0; transform: translateY(16px); animation: v8-rise 800ms var(--ease-out) forwards; animation-delay: calc(var(--i, 0) * 90ms + 500ms); }
+  .js [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity 900ms var(--ease-out), transform 1100ms var(--ease-expo); transition-delay: calc(var(--i, 0) * 80ms); }
+  .js [data-reveal].is-in { opacity: 1; transform: none; }
+}
+@keyframes v8-line { to { transform: none; } }
+@keyframes v8-rise { to { opacity: 1; transform: none; } }

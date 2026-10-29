@@ -1,0 +1,61 @@
+---
+/* Footer — columns above, wordmark below, in the inverse: stone ground,
+   charcoal ink. The picture credits live here. */
+import { alternativeLinks, featureLinks, guideLinks } from '../../lib/navigation';
+import { RELEASES_URL } from '../../lib/releases';
+const year = new Date().getFullYear();
+---
+<footer class="foot" aria-labelledby="foot-title">
+  <h2 id="foot-title" class="sr-only">EchoFlow</h2>
+  <div class="cols">
+    <ul>
+      <li class="first">EchoFlow</li>
+      <li><a class="link" href={RELEASES_URL} data-apk>Download the APK</a></li>
+      <li><a class="link" href="https://github.com/adityavardhansharma/EchoFlow" target="_blank" rel="noopener">Source on GitHub</a></li>
+      <li><a class="link" href="mailto:echoflow@adityavs.tech">echoflow@adityavs.tech</a></li>
+    </ul>
+    <ul>
+      <li class="first">Features</li>
+      {featureLinks.map((l) => <li><a class="link" href={l.href}>{l.label}</a></li>)}
+    </ul>
+    <ul>
+      <li class="first">Compare and learn</li>
+      {alternativeLinks.map((l) => <li><a class="link" href={l.href}>{l.label}</a></li>)}
+      {guideLinks.map((l) => <li><a class="link" href={l.href}>{l.label}</a></li>)}
+    </ul>
+    <ul class="credits">
+      <li class="first">Pictures</li>
+      <li><a class="link" href="https://commons.wikimedia.org/wiki/File:John_William_Waterhouse_-_Echo_and_Narcissus_-_Google_Art_Project.jpg" target="_blank" rel="noopener">Echo and Narcissus</a>, J. W. Waterhouse, 1903. Public domain.</li>
+      <li><a class="link" href="https://commons.wikimedia.org/wiki/File:Nicolas_Poussin_-_Echo_and_Narcissus_-_WGA18271.jpg" target="_blank" rel="noopener">Echo and Narcissus</a>, Nicolas Poussin. Public domain.</li>
+      <li><a class="link" href="https://commons.wikimedia.org/wiki/File:Fotoreproductie_van_een_gravure_van_Echo,_RP-F-2000-236.jpg" target="_blank" rel="noopener">Engraving of Echo</a>, Rijksmuseum. CC0.</li>
+      <li><a class="link" href="https://www.artic.edu/artworks/39282" target="_blank" rel="noopener">Jupiter and Mercury with Philemon and Baucis</a>, Nicolaes Lauwers. Art Institute of Chicago, CC0.</li>
+      <li><a class="link" href="https://commons.wikimedia.org/wiki/File:Alexandre_Cabanel_-_Echo.jpg" target="_blank" rel="noopener">Echo</a>, Alexandre Cabanel, 1874. Public domain.</li>
+      <li><a class="link" href="https://www.artic.edu/artworks/21285" target="_blank" rel="noopener">Mercury and the Graces</a>, Agostino Carracci. Art Institute of Chicago, CC0.</li>
+      <li>All via Wikimedia Commons or the museum, dithered for this page.</li>
+    </ul>
+  </div>
+
+  <p class="word" aria-hidden="true">EchoFlow</p>
+  <p class="legal">© {year} EchoFlow · MIT. Not affiliated with OpenRouter or any model provider.</p>
+</footer>
+
+<style>
+  .foot {
+    min-height: 100svh; display: grid; grid-template-rows: auto 1fr auto auto;
+    background: var(--stone); color: var(--stone-ink); padding: 40px var(--margin) 24px;
+  }
+  .cols { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gutter); }
+  .cols ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.35rem; align-content: start; font-size: var(--step-small); color: #4a4b45; }
+  .cols .first { color: var(--stone-ink); font-weight: 500; margin-bottom: 0.4rem; }
+  .cols a { color: var(--stone-ink); }
+  .word {
+    grid-row: 3; font-family: var(--font-display); font-weight: 500; font-size: 19vw; line-height: 0.8;
+    letter-spacing: -0.04em; white-space: nowrap; margin-left: -0.04em; max-width: 100%; overflow: hidden;
+  }
+  .legal { grid-row: 4; margin-top: 20px; font-size: var(--step-small); }
+
+  @media (max-width: 60em) {
+    .cols { grid-template-columns: 1fr 1fr; row-gap: 2rem; }
+    .word { font-size: 19vw; margin-top: 20svh; }
+  }
+</style>

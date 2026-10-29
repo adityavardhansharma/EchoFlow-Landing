@@ -1,0 +1,62 @@
+---
+/* Hero — title from the top edge to the bottom edge, over Waterhouse's
+   "Echo and Narcissus" (1903), dithered into the page's charcoal and sage
+   and dimmed so the room stays dark. */
+import { RELEASES_URL } from '../../lib/releases';
+---
+<section class="hero" aria-labelledby="hero-title">
+  <img class="art dither" src="/brand/v8/echo-waterhouse.png" width="1600" height="913"
+    alt="Echo and Narcissus by John William Waterhouse: Echo watches from the trees as Narcissus leans over the pool, rendered in dithered dots" />
+
+  <nav class="top" aria-label="Main">
+    <a class="link" href="#row">Tools</a>
+    <a class="link" href="https://github.com/adityavardhansharma/EchoFlow" target="_blank" rel="noopener">GitHub</a>
+  </nav>
+
+  <h1 id="hero-title" class="title lines">
+    <span class="line l1"><span data-line style="--i:0">EchoFlow</span></span>
+    <span class="line l2"><span data-line style="--i:1">answers</span></span>
+  </h1>
+
+  <div class="mid">
+    <p class="sent" data-rise>
+      An open-source Android app that answers in the voice of any AI model: in the cloud,
+      on your own PC, or on the phone itself.
+    </p>
+    <a class="button" href={RELEASES_URL} data-apk data-rise style="--i:1">Download the APK</a>
+  </div>
+
+  <p class="cap" data-rise style="--i:2">Echo and Narcissus, John William Waterhouse, 1903</p>
+</section>
+
+<style>
+  .hero {
+    position: relative; height: 100svh; min-height: 640px; overflow: hidden;
+    display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr auto;
+  }
+  .art { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; opacity: 0.42; }
+  .top { position: absolute; top: 32px; right: 32px; display: flex; gap: 1.5rem; font-size: var(--step-small); z-index: 1; }
+
+  /* the h1 spans the whole hero; its two lines sit at opposite edges */
+  .title { grid-area: 1 / 1 / 4 / 2; position: relative; display: flex; flex-direction: column; justify-content: space-between; font-size: var(--step-display); line-height: 0.85; letter-spacing: -0.03em; }
+  .l1, .l2 { position: relative; font-family: var(--font-display); font-size: var(--step-display); line-height: 0.85; }
+  .l1 { padding: 72px 0 0 32px; margin-left: -0.04em; }
+  .l2 { padding: 0 32px 24px 28vw; }
+
+  /* a flat neutral scrim gives the sentence a calm ground over the dots */
+  .mid { position: relative; grid-area: 2 / 1; z-index: 1; align-self: center; margin-left: 30vw; display: grid; gap: 1.5rem; justify-items: start; padding: 1.5rem 1.75rem 1.75rem; margin-right: auto; background: rgb(28 28 28 / 0.78); }
+  .mid { margin-left: calc(30vw - 1.75rem); }
+  .sent { font-size: max(18px, var(--step-body)); max-width: 44ch; }
+  .cap { position: absolute; left: 32px; bottom: 32px; font-size: var(--step-small); color: var(--muted); max-width: 22ch; }
+
+  @media (max-width: 48em) {
+    .title { grid-area: 1 / 1 / 5 / 2; }
+    .top { top: 20px; right: 16px; }
+    .l1, .l2 { font-size: 15.5vw; }
+    .l1 { padding: 112px 16px 0; }
+    .l2 { padding: 0 16px 20px; text-align: right; }
+    .mid { margin: 0 16px; align-self: center; padding: 1.25rem; }
+    .cap { position: relative; grid-area: 3 / 1; left: auto; bottom: auto; margin: 0 16px 1rem; }
+    .hero { grid-template-rows: auto 1fr auto 26vw; }
+  }
+</style>
