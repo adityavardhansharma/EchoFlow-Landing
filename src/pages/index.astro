@@ -5,16 +5,18 @@ import Outputs from '../components/v6/Outputs.astro';
 import Inside from '../components/v6/Inside.astro';
 import Timing from '../components/v6/Timing.astro';
 import Close from '../components/v6/Close.astro';
+import Footer from '../components/v6/Footer.astro';
 import { pages } from '../lib/seo';
 
 const seo = pages.home;
 ---
 <Home seo={seo}>
-  <main>
+  <main id="top">
     <Hero />
     <Outputs />
     <Inside />
     <Timing />
     <Close />
   </main>
+  <Footer />
 </Home>

@@ -1,0 +1,53 @@
+---
+/* Footer — name first, places under it. The last chapter, in Rose. The name
+   spans the width with its tops sliced off by the section's edge. */
+import { alternativeLinks, featureLinks, guideLinks } from '../../lib/navigation';
+import { RELEASES_URL } from '../../lib/releases';
+const year = new Date().getFullYear();
+---
+<footer class="foot f-rose" aria-labelledby="foot-title">
+  <h2 id="foot-title" class="sr-only">EchoFlow</h2>
+  <p class="name" aria-hidden="true">EchoFlow</p>
+
+  <div class="grid places">
+    <ul class="where">
+      <li><a class="link" href="mailto:echoflow@adityavs.tech">echoflow@adityavs.tech</a></li>
+      <li><a class="link" href="https://github.com/adityavardhansharma/EchoFlow" target="_blank" rel="noopener">GitHub</a></li>
+      <li><a class="link" href={RELEASES_URL} data-apk>Latest APK</a></li>
+    </ul>
+    <nav class="cols" aria-label="More pages">
+      <ul>{featureLinks.slice(0, 6).map((l) => <li><a class="link" href={l.href}>{l.label}</a></li>)}</ul>
+      <ul>{featureLinks.slice(6).map((l) => <li><a class="link" href={l.href}>{l.label}</a></li>)}</ul>
+      <ul>
+        {alternativeLinks.map((l) => <li><a class="link" href={l.href}>{l.label}</a></li>)}
+        {guideLinks.map((l) => <li><a class="link" href={l.href}>{l.label}</a></li>)}
+      </ul>
+    </nav>
+  </div>
+
+  <div class="legal">
+    <span>© {year} EchoFlow · MIT. Not affiliated with OpenRouter or any model provider.</span>
+    <a class="link" href="#top">Back to top</a>
+  </div>
+</footer>
+
+<style>
+  .foot { min-height: 90svh; padding: 0 var(--margin) 28px; overflow: hidden; display: grid; grid-template-rows: auto auto 1fr auto; }
+  .name {
+    font-size: 23.5vw; font-weight: 700; letter-spacing: -0.04em; line-height: 0.8;
+    margin: -0.13em 0 0 -0.04em; white-space: nowrap;
+  }
+  .places { margin-top: 72px; align-items: start; }
+  .where { grid-column: 1 / 6; display: grid; gap: 0.35rem; font-size: clamp(26px, 2.5vw, 36px); font-weight: 500; letter-spacing: -0.01em; }
+  .cols { grid-column: 7 / 13; display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gutter); }
+  .cols ul { display: grid; gap: 0.4rem; align-content: start; font-size: 15px; }
+  .legal { grid-row: 4; display: flex; justify-content: space-between; gap: 1rem; padding-top: 96px; font-size: 13px; }
+
+  @media (max-width: 48em) {
+    .name { font-size: 24vw; }
+    .where, .cols { grid-column: 1 / -1; }
+    .where { font-size: 26px; }
+    .cols { grid-template-columns: 1fr 1fr; margin-top: 3rem; }
+    .legal { flex-direction: column; padding-top: 64px; }
+  }
+</style>
