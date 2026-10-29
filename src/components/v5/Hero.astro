@@ -1,0 +1,179 @@
+---
+/* Hero — "control that reads the page". The right half is EchoFlow's real
+   Appearance screen, rebuilt in HTML. It acts on this page: every accent
+   and theme it offers repaints the site, and its readout prints the value. */
+import { RELEASES_URL } from '../../lib/releases';
+
+export const accents = [
+  { name: 'Wallpaper', color: '#8a8a2c' },
+  { name: 'Mono', color: '#16181d' },
+  { name: 'Ocean', color: '#1763c6' },
+  { name: 'Forest', color: '#1c6e2e' },
+  { name: 'Sunset', color: '#b4540b' },
+  { name: 'Lavender', color: '#6750a4' },
+  { name: 'Rose', color: '#b01b49' },
+];
+const themes = ['System', 'Light', 'Dark'];
+---
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero-text">
+    <a class="mark" href="/" aria-label="EchoFlow home">
+      <img src="/brand/echoflow-mark.png" alt="" width="40" height="40" />
+      <span>EchoFlow</span>
+    </a>
+    <div class="hero-copy">
+      <h1 id="hero-title" class="display lines">
+        <span class="line"><span data-line style="--i:0">One app for</span></span>
+        <span class="line"><span data-line style="--i:1">every AI model</span></span>
+      </h1>
+      <p class="lead" data-rise style="--i:0">
+        EchoFlow is a free, open-source chat app for Android. Use an OpenRouter key,
+        your own provider keys, the PC on your desk or a model that runs on the phone.
+      </p>
+      <a class="button" href={RELEASES_URL} data-apk data-rise style="--i:1">
+        Download for Android
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-stage">
+    <a class="link top-link" href="https://github.com/adityavardhansharma/EchoFlow" target="_blank" rel="noopener">
+      Source on GitHub
+    </a>
+
+    <div class="appearance" data-ui data-appearance>
+      <div class="ap-head">
+        <p class="ap-title">Appearance</p>
+        <p class="ap-sub">Theme &amp; accent color · try it on this page</p>
+      </div>
+
+      <div class="ap-group">
+        <p class="ap-label" id="ap-theme">Theme</p>
+        <div class="ap-seg" role="radiogroup" aria-labelledby="ap-theme">
+          {themes.map((t) => (
+            <button type="button" role="radio" aria-checked={t === 'Light' ? 'true' : 'false'} data-theme-choice={t.toLowerCase()}>
+              {t}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div class="ap-group">
+        <p class="ap-label" id="ap-accent">Accent color</p>
+        <div class="ap-swatches" role="radiogroup" aria-labelledby="ap-accent">
+          {accents.map((a) => (
+            <button type="button" role="radio" class="ap-swatch" aria-checked={a.name === 'Forest' ? 'true' : 'false'}
+              data-accent={a.color} data-name={a.name} style={`--sw:${a.color}`}>
+              <span class="dot" aria-hidden="true"></span>
+              <span class="nm">{a.name}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div class="ap-preview" aria-label="Preview of the chat home screen">
+        <p class="pv-greet" data-greet><span data-greet-a>A fresh</span> <b data-greet-b>start</b></p>
+        <p class="pv-sub" data-greet-sub>Let’s talk ideas</p>
+        <div class="pv-composer"><span class="pv-plus" aria-hidden="true">+</span><span>Ask anything…</span></div>
+      </div>
+
+      <p class="ap-readout nums" aria-live="polite" data-readout>Forest · #1c6e2e · Light</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    display: grid; grid-template-columns: 1fr 1fr;
+    min-height: min(100svh, 980px);
+  }
+  .hero-text {
+    display: flex; flex-direction: column; justify-content: space-between;
+    padding: var(--margin);
+    padding-block-end: clamp(2rem, 5vw, 4.5rem);
+  }
+  .mark { display: inline-flex; align-items: center; gap: 0.6rem; font-weight: 800; font-size: 1.25rem; letter-spacing: -0.03em; text-decoration: none; width: max-content; }
+  .mark img { width: 40px; height: 40px; }
+  .hero-copy { display: grid; gap: clamp(1.25rem, 2.4vw, 2rem); justify-items: start; }
+  .hero-copy h1 { max-width: 12ch; margin-left: -0.04em; }
+  .hero-copy .lead { max-width: 44ch; }
+
+  .hero-stage {
+    position: relative; display: grid; place-items: center;
+    background: var(--lift);
+    padding: clamp(4.5rem, 7vw, 6rem) var(--margin);
+    transition: background-color var(--t-repaint) ease;
+  }
+  .top-link { position: absolute; top: var(--margin); right: var(--margin); font-size: 0.9375rem; }
+
+  /* ---- the Appearance fragment: the app's own conventions apply inside ---- */
+  .appearance {
+    --a-surface: color-mix(in oklab, var(--accent) 9%, var(--lift));
+    --a-chip: color-mix(in oklab, var(--accent) 16%, var(--lift));
+    width: min(100%, 470px);
+    background: var(--bg);
+    border-radius: 28px;
+    padding: 22px;
+    display: grid; gap: 18px;
+    font-size: 14px; line-height: 1.35;
+    transition: background-color var(--t-repaint) ease;
+  }
+  .ap-title { font-size: 26px; font-weight: 800; letter-spacing: -0.03em; }
+  .ap-sub { color: var(--muted); font-size: 14px; margin-top: 2px; }
+  .ap-group { display: grid; gap: 10px; }
+  .ap-label { font-weight: 600; font-size: 14px; }
+
+  .ap-seg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; background: var(--a-surface); padding: 5px; border-radius: 999px; }
+  .ap-seg button {
+    min-height: 40px; border-radius: 999px; font-weight: 600; font-size: 14px;
+    transition: background-color var(--t-ui) var(--ease-out), color var(--t-ui) ease, transform var(--t-press) var(--ease-out);
+  }
+  .ap-seg button[aria-checked='true'] { background: var(--accent); color: var(--accent-ink); }
+  .ap-seg button:active { transform: scale(0.96); }
+
+  .ap-swatches { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; }
+  .ap-swatch { display: grid; justify-items: center; gap: 6px; padding: 6px 0 4px; border-radius: 14px; transition: background-color var(--t-hover) ease; }
+  .ap-swatch .dot {
+    width: 40px; height: 40px; border-radius: 50%; background: var(--sw);
+    outline: 2px solid transparent; outline-offset: 3px;
+    transition: transform 420ms var(--ease-out), outline-color var(--t-ui) ease, border-radius 420ms var(--ease-out);
+  }
+  .ap-swatch .nm { font-size: 13px; color: var(--muted); }
+  .ap-swatch[aria-checked='true'] .dot { outline-color: var(--sw); border-radius: 34%; }
+  .ap-swatch[aria-checked='true'] .nm { color: var(--ink); font-weight: 600; }
+  @media (hover: hover) and (pointer: fine) {
+    .ap-swatch:hover .dot { transform: scale(1.08) rotate(10deg); }
+    .ap-seg button:hover:not([aria-checked='true']) { background: var(--a-chip); }
+  }
+
+  .ap-preview {
+    background: var(--lift); border-radius: 22px;
+    padding: 34px 18px 16px; display: grid; justify-items: center; gap: 4px; text-align: center;
+    transition: background-color var(--t-repaint) ease;
+  }
+  .pv-greet { font-size: 30px; font-weight: 800; letter-spacing: -0.04em; line-height: 1.05; }
+  .pv-greet b { color: var(--accent); font-weight: 800; transition: color var(--t-repaint) ease; }
+  .pv-sub { color: var(--muted); font-size: 15px; }
+  .pv-composer {
+    margin-top: 26px; width: 100%; display: flex; align-items: center; gap: 12px;
+    background: var(--a-surface); border-radius: 999px; padding: 8px 18px 8px 8px;
+    color: var(--muted); font-size: 15px; text-align: left;
+  }
+  .pv-plus { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--a-chip); color: var(--ink); font-size: 20px; font-weight: 600; }
+  .ap-readout { font-size: 13px; color: var(--muted); }
+
+  @media (max-width: 60em) {
+    .hero { grid-template-columns: 1fr; min-height: 0; }
+    .hero-stage { order: -1; min-height: 58svh; padding-top: 4.5rem; }
+    .hero-text { gap: 2.5rem; padding-top: 0; }
+    .mark { position: absolute; top: var(--margin); left: var(--margin); }
+    .hero { position: relative; }
+    .hero-text { padding-top: 2.5rem; }
+  }
+  @media (max-width: 30em) {
+    .appearance { padding: 16px; gap: 14px; border-radius: 24px; }
+    .ap-swatch .dot { width: 32px; height: 32px; }
+    .ap-swatch .nm { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+    .pv-greet { font-size: 26px; }
+  }
+</style>
