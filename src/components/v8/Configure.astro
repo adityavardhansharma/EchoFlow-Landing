@@ -1,0 +1,120 @@
+---
+/* Configure — fixed output, live controls. The answer card holds still on
+   the left while the reader works real controls on the right; every change
+   lands on the card at once and is kept. */
+const runs = [
+  { id: 'cloud', label: 'Cloud', model: 'OpenRouter · a model of your choice', note: 'Sent straight to OpenRouter on your key.' },
+  { id: 'pc', label: 'Your PC', model: 'Ollama · llama3.1 on 192.168.1.20', note: 'Sent over Wi-Fi to your own machine. Nothing leaves the house.' },
+  { id: 'phone', label: 'On the phone', model: 'Gemma 3 1B · on-device', note: 'Never leaves the phone. Works in airplane mode.' },
+];
+const engines = ['Off', 'EchoCrawl', 'Exa', 'Parallel', 'Firecrawl'];
+---
+<section class="cfg" id="configure" aria-labelledby="cfg-title" data-cfg>
+  <div class="hold">
+    <img class="hold-art dither" src="/brand/v8/echo-engraving.png" width="900" height="1493" alt="" loading="lazy" decoding="async" />
+    <article class="card" data-ui data-card>
+      <p class="c-by" data-c-by>{runs[0].model}</p>
+      <p class="c-q">What is the tallest mountain in the solar system?</p>
+      <p class="c-adv" data-c-adv hidden>Echo Adviser consulted a stronger model</p>
+      <p class="c-a">Olympus Mons on Mars, a shield volcano about 22 km high, roughly two and a half times the height of Everest above sea level.</p>
+      <p class="c-src" data-c-src>Sources · EchoCrawl · 4 pages</p>
+      <p class="c-note" data-c-note>{runs[0].note}</p>
+    </article>
+  </div>
+
+  <div class="ctrls">
+    <h2 id="cfg-title" class="cfg-head" data-reveal>Make it yours</h2>
+
+    <div class="blk">
+      <p class="b-say">Choose where it thinks.</p>
+      <p class="b-body">The same chat can run in the cloud, on the PC on your desk or on the phone. Switch mid-conversation.</p>
+      <div class="seg" role="radiogroup" aria-label="Where the model runs">
+        {runs.map((r, i) => <button type="button" role="radio" aria-checked={i === 0 ? 'true' : 'false'} data-run={r.id} data-model={r.model} data-note={r.note}>{r.label}</button>)}
+      </div>
+    </div>
+
+    <div class="blk">
+      <p class="b-say">Choose who searches.</p>
+      <p class="b-body">EchoCrawl works with any model and needs no key. Bring Exa, Parallel or Firecrawl if you prefer.</p>
+      <div class="seg five" role="radiogroup" aria-label="Web search engine">
+        {engines.map((e) => <button type="button" role="radio" aria-checked={e === 'EchoCrawl' ? 'true' : 'false'} data-engine={e}>{e}</button>)}
+      </div>
+    </div>
+
+    <div class="blk">
+      <p class="b-say">Ask for a second opinion.</p>
+      <p class="b-body">Echo Adviser lets the model you are talking to call a stronger one when an answer gets hard.</p>
+      <label class="tog">
+        <input type="checkbox" role="switch" data-adviser />
+        <span class="tog-track" aria-hidden="true"></span>
+        <span>Echo Adviser</span>
+      </label>
+    </div>
+
+    <div class="blk">
+      <p class="b-say">Light, or the dark room.</p>
+      <p class="b-body">Seven accents, light or dark, or Material You from your wallpaper.</p>
+      <div class="seg" role="radiogroup" aria-label="Theme">
+        <button type="button" role="radio" aria-checked="true" data-theme="light">Light</button>
+        <button type="button" role="radio" aria-checked="false" data-theme="dark">Dark</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cfg { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); }
+  .hold {
+    grid-column: 1 / 7; position: sticky; top: 0; height: 100svh;
+    display: grid; place-items: center; overflow: hidden; background: var(--surface);
+  }
+  .hold-art { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.3; }
+
+  .card {
+    position: relative; width: min(420px, calc(100% - 32px)); padding: 22px; display: grid; gap: 12px;
+    background: #f7f6f2; color: #1c1c1c; border-radius: 22px; font-size: 15px; line-height: 1.5;
+    transition: background-color 400ms ease, color 400ms ease;
+  }
+  .card.is-dark { background: #121212; color: #ecebe5; }
+  .c-by { font-size: 13px; font-weight: 500; color: #5f7a5e; }
+  .c-q { justify-self: end; max-width: 86%; background: #1c1c1c; color: #f1f1ef; border-radius: 18px 18px 6px 18px; padding: 10px 14px; }
+  .card.is-dark .c-q { background: #8fa68e; color: #121212; }
+  .c-adv { justify-self: start; font-size: 13px; background: #dfe6dd; color: #1c1c1c; border-radius: 999px; padding: 4px 12px; }
+  .c-adv[hidden] { display: none; }
+  .c-src, .c-note { font-size: 13px; opacity: 0.75; }
+  .flash { animation: flash 420ms var(--ease-out); }
+  @keyframes flash { from { opacity: 0.25; } }
+
+  .ctrls { grid-column: 8 / 13; padding: clamp(4rem, 9vh, 6rem) var(--margin) 25vh 0; display: grid; gap: 50vh; align-content: start; }
+  .cfg-head { font-size: clamp(2.5rem, 3vw, 2.75rem); margin-bottom: -40vh; }
+  .blk { display: grid; gap: 1rem; max-width: 44ch; }
+  .b-say { font-family: var(--font-display); font-size: clamp(1.75rem, 2.2vw, 2rem); line-height: 1.1; }
+  .b-body { color: var(--muted); }
+
+  .seg { display: flex; flex-wrap: wrap; gap: 6px; }
+  .seg button {
+    min-height: 44px; padding: 0 1.1rem; border: 1px solid #4a4a47; font-size: var(--step-small);
+    transition: background-color var(--t-hover) ease, color var(--t-hover) ease, border-color var(--t-hover) ease;
+  }
+  .seg button[aria-checked='true'] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+  @media (hover: hover) and (pointer: fine) {
+    .seg button:hover:not([aria-checked='true']) { border-color: var(--ink); }
+  }
+  .tog { display: inline-flex; align-items: center; gap: 0.9rem; cursor: pointer; min-height: 44px; }
+  .tog input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .tog-track { width: 52px; height: 30px; border-radius: 999px; background: #3a3a37; position: relative; transition: background-color var(--t-ui) ease; }
+  .tog-track::after { content: ''; position: absolute; top: 4px; left: 4px; width: 22px; height: 22px; border-radius: 50%; background: var(--ink); transition: transform var(--t-ui) var(--ease-out); }
+  .tog input:checked + .tog-track { background: var(--accent); }
+  .tog input:checked + .tog-track::after { transform: translateX(22px); background: var(--accent-ink); }
+  .tog input:focus-visible + .tog-track { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  @media (max-width: 60em) {
+    .cfg { grid-template-columns: 1fr; }
+    .hold { grid-column: 1; top: 0; height: 42svh; z-index: 1; }
+    .card { transform: scale(0.82); }
+    .ctrls { grid-column: 1; padding: 2.5rem var(--margin) 4rem; gap: 4rem; }
+    .cfg-head { margin-bottom: 0; }
+    .b-say { font-size: 22px; }
+    .seg button { flex: 1 1 auto; }
+  }
+</style>
