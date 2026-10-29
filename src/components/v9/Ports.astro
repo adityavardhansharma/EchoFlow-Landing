@@ -32,6 +32,35 @@ const ports = [
   </div>
 </section>
 
+<script>
+  // On a wide screen, with motion allowed, the stage holds still and the
+  // cards travel across the held sea as the page scrolls (two screens).
+  const sec = document.querySelector<HTMLElement>('[data-ports]');
+  const wide = matchMedia('(min-width: 60em) and (prefers-reduced-motion: no-preference)');
+  if (sec) {
+    const track = sec.querySelector<HTMLElement>('[data-track]')!;
+    let raf = 0;
+    const place = () => {
+      if (!sec.classList.contains('is-live')) return;
+      const cards = track.children;
+      const cw = (cards[0] as HTMLElement).offsetWidth + 40;
+      const start = innerWidth / 2 - (cards[0] as HTMLElement).offsetWidth / 2;
+      const r = sec.getBoundingClientRect();
+      const p = Math.min(1, Math.max(0, -r.top / (sec.offsetHeight - innerHeight)));
+      track.style.transform = `translate3d(${start - p * (cards.length - 1) * cw}px, 0, 0)`;
+    };
+    const setup = () => {
+      sec.classList.toggle('is-live', wide.matches);
+      if (!wide.matches) track.style.transform = '';
+      place();
+    };
+    addEventListener('scroll', () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(place); }, { passive: true });
+    addEventListener('resize', place);
+    wide.addEventListener('change', setup);
+    setup();
+  }
+</script>
+
 <style>
   /* the finished composition: also what reduced motion and phones see */
   .ports { position: relative; }
@@ -46,6 +75,13 @@ const ports = [
   .panel { padding: 20px 24px; display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; }
   .panel h3 { font-size: clamp(28px, 2.6vw, 44px); font-weight: 300; }
   .panel p { font-size: 1rem; max-width: 26ch; text-align: right; line-height: 1.4; }
+
+  /* live: the stage is held for two screens while the cards cross it */
+  .ports.is-live { height: 300svh; }
+  .ports.is-live .stage { position: sticky; top: 0; height: 100svh; padding: 0; }
+  .ports.is-live .p-head { position: absolute; top: clamp(2.5rem, 6vh, 4rem); left: var(--margin); margin: 0; z-index: 1; }
+  .ports.is-live .track { position: absolute; top: 50%; left: 0; display: flex; gap: 40px; margin-top: -280px; will-change: transform; }
+  .ports.is-live .card { flex: none; width: 720px; height: 560px; aspect-ratio: auto; }
 
   @media (max-width: 48em) {
     .track { grid-template-columns: 1fr; }
