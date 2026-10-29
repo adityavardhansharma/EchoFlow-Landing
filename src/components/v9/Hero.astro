@@ -1,0 +1,81 @@
+---
+/* Hero — swatch column beside the view. Friedrich's "Monk by the Sea": one
+   figure on the shore, nothing but sea and sky ahead. The five swatches are
+   sampled from the painting, light to dark; each is the ground of the
+   chapter it links to, so the column is both the navigation and the page. */
+import { RELEASES_URL } from '../../lib/releases';
+
+const swatches = [
+  { label: 'No walls', href: '#walls', c: 'mist' },
+  { label: 'Every port', href: '#ports', c: 'sky' },
+  { label: 'Your route', href: '#route', c: 'sand' },
+  { label: 'Set sail', href: '#download', c: 'shore' },
+  { label: 'Source', href: '#footer', c: 'sea' },
+];
+---
+<section class="hero" aria-labelledby="hero-title">
+  <div class="view">
+    <img src="/brand/v9/sea-friedrich.jpg" width="2400" height="1542" fetchpriority="high"
+      alt="Monk by the Sea by Caspar David Friedrich: one small figure on a pale shore before a dark sea and an immense sky" />
+    <a class="mark" href="/">EchoFlow</a>
+    <h1 id="hero-title" class="title lines">
+      <span class="line"><span data-line style="--i:0">Beyond</span></span>
+      <span class="line"><span data-line style="--i:1">the walls</span></span>
+    </h1>
+    <p class="sent" data-rise>
+      EchoFlow is a free, open-source Android AI app with no account and no lock-in: any provider on your own keys,
+      your own PC, or a model on the phone.
+    </p>
+    <a class="button act" href={RELEASES_URL} data-apk data-rise style="--i:1">Download the APK</a>
+    <p class="cap">Monk by the Sea, Caspar David Friedrich, 1808–10</p>
+  </div>
+
+  <nav class="swatches" aria-label="Chapters">
+    {swatches.map((s) => <a class={`sw c-${s.c}`} href={s.href}>{s.label}</a>)}
+  </nav>
+</section>
+
+<style>
+  .hero {
+    height: 100svh; min-height: 620px; padding: 10px;
+    display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 10px;
+  }
+  .view { grid-column: 1 / 11; position: relative; overflow: hidden; border-radius: 12px; }
+  .view img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 60%; }
+  .mark { position: absolute; top: 28px; left: 28px; font-size: var(--step-lead); font-weight: 500; letter-spacing: -0.02em; text-decoration: none; color: #ffffff; }
+  .title {
+    position: absolute; top: 15%; left: 0; right: 0; text-align: center; color: #ffffff;
+    font-size: clamp(72px, 8.6vw, 132px); font-weight: 300; letter-spacing: -0.05em; line-height: 0.9;
+  }
+  .sent {
+    position: absolute; left: 28px; bottom: 28px; width: min(36%, 40ch); color: #ffffff;
+    font-size: var(--step-body); line-height: 1.45; padding: 14px 16px; background: rgb(10 10 10 / 0.62);
+  }
+  .act { position: absolute; left: 50%; bottom: 36px; transform: translateX(-50%); white-space: nowrap; }
+  .cap { position: absolute; right: 20px; bottom: 16px; font-size: var(--step-small); color: rgb(255 255 255 / 0.85); background: rgb(10 10 10 / 0.5); padding: 2px 8px; }
+
+  .swatches { grid-column: 11 / 13; display: grid; grid-template-rows: repeat(5, 1fr); border-radius: 12px; overflow: hidden; }
+  .sw {
+    padding: 20px; font-size: var(--step-small); font-weight: 500; text-decoration: none;
+    transition: padding-left var(--t-ui) var(--ease-out);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .sw:hover { padding-left: 28px; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    :global(.js) .act[data-rise] { transform: translate(-50%, 16px); animation-name: act-rise; }
+    @keyframes act-rise { to { opacity: 1; transform: translate(-50%, 0); } }
+  }
+
+  @media (max-width: 48em) {
+    .hero { height: auto; min-height: 0; padding: 8px; grid-template-columns: 1fr; gap: 0; }
+    .view { grid-column: 1; height: 64svh; min-height: 440px; border-radius: 12px 12px 0 0; }
+    .mark { top: 18px; left: 18px; }
+    .title { top: 16%; font-size: 12vw; }
+    .sent { left: 12px; right: 12px; width: auto; bottom: 84px; font-size: 18px; padding: 12px 14px; }
+    .act { bottom: 20px; }
+    .cap { display: none; }
+    .swatches { grid-column: 1; grid-template-rows: none; border-radius: 0 0 12px 12px; }
+    .sw { height: 52px; padding: 0 16px; display: flex; align-items: center; }
+  }
+</style>

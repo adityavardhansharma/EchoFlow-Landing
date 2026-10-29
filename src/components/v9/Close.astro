@@ -1,0 +1,63 @@
+---
+/* Set sail — three photographs, then a field. The story in three frames:
+   the giant at the walls, the wings, the open wave. Then the shore band,
+   whose one underlined phrase is the download. In the corner, the one who
+   answers: the app's voice persona. */
+import { RELEASES_URL } from '../../lib/releases';
+
+const strip = [
+  { src: '/brand/v9/colossus-goya.jpg', w: 1400, h: 1574, pos: '50% 30%', alt: 'The Colossus, attributed to Francisco de Goya: a giant striding through the clouds above a fleeing crowd' },
+  { src: '/brand/v9/wings-samothrace.jpg', w: 1200, h: 1484, pos: '50% 25%', alt: 'The Winged Victory of Samothrace, photographed in the 1860s: a headless figure with great spread wings' },
+  { src: '/brand/v9/wave-hokusai.jpg', w: 1800, h: 1232, pos: '30% 50%', alt: 'The Great Wave off Kanagawa by Katsushika Hokusai' },
+];
+---
+<section class="close" id="download" aria-labelledby="close-title">
+  <div class="strip">
+    {strip.map((p, i) => (
+      <figure data-reveal style={`--i:${i}`}>
+        <img src={p.src} alt={p.alt} width={p.w} height={p.h} loading="lazy" decoding="async" style={`object-position:${p.pos}`} />
+      </figure>
+    ))}
+  </div>
+
+  <div class="band c-shore grid">
+    <div class="b-text" data-reveal>
+      <div class="statement">
+        <h2 id="close-title">No walls, no account.</h2>
+        <p><a href={RELEASES_URL} data-apk>Download the APK</a> and choose your own sea.</p>
+      </div>
+      <p class="b-small">
+        Latest release <span data-apk-version>from GitHub</span>, MIT licensed.<br />
+        <a class="link" href="https://github.com/adityavardhansharma/EchoFlow" target="_blank" rel="noopener">Read every line of the source.</a>
+      </p>
+    </div>
+    <figure class="answerer" data-reveal style="--i:1">
+      <img src="/brand/v5/voice-call.jpg" width="720" height="1480" loading="lazy" decoding="async"
+        alt="The app answering on a voice call: “Hey! What’s on your mind?”" style="object-position: 50% 32%" />
+    </figure>
+  </div>
+</section>
+
+<style>
+  .strip { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .strip figure { margin: 0; height: 40svh; min-height: 300px; overflow: hidden; }
+  .strip img { width: 100%; height: 100%; object-fit: cover; }
+
+  .band { position: relative; min-height: 44svh; padding: clamp(3rem, 6vw, 5rem) var(--margin); align-items: start; }
+  .b-text { grid-column: 1 / 8; display: grid; gap: 32px; }
+  .statement { font-size: var(--step-lead); font-weight: 400; line-height: 1.25; max-width: 30ch; }
+  .statement h2 { font: inherit; letter-spacing: -0.01em; }
+  .statement a { text-decoration: underline; text-decoration-thickness: 4px; text-underline-offset: 6px; text-decoration-color: var(--accent); transition: text-decoration-thickness var(--t-hover) ease; }
+  .statement a:hover { text-decoration-thickness: 7px; }
+  .b-small { font-size: var(--step-body); }
+  .answerer { position: absolute; right: 40px; bottom: 40px; width: 150px; aspect-ratio: 4 / 5; margin: 0; overflow: hidden; }
+  .answerer img { width: 100%; height: 100%; object-fit: cover; }
+
+  @media (max-width: 48em) {
+    .strip { grid-template-columns: 1fr 1fr; }
+    .strip figure:first-child { grid-column: 1 / -1; height: auto; aspect-ratio: 4 / 3; }
+    .strip figure { height: auto; min-height: 0; aspect-ratio: 3 / 4; }
+    .b-text { grid-column: 1 / -1; padding-bottom: 9rem; }
+    .answerer { right: 16px; bottom: 16px; width: 96px; }
+  }
+</style>
