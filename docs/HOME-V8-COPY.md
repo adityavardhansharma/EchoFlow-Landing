@@ -41,4 +41,4 @@ is consulted and the theme, and the answer on the left changes as you go.
 - Engraving of Echo, photo-reproduction, Rijksmuseum RP-F-2000-236, CC0 (Wikimedia Commons)
 - *Jupiter and Mercury with Philemon and Baucis*, Nicolaes Lauwers, c. 1650 (Art Institute of Chicago, CC0)
 
-Left out on purpose: Cabanel's *Echo* and Carracci's *Mercury and the Graces* (nudity, wrong for a product page).
+Added at the owner's request: Cabanel's *Echo* (1874, public domain) and Carracci's *Mercury and the Graces* (1589, CC0): classical nudes from the myth, kept as art.

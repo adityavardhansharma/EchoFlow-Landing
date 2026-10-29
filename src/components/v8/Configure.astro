@@ -11,7 +11,9 @@ const engines = ['Off', 'EchoCrawl', 'Exa', 'Parallel', 'Firecrawl'];
 ---
 <section class="cfg" id="configure" aria-labelledby="cfg-title" data-cfg>
   <div class="hold">
-    <img class="hold-art dither" src="/brand/v8/echo-engraving.png" width="900" height="1493" alt="" loading="lazy" decoding="async" />
+    <img class="hold-art dither" src="/brand/v8/echo-cabanel.png" width="900" height="1320" loading="lazy" decoding="async"
+      alt="Echo by Alexandre Cabanel, 1874: the nymph alone against the rock, in dithered dots" />
+    <p class="hold-cap">Echo, Alexandre Cabanel, 1874</p>
     <article class="card" data-ui data-card>
       <p class="c-by" data-c-by>{runs[0].model}</p>
       <p class="c-q">What is the tallest mountain in the solar system?</p>
@@ -106,7 +108,8 @@ const engines = ['Off', 'EchoCrawl', 'Exa', 'Parallel', 'Firecrawl'];
     grid-column: 1 / 7; position: sticky; top: 0; height: 100svh;
     display: grid; place-items: center; overflow: hidden; background: var(--surface);
   }
-  .hold-art { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.3; }
+  .hold-art { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; opacity: 0.45; }
+  .hold-cap { position: absolute; left: 24px; bottom: 20px; font-size: var(--step-small); color: var(--muted); }
 
   .card {
     position: relative; width: min(420px, calc(100% - 32px)); padding: 22px; display: grid; gap: 12px;
