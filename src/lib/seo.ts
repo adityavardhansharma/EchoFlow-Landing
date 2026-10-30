@@ -6,7 +6,7 @@ const env = typeof process !== 'undefined' ? process.env : {};
 export const SITE_URL = (
   env.PUBLIC_SITE_URL ||
   (env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${env.VERCEL_PROJECT_PRODUCTION_URL}` : '') ||
-  'https://echo-flow-landing.vercel.app'
+  'https://echoflow.adityavs.space'
 ).replace(/\/$/, '');
 export const SITE_NAME = 'EchoFlow';
 /** 1200x630 social banner — the link preview image for every page. */

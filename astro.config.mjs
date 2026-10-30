@@ -7,7 +7,7 @@ export default defineConfig({
     process.env.PUBLIC_SITE_URL ||
     (process.env.VERCEL_PROJECT_PRODUCTION_URL
       ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-      : 'https://echo-flow-landing.vercel.app'),
+      : 'https://echoflow.adityavs.space'),
   server: { port: 4321, host: true },
   adapter: vercel({
     webAnalytics: { enabled: true },

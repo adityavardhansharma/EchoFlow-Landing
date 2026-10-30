@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://echoflow.app/sitemap.xml
+Sitemap: https://echoflow.adityavs.space/sitemap.xml
