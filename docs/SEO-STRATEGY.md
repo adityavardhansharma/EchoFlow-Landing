@@ -1,7 +1,7 @@
 # EchoFlow SEO Strategy
 
 Last updated: August 2026  
-Site: https://echoflow.app
+Site: https://echoflow.adityavs.space
 
 ## Positioning
 
@@ -196,7 +196,7 @@ Metadata lives in `src/lib/seo.ts`. Summary:
 
 *No GSC data was available in this environment.* Recommended after deploy:
 
-1. Submit `https://echoflow.app/sitemap.xml`
+1. Submit `https://echoflow.adityavs.space/sitemap.xml`
 2. Inspect homepage + `/openrouter`, `/models`, `/alternatives/chatgpt` for indexing
 3. Monitor queries containing “android”, “openrouter”, “alternative”, “BYOK”
 4. Track impressions for branded “EchoFlow” vs non-branded feature terms
